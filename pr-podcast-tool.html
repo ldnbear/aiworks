@@ -9,7 +9,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#F9F7F3;--surface:#fff;--border:#E8E3DA;--ink:#1A1814;--mid:#7A7568;--dim:#B8B2A8;--green:#1F6644;--green-bg:#EAF2ED;--green-line:rgba(31,102,68,.22);--shadow:0 2px 24px rgba(0,0,0,.07)}
 html{font-size:16px}
-body{background:var(--bg);color:var(--ink);font-family:'Geist',sans-serif;font-weight:300;min-height:100vh}
+body{background:var(--bg);color:var(--ink);font-hfamily:'Geist',sans-serif;font-weight:300;min-height:100vh}
 .dot-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle,#C5BDB0 1px,transparent 1px);background-size:30px 30px;opacity:.4}
 .orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(90px)}
 .orb1{width:500px;height:400px;background:radial-gradient(circle,rgba(31,102,68,.11) 0%,transparent 70%);top:-100px;right:-60px;animation:drift1 14s ease-in-out infinite}
@@ -233,9 +233,9 @@ footer p{font-size:.75rem;color:var(--dim)}
 
     var system='You are a PR strategist and publicist specialising in tech startups and SMEs. Generate targeted PR outreach pitches. You MUST respond with ONLY valid JSON, no markdown, no backticks. Structure: {"storyAngles":["angle 1","angle 2","angle 3"],"targets":[{"name":"Podcast or Publication name","type":"podcast OR press OR newsletter OR blog OR speaking OR community","description":"1 sentence about what they cover and their audience","whyFit":"Why this person/outlet is a great fit","pitchAngle":"The specific story angle for this target","emailSubject":"Compelling subject line","emailBody":"Full personalised pitch email (150-200 words, conversational, specific to the outlet, not generic)"}]}. Make targets realistic and specific — name real-sounding podcasts and publications relevant to the topic. Each pitch must feel hand-crafted, not templated.';
 
-    fetch('https://api.anthropic.com/v1/messages',{
+    fetch('/api/claude',{
       method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:5000,system:system,messages:[{role:'user',content:prompt}]})
     })
     .then(function(r){return r.json();})
