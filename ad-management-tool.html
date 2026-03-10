@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ad Management & Optimisation — Agents at Work</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F9F7F3;--surface:#fff;--border:#E8E3DA;--ink:#1A1814;--mid:#7A7568;--dim:#B8B2A8;--green:#1F6644;--green-bg:#EAF2ED;--green-line:rgba(31,102,68,.22);--amber:#c8873a;--amber-bg:#faf0e4;--red:#b94040;--red-bg:#fef0f0;--shadow:0 2px 24px rgba(0,0,0,.07)}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:'Geist',sans-serif;font-weight:300;min-height:100vh}
+.dot-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle,#C5BDB0 1px,transparent 1px);background-size:30px 30px;opacity:.4}
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(90px)}
+.orb1{width:500px;height:400px;background:radial-gradient(circle,rgba(31,102,68,.11) 0%,transparent 70%);top:-80px;left:-60px;animation:drift1 17s ease-in-out infinite}
+.orb2{width:380px;height:380px;background:radial-gradient(circle,rgba(200,135,58,.09) 0%,transparent 70%);bottom:60px;right:-60px;animation:drift2 21s ease-in-out infinite}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,60px)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,-40px)}}
+.wrap{max-width:900px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.8rem 0;border-bottom:1px solid var(--border)}
+.logo{font-family:'Instrument Serif',serif;font-size:1.15rem;color:var(--ink);text-decoration:none;letter-spacing:-.02em}
+.logo span{color:var(--green)}
+.nav-badge{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--green);background:var(--green-bg);border:1px solid var(--green-line);padding:.25rem .7rem;border-radius:20px;letter-spacing:.05em;text-transform:uppercase}
+.hero{padding:3.5rem 0 2.5rem;animation:fadeUp .6s .1s ease both}
+.hero-eyebrow{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.hero-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--green)}
+h1{font-family:'Instrument Serif',serif;font-size:clamp(2rem,4vw,2.8rem);line-height:1.1;letter-spacing:-.02em;margin-bottom:.9rem}
+h1 em{font-style:italic;color:var(--green)}
+.hero-sub{font-size:.95rem;color:var(--mid);line-height:1.65;max-width:520px}
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:2px;box-shadow:var(--shadow);margin-bottom:3rem;animation:fadeUp .6s .2s ease both;overflow:hidden}
+.card-header{padding:1.4rem 2rem;border-bottom:1px solid var(--border)}
+.card-title{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--dim);letter-spacing:.08em;text-transform:uppercase}
+.card-body{padding:2rem}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.field{display:flex;flex-direction:column;gap:.4rem}
+.field.full{grid-column:1/-1}
+label{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--mid);letter-spacing:.06em;text-transform:uppercase}
+input[type=text],input[type=number],textarea,select{width:100%;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:2px;font-family:'Geist',sans-serif;font-size:.88rem;color:var(--ink);background:var(--bg);outline:none;transition:border-color .2s;font-weight:300;resize:none}
+input:focus,textarea:focus,select:focus{border-color:var(--green);background:#fff;box-shadow:0 0 0 3px rgba(31,102,68,.07)}
+input::placeholder,textarea::placeholder{color:var(--dim)}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%237A7568' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
+.tog-row{display:flex;gap:.6rem;flex-wrap:wrap}
+.tog{padding:.5rem 1rem;border:1.5px solid var(--border);border-radius:2px;font-family:'DM Mono',monospace;font-size:.7rem;color:var(--mid);cursor:pointer;transition:all .15s;letter-spacing:.04em;background:transparent;user-select:none}
+.tog:hover{border-color:var(--green);color:var(--green)}
+.tog.on{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.section-label{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--mid);letter-spacing:.07em;text-transform:uppercase;margin:1.2rem 0 .7rem;display:flex;align-items:center;gap:.6rem}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:.5rem}
+.metric-input{display:flex;flex-direction:column;gap:.35rem}
+.metric-input label{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--dim);letter-spacing:.06em;text-transform:uppercase}
+.metric-input input{padding:.65rem .8rem;font-size:.85rem}
+.generate-btn{width:100%;margin-top:1.5rem;padding:.9rem;background:var(--green);color:#fff;border:none;border-radius:2px;font-family:'Geist',sans-serif;font-weight:500;font-size:.9rem;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:.6rem}
+.generate-btn:hover{background:#174f35;transform:translateY(-1px)}
+.loading-state{display:none;padding:3rem 2rem;text-align:center}
+.loading-orb{width:52px;height:52px;margin:0 auto 1.5rem;border-radius:50%;background:var(--green-bg);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;animation:orbPulse 1.5s ease-in-out infinite}
+@keyframes orbPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(31,102,68,.3)}50%{transform:scale(1.05);box-shadow:0 0 0 10px rgba(31,102,68,0)}}
+.loading-title{font-family:'Instrument Serif',serif;font-size:1.3rem;margin-bottom:.4rem}
+.loading-sub{font-size:.83rem;color:var(--dim);margin-bottom:1.5rem}
+.loading-steps{list-style:none;text-align:left;max-width:280px;margin:0 auto}
+.loading-steps li{font-family:'DM Mono',monospace;font-size:.71rem;color:var(--dim);padding:.3rem 0;display:flex;align-items:center;gap:.55rem;opacity:0;transition:opacity .4s}
+.loading-steps li.vis{opacity:1}
+.loading-steps li::before{content:'--';color:var(--green)}
+.output-state{display:none}
+.output-header{padding:1.2rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
+.output-meta{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--dim)}
+.output-meta strong{color:var(--ink)}
+.output-btns{display:flex;gap:.6rem}
+.btn-sm{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--mid);background:none;border:1px solid var(--border);border-radius:2px;padding:.35rem .8rem;cursor:pointer;transition:all .15s}
+.btn-sm:hover{border-color:var(--ink);color:var(--ink)}
+.btn-sm.green{color:var(--green);border-color:rgba(31,102,68,.3);background:var(--green-bg)}
+.btn-sm.green:hover{background:var(--green);color:#fff}
+.health-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+.health-cell{background:var(--surface);padding:1.1rem 1.4rem;text-align:center}
+.health-score{font-family:'Instrument Serif',serif;font-size:1.6rem}
+.health-lbl{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-top:.2rem}
+.health-status{font-family:'DM Mono',monospace;font-size:.65rem;margin-top:.25rem}
+.s-good{color:var(--green)}.s-ok{color:var(--amber)}.s-bad{color:var(--red)}
+.out-body{padding:2rem;display:grid;gap:1.5rem}
+.out-section-title{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.9rem;display:flex;align-items:center;gap:.6rem}
+.out-section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.opt-grid{display:grid;gap:.7rem}
+.opt-card{display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:start;padding:1rem 1.1rem;border:1.5px solid var(--border);border-radius:2px;transition:border-color .15s}
+.opt-card:hover{border-color:var(--border2)}
+.opt-card.urgent{border-color:rgba(185,64,64,.3);background:var(--red-bg)}
+.opt-card.medium{border-color:rgba(200,135,58,.25);background:var(--amber-bg)}
+.opt-card.low{background:#fafaf8}
+.opt-priority{font-family:'DM Mono',monospace;font-size:.65rem;padding:.2rem .55rem;border-radius:20px;white-space:nowrap;align-self:start;margin-top:.1rem}
+.opt-priority.urgent{background:var(--red-bg);color:var(--red);border:1px solid rgba(185,64,64,.3)}
+.opt-priority.medium{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(200,135,58,.2)}
+.opt-priority.low{background:var(--green-bg);color:var(--green);border:1px solid var(--green-line)}
+.opt-title{font-weight:500;font-size:.9rem;margin-bottom:.25rem}
+.opt-desc{font-size:.83rem;color:var(--mid);line-height:1.55}
+.opt-impact{font-family:'DM Mono',monospace;font-size:.67rem;color:var(--green);margin-top:.4rem}
+.opt-action{font-family:'DM Mono',monospace;font-size:.67rem;color:var(--mid);white-space:nowrap}
+.budget-card{padding:1.2rem 1.4rem;background:var(--green-bg);border:1px solid rgba(31,102,68,.2);border-radius:2px}
+.budget-title{font-weight:500;font-size:.9rem;margin-bottom:.5rem}
+.budget-desc{font-size:.85rem;color:var(--mid);line-height:1.6}
+.err-bar{display:none;margin:1rem 2rem 0;padding:.8rem 1rem;background:#fef0f0;border:1px solid rgba(192,57,43,.3);border-radius:2px;font-size:.82rem;color:#c0392b;font-family:'DM Mono',monospace}
+footer{border-top:1px solid var(--border);padding:2rem 0;display:flex;justify-content:space-between;align-items:center}
+footer p{font-size:.75rem;color:var(--dim)}
+.footer-back{font-size:.78rem;color:var(--mid);text-decoration:none;transition:color .2s}
+.footer-back:hover{color:var(--ink)}
+@media(max-width:600px){.form-grid,.metrics-grid,.health-bar{grid-template-columns:1fr 1fr}.wrap{padding:0 1.2rem}.opt-card{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="dot-grid"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="https://agentsatwork.co">agents at <span>work</span></a>
+    <span class="nav-badge">Tool 05 — Ad Management</span>
+  </nav>
+  <div class="hero">
+    <div class="hero-eyebrow">Ad Management & Optimisation</div>
+    <h1>Stop wasting ad spend.<br/><em>Start scaling what works.</em></h1>
+    <p class="hero-sub">Paste in your campaign data and our AI audits every element — targeting, creative, bidding, budget — and gives you a prioritised optimisation plan to implement today.</p>
+  </div>
+
+  <div class="tool-card">
+    <div class="card-header"><span class="card-title">Campaign audit brief</span></div>
+    <div class="card-body" id="formState">
+      <div class="form-grid">
+        <div class="field"><label>Platform</label>
+          <select id="fPlatform">
+            <option>Meta (Facebook & Instagram)</option>
+            <option>Google Ads</option>
+            <option>LinkedIn Ads</option>
+            <option>TikTok Ads</option>
+          </select>
+        </div>
+        <div class="field"><label>Campaign objective</label>
+          <select id="fObjective">
+            <option>Lead generation</option>
+            <option>Sales / conversions</option>
+            <option>Brand awareness</option>
+            <option>Traffic / clicks</option>
+            <option>Retargeting</option>
+          </select>
+        </div>
+        <div class="field full"><label>What are you advertising?</label>
+          <input type="text" id="fProduct" placeholder="e.g. AI marketing subscription for e-commerce brands, £299/month"/>
+        </div>
+        <div class="field full"><label>Target audience</label>
+          <input type="text" id="fAudience" placeholder="e.g. UK Shopify store owners, 28-45, interest in digital marketing"/>
+        </div>
+      </div>
+
+      <div class="section-label">Current Campaign Performance</div>
+      <div class="metrics-grid">
+        <div class="metric-input"><label>Daily Budget (£)</label><input type="number" id="mBudget" placeholder="e.g. 50"/></div>
+        <div class="metric-input"><label>Days Running</label><input type="number" id="mDays" placeholder="e.g. 14"/></div>
+        <div class="metric-input"><label>Total Spend (£)</label><input type="number" id="mSpend" placeholder="e.g. 680"/></div>
+        <div class="metric-input"><label>Impressions</label><input type="number" id="mImpressions" placeholder="e.g. 95000"/></div>
+        <div class="metric-input"><label>Clicks</label><input type="number" id="mClicks" placeholder="e.g. 1240"/></div>
+        <div class="metric-input"><label>CTR (%)</label><input type="number" id="mCtr" placeholder="e.g. 1.3" step="0.01"/></div>
+        <div class="metric-input"><label>Conversions</label><input type="number" id="mConversions" placeholder="e.g. 18"/></div>
+        <div class="metric-input"><label>Cost per Result (£)</label><input type="number" id="mCpr" placeholder="e.g. 37.78" step="0.01"/></div>
+        <div class="metric-input"><label>Target CPA (£)</label><input type="number" id="mTargetCpa" placeholder="e.g. 25"/></div>
+      </div>
+
+      <div class="section-label">Creative & Targeting Setup</div>
+      <div class="form-grid">
+        <div class="field"><label>Number of ad creatives running</label>
+          <select id="fCreatives">
+            <option>1</option><option>2-3</option><option selected>4-6</option><option>7-10</option><option>10+</option>
+          </select>
+        </div>
+        <div class="field"><label>Audience size (approx)</label>
+          <select id="fAudSize">
+            <option>Very narrow (&lt;50k)</option>
+            <option selected>Narrow (50k-200k)</option>
+            <option>Medium (200k-1m)</option>
+            <option>Broad (1m+)</option>
+          </select>
+        </div>
+        <div class="field full"><label>Current issues / what's not working</label>
+          <textarea id="fIssues" rows="2" placeholder="e.g. CTR dropped last week, CPA is too high, running out of budget by 3pm, audience feels saturated..."></textarea>
+        </div>
+      </div>
+
+      <div class="err-bar" id="errBar"></div>
+      <button class="generate-btn" id="generateBtn">
+        <span>✦</span>
+        <span>Audit & Optimise Campaign</span>
+      </button>
+    </div>
+
+    <div class="loading-state" id="loadingState">
+      <div class="loading-orb">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F6644" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+      </div>
+      <div class="loading-title">Auditing your campaign…</div>
+      <div class="loading-sub">Diagnosing performance and building your optimisation plan</div>
+      <ul class="loading-steps" id="loadingSteps">
+        <li>Calculating derived metrics</li>
+        <li>Benchmarking against platform standards</li>
+        <li>Diagnosing targeting and creative issues</li>
+        <li>Modelling budget reallocation scenarios</li>
+        <li>Writing prioritised action plan</li>
+      </ul>
+    </div>
+
+    <div class="output-state" id="outputState">
+      <div class="output-header">
+        <span class="output-meta">Campaign audit — <strong id="outPlatform"></strong></span>
+        <div class="output-btns">
+          <button class="btn-sm green" id="exportBtn">↓ Export plan</button>
+          <button class="btn-sm" id="restartBtn">← New audit</button>
+        </div>
+      </div>
+      <div class="health-bar" id="healthBar"></div>
+      <div class="out-body" id="outBody"></div>
+    </div>
+  </div>
+
+  <footer>
+    <a class="footer-back" href="https://agentsatwork.co">← Back to Agents at Work</a>
+    <p>© 2026 Agents at Work</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var API_KEY='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';
+  var lastResult=null;
+
+  function val(id){return document.getElementById(id).value.trim();}
+
+  document.getElementById('generateBtn').addEventListener('click',generate);
+
+  function generate(){
+    var err=document.getElementById('errBar');
+    if(!val('mSpend')&&!val('mClicks')){err.textContent='Please enter at least some campaign metrics.';err.style.display='block';return;}
+    err.style.display='none';
+    document.getElementById('formState').style.display='none';
+    document.getElementById('loadingState').style.display='block';
+    document.querySelectorAll('#loadingSteps li').forEach(function(li,i){setTimeout(function(){li.classList.add('vis');},i*700);});
+
+    var prompt='Platform: '+val('fPlatform')+'\nObjective: '+val('fObjective')+'\nProduct: '+(val('fProduct')||'Not specified')+'\nAudience: '+(val('fAudience')||'Not specified')+'\n'+
+      'Budget: £'+val('mBudget')+'/day, running '+val('mDays')+' days\n'+
+      'Spend: £'+val('mSpend')+', Impressions: '+val('mImpressions')+', Clicks: '+val('mClicks')+', CTR: '+val('mCtr')+'%\n'+
+      'Conversions: '+val('mConversions')+', CPR: £'+val('mCpr')+', Target CPA: £'+val('mTargetCpa')+'\n'+
+      'Creatives running: '+val('fCreatives')+', Audience size: '+val('fAudSize')+'\n'+
+      (val('fIssues')?'Issues: '+val('fIssues'):'');
+
+    var system='You are a senior paid media strategist with deep expertise in Meta, Google, LinkedIn and TikTok ads. Audit the campaign and produce a prioritised optimisation plan. You MUST respond with ONLY valid JSON, no markdown, no backticks. Structure: {"healthScores":[{"label":"CTR Health","score":"1.3%","status":"ok","note":"Below 2% benchmark"},{"label":"CPA vs Target","score":"£37","status":"bad","note":"51% above target"},{"label":"Creative Fatigue","score":"Medium","status":"ok","note":"4-6 creatives is healthy"},{"label":"Audience Fit","score":"Good","status":"good","note":"Narrow audiences convert better for this objective"}],"optimisations":[{"priority":"urgent","title":"Optimisation title","description":"What to do and exactly how","impact":"Estimated impact","action":"Do this now"},{"priority":"medium",...},{"priority":"low",...}],"budgetRecommendation":{"title":"Budget recommendation title","description":"Specific budget advice with numbers"}}. Status options: good, ok, bad. Include 4 health scores, 4-6 optimisations (mix of urgent/medium/low), 1 budget recommendation. Be very specific and actionable.';
+
+    fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2500,system:system,messages:[{role:'user',content:prompt}]})
+    })
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(data.error) throw new Error(data.error.message);
+      var raw=data.content.filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
+      raw=raw.replace(/```json|```/g,'').trim();
+      var result=JSON.parse(raw);
+      lastResult=result;
+      showOutput(result);
+    })
+    .catch(function(e){
+      document.getElementById('loadingState').style.display='none';
+      document.getElementById('formState').style.display='block';
+      var err=document.getElementById('errBar');
+      err.textContent='Something went wrong: '+(e.message||'Unknown error')+'. Please try again.';
+      err.style.display='block';
+    });
+  }
+
+  function showOutput(r){
+    document.getElementById('loadingState').style.display='none';
+    document.getElementById('outputState').style.display='block';
+    document.getElementById('outPlatform').textContent=val('fPlatform');
+
+    document.getElementById('healthBar').innerHTML=r.healthScores.map(function(h){
+      return '<div class="health-cell"><div class="health-score s-'+h.status+'">'+h.score+'</div><div class="health-lbl">'+h.label+'</div><div class="health-status s-'+h.status+'">'+(h.note||'')+'</div></div>';
+    }).join('');
+
+    var html='<div><div class="out-section-title">Optimisation Plan</div><div class="opt-grid">';
+    r.optimisations.forEach(function(o){
+      html+='<div class="opt-card '+o.priority+'">' +
+        '<span class="opt-priority '+o.priority+'">'+(o.priority==='urgent'?'🔴 Urgent':o.priority==='medium'?'🟡 Medium':'🟢 Low')+'</span>'+
+        '<div><div class="opt-title">'+o.title+'</div><div class="opt-desc">'+o.description+'</div><div class="opt-impact">→ '+o.impact+'</div></div>'+
+        '<div class="opt-action">'+o.action+'</div>'+
+      '</div>';
+    });
+    html+='</div></div>';
+
+    if(r.budgetRecommendation){
+      html+='<div><div class="out-section-title">Budget Strategy</div><div class="budget-card"><div class="budget-title">'+r.budgetRecommendation.title+'</div><div class="budget-desc">'+r.budgetRecommendation.description+'</div></div></div>';
+    }
+
+    document.getElementById('outBody').innerHTML=html;
+  }
+
+  document.getElementById('restartBtn').addEventListener('click',function(){
+    document.getElementById('outputState').style.display='none';
+    document.getElementById('formState').style.display='block';
+    document.querySelectorAll('#loadingSteps li').forEach(function(li){li.classList.remove('vis');});
+  });
+
+  document.getElementById('exportBtn').addEventListener('click',function(){
+    if(!lastResult) return;
+    var txt='AD CAMPAIGN OPTIMISATION PLAN\nGenerated by Agents at Work — agentsatwork.co\n'+'='.repeat(50)+'\n\n';
+    txt+='CAMPAIGN HEALTH\n';
+    lastResult.healthScores.forEach(function(h){txt+=h.label+': '+h.score+' — '+h.note+'\n';});
+    txt+='\nOPTIMISATION PLAN\n';
+    lastResult.optimisations.forEach(function(o,i){
+      txt+=(i+1)+'. ['+o.priority.toUpperCase()+'] '+o.title+'\n   '+o.description+'\n   Impact: '+o.impact+'\n   Action: '+o.action+'\n\n';
+    });
+    if(lastResult.budgetRecommendation){txt+='BUDGET STRATEGY\n'+lastResult.budgetRecommendation.title+'\n'+lastResult.budgetRecommendation.description+'\n';}
+    var blob=new Blob([txt],{type:'text/plain'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='ad-optimisation-'+new Date().toISOString().slice(0,10)+'.txt';
+    a.click();
+  });
+})();
+</script>
+<script>if(!sessionStorage.getItem("aaw_auth")){window.location.href="login.html";}</script>
+</body>
+</html>

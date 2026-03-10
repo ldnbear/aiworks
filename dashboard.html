@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dashboard — Agents at Work</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F9F7F3;--surface:#fff;--border:#E8E3DA;--ink:#1A1814;--mid:#7A7568;--dim:#B8B2A8;--green:#1F6644;--green-bg:#EAF2ED;--green-line:rgba(31,102,68,.22);--shadow:0 2px 24px rgba(0,0,0,.07)}
+body{background:var(--bg);color:var(--ink);font-family:'Geist',sans-serif;font-weight:300;min-height:100vh}
+.dot-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle,#C5BDB0 1px,transparent 1px);background-size:30px 30px;opacity:.4}
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(90px)}
+.orb1{width:600px;height:500px;background:radial-gradient(circle,rgba(31,102,68,.1) 0%,transparent 70%);top:-200px;right:-100px;animation:drift1 16s ease-in-out infinite}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,60px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.wrap{max-width:1000px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.8rem 0;border-bottom:1px solid var(--border)}
+.logo{font-family:'Instrument Serif',serif;font-size:1.15rem;color:var(--ink);text-decoration:none;letter-spacing:-.02em}
+.logo span{color:var(--green)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.user-pill{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--mid);background:var(--surface);border:1px solid var(--border);padding:.3rem .8rem;border-radius:20px}
+.logout-btn{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--mid);background:none;border:1px solid var(--border);border-radius:2px;padding:.3rem .7rem;cursor:pointer;transition:all .15s}
+.logout-btn:hover{border-color:var(--ink);color:var(--ink)}
+.hero{padding:3rem 0 2.5rem;animation:fadeUp .5s .1s ease both}
+.welcome{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--green);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.7rem}
+h1{font-family:'Instrument Serif',serif;font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.1;letter-spacing:-.02em;margin-bottom:.6rem}
+h1 em{font-style:italic;color:var(--green)}
+.hero-sub{font-size:.9rem;color:var(--mid);line-height:1.6}
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:3rem;animation:fadeUp .5s .2s ease both}
+.tool-card{background:var(--surface);border:1.5px solid var(--border);border-radius:2px;overflow:hidden;text-decoration:none;color:inherit;transition:border-color .2s,box-shadow .2s,transform .15s;display:flex;flex-direction:column}
+.tool-card:hover{border-color:var(--green);box-shadow:0 4px 24px rgba(31,102,68,.1);transform:translateY(-2px)}
+.tool-card-top{padding:1.4rem 1.4rem 1rem;flex:1}
+.tool-number{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--dim);letter-spacing:.08em;margin-bottom:.8rem}
+.tool-icon{font-size:1.6rem;margin-bottom:.7rem;display:block}
+.tool-name{font-family:'Instrument Serif',serif;font-size:1.15rem;letter-spacing:-.01em;margin-bottom:.35rem}
+.tool-desc{font-size:.8rem;color:var(--mid);line-height:1.55}
+.tool-card-foot{padding:.8rem 1.4rem;border-top:1px solid var(--border);background:#fafaf8;display:flex;align-items:center;justify-content:space-between}
+.tool-cta{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--green)}
+.tool-arrow{font-size:.85rem;color:var(--dim);transition:transform .15s}
+.tool-card:hover .tool-arrow{transform:translateX(3px)}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:2px;margin-bottom:3rem;overflow:hidden;animation:fadeUp .5s .3s ease both}
+.stat{background:var(--surface);padding:1.2rem 1.4rem}
+.stat-n{font-family:'Instrument Serif',serif;font-size:1.7rem;color:var(--green)}
+.stat-l{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-top:.2rem}
+.recent-section{margin-bottom:3rem;animation:fadeUp .5s .4s ease both}
+.section-title{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.tip-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.tip{padding:1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:2px}
+.tip-label{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--green);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.4rem}
+.tip-text{font-size:.83rem;color:var(--mid);line-height:1.55}
+footer{border-top:1px solid var(--border);padding:2rem 0;display:flex;justify-content:space-between;align-items:center}
+footer p{font-size:.75rem;color:var(--dim)}
+.footer-link{font-size:.78rem;color:var(--mid);text-decoration:none}
+.footer-link:hover{color:var(--ink)}
+@media(max-width:720px){.tools-grid{grid-template-columns:1fr 1fr}.stats-row{grid-template-columns:1fr 1fr}.tip-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.tools-grid{grid-template-columns:1fr}.wrap{padding:0 1.2rem}}
+</style>
+</head>
+<body>
+<div class="dot-grid"></div>
+<div class="orb orb1"></div>
+
+<div class="wrap">
+  <nav>
+    <a class="logo" href="https://agentsatwork.co">agents at <span>work</span></a>
+    <div class="nav-right">
+      <span class="user-pill" id="userPill">Loading…</span>
+      <button class="logout-btn" id="logoutBtn">Sign out</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="welcome">Client dashboard</div>
+    <h1>Your AI marketing<br/><em>agents are ready.</em></h1>
+    <p class="hero-sub">Six tools. All running on your behalf. Pick one to get started.</p>
+  </div>
+
+  <div class="tools-grid">
+    <a class="tool-card" href="cold-outreach-tool.html">
+      <div class="tool-card-top">
+        <div class="tool-number">Tool 01</div>
+        <span class="tool-icon">✉️</span>
+        <div class="tool-name">Cold Outreach Automation</div>
+        <div class="tool-desc">Generate personalised 3-email sequences for any prospect in seconds. Subject lines, timing, and copy included.</div>
+      </div>
+      <div class="tool-card-foot"><span class="tool-cta">Open tool</span><span class="tool-arrow">→</span></div>
+    </a>
+    <a class="tool-card" href="lead-gen-tool.html">
+      <div class="tool-card-top">
+        <div class="tool-number">Tool 02</div>
+        <span class="tool-icon">🎯</span>
+        <div class="tool-name">Lead Generation</div>
+        <div class="tool-desc">Describe your ideal client and get a scored, targeted prospect list with outreach hooks. Export to CSV instantly.</div>
+      </div>
+      <div class="tool-card-foot"><span class="tool-cta">Open tool</span><span class="tool-arrow">→</span></div>
+    </a>
+    <a class="tool-card" href="ad-creation-tool.html">
+      <div class="tool-card-top">
+        <div class="tool-number">Tool 03</div>
+        <span class="tool-icon">📣</span>
+        <div class="tool-name">AI Ad Creation</div>
+        <div class="tool-desc">Brief the AI and get scroll-stopping ad variations across Meta, Google, LinkedIn and TikTok — ready to launch.</div>
+      </div>
+      <div class="tool-card-foot"><span class="tool-cta">Open tool</span><span class="tool-arrow">→</span></div>
+    </a>
+    <a class="tool-card" href="analytics-tool.html">
+      <div class="tool-card-top">
+        <div class="tool-number">Tool 04</div>
+        <span class="tool-icon">📊</span>
+        <div class="tool-name">Analytics & Reporting</div>
+        <div class="tool-desc">Paste your metrics and get a full performance report — KPIs, insights, red flags, and a prioritised action plan.</div>
+      </div>
+      <div class="tool-card-foot"><span class="tool-cta">Open tool</span><span class="tool-arrow">→</span></div>
+    </a>
+    <a class="tool-card" href="ad-management-tool.html">
+      <div class="tool-card-top">
+        <div class="tool-number">Tool 05</div>
+        <span class="tool-icon">⚙️</span>
+        <div class="tool-name">Ad Management & Optimisation</div>
+        <div class="tool-desc">Audit your live campaigns and get a prioritised list of exactly what to fix — with specific actions and impact estimates.</div>
+      </div>
+      <div class="tool-card-foot"><span class="tool-cta">Open tool</span><span class="tool-arrow">→</span></div>
+    </a>
+    <a class="tool-card" href="pr-podcast-tool.html">
+      <div class="tool-card-top">
+        <div class="tool-number">Tool 06</div>
+        <span class="tool-icon">🎙️</span>
+        <div class="tool-name">PR & Podcast Outreach</div>
+        <div class="tool-desc">Identify the best press and podcast opportunities for your brand and get personalised pitches ready to send today.</div>
+      </div>
+      <div class="tool-card-foot"><span class="tool-cta">Open tool</span><span class="tool-arrow">→</span></div>
+    </a>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat"><div class="stat-n">6</div><div class="stat-l">AI tools active</div></div>
+    <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">Always running</div></div>
+    <div class="stat"><div class="stat-n">~10s</div><div class="stat-l">Avg generation time</div></div>
+    <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Runs per month</div></div>
+  </div>
+
+  <div class="recent-section">
+    <div class="section-title">Tips for best results</div>
+    <div class="tip-grid">
+      <div class="tip"><div class="tip-label">Cold Outreach</div><div class="tip-text">The more specific your prospect description, the more personalised the emails. Add a sentence about what their business does for best results.</div></div>
+      <div class="tip"><div class="tip-label">Lead Generation</div><div class="tip-text">Export your lead list to CSV, then run each lead through the Cold Outreach tool for a fully automated pipeline.</div></div>
+      <div class="tip"><div class="tip-label">Ad Creation</div><div class="tip-text">Generate 3 different angle variations and A/B test them. Pain point and social proof angles typically outperform curiosity for cold traffic.</div></div>
+      <div class="tip"><div class="tip-label">Analytics</div><div class="tip-text">Add context about anything unusual that happened (promotions, paused campaigns) so the AI can give more accurate analysis.</div></div>
+    </div>
+  </div>
+
+  <footer>
+    <a class="footer-link" href="https://agentsatwork.co">← Back to main site</a>
+    <p>© 2026 Agents at Work · Client portal</p>
+  </footer>
+</div>
+
+<script>
+// Auth check
+var auth = sessionStorage.getItem('aaw_auth');
+if (!auth) { window.location.href = 'login.html'; }
+else {
+  var data = JSON.parse(auth);
+  document.getElementById('userPill').textContent = data.email;
+}
+document.getElementById('logoutBtn').addEventListener('click', function() {
+  sessionStorage.removeItem('aaw_auth');
+  window.location.href = 'login.html';
+});
+</script>
+</body>
+</html>

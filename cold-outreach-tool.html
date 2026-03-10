@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cold Outreach Automation — Agents at Work</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F9F7F3;--surface:#fff;--border:#E8E3DA;--border2:#D9D3C8;
+  --ink:#1A1814;--mid:#7A7568;--dim:#B8B2A8;
+  --green:#1F6644;--green-bg:#EAF2ED;--green-line:rgba(31,102,68,.22);
+  --amber:#c8873a;--amber-bg:#faf0e4;
+  --shadow:0 2px 24px rgba(0,0,0,.07)
+}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:'Geist',sans-serif;font-weight:300;min-height:100vh}
+.dot-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle,#C5BDB0 1px,transparent 1px);background-size:30px 30px;opacity:.4}
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(90px)}
+.orb1{width:500px;height:400px;background:radial-gradient(circle,rgba(31,102,68,.12) 0%,transparent 70%);top:-150px;left:-100px;animation:drift1 14s ease-in-out infinite}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,rgba(200,135,58,.09) 0%,transparent 70%);bottom:100px;right:-80px;animation:drift2 18s ease-in-out infinite}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,60px)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,40px)}}
+.wrap{max-width:860px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.8rem 0;border-bottom:1px solid var(--border)}
+.logo{font-family:'Instrument Serif',serif;font-size:1.15rem;color:var(--ink);text-decoration:none;letter-spacing:-.02em}
+.logo span{color:var(--green)}
+.nav-badge{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--green);background:var(--green-bg);border:1px solid var(--green-line);padding:.25rem .7rem;border-radius:20px;letter-spacing:.05em;text-transform:uppercase}
+.hero{padding:3.5rem 0 2.5rem;animation:fadeUp .6s .1s ease both}
+.hero-eyebrow{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.hero-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--green)}
+h1{font-family:'Instrument Serif',serif;font-size:clamp(2rem,4vw,2.8rem);line-height:1.1;letter-spacing:-.02em;margin-bottom:.9rem}
+h1 em{font-style:italic;color:var(--green)}
+.hero-sub{font-size:.95rem;color:var(--mid);line-height:1.65;max-width:520px}
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:2px;box-shadow:var(--shadow);margin-bottom:3rem;animation:fadeUp .6s .2s ease both;overflow:hidden}
+.card-header{padding:1.4rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--dim);letter-spacing:.08em;text-transform:uppercase}
+.step-pills{display:flex;gap:.4rem}
+.pill{width:8px;height:8px;border-radius:50%;background:var(--border)}
+.pill.active{background:var(--green)}
+.pill.done{background:var(--green);opacity:.4}
+.card-body{padding:2rem}
+
+/* Form */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.field{display:flex;flex-direction:column;gap:.4rem}
+.field.full{grid-column:1/-1}
+label{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--mid);letter-spacing:.06em;text-transform:uppercase}
+input[type=text],input[type=url],textarea,select{width:100%;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:2px;font-family:'Geist',sans-serif;font-size:.88rem;color:var(--ink);background:var(--bg);outline:none;transition:border-color .2s;font-weight:300;resize:none}
+input:focus,textarea:focus,select:focus{border-color:var(--green);background:#fff;box-shadow:0 0 0 3px rgba(31,102,68,.07)}
+input::placeholder,textarea::placeholder{color:var(--dim)}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%237A7568' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
+.toggle-row{display:flex;gap:.6rem;flex-wrap:wrap}
+.tog{padding:.5rem 1rem;border:1.5px solid var(--border);border-radius:2px;font-family:'DM Mono',monospace;font-size:.7rem;color:var(--mid);cursor:pointer;transition:all .15s;letter-spacing:.04em;background:transparent;user-select:none}
+.tog:hover{border-color:var(--green);color:var(--green)}
+.tog.on{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.generate-btn{width:100%;margin-top:1.5rem;padding:.9rem;background:var(--green);color:#fff;border:none;border-radius:2px;font-family:'Geist',sans-serif;font-weight:500;font-size:.9rem;cursor:pointer;position:relative;overflow:hidden;transition:background .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:.6rem}
+.generate-btn:hover{background:#174f35;transform:translateY(-1px)}
+.generate-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-icon{font-size:1rem}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Loading */
+.loading-state{display:none;padding:3rem 2rem;text-align:center}
+.loading-orb{width:52px;height:52px;margin:0 auto 1.5rem;border-radius:50%;background:var(--green-bg);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;animation:orbPulse 1.5s ease-in-out infinite}
+@keyframes orbPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(31,102,68,.3)}50%{transform:scale(1.05);box-shadow:0 0 0 10px rgba(31,102,68,0)}}
+.loading-title{font-family:'Instrument Serif',serif;font-size:1.3rem;margin-bottom:.4rem}
+.loading-sub{font-size:.83rem;color:var(--dim);margin-bottom:1.5rem}
+.loading-steps{list-style:none;text-align:left;max-width:260px;margin:0 auto}
+.loading-steps li{font-family:'DM Mono',monospace;font-size:.71rem;color:var(--dim);padding:.3rem 0;display:flex;align-items:center;gap:.55rem;opacity:0;transition:opacity .4s}
+.loading-steps li.vis{opacity:1}
+.loading-steps li::before{content:'--';color:var(--green)}
+
+/* Output */
+.output-state{display:none}
+.output-header{padding:1.4rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.output-meta{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--dim)}
+.output-meta strong{color:var(--ink)}
+.btn-restart{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--mid);background:none;border:1px solid var(--border);border-radius:2px;padding:.35rem .8rem;cursor:pointer;transition:all .15s}
+.btn-restart:hover{border-color:var(--ink);color:var(--ink)}
+.emails{padding:1.5rem 2rem;display:grid;gap:1.2rem}
+.email-card{border:1.5px solid var(--border);border-radius:2px;overflow:hidden}
+.email-card-hdr{display:flex;align-items:center;justify-content:space-between;padding:.8rem 1.1rem;background:var(--green-bg);border-bottom:1px solid rgba(31,102,68,.15)}
+.email-num{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--green);letter-spacing:.06em;text-transform:uppercase}
+.email-timing{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--mid)}
+.email-body{padding:1.1rem}
+.email-subject{font-size:.78rem;font-weight:500;color:var(--dim);font-family:'DM Mono',monospace;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.04em}
+.email-subject-val{font-size:.9rem;font-weight:500;color:var(--ink);margin-bottom:.9rem;padding-bottom:.7rem;border-bottom:1px solid var(--border)}
+.email-body-text{font-size:.87rem;color:var(--mid);line-height:1.7;white-space:pre-wrap;margin-bottom:.9rem}
+.email-actions{display:flex;gap:.6rem}
+.btn-copy{display:flex;align-items:center;gap:.4rem;font-family:'DM Mono',monospace;font-size:.7rem;color:var(--green);background:var(--green-bg);border:1px solid rgba(31,102,68,.3);border-radius:2px;padding:.4rem .85rem;cursor:pointer;transition:all .15s}
+.btn-copy:hover{background:var(--green);color:#fff}
+.btn-copy.copied{background:var(--green);color:#fff}
+.export-bar{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;border-top:1px solid var(--border);background:#fafaf8}
+.export-note{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--dim)}
+.btn-export{display:flex;align-items:center;gap:.45rem;font-family:'DM Mono',monospace;font-size:.72rem;color:var(--green);background:var(--green-bg);border:1px solid rgba(31,102,68,.3);border-radius:2px;padding:.45rem .9rem;cursor:pointer;transition:all .15s}
+.btn-export:hover{background:var(--green);color:#fff}
+.err-bar{display:none;margin:1rem 2rem 0;padding:.8rem 1rem;background:#fef0f0;border:1px solid rgba(192,57,43,.3);border-radius:2px;font-size:.82rem;color:#c0392b;font-family:'DM Mono',monospace}
+footer{border-top:1px solid var(--border);padding:2rem 0;display:flex;justify-content:space-between;align-items:center;margin-top:1rem}
+footer p{font-size:.75rem;color:var(--dim)}
+.footer-back{font-size:.78rem;color:var(--mid);text-decoration:none;transition:color .2s}
+.footer-back:hover{color:var(--ink)}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}.wrap{padding:0 1.2rem}}
+
+/* Paywall */
+.paywall-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(26,24,20,.7);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:2rem}
+.paywall-overlay.show{display:flex}
+.paywall-card{background:var(--surface);border:1px solid var(--border);border-radius:2px;box-shadow:0 8px 48px rgba(0,0,0,.18);max-width:440px;width:100%;overflow:hidden;animation:fadeUp .3s ease both}
+.paywall-top{padding:2rem 2rem 1.5rem;text-align:center;border-bottom:1px solid var(--border)}
+.paywall-icon{font-size:2rem;margin-bottom:.8rem}
+.paywall-title{font-family:'Instrument Serif',serif;font-size:1.6rem;letter-spacing:-.02em;margin-bottom:.5rem}
+.paywall-title em{font-style:italic;color:var(--green)}
+.paywall-sub{font-size:.85rem;color:var(--mid);line-height:1.6}
+.paywall-features{padding:1.3rem 2rem;border-bottom:1px solid var(--border)}
+.paywall-feature{display:flex;align-items:center;gap:.7rem;font-size:.85rem;color:var(--mid);padding:.35rem 0}
+.paywall-feature::before{content:'✦';color:var(--green);font-size:.7rem;flex-shrink:0}
+.paywall-actions{padding:1.3rem 2rem 1.5rem;display:flex;flex-direction:column;gap:.7rem}
+.btn-stripe{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.95rem;background:var(--green);color:#fff;border:none;border-radius:2px;font-family:'Geist',sans-serif;font-weight:500;font-size:.9rem;cursor:pointer;text-decoration:none;transition:background .2s}
+.btn-stripe:hover{background:#174f35}
+.btn-dismiss{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--dim);background:none;border:none;cursor:pointer;text-align:center;padding:.3rem;transition:color .2s}
+.btn-dismiss:hover{color:var(--mid)}
+
+/* Paywall */
+.paywall-overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(26,24,20,.7);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:2rem}
+.paywall-overlay.show{display:flex}
+.paywall-card{background:var(--surface);border:1px solid var(--border);border-radius:2px;box-shadow:0 8px 48px rgba(0,0,0,.18);max-width:440px;width:100%;overflow:hidden;animation:fadeUp .3s ease both}
+.paywall-top{padding:2rem 2rem 1.5rem;text-align:center;border-bottom:1px solid var(--border)}
+.paywall-icon{font-size:2rem;margin-bottom:.8rem}
+.paywall-title{font-family:'Instrument Serif',serif;font-size:1.6rem;letter-spacing:-.02em;margin-bottom:.4rem}
+.paywall-title em{font-style:italic;color:var(--green)}
+.paywall-sub{font-size:.85rem;color:var(--mid);line-height:1.6}
+.paywall-features{padding:1.4rem 2rem;border-bottom:1px solid var(--border)}
+.paywall-feature{display:flex;align-items:center;gap:.7rem;font-size:.85rem;color:var(--mid);padding:.35rem 0}
+.paywall-feature::before{content:'✦';color:var(--green);font-size:.7rem;flex-shrink:0}
+.paywall-actions{padding:1.4rem 2rem}
+.paywall-btn{display:block;width:100%;padding:.9rem;background:var(--green);color:#fff;border:none;border-radius:2px;font-family:'Geist',sans-serif;font-weight:500;font-size:.9rem;cursor:pointer;text-align:center;text-decoration:none;transition:background .2s;margin-bottom:.7rem}
+.paywall-btn:hover{background:#174f35}
+.paywall-dismiss{display:block;text-align:center;font-family:'DM Mono',monospace;font-size:.7rem;color:var(--dim);cursor:pointer;transition:color .15s}
+.paywall-dismiss:hover{color:var(--mid)}
+.free-badge{display:inline-flex;align-items:center;gap:.4rem;font-family:'DM Mono',monospace;font-size:.68rem;color:var(--green);background:var(--green-bg);border:1px solid var(--green-line);padding:.25rem .7rem;border-radius:20px;margin-bottom:1rem}
+</style>
+</head>
+<body>
+<div class="dot-grid"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div class="wrap">
+  <nav>
+    <a class="logo" href="https://agentsatwork.co">agents at <span>work</span></a>
+    <span class="nav-badge">Tool 01 — Cold Outreach</span>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-eyebrow">Cold Outreach Automation</div>
+    <h1>Personalised email sequences,<br/><em>written in seconds.</em></h1>
+    <p class="hero-sub">Enter a prospect's details and our AI writes a fully personalised 3-email sequence — with subject lines, timing, and a clear CTA. Ready to send.</p>
+  </div>
+
+  <div class="tool-card">
+    <div class="card-header">
+      <span class="card-title">Prospect Details</span>
+      <div class="step-pills">
+        <div class="pill active" id="p1"></div>
+        <div class="pill" id="p2"></div>
+        <div class="pill" id="p3"></div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="card-body" id="formState">
+      <div class="form-grid">
+        <div class="field">
+          <label>First Name</label>
+          <input type="text" id="fName" placeholder="e.g. Sarah"/>
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" id="fLastName" placeholder="e.g. Johnson"/>
+        </div>
+        <div class="field">
+          <label>Company Name</label>
+          <input type="text" id="fCompany" placeholder="e.g. Bloom Interiors"/>
+        </div>
+        <div class="field">
+          <label>Their Role / Title</label>
+          <input type="text" id="fRole" placeholder="e.g. Founder, Marketing Manager"/>
+        </div>
+        <div class="field full">
+          <label>Website or LinkedIn URL</label>
+          <input type="url" id="fUrl" placeholder="https://"/>
+        </div>
+        <div class="field full">
+          <label>What do they do? (1-2 sentences)</label>
+          <textarea id="fAbout" rows="2" placeholder="e.g. They run a boutique interior design studio targeting high-end residential clients in London."></textarea>
+        </div>
+        <div class="field full">
+          <label>Goal of this outreach</label>
+          <div class="toggle-row" id="goalToggles">
+            <div class="tog on" data-val="book a discovery call">Book a call</div>
+            <div class="tog" data-val="offer a free AI marketing audit">Offer free audit</div>
+            <div class="tog" data-val="get a reply and start a conversation">Start a conversation</div>
+            <div class="tog" data-val="pitch a specific service">Pitch a service</div>
+          </div>
+        </div>
+        <div class="field full">
+          <label>Tone</label>
+          <div class="toggle-row" id="toneToggles">
+            <div class="tog on" data-val="friendly and conversational">Friendly</div>
+            <div class="tog" data-val="direct and confident">Direct</div>
+            <div class="tog" data-val="formal and professional">Formal</div>
+          </div>
+        </div>
+        <div class="field full">
+          <label>Your name (sender)</label>
+          <input type="text" id="fSender" placeholder="e.g. Rupert"/>
+        </div>
+      </div>
+      <div class="err-bar" id="errBar"></div>
+      <button class="generate-btn" id="generateBtn">
+        <span class="btn-icon">✦</span>
+        <span id="btnText">Generate Email Sequence</span>
+        <div class="spinner" id="btnSpinner"></div>
+      </button>
+    </div>
+
+    <!-- LOADING -->
+    <div class="loading-state" id="loadingState">
+      <div class="loading-orb">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F6644" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+      </div>
+      <div class="loading-title">Writing your sequence…</div>
+      <div class="loading-sub">Personalising each email to your prospect</div>
+      <ul class="loading-steps" id="loadingSteps">
+        <li>Analysing prospect context</li>
+        <li>Crafting email 1 — the opener</li>
+        <li>Writing email 2 — the follow-up</li>
+        <li>Writing email 3 — the close</li>
+        <li>Finalising subject lines and timing</li>
+      </ul>
+    </div>
+
+    <!-- OUTPUT -->
+    <div class="output-state" id="outputState">
+      <div class="output-header">
+        <span class="output-meta">Sequence for <strong id="outName"></strong> at <strong id="outCompany"></strong></span>
+        <button class="btn-restart" id="restartBtn">← New sequence</button>
+      </div>
+      <div class="emails" id="emailsOut"></div>
+      <div class="export-bar">
+        <span class="export-note">3-email sequence · Ready to send</span>
+        <button class="btn-export" id="exportBtn">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export as .txt
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <a class="footer-back" href="https://agentsatwork.co">← Back to Agents at Work</a>
+    <p>© 2026 Agents at Work</p>
+  </footer>
+</div>
+
+<script>
+(function() {
+
+  var API_KEY = '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';
+  var selectedGoal = 'book a discovery call';
+  var selectedTone = 'friendly and conversational';
+  var lastResult = null;
+
+  // Toggles
+  document.querySelectorAll('#goalToggles .tog').forEach(function(t) {
+    t.addEventListener('click', function() {
+      document.querySelectorAll('#goalToggles .tog').forEach(function(x){x.classList.remove('on')});
+      t.classList.add('on');
+      selectedGoal = t.dataset.val;
+    });
+  });
+
+  document.querySelectorAll('#toneToggles .tog').forEach(function(t) {
+    t.addEventListener('click', function() {
+      document.querySelectorAll('#toneToggles .tog').forEach(function(x){x.classList.remove('on')});
+      t.classList.add('on');
+      selectedTone = t.dataset.val;
+    });
+  });
+
+  // Generate
+  document.getElementById('generateBtn').addEventListener('click', generate);
+
+  function generate() {
+    var name = document.getElementById('fName').value.trim();
+    var lastName = document.getElementById('fLastName').value.trim();
+    var company = document.getElementById('fCompany').value.trim();
+    var role = document.getElementById('fRole').value.trim();
+    var about = document.getElementById('fAbout').value.trim();
+    var sender = document.getElementById('fSender').value.trim();
+    var url = document.getElementById('fUrl').value.trim();
+    var err = document.getElementById('errBar');
+
+    if (!name || !company) {
+      err.textContent = 'Please enter at least a first name and company name.';
+      err.style.display = 'block';
+      return;
+    }
+    if (!sender) {
+      err.textContent = 'Please enter your name as the sender.';
+      err.style.display = 'block';
+      return;
+    }
+    err.style.display = 'none';
+
+    // Switch to loading
+    document.getElementById('formState').style.display = 'none';
+    document.getElementById('loadingState').style.display = 'block';
+    document.getElementById('p1').classList.add('done');
+    document.getElementById('p2').classList.add('active');
+
+    var lis = document.querySelectorAll('#loadingSteps li');
+    lis.forEach(function(li, i) { setTimeout(function(){ li.classList.add('vis'); }, i * 600); });
+
+    var prompt = 'Prospect: ' + name + ' ' + lastName + (role ? ', ' + role : '') + ' at ' + company + (url ? ' (' + url + ')' : '') + '.\n' + (about ? 'About them: ' + about + '\n' : '') + 'Goal: ' + selectedGoal + '\nTone: ' + selectedTone + '\nSender name: ' + sender;
+
+    var system = 'You are an expert cold email copywriter for Agents at Work, an AI agency for SMEs. Write a 3-email cold outreach sequence. Each email should be short (under 120 words), highly personalised, human, and never salesy. Avoid clichés. Reference specifics about their business where possible. You MUST respond with ONLY valid JSON, no markdown, no backticks. Use this exact structure: {"emails":[{"number":1,"timing":"Send on day 1","subject":"subject line here","body":"email body here"},{"number":2,"timing":"Follow up day 3","subject":"subject line here","body":"email body here"},{"number":3,"timing":"Final follow up day 7","subject":"subject line here","body":"email body here"}]}';
+
+    fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': API_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1500,
+        system: system,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data) {
+      if (data.error) throw new Error(data.error.message);
+      var raw = data.content.filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
+      raw = raw.replace(/```json|```/g,'').trim();
+      // Sanitise: replace literal newlines inside JSON string values
+      raw = raw.replace(/("(?:[^"\\]|\\.)*")/g, function(m) {
+        return m.replace(/\n/g, '\\n').replace(/\r/g, '\\r');
+      });
+      var result;
+      try {
+        result = JSON.parse(raw);
+      } catch(parseErr) {
+        var match = raw.match(/\{[\s\S]*\}/);
+        if (match) { result = JSON.parse(match[0]); }
+        else { throw parseErr; }
+      }
+      lastResult = { prospect: name + ' ' + lastName, company: company, emails: result.emails };
+      showOutput(name + (lastName?' '+lastName:''), company, result.emails);
+        document.dispatchEvent(new Event('aaw:generated'));
+    })
+    .catch(function(e) {
+      document.getElementById('loadingState').style.display = 'none';
+      document.getElementById('formState').style.display = 'block';
+      err.textContent = 'Something went wrong: ' + (e.message||'Unknown error') + '. Please try again.';
+      err.style.display = 'block';
+    });
+  }
+
+  function showOutput(name, company, emails) {
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('outputState').style.display = 'block';
+    document.getElementById('p2').classList.add('done');
+    document.getElementById('p3').classList.add('active');
+    document.getElementById('outName').textContent = name;
+    document.getElementById('outCompany').textContent = company;
+
+    var html = emails.map(function(e) {
+      return '<div class="email-card">' +
+        '<div class="email-card-hdr">' +
+          '<span class="email-num">Email ' + e.number + '</span>' +
+          '<span class="email-timing">' + e.timing + '</span>' +
+        '</div>' +
+        '<div class="email-body">' +
+          '<div class="email-subject">Subject line</div>' +
+          '<div class="email-subject-val">' + e.subject + '</div>' +
+          '<div class="email-body-text">' + e.body + '</div>' +
+          '<div class="email-actions">' +
+            '<button class="btn-copy" data-email="' + encodeURIComponent(e.subject + '\n\n' + e.body) + '">Copy email</button>' +
+            '<button class="btn-copy" data-subject="' + encodeURIComponent(e.subject) + '">Copy subject only</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    document.getElementById('emailsOut').innerHTML = html;
+    if(window._paywallMarkUsed) window._paywallMarkUsed();
+    setTimeout(function(){ if(localStorage.getItem('aaw_outreach_used') && !sessionStorage.getItem('aaw_auth')) document.getElementById('paywallOverlay').classList.add('show'); }, 3000);
+
+    document.querySelectorAll('.btn-copy').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var text = btn.dataset.email ? decodeURIComponent(btn.dataset.email) : decodeURIComponent(btn.dataset.subject);
+        navigator.clipboard.writeText(text).then(function() {
+          var orig = btn.textContent;
+          btn.textContent = '✓ Copied!';
+          btn.classList.add('copied');
+          setTimeout(function(){ btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+        });
+      });
+    });
+  }
+
+  document.getElementById('restartBtn').addEventListener('click', function() {
+    document.getElementById('outputState').style.display = 'none';
+    document.getElementById('formState').style.display = 'block';
+    document.getElementById('p1').className = 'pill active';
+    document.getElementById('p2').className = 'pill';
+    document.getElementById('p3').className = 'pill';
+  });
+
+  document.getElementById('exportBtn').addEventListener('click', function() {
+    if (!lastResult) return;
+    var txt = 'COLD OUTREACH SEQUENCE\n';
+    txt += 'Prospect: ' + lastResult.prospect + ' at ' + lastResult.company + '\n';
+    txt += 'Generated by Agents at Work — agentsatwork.co\n';
+    txt += '='.repeat(50) + '\n\n';
+    lastResult.emails.forEach(function(e) {
+      txt += 'EMAIL ' + e.number + ' — ' + e.timing.toUpperCase() + '\n';
+      txt += 'Subject: ' + e.subject + '\n\n';
+      txt += e.body + '\n\n';
+      txt += '-'.repeat(40) + '\n\n';
+    });
+    var blob = new Blob([txt], { type: 'text/plain' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'outreach-' + lastResult.company.toLowerCase().replace(/\s+/g,'-') + '.txt';
+    a.click();
+  });
+
+})();
+
+  // Paywall logic
+  var STRIPE_URL = 'STRIPE_LINK_HERE';
+  var FREE_USES = 1;
+
+  // Check if coming from dashboard (bypass paywall)
+  var fromDashboard = document.referrer.includes('dashboard.html') || 
+                      sessionStorage.getItem('aaw_auth');
+
+  function hasUsedFree() {
+    if (fromDashboard) return false;
+    var used = parseInt(localStorage.getItem('aaw_outreach_uses') || '0');
+    return used >= FREE_USES;
+  }
+
+  function incrementUse() {
+    if (fromDashboard) return;
+    var used = parseInt(localStorage.getItem('aaw_outreach_uses') || '0');
+    localStorage.setItem('aaw_outreach_uses', used + 1);
+  }
+
+  function showPaywall() {
+    document.getElementById('paywallOverlay').classList.add('show');
+  }
+
+  var _pd = document.getElementById('paywallDismiss');
+  if (_pd) _pd.addEventListener('click', function() {
+    document.getElementById('paywallOverlay').classList.remove('show');
+  });
+
+  // Check on page load
+  if (hasUsedFree()) {
+    // Disable generate button, show teaser
+    var btn = document.getElementById('generateBtn');
+    btn.textContent = '✦ Unlock to generate sequences';
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      showPaywall();
+    }, true);
+  }
+
+  // Hook into generate to count usage
+  var origGenerate = window._generateOutreach;
+  document.addEventListener('aaw:generated', function() {
+    incrementUse();
+    if (hasUsedFree()) {
+      setTimeout(showPaywall, 2000);
+    }
+  });
+</script>
+
+<!-- Paywall overlay -->
+<div class="paywall-overlay" id="paywallOverlay">
+  <div class="paywall-card">
+    <div class="paywall-top">
+      <div class="paywall-icon">✦</div>
+      <div class="paywall-title">You've used your <em>free sequence.</em></div>
+      <div class="paywall-sub">Unlock unlimited cold outreach sequences — plus all 6 AI marketing tools — with an Agents at Work subscription.</div>
+    </div>
+    <div class="paywall-features">
+      <div class="paywall-feature">Unlimited cold outreach sequences</div>
+      <div class="paywall-feature">Lead generation — find 100s of prospects</div>
+      <div class="paywall-feature">AI ad creation across Meta, Google, LinkedIn & TikTok</div>
+      <div class="paywall-feature">Analytics, reporting & campaign optimisation</div>
+      <div class="paywall-feature">PR & podcast outreach pitches</div>
+    </div>
+    <div class="paywall-actions">
+      <a class="btn-stripe" href="STRIPE_LINK_HERE" target="_blank">Unlock all tools →</a>
+      <button class="btn-dismiss" id="paywallDismiss">Maybe later</button>
+    </div>
+  </div>
+</div>
+
+<!-- Paywall Overlay -->
+<div class="paywall-overlay" id="paywallOverlay">
+  <div class="paywall-card">
+    <div class="paywall-top">
+      <div class="paywall-icon">✦</div>
+      <div class="free-badge">Free use complete</div>
+      <div class="paywall-title">Want <em>unlimited</em> sequences?</div>
+      <p class="paywall-sub">You've used your free outreach sequence. Upgrade to get unlimited sequences, all 6 AI tools, and weekly prospect lists — managed for you.</p>
+    </div>
+    <div class="paywall-features">
+      <div class="paywall-feature">Unlimited cold outreach sequences</div>
+      <div class="paywall-feature">Lead Generation — targeted prospect lists weekly</div>
+      <div class="paywall-feature">AI Ad Creation across Meta, Google, LinkedIn & TikTok</div>
+      <div class="paywall-feature">Analytics & Reporting — monthly performance reports</div>
+      <div class="paywall-feature">Ad Management & Optimisation</div>
+      <div class="paywall-feature">PR & Podcast Outreach pitches</div>
+    </div>
+    <div class="paywall-actions">
+      <a class="paywall-btn" href="https://buy.stripe.com/test_7sY6oJ4ZEcCK4KH1Nb8N200" target="_blank">Get full access — £297/month →</a>
+      <span class="paywall-dismiss" id="paywallDismiss">I'll stick with the free version for now</span>
+    </div>
+  </div>
+</div>
+<script>
+// Paywall logic — 1 free use
+(function() {
+  var USED_KEY = 'aaw_outreach_used';
+  var isClient = !!sessionStorage.getItem('aaw_auth');
+
+  function checkPaywall() {
+    if (isClient) return; // logged-in clients bypass paywall
+    if (localStorage.getItem(USED_KEY)) {
+      // Already used — show paywall immediately
+      document.getElementById('paywallOverlay').classList.add('show');
+    }
+  }
+
+  function markUsed() {
+    if (!isClient) localStorage.setItem(USED_KEY, '1');
+  }
+
+  // Hook into showProposal to mark used after output shown
+  var origShowProposal = window._showProposalHook;
+  document.addEventListener('aaw:sequenceShown', function() {
+    markUsed();
+  });
+
+  var _pd = document.getElementById('paywallDismiss');
+  if (_pd) _pd.addEventListener('click', function() {
+    document.getElementById('paywallOverlay').classList.remove('show');
+  });
+
+  // Check on load
+  checkPaywall();
+  window._paywallMarkUsed = markUsed;
+})();
+</script>
+</body>
+</html>

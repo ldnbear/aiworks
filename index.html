@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AIWorks — AI Marketing for SMEs</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F9F7F3;--surface:#FFFFFF;--border:#E8E3DA;--border2:#D9D3C8;
+  --ink:#1A1814;--mid:#7A7568;--dim:#B8B2A8;
+  --green:#1F6644;--green-bg:#EAF2ED;--green-line:rgba(31,102,68,.22);
+  --shadow:0 2px 24px rgba(0,0,0,.07);
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Geist',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+
+/* BG */
+.dot-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle,#C5BDB0 1px,transparent 1px);background-size:30px 30px;opacity:.5;mask-image:radial-gradient(ellipse 100% 70% at 50% 0%,#000 20%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 100% 70% at 50% 0%,#000 20%,transparent 100%)}
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(90px)}
+.orb1{width:600px;height:500px;background:radial-gradient(circle,rgba(31,102,68,.13) 0%,transparent 70%);top:-180px;left:-120px;animation:drift1 14s ease-in-out infinite}
+.orb2{width:450px;height:450px;background:radial-gradient(circle,rgba(180,155,95,.1) 0%,transparent 70%);top:300px;right:-100px;animation:drift2 18s ease-in-out infinite}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(50px,70px)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,50px)}}
+.particles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.particle{position:absolute;bottom:-30px;width:1.5px;border-radius:2px;background:var(--green);opacity:0;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(0);opacity:0}10%{opacity:.4}90%{opacity:.15}100%{transform:translateY(-100vh);opacity:0}}
+
+/* LAYOUT */
+.wrap{max-width:900px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}
+
+/* PAGE SWITCHING */
+#page-landing{display:block}
+#page-audit{display:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══ LANDING PAGE ═══ */
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.8rem 0;border-bottom:1px solid var(--border);opacity:0;animation:fadeUp .6s .1s ease forwards}
+.logo{font-family:'Instrument Serif',serif;font-size:1.15rem;color:var(--ink);text-decoration:none;letter-spacing:-.02em;cursor:pointer}
+.logo span{color:var(--green)}
+.nav-right{display:flex;align-items:center;gap:1.2rem}
+.nav-count{font-size:.78rem;color:var(--mid)}
+.nav-count strong{color:var(--ink)}
+.live-badge{display:flex;align-items:center;gap:.4rem;font-size:.72rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--green);background:var(--green-bg);padding:.3rem .75rem;border-radius:20px;border:1px solid var(--green-line)}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.8s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.hero{padding:5rem 0 3.5rem;opacity:0;animation:fadeUp .7s .25s ease forwards}
+.hero-label{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:1.4rem;display:flex;align-items:center;gap:.6rem}
+.hero-label::before{content:'';display:block;width:20px;height:1px;background:var(--green)}
+h1{font-family:'Instrument Serif',serif;font-size:clamp(2.6rem,5.5vw,4rem);line-height:1.08;letter-spacing:-.03em;color:var(--ink);margin-bottom:1.4rem}
+h1 em{font-style:italic;color:var(--green)}
+h1 .line2{padding-left:2rem;display:block}
+h1 .line3{padding-left:4rem;display:block}
+.hero-sub{font-size:1.05rem;color:var(--mid);line-height:1.65;max-width:540px;margin-bottom:2.5rem}
+
+.audit-banner{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;background:var(--green);border-radius:2px;padding:1.4rem 1.8rem;margin-bottom:2rem;opacity:0;animation:fadeUp .7s .35s ease forwards}
+.audit-banner-left{display:flex;align-items:center;gap:1rem}
+.audit-icon{font-size:1.4rem;flex-shrink:0}
+.audit-banner-title{font-family:'Instrument Serif',serif;font-size:1.05rem;color:#fff;margin-bottom:.2rem}
+.audit-banner-sub{font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.4}
+.audit-btn{flex-shrink:0;display:inline-flex;align-items:center;gap:.5rem;background:#fff;color:var(--green);font-family:'Geist',sans-serif;font-weight:500;font-size:.82rem;border:none;border-radius:2px;padding:.65rem 1.2rem;cursor:pointer;white-space:nowrap;text-decoration:none;transition:all .15s;letter-spacing:.01em}
+.audit-btn:hover{background:var(--green-bg);transform:translateY(-1px)}
+.audit-btn .arr{transition:transform .15s}
+.audit-btn:hover .arr{transform:translateX(3px)}
+
+.stats{display:flex;gap:3rem;margin-bottom:3rem;opacity:0;animation:fadeUp .7s .4s ease forwards}
+.stat-num{font-family:'Instrument Serif',serif;font-size:2rem;color:var(--ink);letter-spacing:-.02em}
+.stat-num em{font-style:normal;font-size:1.1rem;color:var(--green)}
+.stat-label{font-size:.75rem;color:var(--dim);margin-top:.1rem}
+
+.services-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1.2rem;opacity:0;animation:fadeUp .7s .5s ease forwards}
+.services-label{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:3rem;opacity:0;animation:fadeUp .7s .55s ease forwards}
+.service{background:var(--bg);padding:1.4rem;position:relative;overflow:hidden;cursor:default;transition:background .2s}
+.service:hover{background:var(--surface)}
+.service-accent{position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--green);transform:scaleY(0);transform-origin:bottom;transition:transform .3s}
+.service:hover .service-accent{transform:scaleY(1)}
+.s-num{font-family:'Instrument Serif',serif;font-size:.7rem;color:var(--dim);margin-bottom:.7rem}
+.s-icon{font-size:1.1rem;display:block;margin-bottom:.6rem}
+.service h3{font-size:.88rem;font-weight:500;color:var(--ink);margin-bottom:.4rem;line-height:1.3}
+.service p{font-size:.78rem;color:var(--mid);line-height:1.5}
+.s-arrow{position:absolute;bottom:1.5rem;right:1.5rem;width:28px;height:28px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:.75rem;opacity:0;transform:translateX(-4px);transition:opacity .2s,transform .2s,border-color .2s,color .2s}
+.service:hover .s-arrow{opacity:1;transform:translateX(0);border-color:var(--green-line);color:var(--green)}
+
+.waitlist-section{padding:3rem 0;opacity:0;animation:fadeUp .7s .65s ease forwards}
+.waitlist-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.waitlist-left h2{font-family:'Instrument Serif',serif;font-size:1.8rem;letter-spacing:-.02em;margin-bottom:.8rem;line-height:1.2}
+.waitlist-left p{font-size:.88rem;color:var(--mid);line-height:1.65;max-width:300px}
+.form-box{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:1.8rem;box-shadow:var(--shadow)}
+.form-row{display:flex;flex-direction:column;gap:.75rem;margin-bottom:.75rem}
+.field input{width:100%;padding:.75rem 1rem;border:1px solid var(--border2);border-radius:2px;font-family:'Geist',sans-serif;font-size:.88rem;color:var(--ink);background:var(--bg);outline:none;transition:border-color .2s,box-shadow .2s;font-weight:300}
+.field input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(31,102,68,.08);background:#fff}
+.field input::placeholder{color:var(--dim)}
+.wl-btn{width:100%;padding:.85rem;background:var(--green);color:#fff;border:none;border-radius:2px;font-family:'Geist',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;position:relative;overflow:hidden;transition:background .2s,transform .15s;letter-spacing:.01em}
+.wl-btn:hover{background:#174f35;transform:translateY(-1px)}
+.wl-btn.loading .btn-text{opacity:0}
+.wl-btn.loading .spinner{opacity:1}
+.spinner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
+.spin-ring{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.form-note{font-size:.72rem;color:var(--dim);margin-top:.75rem;display:flex;align-items:center;gap:.4rem;line-height:1.4}
+.wl-success{display:none;padding:1.5rem;background:var(--green-bg);border:1px solid var(--green-line);border-radius:2px}
+.wl-success.show{display:block}
+.wl-success-icon{width:28px;height:28px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:.8rem}
+.wl-success h3{font-family:'Instrument Serif',serif;font-size:1.1rem;margin-bottom:.4rem}
+.wl-success p{font-size:.82rem;color:var(--mid);line-height:1.5}
+.social-proof{display:flex;align-items:center;gap:.75rem;margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--border)}
+.avatars{display:flex}
+.av{width:26px;height:26px;border-radius:50%;border:2px solid var(--surface);display:flex;align-items:center;justify-content:center;font-size:.55rem;font-weight:500;color:#fff;margin-left:-6px}
+.av:first-child{margin-left:0}
+.av1{background:#2d6a4f}.av2{background:#774936}.av3{background:#2c4a7c}.av4{background:#6b3fa0}
+.sp-text{font-size:.75rem;color:var(--mid)}
+.sp-text strong{color:var(--ink)}
+
+footer{border-top:1px solid var(--border);padding:2rem 0;display:flex;justify-content:space-between;align-items:center;opacity:0;animation:fadeUp .7s .95s ease forwards}
+footer .logo{font-size:1rem}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{font-size:.78rem;color:var(--mid);text-decoration:none;transition:color .2s;cursor:pointer}
+.footer-links a:hover{color:var(--ink)}
+footer p{font-size:.75rem;color:var(--dim)}
+
+/* ═══ AUDIT PAGE ═══ */
+#page-audit{animation:fadeUp .4s ease forwards}
+.audit-nav{display:flex;justify-content:space-between;align-items:center;padding:1.8rem 0;border-bottom:1px solid var(--border)}
+.back-btn{display:flex;align-items:center;gap:.5rem;font-family:'Geist',sans-serif;font-size:.82rem;color:var(--mid);background:none;border:none;cursor:pointer;transition:color .15s;padding:0}
+.back-btn:hover{color:var(--ink)}
+.audit-hero{padding:3rem 0 2rem}
+.audit-eyebrow{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.audit-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--green)}
+.audit-h1{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,2.8rem);line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin-bottom:1rem}
+.audit-h1 em{font-style:italic;color:var(--green)}
+.audit-sub{font-size:.95rem;color:var(--mid);line-height:1.65;max-width:500px;margin-bottom:.5rem}
+.audit-meta{display:flex;align-items:center;gap:1.5rem;font-size:.72rem;color:var(--dim);margin-bottom:2rem}
+.pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.8s infinite;display:inline-block;margin-right:.3rem}
+
+/* AUDIT CARD */
+.audit-card{background:var(--surface);border:1px solid var(--border);border-radius:2px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:4rem}
+.progress-bar{height:3px;background:var(--border)}
+.progress-fill{height:100%;background:var(--green);transition:width .4s cubic-bezier(.4,0,.2,1);width:0%}
+.step-header{padding:1.6rem 2rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.step-label{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--dim);letter-spacing:.08em;text-transform:uppercase}
+.step-counter{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--dim)}
+.step-counter strong{color:var(--ink)}
+.step-body{padding:2rem}
+.step-question{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--ink);margin-bottom:.5rem;line-height:1.3}
+.step-hint{font-size:.83rem;color:var(--dim);margin-bottom:1.6rem}
+.options-grid{display:grid;gap:.6rem}
+.options-grid.cols-2{grid-template-columns:1fr 1fr}
+.option-btn{display:flex;align-items:center;gap:.8rem;padding:.85rem 1rem;border:1.5px solid var(--border);border-radius:2px;background:transparent;cursor:pointer;text-align:left;transition:all .15s;font-family:'Geist',sans-serif;font-size:.88rem;color:var(--ink)}
+.option-btn:hover{border-color:#4a8c61;background:var(--green-bg)}
+.option-btn.selected{border-color:var(--green);background:var(--green-bg);box-shadow:inset 3px 0 0 var(--green)}
+.opt-icon{font-size:1.05rem;flex-shrink:0}
+.opt-label{font-weight:500}
+.opt-sub{font-size:.76rem;color:var(--dim);display:block;margin-top:.1rem}
+.text-input{width:100%;padding:.82rem 1rem;border:1.5px solid var(--border);border-radius:2px;font-family:'Geist',sans-serif;font-size:.9rem;color:var(--ink);background:transparent;outline:none;transition:border-color .15s;font-weight:300}
+.text-input:focus{border-color:var(--green)}
+.text-input::placeholder{color:var(--dim)}
+.budget-display{text-align:center;font-family:'DM Serif Display',serif;font-size:2rem;color:var(--green);margin-bottom:1rem}
+input[type=range]{width:100%;height:4px;-webkit-appearance:none;background:var(--border);border-radius:2px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--green);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.range-labels{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:.7rem;color:var(--dim);margin-top:.5rem}
+.checkbox-grid{display:grid;gap:.55rem}
+.checkbox-item{display:flex;align-items:center;gap:.75rem;padding:.7rem .9rem;border:1.5px solid var(--border);border-radius:2px;cursor:pointer;transition:all .15s;font-size:.88rem}
+.checkbox-item:hover{border-color:#4a8c61;background:var(--green-bg)}
+.checkbox-item.checked{border-color:var(--green);background:var(--green-bg)}
+.checkbox-box{width:15px;height:15px;border:1.5px solid var(--border);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;font-size:.65rem;color:#fff}
+.checkbox-item.checked .checkbox-box{background:var(--green);border-color:var(--green)}
+.step-nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2rem;border-top:1px solid var(--border);background:#fafaf8}
+.btn-back{font-family:'DM Mono',monospace;font-size:.76rem;color:var(--mid);background:none;border:none;cursor:pointer;padding:.4rem 0;transition:color .15s}
+.btn-back:hover{color:var(--ink)}
+.btn-next{display:flex;align-items:center;gap:.5rem;background:var(--green);color:#fff;font-family:'Geist',sans-serif;font-weight:500;font-size:.86rem;border:none;border-radius:2px;padding:.7rem 1.5rem;cursor:pointer;transition:all .15s}
+.btn-next:hover{background:#174f35;transform:translateY(-1px)}
+.btn-next:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-next .arrow{transition:transform .15s}
+.btn-next:hover:not(:disabled) .arrow{transform:translateX(3px)}
+
+/* API GATE */
+.api-gate{padding:2.5rem 2rem;text-align:center}
+.api-gate-icon{width:48px;height:48px;border-radius:50%;background:var(--green-bg);border:1.5px solid var(--green-line);display:flex;align-items:center;justify-content:center;margin:0 auto 1.4rem;font-size:1.3rem}
+.api-gate-title{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--ink);margin-bottom:.5rem}
+.api-gate-sub{font-size:.86rem;color:var(--mid);line-height:1.65;max-width:380px;margin:0 auto 1.8rem}
+.api-gate-sub a{color:var(--green);text-decoration:none;font-weight:500}
+.api-key-wrap{max-width:400px;margin:0 auto}
+.api-key-input{width:100%;padding:.82rem 1rem;border:1.5px solid var(--border);border-radius:2px;font-family:'DM Mono',monospace;font-size:.82rem;color:var(--ink);background:#fff;outline:none;margin-bottom:.7rem;letter-spacing:.03em;transition:border-color .15s}
+.api-key-input:focus{border-color:var(--green)}
+.api-key-btn{width:100%;background:var(--green);color:#fff;border:none;border-radius:2px;padding:.8rem;font-family:'Geist',sans-serif;font-weight:500;font-size:.88rem;cursor:pointer;transition:background .15s}
+.api-key-btn:hover{background:#174f35}
+.api-key-note{font-size:.7rem;color:var(--dim);margin-top:.65rem;display:flex;align-items:center;justify-content:center;gap:.35rem}
+.api-key-error{display:none;margin-top:.65rem;font-size:.8rem;color:#c0392b;background:#fef0f0;border:1px solid rgba(192,57,43,.2);border-radius:2px;padding:.55rem .8rem}
+
+/* LOADING */
+.loading-state{display:none;padding:3.5rem 2rem;text-align:center}
+.loading-orb{width:56px;height:56px;margin:0 auto 1.8rem;border-radius:50%;background:var(--green-bg);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;animation:orbPulse 1.5s ease-in-out infinite}
+@keyframes orbPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(31,102,68,.3)}50%{transform:scale(1.05);box-shadow:0 0 0 10px rgba(31,102,68,0)}}
+.loading-title{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--ink);margin-bottom:.5rem}
+.loading-sub{font-size:.84rem;color:var(--dim);margin-bottom:1.8rem}
+.loading-steps{list-style:none;text-align:left;max-width:280px;margin:0 auto}
+.loading-steps li{font-family:'DM Mono',monospace;font-size:.73rem;color:var(--dim);padding:.35rem 0;display:flex;align-items:center;gap:.6rem;opacity:0;transition:opacity .4s}
+.loading-steps li.vis{opacity:1}
+.loading-steps li::before{content:'—';color:var(--green)}
+
+/* ERROR */
+.audit-error{display:none;margin:0 2rem 1rem;padding:.85rem 1rem;background:#fef0f0;border:1px solid rgba(192,57,43,.3);border-radius:2px;font-size:.83rem;color:#c0392b}
+
+/* PROPOSAL */
+.proposal-header{background:var(--green);color:#fff;padding:2.2rem 2rem}
+.proposal-tag{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:.9rem}
+.proposal-title{font-family:'DM Serif Display',serif;font-size:1.7rem;line-height:1.2;margin-bottom:.7rem}
+.proposal-subtitle{font-size:.86rem;opacity:.75;line-height:1.5}
+.proposal-score{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.15);border-radius:2px;padding:.35rem .85rem;margin-top:1rem;font-family:'DM Mono',monospace;font-size:.76rem}
+.score-num{font-size:1.15rem;font-weight:600}
+.proposal-body{padding:2rem}
+.section-title{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.diagnosis-text{font-size:.9rem;color:var(--mid);line-height:1.7;margin-bottom:1.8rem;padding:1.1rem;background:#fafaf8;border-left:3px solid #c8873a;border-radius:0 2px 2px 0}
+.gaps-list{display:grid;gap:.55rem;margin-bottom:1.8rem}
+.gap-item{display:flex;align-items:flex-start;gap:.7rem;padding:.85rem .95rem;background:#faf0e4;border:1px solid rgba(200,135,58,.2);border-radius:2px;font-size:.85rem;color:var(--ink)}
+.gap-icon{color:#c8873a;flex-shrink:0;margin-top:.1rem}
+.reco-list{display:grid;gap:.9rem;margin-bottom:1.8rem}
+.reco-card{border:1.5px solid var(--border);border-radius:2px;overflow:hidden}
+.reco-card-header{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem;background:var(--green-bg);border-bottom:1px solid rgba(31,102,68,.15)}
+.reco-name{font-weight:500;font-size:.9rem;color:var(--green)}
+.priority-badge{font-family:'DM Mono',monospace;font-size:.63rem;padding:.18rem .55rem;border-radius:20px;letter-spacing:.05em;text-transform:uppercase}
+.priority-high{background:rgba(31,102,68,.15);color:var(--green)}
+.priority-med{background:rgba(200,135,58,.15);color:#c8873a}
+.reco-card-body{padding:.9rem 1.1rem}
+.reco-rationale{font-size:.85rem;color:var(--mid);line-height:1.6;margin-bottom:.7rem}
+.reco-roi{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--green);background:var(--green-bg);padding:.35rem .65rem;border-radius:2px;display:inline-block}
+.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-bottom:1.8rem}
+.roi-card{text-align:center;padding:1.1rem .7rem;border:1px solid var(--border);border-radius:2px;background:#fafaf8}
+.roi-num{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--green);margin-bottom:.25rem}
+.roi-label{font-size:.72rem;color:var(--dim);line-height:1.4}
+.proposal-cta{background:var(--ink);border-radius:2px;padding:1.8rem;text-align:center;margin-top:.5rem}
+.cta-title{font-family:'DM Serif Display',serif;font-size:1.25rem;color:#fff;margin-bottom:.5rem}
+.cta-sub{font-size:.84rem;color:rgba(255,255,255,.6);margin-bottom:1.3rem;line-height:1.5}
+.cta-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--green);color:#fff;font-family:'Geist',sans-serif;font-weight:500;border:none;border-radius:2px;padding:.8rem 1.8rem;cursor:pointer;font-size:.88rem;transition:all .15s}
+.cta-btn:hover{background:#174f35;transform:translateY(-1px)}
+.pdf-bar{display:flex;align-items:center;justify-content:space-between;padding:.9rem 2rem;background:#fafaf8;border-top:1px solid var(--border)}
+.pdf-note{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--dim)}
+.btn-pdf{display:flex;align-items:center;gap:.45rem;font-family:'DM Mono',monospace;font-size:.72rem;color:var(--green);background:var(--green-bg);border:1px solid rgba(31,102,68,.3);border-radius:2px;padding:.45rem .9rem;cursor:pointer;transition:all .15s}
+.btn-pdf:hover{background:var(--green);color:#fff}
+
+/* RESPONSIVE */
+@media(max-width:780px){
+  .wrap{padding:0 1.4rem}
+  h1 .line2{padding-left:1.5rem}
+  h1 .line3{padding-left:3rem}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .stats{gap:2rem}
+  .audit-banner{flex-direction:column;align-items:flex-start}
+  .roi-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+  .waitlist-inner{grid-template-columns:1fr;gap:2rem}
+  .services-grid{grid-template-columns:1fr}
+  .stats{flex-wrap:wrap;gap:1.5rem}
+  footer{flex-direction:column;gap:1rem;text-align:center}
+  .footer-links{justify-content:center}
+  h1 .line2,h1 .line3{padding-left:0}
+  .options-grid.cols-2{grid-template-columns:1fr}
+}
+@media print{
+  .audit-nav,.audit-hero,.step-nav,.pdf-bar,.proposal-cta,#page-landing{display:none!important}
+  body{background:#fff}
+  .audit-card{box-shadow:none;border:none}
+}
+</style>
+</head>
+<body>
+
+<div class="dot-grid"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="particles" id="particles"></div>
+
+<!-- ═══════════════ LANDING PAGE ═══════════════ -->
+<div id="page-landing">
+  <div class="wrap">
+    <nav>
+      <a class="logo" onclick="showLanding()">ai<span>works</span></a>
+      <div class="nav-right">
+        <span class="nav-count"><strong id="navCount">143</strong> on waitlist</span>
+        <span class="live-badge"><span class="live-dot"></span>Accepting applications</span>
+        <a href="login.html" style="font-family:'DM Mono',monospace;font-size:.72rem;color:var(--mid);text-decoration:none;border:1px solid var(--border);padding:.35rem .8rem;border-radius:2px;transition:all .15s" onmouseover="this.style.borderColor='var(--ink)';this.style.color='var(--ink)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--mid)'">Client login →</a>
+      </div>
+    </nav>
+  </div>
+  <div class="wrap">
+    <section class="hero">
+      <p class="hero-label">Full-service AI agency · SMEs</p>
+      <h1>Your business,<span class="line2"><em>growing</em> while</span><span class="line3">you sleep.</span></h1>
+      <p class="hero-sub">We build and operate AI-powered marketing, sales, and growth systems for small businesses — customers, leads, and revenue generated 24/7, automatically.</p>
+      <div class="audit-banner">
+        <div class="audit-banner-left">
+          <span class="audit-icon">🔍</span>
+          <div>
+            <div class="audit-banner-title">Not sure where to start? Get a free AI audit of your marketing.</div>
+            <div class="audit-banner-sub">Answer 7 questions — our AI analyses your setup and delivers a personalised growth plan in seconds.</div>
+          </div>
+        </div>
+        <button class="audit-btn" onclick="showAudit()">Get My Free Audit <span class="arr">→</span></button>
+      </div>
+      <div class="stats">
+        <div><div class="stat-num">143<em>+</em></div><div class="stat-label">Businesses on waitlist</div></div>
+        <div><div class="stat-num">24<em>/7</em></div><div class="stat-label">Agents running for clients</div></div>
+        <div><div class="stat-num">6<em>×</em></div><div class="stat-label">Avg. pipeline increase</div></div>
+        <div><div class="stat-num">£40<em>k</em></div><div class="stat-label">Avg. revenue added/yr</div></div>
+      </div>
+    </section>
+    <div class="services-header"><span class="services-label">What we do</span></div>
+    <div class="services-grid">
+      <div class="service"><div class="service-accent"></div><div class="s-num">01</div><span class="s-icon">📣</span><h3>AI Ad Creation</h3><p>Bulk-generate hundreds of ad variations based on real customer pain points — tested, refined, and published automatically.</p><div class="s-arrow">→</div></div>
+      <div class="service"><div class="service-accent"></div><div class="s-num">02</div><span class="s-icon">📊</span><h3>Ad Management & Optimisation</h3><p>Agents monitor your campaigns 24/7, switching off underperformers and scaling winners — no dashboards required.</p><div class="s-arrow">→</div></div>
+      <div class="service"><div class="service-accent"></div><div class="s-num">03</div><span class="s-icon">🎯</span><h3>Lead Generation</h3><p>We identify and enrich your ideal customers from LinkedIn, verify contact data, and feed them into your pipeline automatically.</p><div class="s-arrow">→</div></div>
+      <div class="service"><div class="service-accent"></div><div class="s-num">04</div><span class="s-icon">📧</span><h3>Cold Outreach Automation</h3><p>Personalised email campaigns sent and followed up by AI — from first touch to booked meeting, handled end-to-end.</p><div class="s-arrow">→</div></div>
+      <div class="service"><div class="service-accent"></div><div class="s-num">05</div><span class="s-icon">📈</span><h3>Analytics & Reporting</h3><p>Live dashboards and daily AI briefings across all your channels — so you always know what's working and what isn't.</p><div class="s-arrow">→</div></div>
+      <div class="service"><div class="service-accent"></div><div class="s-num">06</div><span class="s-icon">🎙️</span><h3>PR & Podcast Outreach</h3><p>We find and pitch relevant podcasts and publications on your behalf — building brand awareness while you focus on the work.</p><div class="s-arrow">→</div></div>
+    </div>
+    <section class="waitlist-section" id="waitlist">
+      <div class="waitlist-inner">
+        <div class="waitlist-left"><h2>Join the waitlist.</h2><p>We're onboarding a small number of founding clients. Apply now and we'll reach out personally when a spot opens.</p></div>
+        <div>
+          <div class="form-box" id="wlFormOuter">
+            <div class="form-row">
+              <div class="field"><input type="text" id="wlName" placeholder="Your name" autocomplete="name"/></div>
+              <div class="field"><input type="email" id="wlEmail" placeholder="Work email" autocomplete="email"/></div>
+            </div>
+            <button class="wl-btn" id="wlSubmitBtn" onclick="handleWaitlist()">
+              <span class="btn-text">Join the waitlist →</span>
+              <span class="spinner"><span class="spin-ring"></span></span>
+            </button>
+            <p class="form-note"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> No spam. We review applications weekly and reach out personally.</p>
+            <div class="social-proof">
+              <div class="avatars"><div class="av av1">JM</div><div class="av av2">SR</div><div class="av av3">TK</div><div class="av av4">AL</div></div>
+              <p class="sp-text"><strong id="spCount">143</strong> businesses already waiting</p>
+            </div>
+          </div>
+          <div class="wl-success" id="wlSuccess">
+            <div class="wl-success-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <h3>You're on the list.</h3>
+            <p>Thanks for applying. We'll be in touch personally once a spot opens — usually within a week.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <a class="logo" onclick="showLanding()">ai<span>works</span></a>
+      <div class="footer-links">
+        <a onclick="showAudit()">Free Audit</a>
+        <a href="#">Privacy</a>
+        <a href="#">Contact</a>
+      </div>
+      <p>© 2026 AIWorks</p>
+    </footer>
+  </div>
+</div>
+
+<!-- ═══════════════ AUDIT PAGE ═══════════════ -->
+<div id="page-audit">
+  <div class="wrap">
+    <div class="audit-nav">
+      <button class="back-btn" onclick="showLanding()">← Back to AIWorks</button>
+      <a class="logo" onclick="showLanding()">ai<span>works</span></a>
+    </div>
+    <div class="audit-hero">
+      <div class="audit-eyebrow">Free AI Marketing Audit</div>
+      <div class="audit-h1">Find out exactly where your<br/><em>growth is leaking.</em></div>
+      <p class="audit-sub">Answer 7 quick questions and our AI agent analyses your marketing & sales setup — delivering a personalised diagnosis in seconds.</p>
+      <div class="audit-meta"><span><span class="pulse-dot"></span>Live AI analysis</span><span>· ~2 minutes</span><span>· No email required</span></div>
+    </div>
+    <div class="audit-card" id="auditCard">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div id="auditSteps"></div>
+      <div class="audit-error" id="auditError"></div>
+      <div class="loading-state" id="loadingState">
+        <div class="loading-orb"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F6644" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
+        <div class="loading-title">Analysing your business…</div>
+        <div class="loading-sub">Our AI agent is reviewing your answers</div>
+        <ul class="loading-steps" id="loadingSteps">
+          <li>Mapping your current growth stack</li>
+          <li>Identifying bottlenecks & gaps</li>
+          <li>Matching services to your situation</li>
+          <li>Calculating ROI projections</li>
+          <li>Writing your personalised report</li>
+        </ul>
+      </div>
+      <div id="proposalState"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── PAGE SWITCHING ────────────────────────────────────────────
+function showAudit() {
+  document.getElementById('page-landing').style.display = 'none';
+  document.getElementById('page-audit').style.display = 'block';
+  window.scrollTo(0,0);
+  if (!auditStarted) { showApiGate(); auditStarted = true; }
+}
+function showLanding() {
+  document.getElementById('page-landing').style.display = 'block';
+  document.getElementById('page-audit').style.display = 'none';
+  window.scrollTo(0,0);
+}
+
+// ── PARTICLES ─────────────────────────────────────────────────
+const pc = document.getElementById('particles');
+for (let i = 0; i < 20; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left = Math.random() * 100 + 'vw';
+  p.style.height = (50 + Math.random() * 100) + 'px';
+  p.style.animationDuration = (7 + Math.random() * 10) + 's';
+  p.style.animationDelay = (Math.random() * 12) + 's';
+  pc.appendChild(p);
+}
+
+// ── WAITLIST ──────────────────────────────────────────────────
+function handleWaitlist() {
+  const name  = document.getElementById('wlName').value.trim();
+  const email = document.getElementById('wlEmail').value.trim();
+  const btn   = document.getElementById('wlSubmitBtn');
+  if (!name)  { flashInput(document.getElementById('wlName'));  return; }
+  if (!email || !email.includes('@')) { flashInput(document.getElementById('wlEmail')); return; }
+  btn.classList.add('loading'); btn.disabled = true;
+  setTimeout(() => {
+    document.getElementById('wlFormOuter').style.display = 'none';
+    document.getElementById('wlSuccess').classList.add('show');
+    const n = parseInt(document.getElementById('navCount').textContent) + 1;
+    document.getElementById('navCount').textContent = n;
+    document.getElementById('spCount').textContent = n;
+  }, 1500);
+}
+function flashInput(el) {
+  el.style.borderColor = 'rgba(200,60,40,.45)';
+  setTimeout(() => { el.style.borderColor = ''; }, 1800);
+}
+
+// ── AUDIT ENGINE ──────────────────────────────────────────────
+let ANTHROPIC_API_KEY = '';
+let auditStarted = false;
+let currentStep = 0;
+let answers = {};
+
+const QUESTIONS = [
+  { id:'name', label:'Introduction', question:"What's your name and business?", hint:"So we can personalise your report.", type:'text-pair', fields:[{key:'firstName',placeholder:'Your first name'},{key:'businessName',placeholder:'Business or trading name'}] },
+  { id:'industry', label:'Your Industry', question:'What sector are you in?', hint:"We'll tailor recommendations to your market.", type:'options', cols:2, options:[{icon:'🛒',label:'E-commerce / Retail'},{icon:'🏠',label:'Property / Real Estate'},{icon:'⚖️',label:'Professional Services'},{icon:'🍽️',label:'Hospitality / Food & Drink'},{icon:'🏥',label:'Health & Wellness'},{icon:'💻',label:'Tech / SaaS'},{icon:'🎓',label:'Education / Coaching'},{icon:'🔧',label:'Trades / Construction'}] },
+  { id:'teamSize', label:'Your Team', question:'How big is your sales & marketing team?', hint:'Including founders who handle marketing.', type:'options', cols:2, options:[{icon:'🧑',label:'Just me',sub:'Solo founder'},{icon:'👥',label:'2–5 people',sub:'Small team'},{icon:'🏢',label:'6–15 people',sub:'Growing team'},{icon:'🏭',label:'15+ people',sub:'Established'}] },
+  { id:'budget', label:'Marketing Budget', question:"What's your monthly marketing spend?", hint:'Approximate is fine — this shapes your ROI projections.', type:'range', min:0, max:10000, step:250, default:1500, format:(v)=>v===0?'£0':v>=10000?'£10,000+':'£'+v.toLocaleString() },
+  { id:'leadSource', label:'Lead Generation', question:'How do you currently get leads?', hint:'Select all that apply.', type:'multi', options:[{icon:'📣',label:'Paid ads (Google / Meta)'},{icon:'🤝',label:'Referrals / word of mouth'},{icon:'📱',label:'Organic social media'},{icon:'✉️',label:'Cold outreach (email / DMs)'},{icon:'🔍',label:'SEO / content'},{icon:'🎪',label:'Events / networking'},{icon:'😶',label:'No consistent source'}] },
+  { id:'bottleneck', label:'Your Challenge', question:"What's your biggest growth bottleneck right now?", hint:'Pick the one that keeps you up at night.', type:'options', cols:1, options:[{icon:'🔍',label:'Not enough leads coming in',sub:'Top of funnel is dry'},{icon:'💬',label:"Leads don't convert to sales",sub:'Follow-up or nurture is broken'},{icon:'⏰',label:'No time to do marketing properly',sub:'Too busy running the business'},{icon:'📊',label:"Can't tell what's working",sub:'No visibility on ROI'},{icon:'💸',label:'Ad costs are too high',sub:'Poor ROAS on paid channels'}] },
+  { id:'tools', label:'Current Stack', question:'Which tools are you currently using?', hint:'Select everything in your stack.', type:'multi', options:[{icon:'📧',label:'Email marketing (Mailchimp, Klaviyo…)'},{icon:'🗃️',label:'CRM (HubSpot, Salesforce, Pipedrive…)'},{icon:'📣',label:'Meta / Google Ads'},{icon:'🔗',label:'LinkedIn Sales Navigator'},{icon:'📊',label:'Analytics (GA4, Mixpanel…)'},{icon:'🤖',label:'Any AI tools'},{icon:'❌',label:'None of the above'}] }
+];
+
+function showApiGate() {
+  document.getElementById('auditSteps').innerHTML = '';
+  document.getElementById('auditCard').innerHTML = `
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    <div class="api-gate">
+      <div class="api-gate-icon">🔑</div>
+      <div class="api-gate-title">One quick step</div>
+      <p class="api-gate-sub">This audit is powered by the Anthropic API. Paste your API key below to get started — it stays only in your browser session and is never stored.<br/><br/><a href="https://console.anthropic.com/keys" target="_blank">Get a free key at console.anthropic.com →</a></p>
+      <div class="api-key-wrap">
+        <input type="password" id="apiKeyInput" class="api-key-input" placeholder="sk-ant-api03-..." onkeydown="if(event.key==='Enter')submitApiKey()"/>
+        <button class="api-key-btn" onclick="submitApiKey()">Start My Audit →</button>
+        <div class="api-key-note"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Used only in this session — never stored or shared</div>
+        <div class="api-key-error" id="apiKeyError">Please enter a valid Anthropic API key (starts with sk-ant-)</div>
+      </div>
+    </div>`;
+}
+
+function submitApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (!key || !key.startsWith('sk-')) {
+    document.getElementById('apiKeyError').style.display = 'block'; return;
+  }
+  ANTHROPIC_API_KEY = key;
+  document.getElementById('auditCard').innerHTML = `
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div id="auditSteps"></div>
+    <div class="audit-error" id="auditError"></div>
+    <div class="loading-state" id="loadingState">
+      <div class="loading-orb"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F6644" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
+      <div class="loading-title">Analysing your business…</div>
+      <div class="loading-sub">Our AI agent is reviewing your answers</div>
+      <ul class="loading-steps" id="loadingSteps">
+        <li>Mapping your current growth stack</li><li>Identifying bottlenecks & gaps</li>
+        <li>Matching services to your situation</li><li>Calculating ROI projections</li>
+        <li>Writing your personalised report</li>
+      </ul>
+    </div>
+    <div id="proposalState"></div>`;
+  currentStep = 0; answers = {};
+  renderStep(0);
+}
+
+function renderStep(idx) {
+  const q = QUESTIONS[idx];
+  document.getElementById('progressFill').style.width = `${(idx/QUESTIONS.length)*100}%`;
+  document.getElementById('auditSteps').innerHTML = `
+    <div class="step-header">
+      <span class="step-label">${q.label}</span>
+      <span class="step-counter"><strong>${idx+1}</strong> / ${QUESTIONS.length}</span>
+    </div>
+    <div class="step-body">
+      <div class="step-question">${q.question}</div>
+      ${q.hint?`<div class="step-hint">${q.hint}</div>`:''}
+      ${renderInput(q)}
+    </div>
+    <div class="step-nav">
+      ${idx>0?`<button class="btn-back" onclick="goBack()">← Back</button>`:`<span></span>`}
+      <button class="btn-next" id="nextBtn" onclick="goNext()">
+        ${idx===QUESTIONS.length-1?'Get My Audit':'Continue'} <span class="arrow">→</span>
+      </button>
+    </div>`;
+  restoreAnswer(q);
+  updateNextBtn(q);
+}
+
+function renderInput(q) {
+  if (q.type==='text-pair') return `<div style="display:grid;gap:.6rem">${q.fields.map(f=>`<input class="text-input" id="field_${f.key}" placeholder="${f.placeholder}" value="${answers[q.id]?.[f.key]||''}" oninput="handleTextPair('${q.id}')" />`).join('')}</div>`;
+  if (q.type==='options') return `<div class="options-grid ${q.cols===1?'':'cols-2'}">${q.options.map((o,i)=>`<button class="option-btn" data-idx="${i}" onclick="selectOption('${q.id}',${i},this)"><span class="opt-icon">${o.icon}</span><span><span class="opt-label">${o.label}</span>${o.sub?`<span class="opt-sub">${o.sub}</span>`:''}</span></button>`).join('')}</div>`;
+  if (q.type==='range') { const v=answers[q.id]??q.default; return `<div><div class="budget-display" id="budgetDisplay">${q.format(v)}</div><input type="range" min="${q.min}" max="${q.max}" step="${q.step}" value="${v}" oninput="updateRange('${q.id}',this.value)"/><div class="range-labels"><span>£0</span><span>£10,000+</span></div></div>`; }
+  if (q.type==='multi') { const sel=answers[q.id]||[]; return `<div class="checkbox-grid">${q.options.map((o,i)=>`<div class="checkbox-item ${sel.includes(i)?'checked':''}" onclick="toggleMulti('${q.id}',${i},this)"><div class="checkbox-box">${sel.includes(i)?'✓':''}</div><span>${o.icon} ${o.label}</span></div>`).join('')}</div>`; }
+  return '';
+}
+
+function restoreAnswer(q) {
+  if (q.type==='options' && answers[q.id]!==undefined) {
+    document.querySelectorAll('.option-btn').forEach(b=>{ if(parseInt(b.dataset.idx)===answers[q.id]) b.classList.add('selected'); });
+  }
+}
+function updateNextBtn(q) {
+  const btn = document.getElementById('nextBtn');
+  if (btn) btn.disabled = !isAnswered(q);
+}
+function isAnswered(q) {
+  if (q.type==='text-pair') return q.fields.every(f=>answers[q.id]?.[f.key]?.trim());
+  if (q.type==='options') return answers[q.id]!==undefined;
+  if (q.type==='range') return true;
+  if (q.type==='multi') return (answers[q.id]||[]).length>0;
+  return false;
+}
+function selectOption(id,idx,el) {
+  answers[id]=idx;
+  document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  updateNextBtn(QUESTIONS[currentStep]);
+}
+function toggleMulti(id,idx,el) {
+  if (!answers[id]) answers[id]=[];
+  const pos=answers[id].indexOf(idx);
+  if (pos===-1) answers[id].push(idx); else answers[id].splice(pos,1);
+  el.classList.toggle('checked');
+  const box=el.querySelector('.checkbox-box');
+  box.textContent=answers[id].includes(idx)?'✓':'';
+  updateNextBtn(QUESTIONS[currentStep]);
+}
+function updateRange(id,value) {
+  answers[id]=parseInt(value);
+  const q=QUESTIONS.find(q=>q.id===id);
+  document.getElementById('budgetDisplay').textContent=q.format(parseInt(value));
+}
+function handleTextPair(id) {
+  const q=QUESTIONS.find(q=>q.id===id);
+  if (!answers[id]) answers[id]={};
+  q.fields.forEach(f=>{ const el=document.getElementById(`field_${f.key}`); if(el) answers[id][f.key]=el.value; });
+  updateNextBtn(q);
+}
+function goNext() {
+  const q=QUESTIONS[currentStep];
+  if (q.type==='range' && answers[q.id]===undefined) answers[q.id]=q.default;
+  if (currentStep<QUESTIONS.length-1) { currentStep++; renderStep(currentStep); }
+  else { submitAudit(); }
+}
+function goBack() {
+  if (currentStep>0) { currentStep--; renderStep(currentStep); }
+}
+
+async function submitAudit() {
+  document.getElementById('auditSteps').style.display='none';
+  document.getElementById('loadingState').style.display='block';
+  document.getElementById('progressFill').style.width='100%';
+  document.getElementById('auditError').style.display='none';
+  document.querySelectorAll('#loadingSteps li').forEach((s,i)=>setTimeout(()=>s.classList.add('vis'),i*700));
+
+  const a=answers;
+  const Q=QUESTIONS;
+  const industry=Q[1].options[a.industry]?.label||'Unknown';
+  const teamSize=Q[2].options[a.teamSize]?.label||'Unknown';
+  const budget=Q[3].format(a.budget??1500);
+  const leadSources=(a.leadSource||[]).map(i=>Q[4].options[i]?.label).join(', ')||'None';
+  const bottleneck=Q[5].options[a.bottleneck]?.label||'Unknown';
+  const tools=(a.tools||[]).map(i=>Q[6].options[i]?.label).join(', ')||'None';
+
+  const prompt=`Analyse this SME's marketing setup and produce their personalised audit:
+Business: ${a.name?.businessName||'Unknown'} (${a.name?.firstName||'Unknown'})
+Industry: ${industry} | Team: ${teamSize} | Budget: ${budget}/mo
+Lead sources: ${leadSources} | Bottleneck: ${bottleneck} | Tools: ${tools}
+Be specific to their industry. Make it feel like a real expert reviewed their business.`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':ANTHROPIC_API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:`You are an expert AI marketing consultant for AIWorks. Analyse an SME's setup and produce a concise personalised audit. Respond ONLY with valid JSON, no markdown, no backticks:
+{"headline":"personalised 1-line headline using their business name","overallScore":number 1-10,"diagnosis":"2-3 sentence plain-English summary","gaps":["gap 1","gap 2","gap 3"],"recommendations":[{"service":"from: AI Ad Creation, Ad Management & Optimisation, Lead Generation, Cold Outreach Automation, Analytics & Reporting, PR & Podcast Outreach","priority":"High or Medium","rationale":"2 sentences specific to them","roi":"specific outcome e.g. 8-15 booked calls/month"}],"roiSummary":{"leadsPerMonth":"e.g. 200-500","hoursSaved":"e.g. 12","costSaved":"e.g. £2,400"}}
+Give 2-4 recommendations max. Be honest and specific.`,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    const data=await res.json();
+    if (data.error) throw new Error(data.error.message);
+    const raw=data.content?.find(b=>b.type==='text')?.text||'';
+    const result=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    await new Promise(r=>setTimeout(r,500));
+    showProposal(result);
+  } catch(err) {
+    console.error(err);
+    document.getElementById('loadingState').style.display='none';
+    document.getElementById('auditSteps').style.display='block';
+    const errEl=document.getElementById('auditError');
+    errEl.textContent='Error: '+(err.message||'Something went wrong')+'. Please check your API key has credits and try again.';
+    errEl.style.display='block';
+    renderStep(currentStep);
+  }
+}
+
+function showProposal(data) {
+  document.getElementById('loadingState').style.display='none';
+  const el=document.getElementById('proposalState');
+  const firstName=answers.name?.firstName||'there';
+  const businessName=answers.name?.businessName||'your business';
+  el.innerHTML=`
+    <div class="proposal-header">
+      <div class="proposal-tag">AIWorks · AI Marketing Audit</div>
+      <div class="proposal-title">${data.headline||businessName+' — Growth Audit'}</div>
+      <div class="proposal-subtitle">Personalised analysis based on your answers — prepared by AI in seconds.</div>
+      <div class="proposal-score"><span>Marketing maturity score:</span><span class="score-num">${data.overallScore}/10</span></div>
+    </div>
+    <div class="proposal-body">
+      <div class="section-title">Your Situation</div>
+      <div class="diagnosis-text">${data.diagnosis}</div>
+      <div class="section-title">Key Gaps Identified</div>
+      <div class="gaps-list">${(data.gaps||[]).map(g=>`<div class="gap-item"><span class="gap-icon">⚠</span><span>${g}</span></div>`).join('')}</div>
+      <div class="section-title">Recommendations for ${firstName}</div>
+      <div class="reco-list">${(data.recommendations||[]).map(r=>`<div class="reco-card"><div class="reco-card-header"><span class="reco-name">${r.service}</span><span class="priority-badge priority-${r.priority==='High'?'high':'med'}">${r.priority} Priority</span></div><div class="reco-card-body"><div class="reco-rationale">${r.rationale}</div><div class="reco-roi">📈 ${r.roi}</div></div></div>`).join('')}</div>
+      <div class="section-title">Projected Impact</div>
+      <div class="roi-grid">
+        <div class="roi-card"><div class="roi-num">${data.roiSummary?.leadsPerMonth||'—'}</div><div class="roi-label">New leads per month</div></div>
+        <div class="roi-card"><div class="roi-num">${data.roiSummary?.hoursSaved||'—'}hrs</div><div class="roi-label">Saved per week</div></div>
+        <div class="roi-card"><div class="roi-num">${data.roiSummary?.costSaved||'—'}</div><div class="roi-label">Saved monthly vs. hiring</div></div>
+      </div>
+      <div class="proposal-cta">
+        <div class="cta-title">Ready to plug these gaps?</div>
+        <div class="cta-sub">Join the AIWorks waitlist and we'll reach out to discuss your audit personally.</div>
+        <button class="cta-btn" onclick="showLanding();setTimeout(()=>document.getElementById('waitlist').scrollIntoView({behavior:'smooth'}),100)">Join the Waitlist →</button>
+      </div>
+    </div>
+    <div class="pdf-bar">
+      <span class="pdf-note">AIWorks Audit · ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</span>
+      <button class="btn-pdf" onclick="window.print()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> Save as PDF</button>
+    </div>`;
+  document.getElementById('auditCard').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>

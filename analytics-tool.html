@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Analytics & Reporting — Agents at Work</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F9F7F3;--surface:#fff;--border:#E8E3DA;--ink:#1A1814;--mid:#7A7568;--dim:#B8B2A8;--green:#1F6644;--green-bg:#EAF2ED;--green-line:rgba(31,102,68,.22);--amber:#c8873a;--amber-bg:#faf0e4;--red:#b94040;--red-bg:#fef0f0;--shadow:0 2px 24px rgba(0,0,0,.07)}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:'Geist',sans-serif;font-weight:300;min-height:100vh}
+.dot-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle,#C5BDB0 1px,transparent 1px);background-size:30px 30px;opacity:.4}
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(90px)}
+.orb1{width:500px;height:400px;background:radial-gradient(circle,rgba(31,102,68,.1) 0%,transparent 70%);top:-100px;right:-80px;animation:drift1 15s ease-in-out infinite}
+.orb2{width:400px;height:350px;background:radial-gradient(circle,rgba(200,135,58,.08) 0%,transparent 70%);bottom:80px;left:-60px;animation:drift2 19s ease-in-out infinite}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,50px)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-40px)}}
+.wrap{max-width:940px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.8rem 0;border-bottom:1px solid var(--border)}
+.logo{font-family:'Instrument Serif',serif;font-size:1.15rem;color:var(--ink);text-decoration:none;letter-spacing:-.02em}
+.logo span{color:var(--green)}
+.nav-badge{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--green);background:var(--green-bg);border:1px solid var(--green-line);padding:.25rem .7rem;border-radius:20px;letter-spacing:.05em;text-transform:uppercase}
+.hero{padding:3.5rem 0 2.5rem;animation:fadeUp .6s .1s ease both}
+.hero-eyebrow{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.hero-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--green)}
+h1{font-family:'Instrument Serif',serif;font-size:clamp(2rem,4vw,2.8rem);line-height:1.1;letter-spacing:-.02em;margin-bottom:.9rem}
+h1 em{font-style:italic;color:var(--green)}
+.hero-sub{font-size:.95rem;color:var(--mid);line-height:1.65;max-width:520px}
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:2px;box-shadow:var(--shadow);margin-bottom:3rem;animation:fadeUp .6s .2s ease both;overflow:hidden}
+.card-header{padding:1.4rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--dim);letter-spacing:.08em;text-transform:uppercase}
+.card-body{padding:2rem}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.field{display:flex;flex-direction:column;gap:.4rem}
+.field.full{grid-column:1/-1}
+label{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--mid);letter-spacing:.06em;text-transform:uppercase}
+input[type=text],input[type=number],textarea,select{width:100%;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:2px;font-family:'Geist',sans-serif;font-size:.88rem;color:var(--ink);background:var(--bg);outline:none;transition:border-color .2s;font-weight:300;resize:none}
+input:focus,textarea:focus,select:focus{border-color:var(--green);background:#fff;box-shadow:0 0 0 3px rgba(31,102,68,.07)}
+input::placeholder,textarea::placeholder{color:var(--dim)}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%237A7568' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
+.metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1rem}
+.metric-input{display:flex;flex-direction:column;gap:.35rem}
+.metric-input label{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--dim);letter-spacing:.06em;text-transform:uppercase}
+.metric-input input{padding:.65rem .8rem;font-size:.85rem}
+.section-label{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--mid);letter-spacing:.07em;text-transform:uppercase;margin:1.2rem 0 .7rem;display:flex;align-items:center;gap:.6rem}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.generate-btn{width:100%;margin-top:1.5rem;padding:.9rem;background:var(--green);color:#fff;border:none;border-radius:2px;font-family:'Geist',sans-serif;font-weight:500;font-size:.9rem;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:.6rem}
+.generate-btn:hover{background:#174f35;transform:translateY(-1px)}
+.loading-state{display:none;padding:3rem 2rem;text-align:center}
+.loading-orb{width:52px;height:52px;margin:0 auto 1.5rem;border-radius:50%;background:var(--green-bg);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;animation:orbPulse 1.5s ease-in-out infinite}
+@keyframes orbPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(31,102,68,.3)}50%{transform:scale(1.05);box-shadow:0 0 0 10px rgba(31,102,68,0)}}
+.loading-title{font-family:'Instrument Serif',serif;font-size:1.3rem;margin-bottom:.4rem}
+.loading-sub{font-size:.83rem;color:var(--dim);margin-bottom:1.5rem}
+.loading-steps{list-style:none;text-align:left;max-width:280px;margin:0 auto}
+.loading-steps li{font-family:'DM Mono',monospace;font-size:.71rem;color:var(--dim);padding:.3rem 0;display:flex;align-items:center;gap:.55rem;opacity:0;transition:opacity .4s}
+.loading-steps li.vis{opacity:1}
+.loading-steps li::before{content:'--';color:var(--green)}
+/* Output */
+.output-state{display:none}
+.output-header{padding:1.2rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
+.output-meta{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--dim)}
+.output-meta strong{color:var(--ink)}
+.output-btns{display:flex;gap:.6rem}
+.btn-sm{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--mid);background:none;border:1px solid var(--border);border-radius:2px;padding:.35rem .8rem;cursor:pointer;transition:all .15s}
+.btn-sm:hover{border-color:var(--ink);color:var(--ink)}
+.btn-sm.green{color:var(--green);border-color:rgba(31,102,68,.3);background:var(--green-bg)}
+.btn-sm.green:hover{background:var(--green);color:#fff}
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+.kpi{background:var(--surface);padding:1.2rem 1.5rem}
+.kpi-val{font-family:'Instrument Serif',serif;font-size:1.7rem;line-height:1;margin-bottom:.25rem}
+.kpi-lbl{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--dim);text-transform:uppercase;letter-spacing:.05em}
+.kpi-delta{font-family:'DM Mono',monospace;font-size:.68rem;margin-top:.3rem}
+.up{color:var(--green)}.down{color:var(--red)}.flat{color:var(--mid)}
+.report-body{padding:2rem}
+.report-section{margin-bottom:2rem}
+.report-section-title{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.9rem;display:flex;align-items:center;gap:.6rem}
+.report-section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.insight-list{display:grid;gap:.6rem}
+.insight{display:flex;gap:.9rem;align-items:flex-start;padding:.85rem 1rem;border:1px solid var(--border);border-radius:2px;background:var(--bg)}
+.insight-icon{font-size:1rem;flex-shrink:0;margin-top:.05rem}
+.insight-text{font-size:.87rem;color:var(--mid);line-height:1.6}
+.insight-text strong{color:var(--ink);font-weight:500}
+.insight.positive{background:var(--green-bg);border-color:rgba(31,102,68,.2)}
+.insight.warning{background:var(--amber-bg);border-color:rgba(200,135,58,.2)}
+.insight.negative{background:var(--red-bg);border-color:rgba(185,64,64,.2)}
+.action-grid{display:grid;gap:.7rem}
+.action-card{padding:1rem 1.1rem;border:1.5px solid var(--border);border-radius:2px;display:flex;align-items:flex-start;gap:.9rem}
+.action-num{font-family:'Instrument Serif',serif;font-size:1.4rem;color:var(--green);flex-shrink:0;line-height:1}
+.action-body{}
+.action-title{font-weight:500;font-size:.88rem;margin-bottom:.2rem}
+.action-desc{font-size:.82rem;color:var(--mid);line-height:1.5}
+.action-impact{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--green);margin-top:.4rem}
+.exec-summary{padding:1.2rem 1.4rem;background:var(--green-bg);border:1px solid rgba(31,102,68,.2);border-radius:2px;font-size:.88rem;color:var(--mid);line-height:1.7;margin-bottom:1.5rem}
+.exec-summary strong{color:var(--ink)}
+.err-bar{display:none;margin:1rem 2rem 0;padding:.8rem 1rem;background:#fef0f0;border:1px solid rgba(192,57,43,.3);border-radius:2px;font-size:.82rem;color:#c0392b;font-family:'DM Mono',monospace}
+footer{border-top:1px solid var(--border);padding:2rem 0;display:flex;justify-content:space-between;align-items:center}
+footer p{font-size:.75rem;color:var(--dim)}
+.footer-back{font-size:.78rem;color:var(--mid);text-decoration:none;transition:color .2s}
+.footer-back:hover{color:var(--ink)}
+@media(max-width:640px){.form-grid,.metrics-grid,.kpi-strip{grid-template-columns:1fr 1fr}.wrap{padding:0 1.2rem}}
+@media(max-width:420px){.metrics-grid,.kpi-strip{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="dot-grid"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="https://agentsatwork.co">agents at <span>work</span></a>
+    <span class="nav-badge">Tool 04 — Analytics & Reporting</span>
+  </nav>
+  <div class="hero">
+    <div class="hero-eyebrow">Analytics & Reporting</div>
+    <h1>Your marketing data,<br/><em>turned into decisions.</em></h1>
+    <p class="hero-sub">Paste in your numbers and our AI generates a full performance report — with insights, red flags, and a prioritised action plan. No spreadsheets. No guesswork.</p>
+  </div>
+
+  <div class="tool-card">
+    <div class="card-header">
+      <span class="card-title">Enter your marketing metrics</span>
+    </div>
+    <div class="card-body" id="formState">
+      <div class="form-grid">
+        <div class="field">
+          <label>Business / Client name</label>
+          <input type="text" id="fBiz" placeholder="e.g. Bloom Interiors"/>
+        </div>
+        <div class="field">
+          <label>Reporting period</label>
+          <select id="fPeriod">
+            <option>Last 7 days</option>
+            <option selected>Last 30 days</option>
+            <option>Last 90 days</option>
+            <option>Last 6 months</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-label">Paid Ads</div>
+      <div class="metrics-grid">
+        <div class="metric-input"><label>Ad Spend (£)</label><input type="number" id="mSpend" placeholder="e.g. 2500"/></div>
+        <div class="metric-input"><label>Impressions</label><input type="number" id="mImpressions" placeholder="e.g. 180000"/></div>
+        <div class="metric-input"><label>Clicks</label><input type="number" id="mClicks" placeholder="e.g. 3200"/></div>
+        <div class="metric-input"><label>Conversions</label><input type="number" id="mConversions" placeholder="e.g. 48"/></div>
+        <div class="metric-input"><label>Revenue from Ads (£)</label><input type="number" id="mRevenue" placeholder="e.g. 9600"/></div>
+        <div class="metric-input"><label>Cost per Click (£)</label><input type="number" id="mCpc" placeholder="e.g. 0.78" step="0.01"/></div>
+      </div>
+
+      <div class="section-label">Organic / SEO</div>
+      <div class="metrics-grid">
+        <div class="metric-input"><label>Organic Sessions</label><input type="number" id="mOrganic" placeholder="e.g. 4200"/></div>
+        <div class="metric-input"><label>Organic Leads</label><input type="number" id="mOrgLeads" placeholder="e.g. 22"/></div>
+        <div class="metric-input"><label>Bounce Rate (%)</label><input type="number" id="mBounce" placeholder="e.g. 62"/></div>
+      </div>
+
+      <div class="section-label">Email</div>
+      <div class="metrics-grid">
+        <div class="metric-input"><label>Emails Sent</label><input type="number" id="mSent" placeholder="e.g. 3800"/></div>
+        <div class="metric-input"><label>Open Rate (%)</label><input type="number" id="mOpen" placeholder="e.g. 24"/></div>
+        <div class="metric-input"><label>Click Rate (%)</label><input type="number" id="mClickRate" placeholder="e.g. 3.2" step="0.1"/></div>
+      </div>
+
+      <div class="section-label">Context (optional)</div>
+      <div class="field full" style="margin-bottom:.8rem">
+        <label>Anything else the AI should know?</label>
+        <textarea id="fContext" rows="2" placeholder="e.g. We ran a promotion in week 2, paused Google ads mid-month, new landing page launched on the 15th..."></textarea>
+      </div>
+
+      <div class="err-bar" id="errBar"></div>
+      <button class="generate-btn" id="generateBtn">
+        <span>✦</span>
+        <span>Generate Report</span>
+      </button>
+    </div>
+
+    <div class="loading-state" id="loadingState">
+      <div class="loading-orb">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F6644" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+      </div>
+      <div class="loading-title">Analysing your data…</div>
+      <div class="loading-sub">Building your performance report</div>
+      <ul class="loading-steps" id="loadingSteps">
+        <li>Calculating key performance metrics</li>
+        <li>Benchmarking against industry standards</li>
+        <li>Identifying wins and red flags</li>
+        <li>Building prioritised action plan</li>
+        <li>Writing executive summary</li>
+      </ul>
+    </div>
+
+    <div class="output-state" id="outputState">
+      <div class="output-header">
+        <span class="output-meta">Report for <strong id="outBiz"></strong> · <strong id="outPeriod"></strong></span>
+        <div class="output-btns">
+          <button class="btn-sm green" id="exportBtn">↓ Export report</button>
+          <button class="btn-sm" id="restartBtn">← New report</button>
+        </div>
+      </div>
+      <div class="kpi-strip" id="kpiStrip"></div>
+      <div class="report-body" id="reportBody"></div>
+    </div>
+  </div>
+
+  <footer>
+    <a class="footer-back" href="https://agentsatwork.co">← Back to Agents at Work</a>
+    <p>© 2026 Agents at Work</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var API_KEY='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';
+  var lastReport=null;
+
+  document.getElementById('generateBtn').addEventListener('click', generate);
+
+  function val(id){ return document.getElementById(id).value.trim(); }
+
+  function generate(){
+    var biz=val('fBiz'); var period=val('fPeriod');
+    var err=document.getElementById('errBar');
+    var hasData = val('mSpend')||val('mClicks')||val('mOrganic')||val('mSent');
+    if(!hasData){err.textContent='Please enter at least some metrics to analyse.';err.style.display='block';return;}
+    err.style.display='none';
+    document.getElementById('formState').style.display='none';
+    document.getElementById('loadingState').style.display='block';
+    document.querySelectorAll('#loadingSteps li').forEach(function(li,i){setTimeout(function(){li.classList.add('vis');},i*700);});
+
+    var metrics='';
+    var fields=[
+      ['Ad Spend',val('mSpend'),'£'],['Impressions',val('mImpressions'),''],['Clicks',val('mClicks'),''],
+      ['Conversions',val('mConversions'),''],['Revenue from Ads',val('mRevenue'),'£'],['Cost per Click',val('mCpc'),'£'],
+      ['Organic Sessions',val('mOrganic'),''],['Organic Leads',val('mOrgLeads'),''],['Bounce Rate',val('mBounce'),'%'],
+      ['Emails Sent',val('mSent'),''],['Email Open Rate',val('mOpen'),'%'],['Email Click Rate',val('mClickRate'),'%']
+    ];
+    fields.forEach(function(f){if(f[1]) metrics+=f[0]+': '+f[2]+f[1]+'\n';});
+    var context=val('fContext');
+
+    var prompt='Business: '+(biz||'Client')+'\nPeriod: '+period+'\n\nMetrics:\n'+metrics+(context?'\nContext: '+context:'');
+    var system='You are a senior marketing analyst. Analyse the provided marketing metrics and generate a comprehensive performance report. Calculate derived metrics (CTR, CPA, ROAS, CVR etc). You MUST respond with ONLY valid JSON, no markdown, no backticks. Structure: {"kpis":[{"label":"ROAS","value":"3.8x","delta":"+0.4x","trend":"up"},{"label":"CTR","value":"1.78%","delta":"-0.2%","trend":"down"},{"label":"CPA","value":"£52","delta":"-£8","trend":"up"},{"label":"Conv. Rate","value":"1.5%","delta":"","trend":"flat"}],"executiveSummary":"2-3 sentence plain English summary of overall performance","insights":[{"type":"positive","icon":"✅","text":"<strong>ROAS of 3.8x</strong> is above the 3x benchmark for this sector, driven by strong ad creative performance."},{"type":"warning","icon":"⚠️","text":"..."},{"type":"negative","icon":"🔴","text":"..."}],"actions":[{"title":"Action title","description":"What to do and why","impact":"Estimated impact e.g. +15% CTR"}]}. Include 4 KPIs, 1 exec summary, 4-6 insights (mix of positive/warning/negative), 3-5 prioritised actions. Be specific with numbers.';
+
+    fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2500,system:system,messages:[{role:'user',content:prompt}]})
+    })
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(data.error) throw new Error(data.error.message);
+      var raw=data.content.filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
+      raw=raw.replace(/```json|```/g,'').trim();
+      var result=JSON.parse(raw);
+      lastReport={biz:biz||'Client',period:period,data:result,metrics:metrics};
+      showOutput(biz||'Client',period,result);
+    })
+    .catch(function(e){
+      document.getElementById('loadingState').style.display='none';
+      document.getElementById('formState').style.display='block';
+      err.textContent='Something went wrong: '+(e.message||'Unknown error')+'. Please try again.';
+      err.style.display='block';
+    });
+  }
+
+  function showOutput(biz,period,r){
+    document.getElementById('loadingState').style.display='none';
+    document.getElementById('outputState').style.display='block';
+    document.getElementById('outBiz').textContent=biz;
+    document.getElementById('outPeriod').textContent=period;
+
+    // KPIs
+    document.getElementById('kpiStrip').innerHTML=r.kpis.map(function(k){
+      var dc=k.trend==='up'?'up':k.trend==='down'?'down':'flat';
+      var arrow=k.trend==='up'?'↑':k.trend==='down'?'↓':'→';
+      return '<div class="kpi"><div class="kpi-val">'+k.value+'</div><div class="kpi-lbl">'+k.label+'</div>'+(k.delta?'<div class="kpi-delta '+dc+'">'+arrow+' '+k.delta+'</div>':'')+'</div>';
+    }).join('');
+
+    var html='<div class="exec-summary">'+r.executiveSummary+'</div>';
+
+    html+='<div class="report-section"><div class="report-section-title">Key Insights</div><div class="insight-list">';
+    r.insights.forEach(function(ins){
+      html+='<div class="insight '+(ins.type||'')+'"><span class="insight-icon">'+(ins.icon||'•')+'</span><div class="insight-text">'+ins.text+'</div></div>';
+    });
+    html+='</div></div>';
+
+    html+='<div class="report-section"><div class="report-section-title">Prioritised Actions</div><div class="action-grid">';
+    r.actions.forEach(function(a,i){
+      html+='<div class="action-card"><div class="action-num">'+(i+1)+'</div><div class="action-body"><div class="action-title">'+a.title+'</div><div class="action-desc">'+a.description+'</div>'+(a.impact?'<div class="action-impact">→ '+a.impact+'</div>':'')+'</div></div>';
+    });
+    html+='</div></div>';
+
+    document.getElementById('reportBody').innerHTML=html;
+  }
+
+  document.getElementById('restartBtn').addEventListener('click',function(){
+    document.getElementById('outputState').style.display='none';
+    document.getElementById('formState').style.display='block';
+    document.querySelectorAll('#loadingSteps li').forEach(function(li){li.classList.remove('vis');});
+  });
+
+  document.getElementById('exportBtn').addEventListener('click',function(){
+    if(!lastReport) return;
+    var r=lastReport.data;
+    var txt='MARKETING PERFORMANCE REPORT\n';
+    txt+='Client: '+lastReport.biz+'\nPeriod: '+lastReport.period+'\nGenerated by Agents at Work — agentsatwork.co\n'+'='.repeat(50)+'\n\n';
+    txt+='RAW METRICS\n'+lastReport.metrics+'\n';
+    txt+='EXECUTIVE SUMMARY\n'+r.executiveSummary+'\n\n';
+    txt+='KEY METRICS\n';
+    r.kpis.forEach(function(k){txt+=k.label+': '+k.value+(k.delta?' ('+k.delta+')':'')+'\n';});
+    txt+='\nINSIGHTS\n';
+    r.insights.forEach(function(ins){txt+='• '+ins.text.replace(/<[^>]+>/g,'')+'\n';});
+    txt+='\nACTION PLAN\n';
+    r.actions.forEach(function(a,i){txt+=(i+1)+'. '+a.title+'\n   '+a.description+(a.impact?'\n   Impact: '+a.impact:'')+'\n\n';});
+    var blob=new Blob([txt],{type:'text/plain'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='report-'+lastReport.biz.toLowerCase().replace(/\s+/g,'-')+'-'+new Date().toISOString().slice(0,10)+'.txt';
+    a.click();
+  });
+})();
+</script>
+<script>if(!sessionStorage.getItem("aaw_auth")){window.location.href="login.html";}</script>
+</body>
+</html>
