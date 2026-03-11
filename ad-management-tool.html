@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Ad Management & Optimisation — Agents at Work</title>
+<title>Ad Management & Optimisation â Agents at Work</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -111,12 +111,12 @@ footer p{font-size:.75rem;color:var(--dim)}
 <div class="wrap">
   <nav>
     <a class="logo" href="https://agentsatwork.co">agents at <span>work</span></a>
-    <span class="nav-badge">Tool 05 — Ad Management</span>
+    <span class="nav-badge">Tool 05 â Ad Management</span>
   </nav>
   <div class="hero">
     <div class="hero-eyebrow">Ad Management & Optimisation</div>
     <h1>Stop wasting ad spend.<br/><em>Start scaling what works.</em></h1>
-    <p class="hero-sub">Paste in your campaign data and our AI audits every element — targeting, creative, bidding, budget — and gives you a prioritised optimisation plan to implement today.</p>
+    <p class="hero-sub">Paste in your campaign data and our AI audits every element â targeting, creative, bidding, budget â and gives you a prioritised optimisation plan to implement today.</p>
   </div>
 
   <div class="tool-card">
@@ -141,7 +141,7 @@ footer p{font-size:.75rem;color:var(--dim)}
           </select>
         </div>
         <div class="field full"><label>What are you advertising?</label>
-          <input type="text" id="fProduct" placeholder="e.g. AI marketing subscription for e-commerce brands, £299/month"/>
+          <input type="text" id="fProduct" placeholder="e.g. AI marketing subscription for e-commerce brands, Â£299/month"/>
         </div>
         <div class="field full"><label>Target audience</label>
           <input type="text" id="fAudience" placeholder="e.g. UK Shopify store owners, 28-45, interest in digital marketing"/>
@@ -150,15 +150,15 @@ footer p{font-size:.75rem;color:var(--dim)}
 
       <div class="section-label">Current Campaign Performance</div>
       <div class="metrics-grid">
-        <div class="metric-input"><label>Daily Budget (£)</label><input type="number" id="mBudget" placeholder="e.g. 50"/></div>
+        <div class="metric-input"><label>Daily Budget (Â£)</label><input type="number" id="mBudget" placeholder="e.g. 50"/></div>
         <div class="metric-input"><label>Days Running</label><input type="number" id="mDays" placeholder="e.g. 14"/></div>
-        <div class="metric-input"><label>Total Spend (£)</label><input type="number" id="mSpend" placeholder="e.g. 680"/></div>
+        <div class="metric-input"><label>Total Spend (Â£)</label><input type="number" id="mSpend" placeholder="e.g. 680"/></div>
         <div class="metric-input"><label>Impressions</label><input type="number" id="mImpressions" placeholder="e.g. 95000"/></div>
         <div class="metric-input"><label>Clicks</label><input type="number" id="mClicks" placeholder="e.g. 1240"/></div>
         <div class="metric-input"><label>CTR (%)</label><input type="number" id="mCtr" placeholder="e.g. 1.3" step="0.01"/></div>
         <div class="metric-input"><label>Conversions</label><input type="number" id="mConversions" placeholder="e.g. 18"/></div>
-        <div class="metric-input"><label>Cost per Result (£)</label><input type="number" id="mCpr" placeholder="e.g. 37.78" step="0.01"/></div>
-        <div class="metric-input"><label>Target CPA (£)</label><input type="number" id="mTargetCpa" placeholder="e.g. 25"/></div>
+        <div class="metric-input"><label>Cost per Result (Â£)</label><input type="number" id="mCpr" placeholder="e.g. 37.78" step="0.01"/></div>
+        <div class="metric-input"><label>Target CPA (Â£)</label><input type="number" id="mTargetCpa" placeholder="e.g. 25"/></div>
       </div>
 
       <div class="section-label">Creative & Targeting Setup</div>
@@ -183,7 +183,7 @@ footer p{font-size:.75rem;color:var(--dim)}
 
       <div class="err-bar" id="errBar"></div>
       <button class="generate-btn" id="generateBtn">
-        <span>✦</span>
+        <span>â¦</span>
         <span>Audit & Optimise Campaign</span>
       </button>
     </div>
@@ -192,7 +192,7 @@ footer p{font-size:.75rem;color:var(--dim)}
       <div class="loading-orb">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F6644" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
       </div>
-      <div class="loading-title">Auditing your campaign…</div>
+      <div class="loading-title">Auditing your campaignâ¦</div>
       <div class="loading-sub">Diagnosing performance and building your optimisation plan</div>
       <ul class="loading-steps" id="loadingSteps">
         <li>Calculating derived metrics</li>
@@ -205,10 +205,10 @@ footer p{font-size:.75rem;color:var(--dim)}
 
     <div class="output-state" id="outputState">
       <div class="output-header">
-        <span class="output-meta">Campaign audit — <strong id="outPlatform"></strong></span>
+        <span class="output-meta">Campaign audit â <strong id="outPlatform"></strong></span>
         <div class="output-btns">
-          <button class="btn-sm green" id="exportBtn">↓ Export plan</button>
-          <button class="btn-sm" id="restartBtn">← New audit</button>
+          <button class="btn-sm green" id="exportBtn">â Export plan</button>
+          <button class="btn-sm" id="restartBtn">â New audit</button>
         </div>
       </div>
       <div class="health-bar" id="healthBar"></div>
@@ -217,15 +217,13 @@ footer p{font-size:.75rem;color:var(--dim)}
   </div>
 
   <footer>
-    <a class="footer-back" href="https://agentsatwork.co">← Back to Agents at Work</a>
-    <p>© 2026 Agents at Work</p>
+    <a class="footer-back" href="https://agentsatwork.co">â Back to Agents at Work</a>
+    <p>Â© 2026 Agents at Work</p>
   </footer>
 </div>
 
 <script>
-(function(){
-  var API_KEY='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';
-  var lastResult=null;
+(function(){ var lastResult=null;
 
   function val(id){return document.getElementById(id).value.trim();}
 
@@ -240,17 +238,15 @@ footer p{font-size:.75rem;color:var(--dim)}
     document.querySelectorAll('#loadingSteps li').forEach(function(li,i){setTimeout(function(){li.classList.add('vis');},i*700);});
 
     var prompt='Platform: '+val('fPlatform')+'\nObjective: '+val('fObjective')+'\nProduct: '+(val('fProduct')||'Not specified')+'\nAudience: '+(val('fAudience')||'Not specified')+'\n'+
-      'Budget: £'+val('mBudget')+'/day, running '+val('mDays')+' days\n'+
-      'Spend: £'+val('mSpend')+', Impressions: '+val('mImpressions')+', Clicks: '+val('mClicks')+', CTR: '+val('mCtr')+'%\n'+
-      'Conversions: '+val('mConversions')+', CPR: £'+val('mCpr')+', Target CPA: £'+val('mTargetCpa')+'\n'+
+      'Budget: Â£'+val('mBudget')+'/day, running '+val('mDays')+' days\n'+
+      'Spend: Â£'+val('mSpend')+', Impressions: '+val('mImpressions')+', Clicks: '+val('mClicks')+', CTR: '+val('mCtr')+'%\n'+
+      'Conversions: '+val('mConversions')+', CPR: Â£'+val('mCpr')+', Target CPA: Â£'+val('mTargetCpa')+'\n'+
       'Creatives running: '+val('fCreatives')+', Audience size: '+val('fAudSize')+'\n'+
       (val('fIssues')?'Issues: '+val('fIssues'):'');
 
-    var system='You are a senior paid media strategist with deep expertise in Meta, Google, LinkedIn and TikTok ads. Audit the campaign and produce a prioritised optimisation plan. You MUST respond with ONLY valid JSON, no markdown, no backticks. Structure: {"healthScores":[{"label":"CTR Health","score":"1.3%","status":"ok","note":"Below 2% benchmark"},{"label":"CPA vs Target","score":"£37","status":"bad","note":"51% above target"},{"label":"Creative Fatigue","score":"Medium","status":"ok","note":"4-6 creatives is healthy"},{"label":"Audience Fit","score":"Good","status":"good","note":"Narrow audiences convert better for this objective"}],"optimisations":[{"priority":"urgent","title":"Optimisation title","description":"What to do and exactly how","impact":"Estimated impact","action":"Do this now"},{"priority":"medium",...},{"priority":"low",...}],"budgetRecommendation":{"title":"Budget recommendation title","description":"Specific budget advice with numbers"}}. Status options: good, ok, bad. Include 4 health scores, 4-6 optimisations (mix of urgent/medium/low), 1 budget recommendation. Be very specific and actionable.';
+    var system='You are a senior paid media strategist with deep expertise in Meta, Google, LinkedIn and TikTok ads. Audit the campaign and produce a prioritised optimisation plan. You MUST respond with ONLY valid JSON, no markdown, no backticks. Structure: {"healthScores":[{"label":"CTR Health","score":"1.3%","status":"ok","note":"Below 2% benchmark"},{"label":"CPA vs Target","score":"Â£37","status":"bad","note":"51% above target"},{"label":"Creative Fatigue","score":"Medium","status":"ok","note":"4-6 creatives is healthy"},{"label":"Audience Fit","score":"Good","status":"good","note":"Narrow audiences convert better for this objective"}],"optimisations":[{"priority":"urgent","title":"Optimisation title","description":"What to do and exactly how","impact":"Estimated impact","action":"Do this now"},{"priority":"medium",...},{"priority":"low",...}],"budgetRecommendation":{"title":"Budget recommendation title","description":"Specific budget advice with numbers"}}. Status options: good, ok, bad. Include 4 health scores, 4-6 optimisations (mix of urgent/medium/low), 1 budget recommendation. Be very specific and actionable.';
 
-    fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    fetch('/api/claude',{ method:'POST', headers:{'Content-Type':'application/json'},
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2500,system:system,messages:[{role:'user',content:prompt}]})
     })
     .then(function(r){return r.json();})
@@ -283,8 +279,8 @@ footer p{font-size:.75rem;color:var(--dim)}
     var html='<div><div class="out-section-title">Optimisation Plan</div><div class="opt-grid">';
     r.optimisations.forEach(function(o){
       html+='<div class="opt-card '+o.priority+'">' +
-        '<span class="opt-priority '+o.priority+'">'+(o.priority==='urgent'?'🔴 Urgent':o.priority==='medium'?'🟡 Medium':'🟢 Low')+'</span>'+
-        '<div><div class="opt-title">'+o.title+'</div><div class="opt-desc">'+o.description+'</div><div class="opt-impact">→ '+o.impact+'</div></div>'+
+        '<span class="opt-priority '+o.priority+'">'+(o.priority==='urgent'?'ð´ Urgent':o.priority==='medium'?'ð¡ Medium':'ð¢ Low')+'</span>'+
+        '<div><div class="opt-title">'+o.title+'</div><div class="opt-desc">'+o.description+'</div><div class="opt-impact">â '+o.impact+'</div></div>'+
         '<div class="opt-action">'+o.action+'</div>'+
       '</div>';
     });
@@ -305,9 +301,9 @@ footer p{font-size:.75rem;color:var(--dim)}
 
   document.getElementById('exportBtn').addEventListener('click',function(){
     if(!lastResult) return;
-    var txt='AD CAMPAIGN OPTIMISATION PLAN\nGenerated by Agents at Work — agentsatwork.co\n'+'='.repeat(50)+'\n\n';
+    var txt='AD CAMPAIGN OPTIMISATION PLAN\nGenerated by Agents at Work â agentsatwork.co\n'+'='.repeat(50)+'\n\n';
     txt+='CAMPAIGN HEALTH\n';
-    lastResult.healthScores.forEach(function(h){txt+=h.label+': '+h.score+' — '+h.note+'\n';});
+    lastResult.healthScores.forEach(function(h){txt+=h.label+': '+h.score+' â '+h.note+'\n';});
     txt+='\nOPTIMISATION PLAN\n';
     lastResult.optimisations.forEach(function(o,i){
       txt+=(i+1)+'. ['+o.priority.toUpperCase()+'] '+o.title+'\n   '+o.description+'\n   Impact: '+o.impact+'\n   Action: '+o.action+'\n\n';
