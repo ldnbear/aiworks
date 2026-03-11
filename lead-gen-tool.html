@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Lead Generation — Agents at Work</title>
+<title>Lead Generation â Agents at Work</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -114,13 +114,13 @@ footer p{font-size:.75rem;color:var(--dim)}
 <div class="wrap">
   <nav>
     <a class="logo" href="https://agentsatwork.co">agents at <span>work</span></a>
-    <span class="nav-badge">Tool 02 — Lead Generation</span>
+    <span class="nav-badge">Tool 02 â Lead Generation</span>
   </nav>
 
   <div class="hero">
     <div class="hero-eyebrow">Lead Generation</div>
     <h1>Find your ideal prospects,<br/><em>instantly.</em></h1>
-    <p class="hero-sub">Describe your perfect client and our AI generates a targeted list of high-fit prospects — with contact intel, fit scores, and a personalised reason to reach out to each one.</p>
+    <p class="hero-sub">Describe your perfect client and our AI generates a targeted list of high-fit prospects â with contact intel, fit scores, and a personalised reason to reach out to each one.</p>
   </div>
 
   <div class="tool-card">
@@ -133,7 +133,7 @@ footer p{font-size:.75rem;color:var(--dim)}
       <div class="form-grid">
         <div class="field full">
           <label>What does your ideal client look like?</label>
-          <textarea id="fIdeal" rows="3" placeholder="e.g. E-commerce founders with a Shopify store doing £500k-2m/yr revenue, based in the UK, who are spending on paid ads but struggling with ROAS..."></textarea>
+          <textarea id="fIdeal" rows="3" placeholder="e.g. E-commerce founders with a Shopify store doing Â£500k-2m/yr revenue, based in the UK, who are spending on paid ads but struggling with ROAS..."></textarea>
         </div>
         <div class="field">
           <label>Industry / Sector</label>
@@ -176,7 +176,7 @@ footer p{font-size:.75rem;color:var(--dim)}
       </div>
       <div class="err-bar" id="errBar"></div>
       <button class="generate-btn" id="generateBtn">
-        <span>✦</span>
+        <span>â¦</span>
         <span>Generate Lead List</span>
       </button>
     </div>
@@ -186,7 +186,7 @@ footer p{font-size:.75rem;color:var(--dim)}
       <div class="loading-orb">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F6644" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
       </div>
-      <div class="loading-title">Finding your prospects…</div>
+      <div class="loading-title">Finding your prospectsâ¦</div>
       <div class="loading-sub">AI is building your targeted lead list</div>
       <ul class="loading-steps" id="loadingSteps">
         <li>Profiling your ideal client</li>
@@ -202,8 +202,8 @@ footer p{font-size:.75rem;color:var(--dim)}
       <div class="output-header">
         <span class="output-meta"><strong id="outCount"></strong> leads generated</span>
         <div class="output-actions">
-          <button class="btn-sm green" id="exportBtn">↓ Export CSV</button>
-          <button class="btn-sm" id="restartBtn">← New search</button>
+          <button class="btn-sm green" id="exportBtn">â Export CSV</button>
+          <button class="btn-sm" id="restartBtn">â New search</button>
         </div>
       </div>
       <div style="overflow-x:auto">
@@ -225,16 +225,13 @@ footer p{font-size:.75rem;color:var(--dim)}
   </div>
 
   <footer>
-    <a class="footer-back" href="https://agentsatwork.co">← Back to Agents at Work</a>
-    <p>© 2026 Agents at Work</p>
+    <a class="footer-back" href="https://agentsatwork.co">â Back to Agents at Work</a>
+    <p>Â© 2026 Agents at Work</p>
   </footer>
 </div>
 
 <script>
-(function() {
-
-  var API_KEY = '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';
-  var selectedPriority = 'highest fit score';
+(function() { var selectedPriority = 'highest fit score';
   var lastLeads = [];
 
   document.getElementById('leadCount').addEventListener('input', function() {
@@ -283,14 +280,7 @@ footer p{font-size:.75rem;color:var(--dim)}
 
     var system = 'You are a B2B lead generation specialist. Generate realistic, plausible prospect leads (not real people, but realistic fictional examples that could exist). You MUST respond with ONLY valid JSON, no markdown, no backticks. Use this exact structure: {"leads":[{"firstName":"","lastName":"","role":"","company":"","industry":"","location":"","estimatedRevenue":"","painPoint":"","whyTheyFit":"1-2 sentences","outreachHook":"1 sentence opener for a cold email","fitScore":8}],"summary":{"avgScore":7,"highFit":5,"medFit":3,"lowFit":2}} FitScore is 1-10. Make leads diverse and realistic.';
 
-    fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
+    fetch('/api/claude', { method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 4000,
@@ -336,10 +326,10 @@ footer p{font-size:.75rem;color:var(--dim)}
     var rows = leads.map(function(l, i) {
       return '<tr>' +
         '<td><div class="lead-name">' + l.firstName + ' ' + l.lastName + '</div><div class="lead-role">' + l.role + '</div></td>' +
-        '<td><div class="lead-company">' + l.company + '</div><div class="lead-industry">' + l.industry + ' · ' + l.location + '</div></td>' +
+        '<td><div class="lead-company">' + l.company + '</div><div class="lead-industry">' + l.industry + ' Â· ' + l.location + '</div></td>' +
         '<td><div class="lead-why">' + l.whyTheyFit + '</div></td>' +
         '<td><span class="score-badge ' + scoreClass(l.fitScore) + '">' + l.fitScore + '</span></td>' +
-        '<td><div class="lead-actions"><button class="btn-lead primary" data-idx="' + i + '">Outreach →</button><button class="btn-lead" data-copy="' + encodeURIComponent(l.outreachHook) + '">Copy hook</button></div></td>' +
+        '<td><div class="lead-actions"><button class="btn-lead primary" data-idx="' + i + '">Outreach â</button><button class="btn-lead" data-copy="' + encodeURIComponent(l.outreachHook) + '">Copy hook</button></div></td>' +
       '</tr>';
     }).join('');
 
@@ -357,13 +347,13 @@ footer p{font-size:.75rem;color:var(--dim)}
       btn.addEventListener('click', function() {
         navigator.clipboard.writeText(decodeURIComponent(btn.dataset.copy)).then(function() {
           var orig = btn.textContent;
-          btn.textContent = '✓ Copied';
+          btn.textContent = 'â Copied';
           setTimeout(function(){ btn.textContent = orig; }, 1800);
         });
       });
     });
 
-    // Outreach buttons — open cold outreach tool in new tab (future: pass data)
+    // Outreach buttons â open cold outreach tool in new tab (future: pass data)
     document.querySelectorAll('.btn-lead[data-idx]').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var l = lastLeads[parseInt(btn.dataset.idx)];
