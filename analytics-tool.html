@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Analytics & Reporting â Agents at Work</title>
+<title>Analytics & Reporting Ã¢ÂÂ Agents at Work</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -110,12 +110,12 @@ footer p{font-size:.75rem;color:var(--dim)}
 <div class="wrap">
   <nav>
     <a class="logo" href="https://agentsatwork.co">agents at <span>work</span></a>
-    <span class="nav-badge">Tool 04 â Analytics & Reporting</span>
+    <span class="nav-badge">Tool 04 Ã¢ÂÂ Analytics & Reporting</span>
   </nav>
   <div class="hero">
     <div class="hero-eyebrow">Analytics & Reporting</div>
     <h1>Your marketing data,<br/><em>turned into decisions.</em></h1>
-    <p class="hero-sub">Paste in your numbers and our AI generates a full performance report â with insights, red flags, and a prioritised action plan. No spreadsheets. No guesswork.</p>
+    <p class="hero-sub">Paste in your numbers and our AI generates a full performance report Ã¢ÂÂ with insights, red flags, and a prioritised action plan. No spreadsheets. No guesswork.</p>
   </div>
 
   <div class="tool-card">
@@ -141,12 +141,12 @@ footer p{font-size:.75rem;color:var(--dim)}
 
       <div class="section-label">Paid Ads</div>
       <div class="metrics-grid">
-        <div class="metric-input"><label>Ad Spend (Â£)</label><input type="number" id="mSpend" placeholder="e.g. 2500"/></div>
+        <div class="metric-input"><label>Ad Spend (ÃÂ£)</label><input type="number" id="mSpend" placeholder="e.g. 2500"/></div>
         <div class="metric-input"><label>Impressions</label><input type="number" id="mImpressions" placeholder="e.g. 180000"/></div>
         <div class="metric-input"><label>Clicks</label><input type="number" id="mClicks" placeholder="e.g. 3200"/></div>
         <div class="metric-input"><label>Conversions</label><input type="number" id="mConversions" placeholder="e.g. 48"/></div>
-        <div class="metric-input"><label>Revenue from Ads (Â£)</label><input type="number" id="mRevenue" placeholder="e.g. 9600"/></div>
-        <div class="metric-input"><label>Cost per Click (Â£)</label><input type="number" id="mCpc" placeholder="e.g. 0.78" step="0.01"/></div>
+        <div class="metric-input"><label>Revenue from Ads (ÃÂ£)</label><input type="number" id="mRevenue" placeholder="e.g. 9600"/></div>
+        <div class="metric-input"><label>Cost per Click (ÃÂ£)</label><input type="number" id="mCpc" placeholder="e.g. 0.78" step="0.01"/></div>
       </div>
 
       <div class="section-label">Organic / SEO</div>
@@ -171,7 +171,7 @@ footer p{font-size:.75rem;color:var(--dim)}
 
       <div class="err-bar" id="errBar"></div>
       <button class="generate-btn" id="generateBtn">
-        <span>â¦</span>
+        <span>Ã¢ÂÂ¦</span>
         <span>Generate Report</span>
       </button>
     </div>
@@ -180,7 +180,7 @@ footer p{font-size:.75rem;color:var(--dim)}
       <div class="loading-orb">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F6644" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
       </div>
-      <div class="loading-title">Analysing your dataâ¦</div>
+      <div class="loading-title">Analysing your dataÃ¢ÂÂ¦</div>
       <div class="loading-sub">Building your performance report</div>
       <ul class="loading-steps" id="loadingSteps">
         <li>Calculating key performance metrics</li>
@@ -193,10 +193,10 @@ footer p{font-size:.75rem;color:var(--dim)}
 
     <div class="output-state" id="outputState">
       <div class="output-header">
-        <span class="output-meta">Report for <strong id="outBiz"></strong> Â· <strong id="outPeriod"></strong></span>
+        <span class="output-meta">Report for <strong id="outBiz"></strong> ÃÂ· <strong id="outPeriod"></strong></span>
         <div class="output-btns">
-          <button class="btn-sm green" id="exportBtn">â Export report</button>
-          <button class="btn-sm" id="restartBtn">â New report</button>
+          <button class="btn-sm green" id="exportBtn">Ã¢ÂÂ Export report</button>
+          <button class="btn-sm" id="restartBtn">Ã¢ÂÂ New report</button>
         </div>
       </div>
       <div class="kpi-strip" id="kpiStrip"></div>
@@ -205,8 +205,8 @@ footer p{font-size:.75rem;color:var(--dim)}
   </div>
 
   <footer>
-    <a class="footer-back" href="https://agentsatwork.co">â Back to Agents at Work</a>
-    <p>Â© 2026 Agents at Work</p>
+    <a class="footer-back" href="https://agentsatwork.co">Ã¢ÂÂ Back to Agents at Work</a>
+    <p>ÃÂ© 2026 Agents at Work</p>
   </footer>
 </div>
 
@@ -229,8 +229,8 @@ footer p{font-size:.75rem;color:var(--dim)}
 
     var metrics='';
     var fields=[
-      ['Ad Spend',val('mSpend'),'Â£'],['Impressions',val('mImpressions'),''],['Clicks',val('mClicks'),''],
-      ['Conversions',val('mConversions'),''],['Revenue from Ads',val('mRevenue'),'Â£'],['Cost per Click',val('mCpc'),'Â£'],
+      ['Ad Spend',val('mSpend'),'ÃÂ£'],['Impressions',val('mImpressions'),''],['Clicks',val('mClicks'),''],
+      ['Conversions',val('mConversions'),''],['Revenue from Ads',val('mRevenue'),'ÃÂ£'],['Cost per Click',val('mCpc'),'ÃÂ£'],
       ['Organic Sessions',val('mOrganic'),''],['Organic Leads',val('mOrgLeads'),''],['Bounce Rate',val('mBounce'),'%'],
       ['Emails Sent',val('mSent'),''],['Email Open Rate',val('mOpen'),'%'],['Email Click Rate',val('mClickRate'),'%']
     ];
@@ -238,7 +238,7 @@ footer p{font-size:.75rem;color:var(--dim)}
     var context=val('fContext');
 
     var prompt='Business: '+(biz||'Client')+'\nPeriod: '+period+'\n\nMetrics:\n'+metrics+(context?'\nContext: '+context:'');
-    var system='You are a senior marketing analyst. Analyse the provided marketing metrics and generate a comprehensive performance report. Calculate derived metrics (CTR, CPA, ROAS, CVR etc). You MUST respond with ONLY valid JSON, no markdown, no backticks. Structure: {"kpis":[{"label":"ROAS","value":"3.8x","delta":"+0.4x","trend":"up"},{"label":"CTR","value":"1.78%","delta":"-0.2%","trend":"down"},{"label":"CPA","value":"Â£52","delta":"-Â£8","trend":"up"},{"label":"Conv. Rate","value":"1.5%","delta":"","trend":"flat"}],"executiveSummary":"2-3 sentence plain English summary of overall performance","insights":[{"type":"positive","icon":"â","text":"<strong>ROAS of 3.8x</strong> is above the 3x benchmark for this sector, driven by strong ad creative performance."},{"type":"warning","icon":"â ï¸","text":"..."},{"type":"negative","icon":"ð´","text":"..."}],"actions":[{"title":"Action title","description":"What to do and why","impact":"Estimated impact e.g. +15% CTR"}]}. Include 4 KPIs, 1 exec summary, 4-6 insights (mix of positive/warning/negative), 3-5 prioritised actions. Be specific with numbers.';
+    var system='You are a senior marketing analyst. Analyse the provided marketing metrics and generate a comprehensive performance report. Calculate derived metrics (CTR, CPA, ROAS, CVR etc). You MUST respond with ONLY valid JSON, no markdown, no backticks. Structure: {"kpis":[{"label":"ROAS","value":"3.8x","delta":"+0.4x","trend":"up"},{"label":"CTR","value":"1.78%","delta":"-0.2%","trend":"down"},{"label":"CPA","value":"ÃÂ£52","delta":"-ÃÂ£8","trend":"up"},{"label":"Conv. Rate","value":"1.5%","delta":"","trend":"flat"}],"executiveSummary":"2-3 sentence plain English summary of overall performance","insights":[{"type":"positive","icon":"Ã¢ÂÂ","text":"<strong>ROAS of 3.8x</strong> is above the 3x benchmark for this sector, driven by strong ad creative performance."},{"type":"warning","icon":"Ã¢ÂÂ Ã¯Â¸Â","text":"..."},{"type":"negative","icon":"Ã°ÂÂÂ´","text":"..."}],"actions":[{"title":"Action title","description":"What to do and why","impact":"Estimated impact e.g. +15% CTR"}]}. Include 4 KPIs, 1 exec summary, 4-6 insights (mix of positive/warning/negative), 3-5 prioritised actions. Be specific with numbers.';
 
     fetch('/api/claude',{ method:'POST', headers:{'Content-Type':'application/json'},
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2500,system:system,messages:[{role:'user',content:prompt}]})
@@ -269,7 +269,7 @@ footer p{font-size:.75rem;color:var(--dim)}
     // KPIs
     document.getElementById('kpiStrip').innerHTML=r.kpis.map(function(k){
       var dc=k.trend==='up'?'up':k.trend==='down'?'down':'flat';
-      var arrow=k.trend==='up'?'â':k.trend==='down'?'â':'â';
+      var arrow=k.trend==='up'?'Ã¢ÂÂ':k.trend==='down'?'Ã¢ÂÂ':'Ã¢ÂÂ';
       return '<div class="kpi"><div class="kpi-val">'+k.value+'</div><div class="kpi-lbl">'+k.label+'</div>'+(k.delta?'<div class="kpi-delta '+dc+'">'+arrow+' '+k.delta+'</div>':'')+'</div>';
     }).join('');
 
@@ -277,13 +277,13 @@ footer p{font-size:.75rem;color:var(--dim)}
 
     html+='<div class="report-section"><div class="report-section-title">Key Insights</div><div class="insight-list">';
     r.insights.forEach(function(ins){
-      html+='<div class="insight '+(ins.type||'')+'"><span class="insight-icon">'+(ins.icon||'â¢')+'</span><div class="insight-text">'+ins.text+'</div></div>';
+      html+='<div class="insight '+(ins.type||'')+'"><span class="insight-icon">'+(ins.icon||'Ã¢ÂÂ¢')+'</span><div class="insight-text">'+ins.text+'</div></div>';
     });
     html+='</div></div>';
 
     html+='<div class="report-section"><div class="report-section-title">Prioritised Actions</div><div class="action-grid">';
     r.actions.forEach(function(a,i){
-      html+='<div class="action-card"><div class="action-num">'+(i+1)+'</div><div class="action-body"><div class="action-title">'+a.title+'</div><div class="action-desc">'+a.description+'</div>'+(a.impact?'<div class="action-impact">â '+a.impact+'</div>':'')+'</div></div>';
+      html+='<div class="action-card"><div class="action-num">'+(i+1)+'</div><div class="action-body"><div class="action-title">'+a.title+'</div><div class="action-desc">'+a.description+'</div>'+(a.impact?'<div class="action-impact">Ã¢ÂÂ '+a.impact+'</div>':'')+'</div></div>';
     });
     html+='</div></div>';
 
@@ -300,13 +300,13 @@ footer p{font-size:.75rem;color:var(--dim)}
     if(!lastReport) return;
     var r=lastReport.data;
     var txt='MARKETING PERFORMANCE REPORT\n';
-    txt+='Client: '+lastReport.biz+'\nPeriod: '+lastReport.period+'\nGenerated by Agents at Work â agentsatwork.co\n'+'='.repeat(50)+'\n\n';
+    txt+='Client: '+lastReport.biz+'\nPeriod: '+lastReport.period+'\nGenerated by Agents at Work Ã¢ÂÂ agentsatwork.co\n'+'='.repeat(50)+'\n\n';
     txt+='RAW METRICS\n'+lastReport.metrics+'\n';
     txt+='EXECUTIVE SUMMARY\n'+r.executiveSummary+'\n\n';
     txt+='KEY METRICS\n';
     r.kpis.forEach(function(k){txt+=k.label+': '+k.value+(k.delta?' ('+k.delta+')':'')+'\n';});
     txt+='\nINSIGHTS\n';
-    r.insights.forEach(function(ins){txt+='â¢ '+ins.text.replace(/<[^>]+>/g,'')+'\n';});
+    r.insights.forEach(function(ins){txt+='Ã¢ÂÂ¢ '+ins.text.replace(/<[^>]+>/g,'')+'\n';});
     txt+='\nACTION PLAN\n';
     r.actions.forEach(function(a,i){txt+=(i+1)+'. '+a.title+'\n   '+a.description+(a.impact?'\n   Impact: '+a.impact:'')+'\n\n';});
     var blob=new Blob([txt],{type:'text/plain'});
