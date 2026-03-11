@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>AI Ad Creation — Agents at Work</title>
+<title>AI Ad Creation â Agents at Work</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -104,13 +104,13 @@ footer p{font-size:.75rem;color:var(--dim)}
 <div class="wrap">
   <nav>
     <a class="logo" href="https://agentsatwork.co">agents at <span>work</span></a>
-    <span class="nav-badge">Tool 03 — AI Ad Creation</span>
+    <span class="nav-badge">Tool 03 â AI Ad Creation</span>
   </nav>
 
   <div class="hero">
     <div class="hero-eyebrow">AI Ad Creation</div>
     <h1>Scroll-stopping ads,<br/><em>generated in seconds.</em></h1>
-    <p class="hero-sub">Enter your product and audience — our AI generates multiple ad variations across platforms, each with a different angle, headline, and CTA. Ready to test immediately.</p>
+    <p class="hero-sub">Enter your product and audience â our AI generates multiple ad variations across platforms, each with a different angle, headline, and CTA. Ready to test immediately.</p>
   </div>
 
   <div class="tool-card">
@@ -122,11 +122,11 @@ footer p{font-size:.75rem;color:var(--dim)}
       <div class="form-grid">
         <div class="field full">
           <label>What are you advertising?</label>
-          <textarea id="fProduct" rows="2" placeholder="e.g. A monthly AI marketing subscription for e-commerce brands — we run your ads, emails and social on autopilot."></textarea>
+          <textarea id="fProduct" rows="2" placeholder="e.g. A monthly AI marketing subscription for e-commerce brands â we run your ads, emails and social on autopilot."></textarea>
         </div>
         <div class="field full">
           <label>Who is your target audience?</label>
-          <textarea id="fAudience" rows="2" placeholder="e.g. Shopify store owners aged 28-45 doing £500k-2m/yr, frustrated with managing ads themselves."></textarea>
+          <textarea id="fAudience" rows="2" placeholder="e.g. Shopify store owners aged 28-45 doing Â£500k-2m/yr, frustrated with managing ads themselves."></textarea>
         </div>
         <div class="field">
           <label>Key benefit / USP</label>
@@ -146,10 +146,10 @@ footer p{font-size:.75rem;color:var(--dim)}
         <div class="field full">
           <label>Platforms</label>
           <div class="platform-grid">
-            <div class="platform-tog on" data-val="Meta (Facebook & Instagram)"><span class="platform-icon">📘</span>Meta</div>
-            <div class="platform-tog" data-val="Google Search"><span class="platform-icon">🔍</span>Google</div>
-            <div class="platform-tog" data-val="LinkedIn"><span class="platform-icon">💼</span>LinkedIn</div>
-            <div class="platform-tog" data-val="TikTok"><span class="platform-icon">🎵</span>TikTok</div>
+            <div class="platform-tog on" data-val="Meta (Facebook & Instagram)"><span class="platform-icon">ð</span>Meta</div>
+            <div class="platform-tog" data-val="Google Search"><span class="platform-icon">ð</span>Google</div>
+            <div class="platform-tog" data-val="LinkedIn"><span class="platform-icon">ð¼</span>LinkedIn</div>
+            <div class="platform-tog" data-val="TikTok"><span class="platform-icon">ðµ</span>TikTok</div>
           </div>
         </div>
         <div class="field full">
@@ -165,7 +165,7 @@ footer p{font-size:.75rem;color:var(--dim)}
       </div>
       <div class="err-bar" id="errBar"></div>
       <button class="generate-btn" id="generateBtn">
-        <span>✦</span>
+        <span>â¦</span>
         <span>Generate Ad Variations</span>
       </button>
     </div>
@@ -174,7 +174,7 @@ footer p{font-size:.75rem;color:var(--dim)}
       <div class="loading-orb">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F6644" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
       </div>
-      <div class="loading-title">Writing your ads…</div>
+      <div class="loading-title">Writing your adsâ¦</div>
       <div class="loading-sub">Creating variations for each platform</div>
       <ul class="loading-steps" id="loadingSteps">
         <li>Analysing your product and audience</li>
@@ -189,8 +189,8 @@ footer p{font-size:.75rem;color:var(--dim)}
       <div class="output-header">
         <span class="output-meta"><strong id="outCount"></strong> ad variations generated</span>
         <div class="output-btns">
-          <button class="btn-sm green" id="exportBtn">↓ Export all</button>
-          <button class="btn-sm" id="restartBtn">← New brief</button>
+          <button class="btn-sm green" id="exportBtn">â Export all</button>
+          <button class="btn-sm" id="restartBtn">â New brief</button>
         </div>
       </div>
       <div class="platform-sections" id="adsOut"></div>
@@ -198,15 +198,13 @@ footer p{font-size:.75rem;color:var(--dim)}
   </div>
 
   <footer>
-    <a class="footer-back" href="https://agentsatwork.co">← Back to Agents at Work</a>
-    <p>© 2026 Agents at Work</p>
+    <a class="footer-back" href="https://agentsatwork.co">â Back to Agents at Work</a>
+    <p>Â© 2026 Agents at Work</p>
   </footer>
 </div>
 
 <script>
-(function() {
-  var API_KEY = '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';
-  var selectedAngle = 'pain-point driven';
+(function() { var selectedAngle = 'pain-point driven';
   var selectedPlatforms = ['Meta (Facebook & Instagram)'];
   var lastResult = null;
 
@@ -254,9 +252,7 @@ footer p{font-size:.75rem;color:var(--dim)}
 
     var system = 'You are an expert performance marketer and ad copywriter. Generate ad variations for the specified platforms. For each platform write 3 variations. Each variation must be platform-appropriate in length and style. You MUST respond with ONLY valid JSON, no markdown, no backticks. Structure: {"totalAds":9,"platforms":[{"platform":"Meta (Facebook & Instagram)","ads":[{"variant":1,"angle":"Pain point","headline":"headline here","primaryText":"ad body copy here","cta":"Book a free audit","charCount":120},{"variant":2,...},{"variant":3,...}]}]} For Google Search ads use: headline1, headline2, description fields instead. For TikTok use: hook (first 3 seconds script), body, cta. For LinkedIn use: headline, introText, cta. Make ads punchy, specific, and scroll-stopping. No generic copy.';
 
-    fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    fetch('/api/claude',{ method:'POST', headers:{'Content-Type':'application/json'},
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:4000,system:system,messages:[{role:'user',content:prompt}]})
     })
     .then(function(r){return r.json();})
@@ -295,7 +291,7 @@ footer p{font-size:.75rem;color:var(--dim)}
     return '<div class="ad-card">' +
       '<div class="ad-card-hdr"><span class="ad-variant">Variant '+ad.variant+'</span><span class="ad-angle">'+(ad.angle||selectedAngle)+'</span></div>' +
       '<div class="ad-body">' + body +
-      '<div class="ad-cta">CTA → '+(ad.cta||document.getElementById('fCta').value)+'</div>' +
+      '<div class="ad-cta">CTA â '+(ad.cta||document.getElementById('fCta').value)+'</div>' +
       (ad.charCount?'<div class="ad-char">~'+ad.charCount+' chars</div>':'') +
       '</div>' +
       '<div class="ad-actions"><button class="btn-ad" data-copy="'+encodeURIComponent(copyText)+'">Copy ad</button><button class="btn-ad" data-copy="'+encodeURIComponent(ad.headline||ad.headline1||'')+'">Copy headline</button></div>' +
@@ -308,8 +304,8 @@ footer p{font-size:.75rem;color:var(--dim)}
     document.getElementById('outCount').textContent=result.totalAds||'Multiple';
 
     var html = result.platforms.map(function(p) {
-      var icons={'Meta':'📘','Google':'🔍','LinkedIn':'💼','TikTok':'🎵'};
-      var icon=Object.keys(icons).find(function(k){return p.platform.includes(k);})||'📣';
+      var icons={'Meta':'ð','Google':'ð','LinkedIn':'ð¼','TikTok':'ðµ'};
+      var icon=Object.keys(icons).find(function(k){return p.platform.includes(k);})||'ð£';
       return '<div class="platform-section">' +
         '<div class="platform-label">'+icons[icon]||icon+' '+p.platform+'</div>' +
         '<div class="ads-grid">' + p.ads.map(function(ad){return adCardHTML(ad,p.platform);}).join('') + '</div>' +
@@ -322,7 +318,7 @@ footer p{font-size:.75rem;color:var(--dim)}
       btn.addEventListener('click',function(){
         navigator.clipboard.writeText(decodeURIComponent(btn.dataset.copy)).then(function(){
           var orig=btn.textContent;
-          btn.textContent='✓ Copied';
+          btn.textContent='â Copied';
           btn.classList.add('copied');
           setTimeout(function(){btn.textContent=orig;btn.classList.remove('copied');},1800);
         });
@@ -338,11 +334,11 @@ footer p{font-size:.75rem;color:var(--dim)}
 
   document.getElementById('exportBtn').addEventListener('click',function(){
     if(!lastResult) return;
-    var txt='AI AD VARIATIONS\nGenerated by Agents at Work — agentsatwork.co\n'+'='.repeat(50)+'\n\n';
+    var txt='AI AD VARIATIONS\nGenerated by Agents at Work â agentsatwork.co\n'+'='.repeat(50)+'\n\n';
     lastResult.platforms.forEach(function(p){
       txt+=p.platform.toUpperCase()+'\n'+'-'.repeat(40)+'\n\n';
       p.ads.forEach(function(ad){
-        txt+='VARIANT '+ad.variant+' — '+(ad.angle||'')+'\n';
+        txt+='VARIANT '+ad.variant+' â '+(ad.angle||'')+'\n';
         if(ad.headline) txt+='Headline: '+ad.headline+'\n';
         if(ad.headline1) txt+='Headline 1: '+ad.headline1+'\n';
         if(ad.headline2) txt+='Headline 2: '+ad.headline2+'\n';
