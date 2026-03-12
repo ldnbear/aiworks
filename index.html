@@ -447,8 +447,8 @@ let answers = {};
 const QUESTIONS = [
   { id:'name', label:'Introduction', question:"What's your name and business?", hint:"So we can personalise your report.", type:'text-pair', fields:[{key:'firstName',placeholder:'Your first name'},{key:'businessName',placeholder:'Business or trading name'}] },
   { id:'industry', label:'Your Industry', question:'What sector are you in?', hint:"We'll tailor recommendations to your market.", type:'options', cols:2, options:[{icon:'🛒',label:'E-commerce / Retail'},{icon:'🏠',label:'Property / Real Estate'},{icon:'⚖️',label:'Professional Services'},{icon:'🍽️',label:'Hospitality / Food & Drink'},{icon:'🏥',label:'Health & Wellness'},{icon:'💻',label:'Tech / SaaS'},{icon:'🎓',label:'Education / Coaching'},{icon:'🔧',label:'Trades / Construction'}] },
-  { id:'teamSize', label:'Your Team', question:'How big is your sales & marketing team?', hint:'Including founders who handle marketing.', type:'options', cols:2, options:[{icon:'🧑',label:'Just me',sub:'Solo founder'},{icon:'👥',label:'2–5 people',sub:'Small team'},{icon:'🏢',label:'6–15 people',sub:'Growing team'},{icon:'🏭',label:'15+ people',sub:'Established'}] },
-  { id:'budget', label:'Marketing Budget', question:"What's your monthly marketing spend?", hint:'Approximate is fine — this shapes your ROI projections.', type:'range', min:0, max:10000, step:250, default:1500, format:(v)=>v===0?'£0':v>=10000?'£10,000+':'£'+v.toLocaleString() },
+  { id:'teamSize', label:'Your Team', question:'How big is your sales & marketing team?', hint:'Including founders who handle marketing.', type:'options', cols:2, options:[{icon:'🧑',label:'Just me',sub:'Solo founder'},{icon:'👥',label:'2-5 people',sub:'Small team'},{icon:'🏢',label:'6-15 people',sub:'Growing team'},{icon:'🏭',label:'15+ people',sub:'Established'}] },
+  { id:'budget', label:'Marketing Budget', question:"What's your monthly marketing spend?", hint:'Approximate is fine -- this shapes your ROI projections.', type:'range', min:0, max:10000, step:250, default:1500, format:(v)=>v===0?'£0':v>=10000?'£10,000+':'£'+v.toLocaleString() },
   { id:'leadSource', label:'Lead Generation', question:'How do you currently get leads?', hint:'Select all that apply.', type:'multi', options:[{icon:'📣',label:'Paid ads (Google / Meta)'},{icon:'🤝',label:'Referrals / word of mouth'},{icon:'📱',label:'Organic social media'},{icon:'✉️',label:'Cold outreach (email / DMs)'},{icon:'🔍',label:'SEO / content'},{icon:'🎪',label:'Events / networking'},{icon:'😶',label:'No consistent source'}] },
   { id:'bottleneck', label:'Your Challenge', question:"What's your biggest growth bottleneck right now?", hint:'Pick the one that keeps you up at night.', type:'options', cols:1, options:[{icon:'🔍',label:'Not enough leads coming in',sub:'Top of funnel is dry'},{icon:'💬',label:"Leads don't convert to sales",sub:'Follow-up or nurture is broken'},{icon:'⏰',label:'No time to do marketing properly',sub:'Too busy running the business'},{icon:'📊',label:"Can't tell what's working",sub:'No visibility on ROI'},{icon:'💸',label:'Ad costs are too high',sub:'Poor ROAS on paid channels'}] },
   { id:'tools', label:'Current Stack', question:'Which tools are you currently using?', hint:'Select everything in your stack.', type:'multi', options:[{icon:'📧',label:'Email marketing (Mailchimp, Klaviyo…)'},{icon:'🗃️',label:'CRM (HubSpot, Salesforce, Pipedrive…)'},{icon:'📣',label:'Meta / Google Ads'},{icon:'🔗',label:'LinkedIn Sales Navigator'},{icon:'📊',label:'Analytics (GA4, Mixpanel…)'},{icon:'🤖',label:'Any AI tools'},{icon:'❌',label:'None of the above'}] }
@@ -559,8 +559,8 @@ function showProposal(data) {
   el.innerHTML=`
     <div class="proposal-header">
       <div class="proposal-tag">AIWorks · AI Marketing Audit</div>
-      <div class="proposal-title">${data.headline||businessName+' — Growth Audit'}</div>
-      <div class="proposal-subtitle">Personalised analysis based on your answers — prepared by AI in seconds.</div>
+      <div class="proposal-title">${data.headline||businessName+' -- Growth Audit'}</div>
+      <div class="proposal-subtitle">Personalised analysis based on your answers -- prepared by AI in seconds.</div>
       <div class="proposal-score"><span>Marketing maturity score:</span><span class="score-num">${data.overallScore}/10</span></div>
     </div>
     <div class="proposal-body">
@@ -572,9 +572,9 @@ function showProposal(data) {
       <div class="reco-list">${(data.recommendations||[]).map(r=>`<div class="reco-card"><div class="reco-card-header"><span class="reco-name">${r.service}</span><span class="priority-badge priority-${r.priority==='High'?'high':'med'}">${r.priority} Priority</span></div><div class="reco-card-body"><div class="reco-rationale">${r.rationale}</div><div class="reco-roi">📈 ${r.roi}</div></div></div>`).join('')}</div>
       <div class="section-title">Projected Impact</div>
       <div class="roi-grid">
-        <div class="roi-card"><div class="roi-num">${data.roiSummary?.leadsPerMonth||'—'}</div><div class="roi-label">New leads per month</div></div>
-        <div class="roi-card"><div class="roi-num">${data.roiSummary?.hoursSaved||'—'}hrs</div><div class="roi-label">Saved per week</div></div>
-        <div class="roi-card"><div class="roi-num">${data.roiSummary?.costSaved||'—'}</div><div class="roi-label">Saved monthly vs. hiring</div></div>
+        <div class="roi-card"><div class="roi-num">${data.roiSummary?.leadsPerMonth||'--'}</div><div class="roi-label">New leads per month</div></div>
+        <div class="roi-card"><div class="roi-num">${data.roiSummary?.hoursSaved||'--'}hrs</div><div class="roi-label">Saved per week</div></div>
+        <div class="roi-card"><div class="roi-num">${data.roiSummary?.costSaved||'--'}</div><div class="roi-label">Saved monthly vs. hiring</div></div>
       </div>
       <div class="proposal-cta">
         <div class="cta-title">Ready to plug these gaps?</div>
