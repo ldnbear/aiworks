@@ -393,6 +393,71 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 
 <script>
 // ── PAGE SWITCHING ────────────────────────────────────────────
+
+function renderStep(idx) {
+  const q = QUESTIONS[idx];
+  const container = document.getElementById('auditSteps');
+  const pct = Math.round(((idx) / QUESTIONS.length) * 100);
+  document.querySelector('.progress-bar').style.width = pct + '%';
+
+  let inputHtml = '';
+  if (q.type === 'text-pair') {
+    inputHtml = q.fields.map(f => `
+      <input type="text" class="audit-input" id="field_${f.key}"
+        placeholder="${f.placeholder}"
+        value="${answers[f.key]||''}"
+        oninput="answers['${f.key}']=this.value;updateNextBtn()">
+    `).join('');
+  } else if (q.type === 'options') {
+    const cols = q.cols || 2;
+    inputHtml = `<div class="options-grid" style="grid-template-columns:repeat(${cols},1fr)">${
+      q.options.map(o => {
+        const sel = q.multi
+          ? (answers[q.id]||[]).includes(o.label)
+          : answers[q.id] === o.label;
+        const fn = q.multi ? `toggleMulti('${q.id}','${o.label}')` : `selectOption('${q.id}','${o.label}')`;
+        return `<button class="opt-btn${sel?' selected':''}" onclick="${fn}">
+          ${o.icon ? `<span class="opt-icon">${o.icon}</span>` : ''}
+          <span class="opt-label">${o.label}</span>
+          ${o.sub ? `<span class="opt-sub">${o.sub}</span>` : ''}
+        </button>`;
+      }).join('')
+    }</div>`;
+    if (q.multi) inputHtml += `<p class="hint-text">Select all that apply</p>`;
+  } else if (q.type === 'range') {
+    const val = answers[q.id] !== undefined ? answers[q.id] : q.default;
+    inputHtml = `
+      <div class="range-wrap">
+        <input type="range" min="${q.min}" max="${q.max}" value="${val}"
+          oninput="updateRange('${q.id}',this.value)" class="audit-range">
+        <div class="range-labels">
+          <span>${q.minLabel}</span>
+          <span id="rangeVal_${q.id}" class="range-val">${val}${q.suffix||''}</span>
+          <span>${q.maxLabel}</span>
+        </div>
+      </div>`;
+  } else if (q.type === 'textarea') {
+    inputHtml = `<textarea class="audit-textarea" rows="4"
+      placeholder="${q.placeholder||''}"
+      oninput="answers['${q.id}']=this.value;updateNextBtn()">${answers[q.id]||''}</textarea>`;
+  }
+
+  const isLast = idx === QUESTIONS.length - 1;
+  container.innerHTML = `
+    <div class="audit-step">
+      <p class="step-label">${q.label} · ${idx+1} of ${QUESTIONS.length}</p>
+      <h2 class="step-question">${q.question}</h2>
+      ${q.hint ? `<p class="step-hint">${q.hint}</p>` : ''}
+      <div class="step-inputs">${inputHtml}</div>
+      <div class="step-nav">
+        ${idx > 0 ? '<button class="btn-back" onclick="goBack()">Back</button>' : ''}
+        <button class="btn-next" id="nextBtn" onclick="goNext()" ${isAnswered(q)?'':'disabled'}>
+          ${isLast ? 'Get My Report' : 'Next'}
+        </button>
+      </div>
+    </div>`;
+}
+function showQuestion(idx) { currentStep = idx; renderStep(idx); }
 function showAudit() {
   document.getElementById('page-landing').style.display = 'none';
   document.getElementById('page-audit').style.display = 'block';
