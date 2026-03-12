@@ -397,7 +397,7 @@ function showAudit() {
   document.getElementById('page-landing').style.display = 'none';
   document.getElementById('page-audit').style.display = 'block';
   window.scrollTo(0,0);
-  if (!auditStarted) { showApiGate(); auditStarted = true; }
+  if (!auditStarted) { showQuestion(0); auditStarted = true; }
 }
 function showLanding() {
   document.getElementById('page-landing').style.display = 'block';
@@ -453,14 +453,6 @@ const QUESTIONS = [
   { id:'bottleneck', label:'Your Challenge', question:"What's your biggest growth bottleneck right now?", hint:'Pick the one that keeps you up at night.', type:'options', cols:1, options:[{icon:'🔍',label:'Not enough leads coming in',sub:'Top of funnel is dry'},{icon:'💬',label:"Leads don't convert to sales",sub:'Follow-up or nurture is broken'},{icon:'⏰',label:'No time to do marketing properly',sub:'Too busy running the business'},{icon:'📊',label:"Can't tell what's working",sub:'No visibility on ROI'},{icon:'💸',label:'Ad costs are too high',sub:'Poor ROAS on paid channels'}] },
   { id:'tools', label:'Current Stack', question:'Which tools are you currently using?', hint:'Select everything in your stack.', type:'multi', options:[{icon:'📧',label:'Email marketing (Mailchimp, Klaviyo…)'},{icon:'🗃️',label:'CRM (HubSpot, Salesforce, Pipedrive…)'},{icon:'📣',label:'Meta / Google Ads'},{icon:'🔗',label:'LinkedIn Sales Navigator'},{icon:'📊',label:'Analytics (GA4, Mixpanel…)'},{icon:'🤖',label:'Any AI tools'},{icon:'❌',label:'None of the above'}] }
 ];
-
-function showApiGate() {
-  document.getElementById('auditSteps').innerHTML = '';
-  document.getElementById('auditCard').innerHTML = `
-    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
-    `;
-}
-
 
 function updateNextBtn(q) {
   const btn = document.getElementById('nextBtn');
