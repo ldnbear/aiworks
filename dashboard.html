@@ -59,6 +59,26 @@ footer p{font-size:.75rem;color:var(--dim)}
 </style>
 </head>
 <body>
+
+<!-- UPGRADE BANNER (shown to non-paying users) -->
+<div id="upgradeBanner" style="display:none;background:linear-gradient(135deg,#1F6644,#2d8a5e);color:#fff;padding:1rem 1.5rem;border-radius:12px;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+  <div>
+    <div style="font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;opacity:.75;margin-bottom:.2rem">Free preview active</div>
+    <div style="font-family:'Instrument Serif',serif;font-size:1.1rem">Subscribe to unlock all 6 tools</div>
+  </div>
+  <a id="upgradeBannerBtn" href="#" style="background:#fff;color:#1F6644;text-decoration:none;border-radius:8px;padding:.55rem 1.25rem;font-family:'Geist',sans-serif;font-size:.82rem;font-weight:600;white-space:nowrap;flex-shrink:0">£297/mo — Get Access →</a>
+</div>
+<script>
+(function(){
+  var STRIPE = 'https://buy.stripe.com/placeholder_297mo';
+  if(!sessionStorage.getItem('aaw_paid')){
+    var b = document.getElementById('upgradeBanner');
+    if(b){ b.style.display='flex'; }
+    var btn = document.getElementById('upgradeBannerBtn');
+    if(btn){ btn.href = STRIPE; }
+  }
+})();
+</script>
 <div class="dot-grid"></div>
 <div class="orb orb1"></div>
 
