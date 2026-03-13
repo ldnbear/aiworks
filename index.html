@@ -267,6 +267,129 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   .audit-card{box-shadow:none;border:none}
 }
 </style>
+
+  <style>
+/* ── AUDIT OVERRIDES ─────────────────────────────────────── */
+
+/* Card */
+.audit-card{background:#fff;border:1px solid #E8E3DA;border-radius:16px;overflow:hidden;box-shadow:0 4px 32px rgba(0,0,0,.07)}
+
+/* Progress bar */
+.progress-bar{height:3px;background:#E8E3DA;position:relative}
+.progress-fill{height:100%;background:#1F6644;border-radius:0 2px 2px 0;transition:width .4s cubic-bezier(.4,0,.2,1)}
+
+/* Step */
+.audit-step{padding:2rem 2rem 1rem}
+.step-label{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#7A7568;margin-bottom:.6rem}
+.step-question{font-family:'Instrument Serif',serif;font-size:1.65rem;font-weight:400;line-height:1.2;letter-spacing:-.02em;color:#1A1814;margin-bottom:.35rem}
+.step-hint{font-size:.82rem;color:#7A7568;margin-bottom:1.25rem;line-height:1.5}
+.step-inputs{margin-bottom:.5rem}
+.step-nav{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 2rem 1.5rem;border-top:1px solid #E8E3DA;margin-top:1.25rem}
+
+/* Text inputs — labelled pair */
+.input-pair{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.input-wrap{display:flex;flex-direction:column;gap:.35rem}
+.input-label{font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#7A7568}
+.audit-input{width:100%;padding:.7rem .9rem;border:1.5px solid #D9D3C8;border-radius:10px;background:#F9F7F3;color:#1A1814;font-family:'Geist',sans-serif;font-size:.92rem;font-weight:300;outline:none;transition:border-color .2s,box-shadow .2s;box-sizing:border-box}
+.audit-input::placeholder{color:#B8B2A8}
+.audit-input:focus{border-color:#1F6644;background:#fff;box-shadow:0 0 0 3px rgba(31,102,68,.1)}
+
+/* Option buttons */
+.options-grid{display:grid;gap:.5rem;margin-bottom:.25rem}
+.opt-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;padding:.85rem .6rem;border:1.5px solid #D9D3C8;border-radius:10px;background:#F9F7F3;color:#1A1814;font-family:'Geist',sans-serif;cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s;text-align:center;min-height:60px;width:100%}
+.opt-btn:hover{border-color:#1F6644;background:#EAF2ED}
+.opt-btn.selected{border-color:#1F6644;background:#EAF2ED;box-shadow:0 0 0 3px rgba(31,102,68,.12)}
+.opt-icon{font-size:1.25rem;line-height:1;display:block}
+.opt-label{font-size:.8rem;font-weight:400;color:#1A1814;line-height:1.3}
+.opt-sub{font-size:.7rem;color:#7A7568;line-height:1.2}
+.opt-btn.selected .opt-label{color:#1F6644;font-weight:500}
+
+/* Range */
+.range-wrap{padding:.25rem 0 .75rem}
+.range-val-display{font-family:'Instrument Serif',serif;font-size:2.4rem;font-weight:400;color:#1A1814;margin-bottom:.9rem;letter-spacing:-.02em}
+.audit-range{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;background:#D9D3C8;outline:none;cursor:pointer;display:block}
+.audit-range::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#1F6644;cursor:pointer;box-shadow:0 2px 8px rgba(31,102,68,.35);transition:transform .15s}
+.audit-range::-webkit-slider-thumb:hover{transform:scale(1.15)}
+.audit-range::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#1F6644;border:none;cursor:pointer;box-shadow:0 2px 8px rgba(31,102,68,.35)}
+.range-labels{display:flex;justify-content:space-between;margin-top:.5rem;font-size:.7rem;color:#B8B2A8}
+
+/* Nav buttons */
+.btn-back{background:none;border:none;color:#7A7568;font-family:'Geist',sans-serif;font-size:.85rem;cursor:pointer;padding:.4rem 0;transition:color .15s}
+.btn-back:hover{color:#1A1814}
+.btn-next{background:#1F6644;color:#fff;border:none;border-radius:10px;padding:.7rem 2.25rem;font-family:'Geist',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;transition:opacity .15s,transform .1s;letter-spacing:.01em}
+.btn-next:hover:not(:disabled){opacity:.88;transform:translateY(-1px)}
+.btn-next:disabled{opacity:.32;cursor:not-allowed}
+
+/* Loading */
+.loading-state{display:none;padding:3rem 2rem;text-align:center}
+.loading-orb{width:44px;height:44px;border:2px solid #D9D3C8;border-top-color:#1F6644;border-radius:50%;animation:auditSpin 1s linear infinite;margin:0 auto 1.5rem}
+@keyframes auditSpin{to{transform:rotate(360deg)}}
+.loading-title{font-family:'Instrument Serif',serif;font-size:1.5rem;font-weight:400;color:#1A1814;margin-bottom:.35rem}
+.loading-sub{font-size:.82rem;color:#7A7568;margin-bottom:1.75rem}
+.loading-steps{list-style:none;text-align:left;max-width:260px;margin:0 auto;display:flex;flex-direction:column;gap:.55rem;padding:0}
+.loading-steps li{font-size:.78rem;color:#B8B2A8;padding-left:1.25rem;position:relative;transition:color .3s}
+.loading-steps li::before{content:'—';position:absolute;left:0;color:#B8B2A8}
+.loading-steps li.vis{color:#1F6644}
+.loading-steps li.vis::before{content:'✓';color:#1F6644}
+
+/* Error */
+.audit-error{display:none;color:#c0392b;font-size:.82rem;padding:.7rem 1rem;background:#fdf0ee;border:1px solid rgba(192,57,43,.2);border-radius:8px;margin:0 2rem 1rem}
+
+/* ── PROPOSAL REPORT ─────────────────────────────────────── */
+.proposal-state{display:none}
+.proposal-header{background:#1F6644;color:#fff;padding:2.25rem 2rem 1.75rem;border-radius:16px 16px 0 0}
+.proposal-tag{font-size:.65rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;opacity:.65;margin-bottom:.65rem}
+.proposal-title{font-family:'Instrument Serif',serif;font-size:clamp(1.35rem,3vw,1.9rem);font-weight:400;line-height:1.2;margin-bottom:.5rem}
+.proposal-subtitle{font-size:.8rem;opacity:.72;line-height:1.55;margin-bottom:1.1rem}
+.proposal-score{display:inline-flex;align-items:center;gap:.65rem;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:.45rem .9rem;font-size:.8rem}
+.score-num{font-family:'Instrument Serif',serif;font-size:1.5rem;font-weight:400}
+
+.proposal-body{padding:1.75rem 2rem}
+.section-title{font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#7A7568;margin-bottom:.85rem;padding-bottom:.4rem;border-bottom:1px solid #E8E3DA;margin-top:1.75rem}
+.section-title:first-child{margin-top:0}
+.diagnosis-text{font-size:.88rem;line-height:1.7;color:#1A1814;padding:.75rem 1rem;background:#EAF2ED;border-left:3px solid #1F6644;border-radius:0 8px 8px 0;margin-bottom:0}
+
+.gaps-list{display:flex;flex-direction:column;gap:.45rem;margin-bottom:0}
+.gap-item{display:flex;align-items:flex-start;gap:.65rem;padding:.65rem .9rem;background:#F9F7F3;border:1px solid #E8E3DA;border-radius:8px;font-size:.83rem;color:#1A1814;line-height:1.4}
+.gap-icon{color:#e67e22;font-size:.85rem;margin-top:.1rem;flex-shrink:0}
+
+.reco-list{display:flex;flex-direction:column;gap:.65rem;margin-bottom:0}
+.reco-card{border:1.5px solid #E8E3DA;border-radius:12px;overflow:hidden}
+.reco-card-header{display:flex;align-items:center;justify-content:space-between;padding:.8rem 1.1rem;background:#F9F7F3;border-bottom:1px solid #E8E3DA}
+.reco-name{font-size:.85rem;font-weight:500;color:#1A1814}
+.priority-badge{font-size:.62rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:.22rem .55rem;border-radius:20px}
+.priority-high{background:#fef3e2;color:#d68910;border:1px solid #fce5b2}
+.priority-med{background:#EAF2ED;color:#1F6644;border:1px solid rgba(31,102,68,.22)}
+.reco-card-body{padding:.9rem 1.1rem}
+.reco-rationale{font-size:.82rem;color:#7A7568;line-height:1.65;margin-bottom:.5rem}
+.reco-roi{font-size:.77rem;color:#1F6644;font-weight:500;background:#EAF2ED;padding:.35rem .7rem;border-radius:6px;display:inline-block}
+
+.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin-bottom:0}
+.roi-card{background:#F9F7F3;border:1px solid #E8E3DA;border-radius:12px;padding:1.1rem .9rem;text-align:center}
+.roi-num{font-family:'Instrument Serif',serif;font-size:1.55rem;font-weight:400;color:#1F6644;line-height:1;margin-bottom:.3rem}
+.roi-label{font-size:.68rem;color:#7A7568;line-height:1.3}
+
+.proposal-cta{background:#1A1814;border-radius:12px;padding:1.75rem;text-align:center;margin-top:1.75rem}
+.cta-title{font-family:'Instrument Serif',serif;font-size:1.35rem;font-weight:400;color:#fff;margin-bottom:.35rem}
+.cta-sub{font-size:.8rem;color:rgba(255,255,255,.55);margin-bottom:1.1rem;line-height:1.55}
+.cta-btn{background:#1F6644;color:#fff;border:none;border-radius:10px;padding:.75rem 2rem;font-family:'Geist',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;transition:opacity .15s}
+.cta-btn:hover{opacity:.85}
+
+.pdf-bar{display:flex;align-items:center;justify-content:space-between;padding:.9rem 2rem;border-top:1px solid #E8E3DA;font-size:.72rem;color:#B8B2A8}
+.btn-pdf{background:none;border:1.5px solid #D9D3C8;border-radius:8px;padding:.35rem .85rem;font-family:'Geist',sans-serif;font-size:.72rem;color:#7A7568;cursor:pointer;transition:all .15s}
+.btn-pdf:hover{border-color:#1F6644;color:#1F6644}
+
+@media(max-width:600px){
+  .audit-step{padding:1.5rem 1.25rem .75rem}
+  .step-nav{padding:1rem 1.25rem 1.25rem}
+  .input-pair{grid-template-columns:1fr}
+  .options-grid{grid-template-columns:1fr 1fr !important}
+  .roi-grid{grid-template-columns:1fr}
+  .proposal-body{padding:1.25rem}
+  .proposal-header{padding:1.5rem 1.25rem 1.25rem}
+  .pdf-bar{flex-direction:column;gap:.6rem;text-align:center}
+}
+</style>
 </head>
 <body>
 
@@ -375,7 +498,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <div id="auditSteps"></div>
       <div class="audit-error" id="auditError"></div>
       <div class="loading-state" id="loadingState">
-        <div class="loading-orb"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F6644" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
+        <div class="loading-orb" style="-webkit-animation:auditSpin 1s linear infinite;animation:auditSpin 1s linear infinite;width:44px;height:44px;border:2px solid #D9D3C8;border-top-color:#1F6644;border-radius:50%;margin:0 auto 1.5rem"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F6644" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
         <div class="loading-title">Analysing your business…</div>
         <div class="loading-sub">Our AI agent is reviewing your answers</div>
         <ul class="loading-steps" id="loadingSteps">
@@ -481,12 +604,10 @@ function renderStep(idx) {
   if (pb) pb.style.width = pct + "%";
   var inputHtml = "";
   if (q.type === "text-pair") {
-    inputHtml = q.fields.map(function(f) {
-      return "<input type=\"text\" class=\"audit-input\" id=\"field_" + f.key + "\"" +
-        " placeholder=\"" + f.placeholder + "\"" +
-        " value=\"" + (answers[f.key] || "") + "\"" +
-        " oninput=\"answers['"+f.key+"']=this.value;updateNextBtn()\">";
-    }).join("");
+    inputHtml = "<div class=\"input-pair\">" + q.fields.map(function(f) {
+      var lbl = f.key === "firstName" ? "First name" : "Business name";
+      return "<div class=\"input-wrap\"><span class=\"input-label\">" + lbl + "</span><input type=\"text\" class=\"audit-input\" id=\"field_" + f.key + "\" placeholder=\"" + f.placeholder + "\" value=\"" + (answers[f.key] || "") + "\" oninput=\"answers['"+f.key+"']=this.value;updateNextBtn()\"></div>";
+    }).join("") + "</div>";
   } else if (q.type === "options") {
     var cols = q.cols || 2;
     inputHtml = "<div class=\"options-grid\" style=\"grid-template-columns:repeat(" + cols + ",1fr)\">" +
