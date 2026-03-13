@@ -36,6 +36,17 @@ input::placeholder{color:var(--dim)}
 .foot-link{font-size:.78rem;color:var(--green);text-decoration:none}
 .foot-link:hover{text-decoration:underline}
 </style>
+
+<script>
+// Handle Stripe return: ?payment=success
+(function(){
+  if(new URLSearchParams(window.location.search).get('payment') === 'success'){
+    sessionStorage.setItem('aaw_paid','true');
+    // Clean URL
+    history.replaceState({},'',window.location.pathname);
+  }
+})();
+</script>
 </head>
 <body>
 <div class="dot-grid"></div>
@@ -97,6 +108,23 @@ function login() {
 if (sessionStorage.getItem('aaw_auth')) {
   window.location.href = 'dashboard.html';
 }
+</script>
+
+<!-- UPGRADE PANEL -->
+<div id="upgradePanel" style="display:none;max-width:400px;margin:1.5rem auto 0;background:#F9F7F3;border:1.5px solid #E8E3DA;border-radius:16px;padding:1.75rem;text-align:center">
+  <div style="font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#7A7568;margin-bottom:.5rem">Unlock Full Access</div>
+  <div style="font-family:'Instrument Serif',serif;font-size:1.4rem;color:#1A1814;margin-bottom:.4rem">Start using your AI tools</div>
+  <div style="font-size:.82rem;color:#7A7568;line-height:1.6;margin-bottom:1.25rem">All 6 AI marketing tools · Lead gen, cold outreach, ads, analytics & PR · Onboarding call included</div>
+  <div style="margin-bottom:1rem"><span style="font-family:'Instrument Serif',serif;font-size:2rem;color:#1A1814">£297</span><span style="font-size:.8rem;color:#7A7568">/month</span></div>
+  <a href="https://buy.stripe.com/placeholder_297mo?client_reference_id=aaw&success_url=https%3A%2F%2Fagentsatwork.co%2Flogin.html%3Fpayment%3Dsuccess&cancel_url=https%3A%2F%2Fagentsatwork.co%2Flogin.html" style="display:block;background:#1F6644;color:#fff;text-decoration:none;border-radius:10px;padding:.75rem 1.5rem;font-family:'Geist',sans-serif;font-size:.88rem;font-weight:500" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">Subscribe for £297/month →</a>
+</div>
+<script>
+// Show upgrade panel if logged in but not paid
+(function(){
+  if(sessionStorage.getItem('aaw_auth') && !sessionStorage.getItem('aaw_paid')){
+    document.getElementById('upgradePanel').style.display='block';
+  }
+})();
 </script>
 </body>
 </html>
