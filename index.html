@@ -392,266 +392,278 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 </div>
 
 <script>
-// ── PAGE SWITCHING ────────────────────────────────────────────
-
-function renderStep(idx) {
-  const q = QUESTIONS[idx];
-  const container = document.getElementById('auditSteps');
-  const pct = Math.round(((idx) / QUESTIONS.length) * 100);
-  document.querySelector('.progress-bar').style.width = pct + '%';
-
-  let inputHtml = '';
-  if (q.type === 'text-pair') {
-    inputHtml = q.fields.map(f => `
-      <input type="text" class="audit-input" id="field_${f.key}"
-        placeholder="${f.placeholder}"
-        value="${answers[f.key]||''}"
-        oninput="answers['${f.key}']=this.value;updateNextBtn()">
-    `).join('');
-  } else if (q.type === 'options') {
-    const cols = q.cols || 2;
-    inputHtml = `<div class="options-grid" style="grid-template-columns:repeat(${cols},1fr)">${
-      q.options.map(o => {
-        const sel = q.multi
-          ? (answers[q.id]||[]).includes(o.label)
-          : answers[q.id] === o.label;
-        const fn = q.multi ? `toggleMulti('${q.id}','${o.label}')` : `selectOption('${q.id}','${o.label}')`;
-        return `<button class="opt-btn${sel?' selected':''}" onclick="${fn}">
-          ${o.icon ? `<span class="opt-icon">${o.icon}</span>` : ''}
-          <span class="opt-label">${o.label}</span>
-          ${o.sub ? `<span class="opt-sub">${o.sub}</span>` : ''}
-        </button>`;
-      }).join('')
-    }</div>`;
-    if (q.multi) inputHtml += `<p class="hint-text">Select all that apply</p>`;
-  } else if (q.type === 'range') {
-    const val = answers[q.id] !== undefined ? answers[q.id] : q.default;
-    inputHtml = `
-      <div class="range-wrap">
-        <input type="range" min="${q.min}" max="${q.max}" value="${val}"
-          oninput="updateRange('${q.id}',this.value)" class="audit-range">
-        <div class="range-labels">
-          <span>${q.minLabel}</span>
-          <span id="rangeVal_${q.id}" class="range-val">${val}${q.suffix||''}</span>
-          <span>${q.maxLabel}</span>
-        </div>
-      </div>`;
-  } else if (q.type === 'textarea') {
-    inputHtml = `<textarea class="audit-textarea" rows="4"
-      placeholder="${q.placeholder||''}"
-      oninput="answers['${q.id}']=this.value;updateNextBtn()">${answers[q.id]||''}</textarea>`;
-  }
-
-  const isLast = idx === QUESTIONS.length - 1;
-  container.innerHTML = `
-    <div class="audit-step">
-      <p class="step-label">${q.label} · ${idx+1} of ${QUESTIONS.length}</p>
-      <h2 class="step-question">${q.question}</h2>
-      ${q.hint ? `<p class="step-hint">${q.hint}</p>` : ''}
-      <div class="step-inputs">${inputHtml}</div>
-      <div class="step-nav">
-        ${idx > 0 ? '<button class="btn-back" onclick="goBack()">Back</button>' : ''}
-        <button class="btn-next" id="nextBtn" onclick="goNext()" ${isAnswered(q)?'':'disabled'}>
-          ${isLast ? 'Get My Report' : 'Next'}
-        </button>
-      </div>
-    </div>`;
-}
-function showQuestion(idx) { currentStep = idx; renderStep(idx); }
-function showAudit() {
-  document.getElementById('page-landing').style.display = 'none';
-  document.getElementById('page-audit').style.display = 'block';
-  window.scrollTo(0,0);
-  if (!auditStarted) { showQuestion(0); auditStarted = true; }
-}
-function showLanding() {
-  document.getElementById('page-landing').style.display = 'block';
-  document.getElementById('page-audit').style.display = 'none';
-  window.scrollTo(0,0);
-}
-
-// ── PARTICLES ─────────────────────────────────────────────────
-const pc = document.getElementById('particles');
+// PARTICLES
+const pc = document.getElementById("particles");
 for (let i = 0; i < 20; i++) {
-  const p = document.createElement('div');
-  p.className = 'particle';
-  p.style.left = Math.random() * 100 + 'vw';
-  p.style.height = (50 + Math.random() * 100) + 'px';
-  p.style.animationDuration = (7 + Math.random() * 10) + 's';
-  p.style.animationDelay = (Math.random() * 12) + 's';
+  const p = document.createElement("div");
+  p.className = "particle";
+  p.style.left = Math.random() * 100 + "vw";
+  p.style.height = (50 + Math.random() * 100) + "px";
+  p.style.animationDuration = (7 + Math.random() * 10) + "s";
+  p.style.animationDelay = (Math.random() * 12) + "s";
   pc.appendChild(p);
 }
 
-// ── WAITLIST ──────────────────────────────────────────────────
+// WAITLIST
 function handleWaitlist() {
-  const name  = document.getElementById('wlName').value.trim();
-  const email = document.getElementById('wlEmail').value.trim();
-  const btn   = document.getElementById('wlSubmitBtn');
-  if (!name)  { flashInput(document.getElementById('wlName'));  return; }
-  if (!email || !email.includes('@')) { flashInput(document.getElementById('wlEmail')); return; }
-  btn.classList.add('loading'); btn.disabled = true;
-  setTimeout(() => {
-    document.getElementById('wlFormOuter').style.display = 'none';
-    document.getElementById('wlSuccess').classList.add('show');
-    const n = parseInt(document.getElementById('navCount').textContent) + 1;
-    document.getElementById('navCount').textContent = n;
-    document.getElementById('spCount').textContent = n;
+  const name = document.getElementById("wlName").value.trim();
+  const email = document.getElementById("wlEmail").value.trim();
+  const btn = document.getElementById("wlSubmitBtn");
+  if (!name) { flashInput(document.getElementById("wlName")); return; }
+  if (!email || !email.includes("@")) { flashInput(document.getElementById("wlEmail")); return; }
+  btn.classList.add("loading"); btn.disabled = true;
+  setTimeout(function() {
+    document.getElementById("wlFormOuter").style.display = "none";
+    document.getElementById("wlSuccess").classList.add("show");
+    const n = parseInt(document.getElementById("navCount").textContent) + 1;
+    document.getElementById("navCount").textContent = n;
+    document.getElementById("spCount").textContent = n;
   }, 1500);
 }
 function flashInput(el) {
-  el.style.borderColor = 'rgba(200,60,40,.45)';
-  setTimeout(() => { el.style.borderColor = ''; }, 1800);
+  el.style.borderColor = "rgba(200,60,40,.45)";
+  setTimeout(function() { el.style.borderColor = ""; }, 1800);
 }
 
-// ── AUDIT ENGINE ──────────────────────────────────────────────
-let ANTHROPIC_API_KEY = '';
-let auditStarted = false;
-let currentStep = 0;
-let answers = {};
+// PAGE SWITCHING
+function showAudit() {
+  document.getElementById("page-landing").style.display = "none";
+  document.getElementById("page-audit").style.display = "block";
+  window.scrollTo(0, 0);
+  if (!auditStarted) { renderStep(0); auditStarted = true; }
+}
+function showLanding() {
+  document.getElementById("page-landing").style.display = "block";
+  document.getElementById("page-audit").style.display = "none";
+  window.scrollTo(0, 0);
+}
 
-const QUESTIONS = [
-  { id:'name', label:'Introduction', question:"What's your name and business?", hint:"So we can personalise your report.", type:'text-pair', fields:[{key:'firstName',placeholder:'Your first name'},{key:'businessName',placeholder:'Business or trading name'}] },
-  { id:'industry', label:'Your Industry', question:'What sector are you in?', hint:"We'll tailor recommendations to your market.", type:'options', cols:2, options:[{icon:'🛒',label:'E-commerce / Retail'},{icon:'🏠',label:'Property / Real Estate'},{icon:'⚖️',label:'Professional Services'},{icon:'🍽️',label:'Hospitality / Food & Drink'},{icon:'🏥',label:'Health & Wellness'},{icon:'💻',label:'Tech / SaaS'},{icon:'🎓',label:'Education / Coaching'},{icon:'🔧',label:'Trades / Construction'}] },
-  { id:'teamSize', label:'Your Team', question:'How big is your sales & marketing team?', hint:'Including founders who handle marketing.', type:'options', cols:2, options:[{icon:'🧑',label:'Just me',sub:'Solo founder'},{icon:'👥',label:'2-5 people',sub:'Small team'},{icon:'🏢',label:'6-15 people',sub:'Growing team'},{icon:'🏭',label:'15+ people',sub:'Established'}] },
-  { id:'budget', label:'Marketing Budget', question:"What's your monthly marketing spend?", hint:'Approximate is fine -- this shapes your ROI projections.', type:'range', min:0, max:10000, step:250, default:1500, format:(v)=>v===0?'£0':v>=10000?'£10,000+':'£'+v.toLocaleString() },
-  { id:'leadSource', label:'Lead Generation', question:'How do you currently get leads?', hint:'Select all that apply.', type:'multi', options:[{icon:'📣',label:'Paid ads (Google / Meta)'},{icon:'🤝',label:'Referrals / word of mouth'},{icon:'📱',label:'Organic social media'},{icon:'✉️',label:'Cold outreach (email / DMs)'},{icon:'🔍',label:'SEO / content'},{icon:'🎪',label:'Events / networking'},{icon:'😶',label:'No consistent source'}] },
-  { id:'bottleneck', label:'Your Challenge', question:"What's your biggest growth bottleneck right now?", hint:'Pick the one that keeps you up at night.', type:'options', cols:1, options:[{icon:'🔍',label:'Not enough leads coming in',sub:'Top of funnel is dry'},{icon:'💬',label:"Leads don't convert to sales",sub:'Follow-up or nurture is broken'},{icon:'⏰',label:'No time to do marketing properly',sub:'Too busy running the business'},{icon:'📊',label:"Can't tell what's working",sub:'No visibility on ROI'},{icon:'💸',label:'Ad costs are too high',sub:'Poor ROAS on paid channels'}] },
-  { id:'tools', label:'Current Stack', question:'Which tools are you currently using?', hint:'Select everything in your stack.', type:'multi', options:[{icon:'📧',label:'Email marketing (Mailchimp, Klaviyo…)'},{icon:'🗃️',label:'CRM (HubSpot, Salesforce, Pipedrive…)'},{icon:'📣',label:'Meta / Google Ads'},{icon:'🔗',label:'LinkedIn Sales Navigator'},{icon:'📊',label:'Analytics (GA4, Mixpanel…)'},{icon:'🤖',label:'Any AI tools'},{icon:'❌',label:'None of the above'}] }
+// AUDIT STATE
+var auditStarted = false;
+var currentStep = 0;
+var answers = {};
+
+var QUESTIONS = [
+  { id:"name", label:"Introduction", question:"What's your name and business?", hint:"So we can personalise your report.", type:"text-pair",
+    fields:[{key:"firstName",placeholder:"Your first name"},{key:"businessName",placeholder:"Business or trading name"}] },
+  { id:"industry", label:"Your Industry", question:"What sector are you in?", hint:"We'll tailor recommendations to your market.", type:"options", cols:2,
+    options:[{icon:"🛒",label:"E-commerce / Retail"},{icon:"🏠",label:"Property / Real Estate"},{icon:"⚖️",label:"Professional Services"},
+             {icon:"🍽️",label:"Hospitality / Food & Drink"},{icon:"🏥",label:"Health & Wellness"},{icon:"💻",label:"Tech / SaaS"},
+             {icon:"🎓",label:"Education / Coaching"},{icon:"🔧",label:"Trades / Construction"}] },
+  { id:"teamSize", label:"Your Team", question:"How big is your sales & marketing team?", hint:"Including founders who handle marketing.", type:"options", cols:2,
+    options:[{icon:"🧑",label:"Just me",sub:"Solo founder"},{icon:"👥",label:"2-5 people",sub:"Small team"},
+             {icon:"🏢",label:"6-15 people",sub:"Growing team"},{icon:"🏭",label:"15+ people",sub:"Established"}] },
+  { id:"budget", label:"Marketing Budget", question:"What's your monthly marketing spend?", hint:"Approximate is fine - this shapes your ROI projections.",
+    type:"range", min:0, max:10000, step:250, default:1500, minLabel:"£0", maxLabel:"£10k+",
+    format:function(v){ return v===0?"£0":v>=10000?"£10,000+":"£"+v.toLocaleString(); } },
+  { id:"leadSource", label:"Lead Generation", question:"How do you currently get leads?", hint:"Select all that apply.", type:"multi",
+    options:[{icon:"📣",label:"Paid ads (Google / Meta)"},{icon:"🤝",label:"Referrals / word of mouth"},{icon:"📱",label:"Organic social media"},
+             {icon:"✉️",label:"Cold outreach (email / DMs)"},{icon:"🔍",label:"SEO / content"},{icon:"🎪",label:"Events / networking"},
+             {icon:"😶",label:"No consistent source"}] },
+  { id:"bottleneck", label:"Your Challenge", question:"What's your biggest growth bottleneck right now?", hint:"Pick the one that keeps you up at night.", type:"options", cols:1,
+    options:[{icon:"🔍",label:"Not enough leads coming in",sub:"Top of funnel is dry"},
+             {icon:"💬",label:"Leads don't convert to sales",sub:"Follow-up or nurture is broken"},
+             {icon:"⏰",label:"No time to do marketing properly",sub:"Too busy running the business"},
+             {icon:"📊",label:"Can't tell what's working",sub:"No visibility on ROI"},
+             {icon:"💸",label:"Ad costs are too high",sub:"Poor ROAS on paid channels"}] },
+  { id:"tools", label:"Current Stack", question:"Which tools are you currently using?", hint:"Select everything in your stack.", type:"multi",
+    options:[{icon:"📧",label:"Email marketing (Mailchimp, Klaviyo...)"},{icon:"🗃️",label:"CRM (HubSpot, Salesforce, Pipedrive...)"},
+             {icon:"📣",label:"Meta / Google Ads"},{icon:"🔗",label:"LinkedIn Sales Navigator"},
+             {icon:"📊",label:"Analytics (GA4, Mixpanel...)"},{icon:"🤖",label:"Any AI tools"},{icon:"❌",label:"None of the above"}] }
 ];
 
-function updateNextBtn(q) {
-  const btn = document.getElementById('nextBtn');
-  if (btn) btn.disabled = !isAnswered(q);
+// RENDER
+function renderStep(idx) {
+  currentStep = idx;
+  var q = QUESTIONS[idx];
+  var pct = Math.round((idx / QUESTIONS.length) * 100);
+  var pb = document.querySelector(".progress-bar");
+  if (pb) pb.style.width = pct + "%";
+  var inputHtml = "";
+  if (q.type === "text-pair") {
+    inputHtml = q.fields.map(function(f) {
+      return "<input type=\"text\" class=\"audit-input\" id=\"field_" + f.key + "\"" +
+        " placeholder=\"" + f.placeholder + "\"" +
+        " value=\"" + (answers[f.key] || "") + "\"" +
+        " oninput=\"answers['"+f.key+"']=this.value;updateNextBtn()\">";
+    }).join("");
+  } else if (q.type === "options") {
+    var cols = q.cols || 2;
+    inputHtml = "<div class=\"options-grid\" style=\"grid-template-columns:repeat(" + cols + ",1fr)\">" +
+      q.options.map(function(o, i) {
+        var sel = answers[q.id] === i ? " selected" : "";
+        return "<button class=\"opt-btn" + sel + "\" onclick=\"selectOption('" + q.id + "'," + i + ",this)\">" +
+          (o.icon ? "<span class=\"opt-icon\">" + o.icon + "</span>" : "") +
+          "<span class=\"opt-label\">" + o.label + "</span>" +
+          (o.sub ? "<span class=\"opt-sub\">" + o.sub + "</span>" : "") +
+          "</button>";
+      }).join("") + "</div>";
+  } else if (q.type === "multi") {
+    inputHtml = "<div class=\"options-grid\" style=\"grid-template-columns:repeat(2,1fr)\">" +
+      q.options.map(function(o, i) {
+        var sel = (answers[q.id] || []).includes(i) ? " selected" : "";
+        return "<button class=\"opt-btn" + sel + "\" onclick=\"toggleMulti('" + q.id + "'," + i + ",this)\">" +
+          (o.icon ? "<span class=\"opt-icon\">" + o.icon + "</span>" : "") +
+          "<span class=\"opt-label\">" + o.label + "</span></button>";
+      }).join("") + "</div><p class=\"step-hint\" style=\"margin-top:8px\">Select all that apply</p>";
+  } else if (q.type === "range") {
+    var val = answers[q.id] !== undefined ? answers[q.id] : q.default;
+    var displayVal = q.format ? q.format(val) : val;
+    inputHtml = "<div class=\"range-wrap\">" +
+      "<div class=\"range-val-display\" id=\"rangeDisplay\">" + displayVal + "</div>" +
+      "<input type=\"range\" class=\"audit-range\"" +
+      " min=\"" + q.min + "\" max=\"" + q.max + "\" step=\"" + (q.step||1) + "\" value=\"" + val + "\"" +
+      " oninput=\"updateRange('" + q.id + "',this.value)\">" +
+      "<div class=\"range-labels\"><span>" + (q.minLabel||q.min) + "</span><span>" + (q.maxLabel||q.max) + "</span></div></div>";
+  }
+  var isLast = idx === QUESTIONS.length - 1;
+  var answered = isAnswered(q);
+  var container = document.getElementById("auditSteps");
+  container.style.display = "block";
+  container.innerHTML =
+    "<div class=\"audit-step\">" +
+    "<p class=\"step-label\">" + q.label + " · " + (idx+1) + " of " + QUESTIONS.length + "</p>" +
+    "<h2 class=\"step-question\">" + q.question + "</h2>" +
+    (q.hint ? "<p class=\"step-hint\">" + q.hint + "</p>" : "") +
+    "<div class=\"step-inputs\">" + inputHtml + "</div>" +
+    "<div class=\"step-nav\">" +
+    (idx > 0 ? "<button class=\"btn-back\" onclick=\"goBack()\">Back</button>" : "") +
+    "<button class=\"btn-next\" id=\"nextBtn\" onclick=\"goNext()\"" + (answered ? "" : " disabled") + ">" +
+    (isLast ? "Get My Report" : "Next") + "</button></div></div>";
 }
+
 function isAnswered(q) {
-  if (q.type==='text-pair') return q.fields.every(f=>answers[q.id]?.[f.key]?.trim());
-  if (q.type==='options') return answers[q.id]!==undefined;
-  if (q.type==='range') return true;
-  if (q.type==='multi') return (answers[q.id]||[]).length>0;
+  if (q.type === "text-pair") return q.fields.every(function(f){ return (answers[f.key]||"").trim().length > 0; });
+  if (q.type === "options") return answers[q.id] !== undefined;
+  if (q.type === "range") return true;
+  if (q.type === "multi") return (answers[q.id]||[]).length > 0;
   return false;
 }
-function selectOption(id,idx,el) {
-  answers[id]=idx;
-  document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
-  el.classList.add('selected');
-  updateNextBtn(QUESTIONS[currentStep]);
+function updateNextBtn() {
+  var btn = document.getElementById("nextBtn");
+  if (btn) btn.disabled = !isAnswered(QUESTIONS[currentStep]);
 }
-function toggleMulti(id,idx,el) {
-  if (!answers[id]) answers[id]=[];
-  const pos=answers[id].indexOf(idx);
-  if (pos===-1) answers[id].push(idx); else answers[id].splice(pos,1);
-  el.classList.toggle('checked');
-  const box=el.querySelector('.checkbox-box');
-  box.textContent=answers[id].includes(idx)?'✓':'';
-  updateNextBtn(QUESTIONS[currentStep]);
+function selectOption(id, idx, el) {
+  answers[id] = idx;
+  document.querySelectorAll(".opt-btn").forEach(function(b){ b.classList.remove("selected"); });
+  el.classList.add("selected");
+  updateNextBtn();
 }
-function updateRange(id,value) {
-  answers[id]=parseInt(value);
-  const q=QUESTIONS.find(q=>q.id===id);
-  document.getElementById('budgetDisplay').textContent=q.format(parseInt(value));
+function toggleMulti(id, idx, el) {
+  if (!answers[id]) answers[id] = [];
+  var pos = answers[id].indexOf(idx);
+  if (pos === -1) answers[id].push(idx);
+  else answers[id].splice(pos, 1);
+  el.classList.toggle("selected");
+  updateNextBtn();
 }
-function handleTextPair(id) {
-  const q=QUESTIONS.find(q=>q.id===id);
-  if (!answers[id]) answers[id]={};
-  q.fields.forEach(f=>{ const el=document.getElementById(`field_${f.key}`); if(el) answers[id][f.key]=el.value; });
-  updateNextBtn(q);
+function updateRange(id, value) {
+  answers[id] = parseInt(value);
+  var q = QUESTIONS.find(function(q){ return q.id === id; });
+  var display = document.getElementById("rangeDisplay");
+  if (display && q && q.format) display.textContent = q.format(parseInt(value));
 }
 function goNext() {
-  const q=QUESTIONS[currentStep];
-  if (q.type==='range' && answers[q.id]===undefined) answers[q.id]=q.default;
-  if (currentStep<QUESTIONS.length-1) { currentStep++; renderStep(currentStep); }
+  var q = QUESTIONS[currentStep];
+  if (q.type === "range" && answers[q.id] === undefined) answers[q.id] = q.default;
+  if (currentStep < QUESTIONS.length - 1) { renderStep(currentStep + 1); }
   else { submitAudit(); }
 }
 function goBack() {
-  if (currentStep>0) { currentStep--; renderStep(currentStep); }
+  if (currentStep > 0) renderStep(currentStep - 1);
 }
 
+// SUBMIT
 async function submitAudit() {
-  document.getElementById('auditSteps').style.display='none';
-  document.getElementById('loadingState').style.display='block';
-  document.getElementById('progressFill').style.width='100%';
-  document.getElementById('auditError').style.display='none';
-  document.querySelectorAll('#loadingSteps li').forEach((s,i)=>setTimeout(()=>s.classList.add('vis'),i*700));
-
-  const a=answers;
-  const Q=QUESTIONS;
-  const industry=Q[1].options[a.industry]?.label||'Unknown';
-  const teamSize=Q[2].options[a.teamSize]?.label||'Unknown';
-  const budget=Q[3].format(a.budget??1500);
-  const leadSources=(a.leadSource||[]).map(i=>Q[4].options[i]?.label).join(', ')||'None';
-  const bottleneck=Q[5].options[a.bottleneck]?.label||'Unknown';
-  const tools=(a.tools||[]).map(i=>Q[6].options[i]?.label).join(', ')||'None';
-
-  const prompt=`Analyse this SME's marketing setup and produce their personalised audit:
-Business: ${a.name?.businessName||'Unknown'} (${a.name?.firstName||'Unknown'})
-Industry: ${industry} | Team: ${teamSize} | Budget: ${budget}/mo
-Lead sources: ${leadSources} | Bottleneck: ${bottleneck} | Tools: ${tools}
-Be specific to their industry. Make it feel like a real expert reviewed their business.`;
-
+  document.getElementById("auditSteps").style.display = "none";
+  document.getElementById("loadingState").style.display = "block";
+  var pf = document.getElementById("progressFill");
+  if (pf) pf.style.width = "100%";
+  document.querySelectorAll("#loadingSteps li").forEach(function(s,i){ setTimeout(function(){ s.classList.add("vis"); }, i*700); });
+  var Q = QUESTIONS; var a = answers;
+  var industryLabel = Q[1].options[a.industry] ? Q[1].options[a.industry].label : "Unknown";
+  var teamLabel = Q[2].options[a.teamSize] ? Q[2].options[a.teamSize].label : "Unknown";
+  var budgetVal = a.budget !== undefined ? a.budget : Q[3].default;
+  var budgetLabel = Q[3].format(budgetVal);
+  var leadSources = (a.leadSource||[]).map(function(i){ return Q[4].options[i]?Q[4].options[i].label:""; }).filter(Boolean).join(", ")||"None";
+  var bottleneckLabel = Q[5].options[a.bottleneck] ? Q[5].options[a.bottleneck].label : "Unknown";
+  var toolsUsed = (a.tools||[]).map(function(i){ return Q[6].options[i]?Q[6].options[i].label:""; }).filter(Boolean).join(", ")||"None";
+  var prompt = "Analyse this SME and produce their personalised marketing audit:\n" +
+    "Name: " + (a.firstName||"Unknown") + " | Business: " + (a.businessName||"Unknown") + "\n" +
+    "Industry: " + industryLabel + " | Team: " + teamLabel + " | Budget: " + budgetLabel + "/mo\n" +
+    "Lead sources: " + leadSources + " | Bottleneck: " + bottleneckLabel + " | Tools: " + toolsUsed;
   try {
-    const res = await fetch('/api/claude', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    var res = await fetch("/api/claude", {
+      method: "POST", headers: {"Content-Type":"application/json"},
       body: JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        system:`You are an expert AI marketing consultant for AIWorks. Analyse an SME's setup and produce a concise personalised audit. Respond ONLY with valid JSON, no markdown, no backticks:
-{"headline":"personalised 1-line headline using their business name","overallScore":number 1-10,"diagnosis":"2-3 sentence plain-English summary","gaps":["gap 1","gap 2","gap 3"],"recommendations":[{"service":"from: AI Ad Creation, Ad Management & Optimisation, Lead Generation, Cold Outreach Automation, Analytics & Reporting, PR & Podcast Outreach","priority":"High or Medium","rationale":"2 sentences specific to them","roi":"specific outcome e.g. 8-15 booked calls/month"}],"roiSummary":{"leadsPerMonth":"e.g. 200-500","hoursSaved":"e.g. 12","costSaved":"e.g. £2,400"}}
-Give 2-4 recommendations max. Be honest and specific.`,
-        messages:[{role:'user',content:prompt}]
+        model: "claude-sonnet-4-20250514", max_tokens: 1200,
+        system: "You are an expert AI marketing consultant for AIWorks. Return ONLY valid JSON, no markdown, no backticks: {\"headline\":\"personalised headline\",\"overallScore\":7,\"diagnosis\":\"2-3 sentence summary\",\"gaps\":[\"gap1\"],\"recommendations\":[{\"service\":\"e.g. Lead Generation\",\"priority\":\"High\",\"rationale\":\"2 specific sentences\",\"roi\":\"specific outcome\"}],\"roiSummary\":{\"leadsPerMonth\":\"e.g. 200-400\",\"hoursSaved\":\"10\",\"costSaved\":\"£2,000\"}} Services must be from: AI Ad Creation, Ad Management & Optimisation, Lead Generation, Cold Outreach Automation, Analytics & Reporting, PR & Podcast Outreach. Give 2-4 recommendations.",
+        messages: [{role:"user",content:prompt}]
       })
     });
-    const data=await res.json();
+    var data = await res.json();
     if (data.error) throw new Error(data.error.message);
-    const raw=data.content?.find(b=>b.type==='text')?.text||'';
-    const result=JSON.parse(raw.replace(/```json|```/g,'').trim());
-    await new Promise(r=>setTimeout(r,500));
+    var raw = (data.content||[]).find(function(b){ return b.type==="text"; });
+    if (!raw) throw new Error("No text in response");
+    var result = JSON.parse(raw.text.replace(/```json|```/g,"").trim());
     showProposal(result);
   } catch(err) {
-    console.error(err);
-    document.getElementById('loadingState').style.display='none';
-    document.getElementById('auditSteps').style.display='block';
-    const errEl=document.getElementById('auditError');
-    errEl.textContent='Error: '+(err.message||'Something went wrong')+'. Please check your API key has credits and try again.';
-    errEl.style.display='block';
+    console.error("Audit error:", err);
+    document.getElementById("loadingState").style.display = "none";
+    document.getElementById("auditSteps").style.display = "block";
+    var errEl = document.getElementById("auditError");
+    if (errEl) { errEl.textContent = "Something went wrong: " + err.message; errEl.style.display = "block"; }
     renderStep(currentStep);
   }
 }
 
+// PROPOSAL
 function showProposal(data) {
-  document.getElementById('loadingState').style.display='none';
-  const el=document.getElementById('proposalState');
-  const firstName=answers.name?.firstName||'there';
-  const businessName=answers.name?.businessName||'your business';
-  el.innerHTML=`
-    <div class="proposal-header">
-      <div class="proposal-tag">AIWorks · AI Marketing Audit</div>
-      <div class="proposal-title">${data.headline||businessName+' -- Growth Audit'}</div>
-      <div class="proposal-subtitle">Personalised analysis based on your answers -- prepared by AI in seconds.</div>
-      <div class="proposal-score"><span>Marketing maturity score:</span><span class="score-num">${data.overallScore}/10</span></div>
-    </div>
-    <div class="proposal-body">
-      <div class="section-title">Your Situation</div>
-      <div class="diagnosis-text">${data.diagnosis}</div>
-      <div class="section-title">Key Gaps Identified</div>
-      <div class="gaps-list">${(data.gaps||[]).map(g=>`<div class="gap-item"><span class="gap-icon">⚠</span><span>${g}</span></div>`).join('')}</div>
-      <div class="section-title">Recommendations for ${firstName}</div>
-      <div class="reco-list">${(data.recommendations||[]).map(r=>`<div class="reco-card"><div class="reco-card-header"><span class="reco-name">${r.service}</span><span class="priority-badge priority-${r.priority==='High'?'high':'med'}">${r.priority} Priority</span></div><div class="reco-card-body"><div class="reco-rationale">${r.rationale}</div><div class="reco-roi">📈 ${r.roi}</div></div></div>`).join('')}</div>
-      <div class="section-title">Projected Impact</div>
-      <div class="roi-grid">
-        <div class="roi-card"><div class="roi-num">${data.roiSummary?.leadsPerMonth||'--'}</div><div class="roi-label">New leads per month</div></div>
-        <div class="roi-card"><div class="roi-num">${data.roiSummary?.hoursSaved||'--'}hrs</div><div class="roi-label">Saved per week</div></div>
-        <div class="roi-card"><div class="roi-num">${data.roiSummary?.costSaved||'--'}</div><div class="roi-label">Saved monthly vs. hiring</div></div>
-      </div>
-      <div class="proposal-cta">
-        <div class="cta-title">Ready to plug these gaps?</div>
-        <div class="cta-sub">Join the AIWorks waitlist and we'll reach out to discuss your audit personally.</div>
-        <button class="cta-btn" onclick="showLanding();setTimeout(()=>document.getElementById('waitlist').scrollIntoView({behavior:'smooth'}),100)">Join the Waitlist →</button>
-      </div>
-    </div>
-    <div class="pdf-bar">
-      <span class="pdf-note">AIWorks Audit · ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</span>
-      <button class="btn-pdf" onclick="window.print()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> Save as PDF</button>
-    </div>`;
-  document.getElementById('auditCard').scrollIntoView({behavior:'smooth'});
+  document.getElementById("loadingState").style.display = "none";
+  var el = document.getElementById("proposalState");
+  var firstName = answers.firstName || "there";
+  var businessName = answers.businessName || "your business";
+  var recos = (data.recommendations||[]).map(function(r) {
+    return "<div class=\"reco-card\">" +
+      "<div class=\"reco-card-header\">" +
+      "<span class=\"reco-name\">" + r.service + "</span>" +
+      "<span class=\"priority-badge priority-" + (r.priority==="High"?"high":"med") + "\">" + r.priority + " Priority</span>" +
+      "</div><div class=\"reco-card-body\">" +
+      "<div class=\"reco-rationale\">" + r.rationale + "</div>" +
+      "<div class=\"reco-roi\">📈 " + r.roi + "</div></div></div>";
+  }).join("");
+  var gaps = (data.gaps||[]).map(function(g) {
+    return "<div class=\"gap-item\"><span class=\"gap-icon\">⚠</span><span>" + g + "</span></div>";
+  }).join("");
+  var rs = data.roiSummary || {};
+  el.innerHTML =
+    "<div class=\"proposal-header\">" +
+    "<div class=\"proposal-tag\">AIWorks - AI Marketing Audit</div>" +
+    "<div class=\"proposal-title\">" + (data.headline || businessName + " - Growth Audit") + "</div>" +
+    "<div class=\"proposal-subtitle\">Personalised analysis based on your answers - prepared by AI in seconds.</div>" +
+    "<div class=\"proposal-score\"><span>Marketing maturity score:</span><span class=\"score-num\">" + data.overallScore + "/10</span></div>" +
+    "</div><div class=\"proposal-body\">" +
+    "<div class=\"section-title\">Your Situation</div>" +
+    "<div class=\"diagnosis-text\">" + data.diagnosis + "</div>" +
+    "<div class=\"section-title\">Key Gaps Identified</div>" +
+    "<div class=\"gaps-list\">" + gaps + "</div>" +
+    "<div class=\"section-title\">Recommendations for " + firstName + "</div>" +
+    "<div class=\"reco-list\">" + recos + "</div>" +
+    "<div class=\"section-title\">Projected Impact</div>" +
+    "<div class=\"roi-grid\">" +
+    "<div class=\"roi-card\"><div class=\"roi-num\">" + (rs.leadsPerMonth||"--") + "</div><div class=\"roi-label\">New leads per month</div></div>" +
+    "<div class=\"roi-card\"><div class=\"roi-num\">" + (rs.hoursSaved||"--") + "hrs</div><div class=\"roi-label\">Saved per week</div></div>" +
+    "<div class=\"roi-card\"><div class=\"roi-num\">" + (rs.costSaved||"--") + "</div><div class=\"roi-label\">Saved monthly vs. hiring</div></div>" +
+    "</div><div class=\"proposal-cta\">" +
+    "<div class=\"cta-title\">Ready to plug these gaps?</div>" +
+    "<div class=\"cta-sub\">Join the AIWorks waitlist and we'll reach out to discuss your audit personally.</div>" +
+    "<button class=\"cta-btn\" onclick=\"showLanding();setTimeout(function(){document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})},100)\">Join the Waitlist \u2192</button>" +
+    "</div></div>" +
+    "<div class=\"pdf-bar\">" +
+    "<span class=\"pdf-note\">AIWorks Audit - " + new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"}) + "</span>" +
+    "<button class=\"btn-pdf\" onclick=\"window.print()\">Save as PDF</button></div>";
+  el.style.display = "block";
+  document.getElementById("auditCard").scrollIntoView({behavior:"smooth"});
 }
 </script>
 </body>
