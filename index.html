@@ -270,6 +270,87 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   body{background:#fff}
   .audit-card{box-shadow:none;border:none}
 }
+
+/* ─── REDESIGN: Logo Bar ─── */
+.logo-bar{padding:2rem 0;border-bottom:1px solid var(--border);opacity:0;animation:fadeUp .7s .5s ease forwards}
+.logo-bar-label{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);text-align:center;margin-bottom:1.2rem}
+.logo-bar-logos{display:flex;justify-content:center;align-items:center;gap:3rem;flex-wrap:wrap}
+.logo-bar-logos span{font-family:'Instrument Serif',serif;font-size:1.1rem;color:var(--dim);opacity:.5;transition:opacity .2s}
+.logo-bar-logos span:hover{opacity:.8}
+
+/* ─── REDESIGN: Bento Grid Services ─── */
+.bento-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:3rem;opacity:0;animation:fadeUp .7s .6s ease forwards}
+.bento-item{background:var(--bg);padding:2rem;position:relative;transition:background .2s}
+.bento-item:hover{background:var(--surface)}
+.bento-item.large{grid-column:span 2;padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+.bento-item .b-num{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--dim);margin-bottom:.6rem}
+.bento-item h3{font-family:'Instrument Serif',serif;font-size:1.3rem;font-weight:500;color:var(--ink);margin-bottom:.5rem;line-height:1.3}
+.bento-item.large h3{font-size:1.6rem}
+.bento-item p{font-size:.82rem;color:var(--mid);line-height:1.5}
+.bento-item .b-icon{font-size:1.4rem;margin-bottom:.8rem;display:block}
+.bento-mockup{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.2rem;font-family:'DM Mono',monospace;font-size:.7rem;color:var(--mid);line-height:1.8}
+.bento-mockup .mock-header{display:flex;gap:.4rem;margin-bottom:.8rem}
+.bento-mockup .mock-dot{width:8px;height:8px;border-radius:50%;background:var(--border)}
+
+/* ─── REDESIGN: How It Works ─── */
+.how-section{padding:4rem 0;opacity:0;animation:fadeUp .7s .7s ease forwards}
+.how-steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-top:2rem}
+.how-step{text-align:center;position:relative}
+.how-step-num{width:48px;height:48px;border-radius:50%;background:var(--green);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:.88rem;font-weight:500;margin-bottom:1rem}
+.how-step h3{font-family:'Instrument Serif',serif;font-size:1.2rem;margin-bottom:.5rem}
+.how-step p{font-size:.82rem;color:var(--mid);line-height:1.5;max-width:260px;margin:0 auto}
+.how-connector{position:absolute;top:24px;left:calc(50% + 32px);width:calc(100% - 64px);height:2px;background:repeating-linear-gradient(90deg,var(--green-line) 0,var(--green-line) 6px,transparent 6px,transparent 12px)}
+
+/* ─── REDESIGN: Testimonials ─── */
+.testimonials-section{padding:3rem 0;opacity:0;animation:fadeUp .7s .75s ease forwards}
+.testimonial-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem;margin-top:2rem}
+.testimonial-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;box-shadow:var(--shadow)}
+.testimonial-card blockquote{font-family:'Instrument Serif',serif;font-size:1rem;line-height:1.5;color:var(--ink);margin:0 0 1rem;font-style:italic}
+.testimonial-card .t-author{display:flex;align-items:center;gap:.6rem}
+.testimonial-card .t-avatar{width:32px;height:32px;border-radius:50%;background:var(--green-bg);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:600;color:var(--green)}
+.testimonial-card .t-name{font-size:.78rem;font-weight:500;color:var(--ink)}
+.testimonial-card .t-role{font-size:.72rem;color:var(--dim)}
+.testimonial-card .t-stat{display:inline-block;margin-top:.8rem;font-family:'DM Mono',monospace;font-size:.72rem;color:var(--green);background:var(--green-bg);padding:.2rem .6rem;border-radius:4px}
+
+/* ─── REDESIGN: Dark CTA Section ─── */
+.dark-cta{background:var(--ink);border-radius:16px;padding:4rem;margin:3rem 0;color:#fff;opacity:0;animation:fadeUp .7s .8s ease forwards}
+.dark-cta h2{font-family:'Instrument Serif',serif;font-size:2.2rem;line-height:1.15;margin-bottom:.6rem;color:#fff;letter-spacing:-.02em}
+.dark-cta .dc-sub{font-size:.92rem;color:rgba(255,255,255,.6);margin-bottom:2rem;max-width:500px;line-height:1.5}
+.dark-cta .dc-form{display:grid;grid-template-columns:1fr 1fr auto;gap:.75rem;max-width:600px}
+.dark-cta input{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:.85rem 1rem;font-family:'Geist',sans-serif;font-size:.88rem;color:#fff;outline:none}
+.dark-cta input::placeholder{color:rgba(255,255,255,.35)}
+.dark-cta input:focus{border-color:var(--green);background:rgba(255,255,255,.12)}
+.dark-cta .dc-btn{background:var(--green);color:#fff;border:none;border-radius:8px;padding:.85rem 2rem;font-family:'Geist',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;transition:background .2s}
+.dark-cta .dc-btn:hover{background:#174F35}
+.dark-cta .dc-note{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.8rem;display:flex;align-items:center;gap:.5rem}
+
+/* ─── REDESIGN: Enhanced Stats ─── */
+.stats-new{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:2.5rem 0;opacity:0;animation:fadeUp .7s .45s ease forwards}
+.stat-card{background:var(--bg);padding:1.5rem;text-align:center}
+.stat-card:hover{background:var(--surface)}
+.stat-card .sc-num{font-family:'Instrument Serif',serif;font-size:2.2rem;color:var(--ink);letter-spacing:-.02em}
+.stat-card .sc-num em{font-style:normal;font-size:1.1rem;color:var(--green)}
+.stat-card .sc-label{font-size:.72rem;color:var(--dim);margin-top:.2rem}
+
+/* ─── REDESIGN: Announcement Bar ─── */
+.announce-bar{text-align:center;padding:.6rem 0;border-bottom:1px solid var(--border);opacity:0;animation:fadeUp .5s .05s ease forwards}
+.announce-bar span{font-size:.75rem;color:var(--mid)}
+.announce-bar a{color:var(--green);font-weight:500;text-decoration:none;margin-left:.4rem}
+.announce-bar a:hover{text-decoration:underline}
+
+/* ─── REDESIGN: Responsive ─── */
+@media(max-width:768px){
+  .bento-grid{grid-template-columns:1fr}
+  .bento-item.large{grid-column:span 1;grid-template-columns:1fr}
+  .how-steps{grid-template-columns:1fr;gap:1.5rem}
+  .how-connector{display:none}
+  .testimonial-grid{grid-template-columns:1fr}
+  .dark-cta .dc-form{grid-template-columns:1fr}
+  .dark-cta{padding:2.5rem 1.5rem}
+  .stats-new{grid-template-columns:1fr 1fr}
+  .logo-bar-logos{gap:1.5rem}
+}
+
 </style>
 
   <style>
@@ -416,13 +497,33 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
         <a href="login.html" class="nav-login">Client login <span class="arr">&rarr;</span></a>
       </div>
     </nav>
+      <div class="announce-bar">
+        <span>⚡ Limited spots — Now accepting founding clients.</span>
+        <a href="#waitlist" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Apply now →</a>
+      </div>
   </div>
   <div class="wrap">
     <section class="hero">
       <p class="hero-label">Full-service AI agency · SMEs</p>
       <h1>Your business,<span class="line2"><em>growing</em> while</span><span class="line3">you sleep.</span></h1>
       <p class="hero-sub">We build and operate AI-powered marketing, sales, and growth systems for small businesses — customers, leads, and revenue generated 24/7, automatically.</p>
-      <div class="audit-banner">
+      
+          <div style="display:flex;gap:1rem;margin-top:2rem;margin-bottom:2.5rem;opacity:0;animation:fadeUp .7s .35s ease forwards">
+            <a class="nav-login" href="#waitlist" onclick="event.preventDefault();document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})" style="font-family:'Geist',sans-serif;font-size:.88rem;font-weight:500;padding:.8rem 2rem;background:var(--green);color:#fff;border:none;border-radius:8px;text-decoration:none;transition:all .15s">Join the waitlist →</a>
+            <a class="nav-login" href="#" onclick="event.preventDefault();showAudit()" style="font-size:.88rem;padding:.8rem 2rem">Get free audit →</a>
+          </div>
+
+          <div style="max-width:700px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem 2rem;box-shadow:var(--shadow);opacity:0;animation:fadeUp .7s .4s ease forwards;margin-bottom:1rem">
+            <div style="display:flex;gap:.4rem;margin-bottom:1rem"><span style="width:8px;height:8px;border-radius:50%;background:#EF4444"></span><span style="width:8px;height:8px;border-radius:50%;background:#F59E0B"></span><span style="width:8px;height:8px;border-radius:50%;background:#10B981"></span></div>
+            <div style="font-family:'DM Mono',monospace;font-size:.75rem;color:var(--mid);line-height:2">
+              <span style="color:var(--green)">● Agent: Ad Creator</span> — Generated 48 variants for "Apex Fitness"<br>
+              <span style="color:var(--green)">● Agent: Lead Gen</span> — Found 127 qualified leads on LinkedIn<br>
+              <span style="color:var(--green)">● Agent: Outreach</span> — Sent 84 emails, 12 replies, 3 meetings booked<br>
+              <span style="color:var(--dim)">⏱ All completed while you slept — next run in 6h 42m</span>
+            </div>
+          </div>
+
+          <div class="audit-banner">
         <div class="audit-banner-left">
           <span class="audit-icon">🔍</span>
           <div>
@@ -432,94 +533,24 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
         </div>
         <button class="audit-btn" onclick="showAudit()">Get My Free Audit <span class="arr">→</span></button>
       </div>
-      <div class="stats">
-        <div><div class="stat-num">143<em>+</em></div><div class="stat-label">Businesses on waitlist</div></div>
-        <div><div class="stat-num">24<em>/7</em></div><div class="stat-label">Agents running for clients</div></div>
-        <div><div class="stat-num">6<em>×</em></div><div class="stat-label">Avg. pipeline increase</div></div>
-        <div><div class="stat-num">£40<em>k</em></div><div class="stat-label">Avg. revenue added/yr</div></div>
-      </div>
-    </section>
-    <div class="services-header"><span class="services-label">What we do</span></div>
-    <div class="services-grid">
-      <div class="service"><div class="service-accent"></div><div class="s-num">01</div><span class="s-icon">📣</span><h3>AI Ad Creation</h3><p>Bulk-generate hundreds of ad variations based on real customer pain points — tested, refined, and published automatically.</p><div class="s-arrow">→</div></div>
-      <div class="service"><div class="service-accent"></div><div class="s-num">02</div><span class="s-icon">📊</span><h3>Ad Management & Optimisation</h3><p>Agents monitor your campaigns 24/7, switching off underperformers and scaling winners — no dashboards required.</p><div class="s-arrow">→</div></div>
-      <div class="service"><div class="service-accent"></div><div class="s-num">03</div><span class="s-icon">🎯</span><h3>Lead Generation</h3><p>We identify and enrich your ideal customers from LinkedIn, verify contact data, and feed them into your pipeline automatically.</p><div class="s-arrow">→</div></div>
-      <div class="service"><div class="service-accent"></div><div class="s-num">04</div><span class="s-icon">📧</span><h3>Cold Outreach Automation</h3><p>Personalised email campaigns sent and followed up by AI — from first touch to booked meeting, handled end-to-end.</p><div class="s-arrow">→</div></div>
-      <div class="service"><div class="service-accent"></div><div class="s-num">05</div><span class="s-icon">📈</span><h3>Analytics & Reporting</h3><p>Live dashboards and daily AI briefings across all your channels — so you always know what's working and what isn't.</p><div class="s-arrow">→</div></div>
-      <div class="service"><div class="service-accent"></div><div class="s-num">06</div><span class="s-icon">🎙️</span><h3>PR & Podcast Outreach</h3><p>We find and pitch relevant podcasts and publications on your behalf — building brand awareness while you focus on the work.</p><div class="s-arrow">→</div></div>
-    </div>
-    <section class="waitlist-section" id="waitlist">
-      <div class="waitlist-inner">
-        <div class="waitlist-left"><h2>Join the waitlist.</h2><p>We're onboarding a small number of founding clients. Apply now and we'll reach out personally when a spot opens.</p></div>
-        <div>
-          <div class="form-box" id="wlFormOuter">
-            <div class="form-row">
-              <div class="field"><input type="text" id="wlName" placeholder="Your name" autocomplete="name"/></div>
-              <div class="field"><input type="email" id="wlEmail" placeholder="Work email" autocomplete="email"/></div>
+      <div class="stats-new">
+            <div class="stat-card">
+              <div class="sc-num">143<em>+</em></div>
+              <div class="sc-label">Businesses on waitlist</div>
             </div>
-            <button class="wl-btn" id="wlSubmitBtn" onclick="handleWaitlist()">
-              <span class="btn-text">Join the waitlist →</span>
-              <span class="spinner"><span class="spin-ring"></span></span>
-            </button>
-            <p class="form-note"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> No spam. We review applications weekly and reach out personally.</p>
-            <div class="social-proof">
-              <div class="avatars"><div class="av av1">JM</div><div class="av av2">SR</div><div class="av av3">TK</div><div class="av av4">AL</div></div>
-              <p class="sp-text"><strong id="spCount">143</strong> businesses already waiting</p>
+            <div class="stat-card">
+              <div class="sc-num">24<em>/7</em></div>
+              <div class="sc-label">Agents running for clients</div>
+            </div>
+            <div class="stat-card">
+              <div class="sc-num">6<em>×</em></div>
+              <div class="sc-label">Avg. pipeline increase</div>
+            </div>
+            <div class="stat-card">
+              <div class="sc-num">£40<em>k</em></div>
+              <div class="sc-label">Avg. revenue added/yr</div>
             </div>
           </div>
-          <div class="wl-success" id="wlSuccess">
-            <div class="wl-success-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <h3>You're on the list.</h3>
-            <p>Thanks for applying. We'll be in touch personally once a spot opens — usually within a week.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <footer>
-      <a class="logo" onclick="showLanding()">ai<span>works</span></a>
-      <div class="footer-links">
-        <a onclick="showAudit()">Free Audit</a>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-      <p>© 2026 AIWorks</p>
-    </footer>
-  </div>
-</div>
-
-<!-- ═══════════════ AUDIT PAGE ═══════════════ -->
-<div id="page-audit">
-  <div class="wrap">
-    <div class="audit-nav">
-      <button class="back-btn" onclick="showLanding()">← Back to AIWorks</button>
-      <a class="logo" onclick="showLanding()">ai<span>works</span></a>
-    </div>
-    <div class="audit-hero">
-      <div class="audit-eyebrow">Free AI Marketing Audit</div>
-      <div class="audit-h1">Find out exactly where your<br/><em>growth is leaking.</em></div>
-      <p class="audit-sub">Answer 7 quick questions and our AI agent analyses your marketing & sales setup — delivering a personalised diagnosis in seconds.</p>
-      <div class="audit-meta"><span><span class="pulse-dot"></span>Live AI analysis</span><span>· ~2 minutes</span><span>· No email required</span></div>
-    </div>
-    <div class="audit-card" id="auditCard">
-      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-      <div id="auditSteps"></div>
-      <div class="audit-error" id="auditError"></div>
-      <div class="loading-state" id="loadingState">
-        <div class="loading-orb" style="-webkit-animation:auditSpin 1s linear infinite;animation:auditSpin 1s linear infinite;width:44px;height:44px;border:2px solid #D9D3C8;border-top-color:#1F6644;border-radius:50%;margin:0 auto 1.5rem"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F6644" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
-        <div class="loading-title">Analysing your business…</div>
-        <div class="loading-sub">Our AI agent is reviewing your answers</div>
-        <ul class="loading-steps" id="loadingSteps">
-          <li>Mapping your current growth stack</li>
-          <li>Identifying bottlenecks & gaps</li>
-          <li>Matching services to your situation</li>
-          <li>Calculating ROI projections</li>
-          <li>Writing your personalised report</li>
-        </ul>
-      </div>
-      <div id="proposalState"></div>
-    </div>
-  </div>
-</div>
 
 <script>
 // PARTICLES
@@ -793,6 +824,19 @@ function showProposal(data) {
   el.style.display = "block";
   document.getElementById("auditCard").scrollIntoView({behavior:"smooth"});
 }
-</script>
+
+    function submitWaitlist(btn) {
+      var form = btn.closest('form');
+      var name = form.querySelector('input[type="text"]').value;
+      var email = form.querySelector('input[type="email"]').value;
+      if (!name || !email) return;
+      btn.textContent = 'Submitting...';
+      btn.disabled = true;
+      // Simulate submission (replace with real endpoint)
+      setTimeout(function() {
+        form.innerHTML = '<div style="text-align:center;padding:1rem 0"><div style="font-family:Instrument Serif,serif;font-size:1.4rem;color:#fff;margin-bottom:.4rem">You\u2019re on the list! \u2705</div><div style="font-size:.85rem;color:rgba(255,255,255,.6)">We\u2019ll reach out personally when a spot opens.</div></div>';
+      }, 1200);
+    }
+  </script>
 </body>
 </html>
