@@ -705,6 +705,38 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 
 </div><!-- end page-landing -->
 
+<div id="page-audit">
+  <div class="wrap">
+    <div class="audit-nav">
+      <button class="back-btn" onclick="showLanding()">â Back to AIWorks</button>
+      <a class="logo" onclick="showLanding()">ai<span>works</span></a>
+    </div>
+    <div class="audit-hero">
+      <div class="audit-eyebrow">Free AI Marketing Audit</div>
+      <div class="audit-h1">Find out exactly where your<br/><em>growth is leaking.</em></div>
+      <p class="audit-sub">Answer 7 quick questions and our AI agent analyses your marketing & sales setup â delivering a personalised diagnosis in seconds.</p>
+      <div class="audit-meta"><span><span class="pulse-dot"></span>Live AI analysis</span><span>Â· ~2 minutes</span><span>Â· No email required</span></div>
+    </div>
+    <div class="audit-card" id="auditCard">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div id="auditSteps"></div>
+      <div class="audit-error" id="auditError"></div>
+      <div class="loading-state" id="loadingState">
+        <div class="loading-orb" style="-webkit-animation:auditSpin 1s linear infinite;animation:auditSpin 1s linear infinite;width:44px;height:44px;border:2px solid #D9D3C8;border-top-color:#1F6644;border-radius:50%;margin:0 auto 1.5rem"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F6644" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
+        <div class="loading-title">Analysing your businessâ¦</div>
+        <div class="loading-sub">Our AI agent is reviewing your answers</div>
+        <ul class="loading-steps" id="loadingSteps">
+          <li>Mapping your current growth stack</li>
+          <li>Identifying bottlenecks & gaps</li>
+          <li>Matching services to your situation</li>
+          <li>Calculating ROI projections</li>
+          <li>Writing your personalised report</li>
+        </ul>
+      </div>
+      <div id="proposalState"></div>
+    </div>
+  </div>
+</div>
 
 <script>
 // PARTICLES
