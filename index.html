@@ -45,6 +45,10 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1.8rem
 .live-badge{display:flex;align-items:center;gap:.4rem;font-size:.72rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--green);background:var(--green-bg);padding:.3rem .75rem;border-radius:20px;border:1px solid var(--green-line)}
 .live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.8s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.nav-login{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--ink);text-decoration:none;border:1px solid var(--ink);padding:.35rem 1rem;border-radius:20px;letter-spacing:.01em;transition:all .15s;cursor:pointer}
+.nav-login:hover{background:var(--ink);color:#fff}
+.nav-login .arr{display:inline-block;margin-left:.3rem;transition:transform .15s}
+.nav-login:hover .arr{transform:translateX(3px)}
 
 .hero{padding:5rem 0 3.5rem;opacity:0;animation:fadeUp .7s .25s ease forwards}
 .hero-label{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:1.4rem;display:flex;align-items:center;gap:.6rem}
@@ -409,7 +413,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <div class="nav-right">
         <span class="nav-count"><strong id="navCount">143</strong> on waitlist</span>
         <span class="live-badge"><span class="live-dot"></span>Accepting applications</span>
-        <a href="login.html" style="font-family:'DM Mono',monospace;font-size:.72rem;color:var(--mid);text-decoration:none;border:1px solid var(--border);padding:.35rem .8rem;border-radius:2px;transition:all .15s" onmouseover="this.style.borderColor='var(--ink)';this.style.color='var(--ink)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--mid)'">Client login →</a>
+        <a href="login.html" class="nav-login">Client login <span class="arr">&rarr;</span></a>
       </div>
     </nav>
   </div>
