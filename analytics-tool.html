@@ -110,7 +110,7 @@ footer p{font-size:.75rem;color:var(--dim)}
 <div class="wrap">
   <nav>
     <a class="logo" href="https://agentsatwork.co">agents at <span>work</span></a>
-    <span class="nav-badge">Tool 04 — Analytics & Reporting</span>
+    <span class="nav-badge">Tool 05 — Analytics & Reporting</span>
   </nav>
   <div class="hero">
     <div class="hero-eyebrow">Analytics & Reporting</div>
@@ -224,7 +224,7 @@ footer p{font-size:.75rem;color:var(--dim)}
     if(!hasData){err.textContent='Please enter at least some metrics to analyse.';err.style.display='block';return;}
     err.style.display='none';
     document.getElementById('formState').style.display='none';
-    document.getElementById('loadingState').style.display='block';
+    document.getElementById('loadingState').style.display='block'; var _loadTimeout=setTimeout(function(){ document.getElementById('loadingState').style.display='none'; document.getElementById('formState').style.display='block'; var err=document.getElementById('errBar'); err.textContent='Request timed out. Please try again.'; err.style.display='block'; },45000);
     document.querySelectorAll('#loadingSteps li').forEach(function(li,i){setTimeout(function(){li.classList.add('vis');},i*700);});
 
     var metrics='';
@@ -241,19 +241,19 @@ footer p{font-size:.75rem;color:var(--dim)}
     var system='You are a senior marketing analyst. Analyse the provided marketing metrics and generate a comprehensive performance report. Calculate derived metrics (CTR, CPA, ROAS, CVR etc). You MUST respond with ONLY valid JSON, no markdown, no backticks. Structure: {"kpis":[{"label":"ROAS","value":"3.8x","delta":"+0.4x","trend":"up"},{"label":"CTR","value":"1.78%","delta":"-0.2%","trend":"down"},{"label":"CPA","value":"£52","delta":"-£8","trend":"up"},{"label":"Conv. Rate","value":"1.5%","delta":"","trend":"flat"}],"executiveSummary":"2-3 sentence plain English summary of overall performance","insights":[{"type":"positive","icon":"✅","text":"<strong>ROAS of 3.8x</strong> is above the 3x benchmark for this sector, driven by strong ad creative performance."},{"type":"warning","icon":"⚠️","text":"..."},{"type":"negative","icon":"🔴","text":"..."}],"actions":[{"title":"Action title","description":"What to do and why","impact":"Estimated impact e.g. +15% CTR"}]}. Include 4 KPIs, 1 exec summary, 4-6 insights (mix of positive/warning/negative), 3-5 prioritised actions. Be specific with numbers.';
 
     fetch('/api/claude',{ method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2500,system:system,messages:[{role:'user',content:prompt}]})
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:4000,system:system,messages:[{role:'user',content:prompt}]})
     })
     .then(function(r){return r.json();})
     .then(function(data){
       if(data.error) throw new Error(data.error.message);
       var raw=data.content.filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
       raw=raw.replace(/```json|```/g,'').trim();
-      var result=JSON.parse(raw);
+      var result; try { result=JSON.parse(raw); } catch(parseErr) { document.getElementById('loadingState').style.display='none'; document.getElementById('formState').style.display='block'; var err=document.getElementById('errBar'); err.textContent='AI response was malformed. Please try again.'; err.style.display='block'; return; }
       lastReport={biz:biz||'Client',period:period,data:result,metrics:metrics};
       showOutput(biz||'Client',period,result);
     })
     .catch(function(e){
-      document.getElementById('loadingState').style.display='none';
+      clearTimeout(_loadTimeout); document.getElementById('loadingState').style.display='none';
       document.getElementById('formState').style.display='block';
       err.textContent='Something went wrong: '+(e.message||'Unknown error')+'. Please try again.';
       err.style.display='block';
