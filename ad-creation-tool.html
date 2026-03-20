@@ -104,7 +104,7 @@ footer p{font-size:.75rem;color:var(--dim)}
 <div class="wrap">
   <nav>
     <a class="logo" href="https://agentsatwork.co">agents at <span>work</span></a>
-    <span class="nav-badge">Tool 03 — AI Ad Creation</span>
+    <span class="nav-badge">Tool 01 — AI Ad Creation</span>
   </nav>
 
   <div class="hero">
@@ -240,7 +240,7 @@ footer p{font-size:.75rem;color:var(--dim)}
     err.style.display='none';
 
     document.getElementById('formState').style.display='none';
-    document.getElementById('loadingState').style.display='block';
+    document.getElementById('loadingState').style.display='block'; var _loadTimeout=setTimeout(function(){ document.getElementById('loadingState').style.display='none'; document.getElementById('formState').style.display='block'; var err=document.getElementById('errBar'); err.textContent='Request timed out. Please try again.'; err.style.display='block'; },45000);
     document.querySelectorAll('#loadingSteps li').forEach(function(li,i){setTimeout(function(){li.classList.add('vis');},i*600);});
 
     var prompt = 'Product/service: ' + product + '\n' +
@@ -260,12 +260,12 @@ footer p{font-size:.75rem;color:var(--dim)}
       if(data.error) throw new Error(data.error.message);
       var raw=data.content.filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
       raw=raw.replace(/```json|```/g,'').trim();
-      var result=JSON.parse(raw);
-      lastResult=result;
+      var result; try { result=JSON.parse(raw); } catch(parseErr) { document.getElementById('loadingState').style.display='none'; document.getElementById('formState').style.display='block'; var err=document.getElementById('errBar'); err.textContent='AI response was malformed. Please try again.'; err.style.display='block'; return; }
+      clearTimeout(_loadTimeout); lastResult=result;
       showOutput(result);
     })
     .catch(function(e){
-      document.getElementById('loadingState').style.display='none';
+      clearTimeout(_loadTimeout); document.getElementById('loadingState').style.display='none';
       document.getElementById('formState').style.display='block';
       var err=document.getElementById('errBar');
       err.textContent='Something went wrong: '+(e.message||'Unknown error')+'. Please try again.';
