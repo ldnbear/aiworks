@@ -50,14 +50,14 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1.8rem
 .nav-login .arr{display:inline-block;margin-left:.3rem;transition:transform .15s}
 .nav-login:hover .arr{transform:translateX(3px)}
 
-.hero{padding:5rem 0 3.5rem;opacity:0;animation:fadeUp .7s .25s ease forwards}
-.hero-label{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:1.4rem;display:flex;align-items:center;gap:.6rem}
+.hero{padding:5rem 0 3.5rem;text-align:center;opacity:0;animation:fadeUp .7s .25s ease forwards}
+.hero-label{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:1.4rem;display:flex;align-items:center;gap:.6rem;justify-content:center}
 .hero-label::before{content:'';display:block;width:20px;height:1px;background:var(--green)}
 h1{font-family:'Instrument Serif',serif;font-size:clamp(2.6rem,5.5vw,4rem);line-height:1.08;letter-spacing:-.03em;color:var(--ink);margin-bottom:1.4rem}
 h1 em{font-style:italic;color:var(--green)}
 h1 .line2{padding-left:2rem;display:block}
 h1 .line3{padding-left:4rem;display:block}
-.hero-sub{font-size:1.05rem;color:var(--mid);line-height:1.65;max-width:540px;margin-bottom:2.5rem}
+.hero-sub{font-size:1.05rem;color:var(--mid);line-height:1.65;max-width:600px;margin:0 auto 2.5rem}
 
 .audit-banner{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;background:var(--green);border-radius:2px;padding:1.4rem 1.8rem;margin-bottom:2rem;opacity:0;animation:fadeUp .7s .35s ease forwards}
 .audit-banner-left{display:flex;align-items:center;gap:1rem}
@@ -511,7 +511,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <h1>Your business,<span class="line2"><em>growing</em> while</span><span class="line3">you sleep.</span></h1>
       <p class="hero-sub">We build and operate AI-powered marketing, sales, and growth systems for small businesses — customers, leads, and revenue generated 24/7, automatically.</p>
       
-          <div style="display:flex;gap:1rem;margin-top:2rem;margin-bottom:2.5rem;opacity:0;animation:fadeUp .7s .35s ease forwards">
+          <div style="display:flex;gap:1rem;margin-top:2rem;margin-bottom:2.5rem;justify-content:center;opacity:0;animation:fadeUp .7s .35s ease forwards">
             <a class="nav-login" href="#waitlist" onclick="event.preventDefault();document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})" style="font-family:'Geist',sans-serif;font-size:.88rem;font-weight:500;padding:.8rem 2rem;background:var(--green);color:#fff;border:none;border-radius:8px;text-decoration:none;transition:all .15s">Join the waitlist →</a>
             <a class="nav-login" href="#" onclick="event.preventDefault();showAudit()" style="font-size:.88rem;padding:.8rem 2rem">Get free audit →</a>
           </div>
