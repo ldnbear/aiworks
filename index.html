@@ -765,7 +765,21 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 </div>
 
 <script>
-// PARTICLES
+// LIVE WAITLIST COUNT
+  (function() {
+    fetch('/api/waitlist-count')
+      .then(function(r){return r.json();})
+      .then(function(d){
+        if(d.count===undefined) return;
+        var n = d.count;
+        var navEl=document.getElementById('navCount');
+        var spEl=document.getElementById('spCount');
+        if(navEl) navEl.textContent=n;
+        if(spEl) spEl.textContent=n+'+';
+      }).catch(function(){});
+  })();
+
+  // PARTICLES
 const pc = document.getElementById("particles");
 for (let i = 0; i < 20; i++) {
   const p = document.createElement("div");
