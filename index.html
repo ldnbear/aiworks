@@ -592,8 +592,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
         <div class="audit-banner-left">
           <span class="audit-icon">🔍</span>
           <div>
-            <div class="audit-banner-title">Not sure where to start? Get a free AI audit of your marketing.</div>
-            <div class="audit-banner-sub">Answer 7 questions — our AI analyses your setup and delivers a personalised growth plan in seconds.</div>
+            <div class="audit-banner-title">Not sure where to start with AI? Get your free AI readiness audit.</div>
+            <div class="audit-banner-sub">Answer 7 questions — find out exactly where AI can save you time and grow your business.</div>
           </div>
         </div>
         <button class="audit-btn" onclick="showAudit()">Get My Free Audit <span class="arr">→</span></button>
@@ -874,9 +874,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <a class="logo" onclick="showLanding()">ai<span>works</span></a>
     </div>
     <div class="audit-hero">
-      <div class="audit-eyebrow">Free AI Marketing Audit</div>
+      <div class="audit-eyebrow">Free AI Readiness Audit</div>
       <div class="audit-h1">Find out exactly where your<br/><em>growth is leaking.</em></div>
-      <p class="audit-sub">Answer 7 quick questions and our AI agent analyses your marketing & sales setup — delivering a personalised diagnosis in seconds.</p>
+      <p class="audit-sub">Answer 7 quick questions and our AI analyses your business — delivering a personalised AI roadmap in seconds.</p>
       <div class="audit-meta"><span><span class="pulse-dot"></span>Live AI analysis</span><span>· ~2 minutes</span><span>· No email required</span></div>
     </div>
     <div class="audit-card" id="auditCard">
@@ -888,11 +888,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
         <div class="loading-title">Analysing your business...</div>
         <div class="loading-sub">Our AI agent is reviewing your answers</div>
         <ul class="loading-steps" id="loadingSteps">
-          <li>Mapping your current growth stack</li>
-          <li>Identifying bottlenecks & gaps</li>
-          <li>Matching services to your situation</li>
-          <li>Calculating ROI projections</li>
-          <li>Writing your personalised report</li>
+          <li>Mapping your current business setup</li>
+          <li>Identifying your biggest AI opportunities</li>
+          <li>Matching AI tools and services to your needs</li>
+          <li>Calculating your time and cost savings</li>
+          <li>Writing your personalised AI roadmap</li>
         </ul>
       </div>
       <div id="proposalState"></div>
@@ -967,33 +967,14 @@ var currentStep = 0;
 var answers = {};
 
 var QUESTIONS = [
-  { id:"name", label:"Introduction", question:"What's your name and business?", hint:"So we can personalise your report.", type:"text-pair",
-    fields:[{key:"firstName",placeholder:"Your first name"},{key:"businessName",placeholder:"Business or trading name"}] },
-  { id:"industry", label:"Your Industry", question:"What sector are you in?", hint:"We'll tailor recommendations to your market.", type:"options", cols:2,
-    options:[{icon:"🛒",label:"E-commerce / Retail"},{icon:"🏠",label:"Property / Real Estate"},{icon:"⚖️",label:"Professional Services"},
-             {icon:"🍽️",label:"Hospitality / Food & Drink"},{icon:"🏥",label:"Health & Wellness"},{icon:"💻",label:"Tech / SaaS"},
-             {icon:"🎓",label:"Education / Coaching"},{icon:"🔧",label:"Trades / Construction"}] },
-  { id:"teamSize", label:"Your Team", question:"How big is your sales & marketing team?", hint:"Including founders who handle marketing.", type:"options", cols:2,
-    options:[{icon:"🧑",label:"Just me",sub:"Solo founder"},{icon:"👥",label:"2-5 people",sub:"Small team"},
-             {icon:"🏢",label:"6-15 people",sub:"Growing team"},{icon:"🏭",label:"15+ people",sub:"Established"}] },
-  { id:"budget", label:"Marketing Budget", question:"What's your monthly marketing spend?", hint:"Approximate is fine - this shapes your ROI projections.",
-    type:"range", min:0, max:10000, step:250, default:1500, minLabel:"£0", maxLabel:"£10k+",
-    format:function(v){ return v===0?"£0":v>=10000?"£10,000+":"£"+v.toLocaleString(); } },
-  { id:"leadSource", label:"Lead Generation", question:"How do you currently get leads?", hint:"Select all that apply.", type:"multi",
-    options:[{icon:"📣",label:"Paid ads (Google / Meta)"},{icon:"🤝",label:"Referrals / word of mouth"},{icon:"📱",label:"Organic social media"},
-             {icon:"✉️",label:"Cold outreach (email / DMs)"},{icon:"🔍",label:"SEO / content"},{icon:"🎪",label:"Events / networking"},
-             {icon:"😶",label:"No consistent source"}] },
-  { id:"bottleneck", label:"Your Challenge", question:"What's your biggest growth bottleneck right now?", hint:"Pick the one that keeps you up at night.", type:"options", cols:1,
-    options:[{icon:"🔍",label:"Not enough leads coming in",sub:"Top of funnel is dry"},
-             {icon:"💬",label:"Leads don't convert to sales",sub:"Follow-up or nurture is broken"},
-             {icon:"⏰",label:"No time to do marketing properly",sub:"Too busy running the business"},
-             {icon:"📊",label:"Can't tell what's working",sub:"No visibility on ROI"},
-             {icon:"💸",label:"Ad costs are too high",sub:"Poor ROAS on paid channels"}] },
-  { id:"tools", label:"Current Stack", question:"Which tools are you currently using?", hint:"Select everything in your stack.", type:"multi",
-    options:[{icon:"📧",label:"Email marketing (Mailchimp, Klaviyo...)"},{icon:"🗃️",label:"CRM (HubSpot, Salesforce, Pipedrive...)"},
-             {icon:"📣",label:"Meta / Google Ads"},{icon:"🔗",label:"LinkedIn Sales Navigator"},
-             {icon:"📊",label:"Analytics (GA4, Mixpanel...)"},{icon:"🤖",label:"Any AI tools"},{icon:"❌",label:"None of the above"}] }
-];
+    { id:"name", label:"Introduction", question:"What's your name and business?", hint:"So we can personalise your report.", type:"text-pair", fields:[{key:"firstName",placeholder:"Your first name"},{key:"businessName",placeholder:"Business or trading name"}] },
+    { id:"industry", label:"Your Industry", question:"What sector are you in?", hint:"We'll tailor AI recommendations to your market.", type:"options", cols:2, options:[{icon:"🛒",label:"E-commerce / Retail"},{icon:"🏠",label:"Property / Real Estate"},{icon:"⚖️",label:"Professional Services"},{icon:"🍽️",label:"Hospitality / Food & Drink"},{icon:"🏥",label:"Health & Wellness"},{icon:"💻",label:"Tech / SaaS"},{icon:"🎓",label:"Education / Coaching"},{icon:"🔧",label:"Trades / Construction"}] },
+    { id:"aiReadiness", label:"AI Familiarity", question:"How familiar are you with AI tools right now?", hint:"Be honest — there's no wrong answer.", type:"options", cols:1, options:[{icon:"🤷",label:"Complete beginner",sub:"I've heard about AI but haven't used it"},{icon:"👀",label:"Curious but cautious",sub:"I've tried ChatGPT or similar a few times"},{icon:"🛠️",label:"Getting started",sub:"I use AI tools occasionally in my business"},{icon:"🚀",label:"Already using AI",sub:"AI is part of my workflow, I want to do more"}] },
+    { id:"teamSize", label:"Your Business", question:"How big is your business?", hint:"Including all staff, not just marketing.", type:"options", cols:2, options:[{icon:"🧑",label:"Just me",sub:"Solo founder"},{icon:"👥",label:"2-10 people",sub:"Small team"},{icon:"🏢",label:"11-50 people",sub:"Growing business"},{icon:"🏭",label:"50+ people",sub:"Established SME"}] },
+    { id:"painAreas", label:"Where AI Can Help", question:"Which parts of your business feel most manual or slow?", hint:"Select all that apply.", type:"multi", options:[{icon:"📣",label:"Marketing & content creation"},{icon:"📧",label:"Sales & customer outreach"},{icon:"💬",label:"Customer service & FAQs"},{icon:"⚙️",label:"Admin & internal processes"},{icon:"📊",label:"Reporting & analytics"},{icon:"🤝",label:"Hiring & HR tasks"},{icon:"💰",label:"Finance & invoicing"},{icon:"🛒",label:"E-commerce & orders"}] },
+    { id:"aiGoal", label:"Your AI Goal", question:"What do you most want AI to do for your business?", hint:"Pick the one that matters most right now.", type:"options", cols:1, options:[{icon:"⏰",label:"Save me time on repetitive tasks",sub:"Get hours back every week"},{icon:"📈",label:"Help me grow — more leads and sales",sub:"Use AI to drive revenue"},{icon:"💡",label:"Help me understand what AI can do",sub:"I want a clear picture before committing"},{icon:"🤖",label:"Run things automatically while I sleep",sub:"Full AI systems, done for me"}] },
+    { id:"tools", label:"Current Stack", question:"Which tools are you currently using?", hint:"Select everything in your stack.", type:"multi", options:[{icon:"📧",label:"Email marketing (Mailchimp, Klaviyo...)"},{icon:"🗃️",label:"CRM (HubSpot, Salesforce, Pipedrive...)"},{icon:"📣",label:"Paid ads (Google / Meta)"},{icon:"💬",label:"Live chat or chatbot"},{icon:"📊",label:"Analytics (GA4, Mixpanel...)"},{icon:"🤖",label:"Any AI tools (ChatGPT, Jasper...)"},{icon:"❌",label:"None of the above"}] }
+  ]
 
 // RENDER
 function renderStep(idx) {
@@ -1103,22 +1084,22 @@ async function submitAudit() {
   document.querySelectorAll("#loadingSteps li").forEach(function(s,i){ setTimeout(function(){ s.classList.add("vis"); }, i*700); });
   var Q = QUESTIONS; var a = answers;
   var industryLabel = Q[1].options[a.industry] ? Q[1].options[a.industry].label : "Unknown";
-  var teamLabel = Q[2].options[a.teamSize] ? Q[2].options[a.teamSize].label : "Unknown";
-  var budgetVal = a.budget !== undefined ? a.budget : Q[3].default;
-  var budgetLabel = Q[3].format(budgetVal);
-  var leadSources = (a.leadSource||[]).map(function(i){ return Q[4].options[i]?Q[4].options[i].label:""; }).filter(Boolean).join(", ")||"None";
-  var bottleneckLabel = Q[5].options[a.bottleneck] ? Q[5].options[a.bottleneck].label : "Unknown";
-  var toolsUsed = (a.tools||[]).map(function(i){ return Q[6].options[i]?Q[6].options[i].label:""; }).filter(Boolean).join(", ")||"None";
-  var prompt = "Analyse this SME and produce their personalised marketing audit:\n" +
-    "Name: " + (a.firstName||"Unknown") + " | Business: " + (a.businessName||"Unknown") + "\n" +
-    "Industry: " + industryLabel + " | Team: " + teamLabel + " | Budget: " + budgetLabel + "/mo\n" +
-    "Lead sources: " + leadSources + " | Bottleneck: " + bottleneckLabel + " | Tools: " + toolsUsed;
-  try {
+    var aiReadinessLabel = Q[2].options[a.aiReadiness] ? Q[2].options[a.aiReadiness].label : "Unknown";
+    var teamLabel = Q[3].options[a.teamSize] ? Q[3].options[a.teamSize].label : "Unknown";
+    var painAreasLabel = (a.painAreas||[]).map(function(i){ return Q[4].options[i]?Q[4].options[i].label:""; }).filter(Boolean).join(", ")||"None";
+    var aiGoalLabel = Q[5].options[a.aiGoal] ? Q[5].options[a.aiGoal].label : "Unknown";
+    var toolsUsed = (a.tools||[]).map(function(i){ return Q[6].options[i]?Q[6].options[i].label:""; }).filter(Boolean).join(", ")||"None";
+    var prompt = "Analyse this SME and produce their personalised AI readiness and growth report:\n" +
+      "Name: " + (a.firstName||"Unknown") + " | Business: " + (a.businessName||"Unknown") + "\n" +
+      "Industry: " + industryLabel + " | Team size: " + teamLabel + "\n" +
+      "AI familiarity: " + aiReadinessLabel + " | AI goal: " + aiGoalLabel + "\n" +
+      "Pain areas (most manual): " + painAreasLabel + " | Tools currently using: " + toolsUsed;
+    try {
     var res = await fetch("/api/claude", {
       method: "POST", headers: {"Content-Type":"application/json"},
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514", max_tokens: 1200,
-        system: "You are an expert AI marketing consultant for AIWorks. Return ONLY valid JSON, no markdown, no backticks: {\"headline\":\"personalised headline\",\"overallScore\":7,\"diagnosis\":\"2-3 sentence summary\",\"gaps\":[\"gap1\"],\"recommendations\":[{\"service\":\"e.g. Lead Generation\",\"priority\":\"High\",\"rationale\":\"2 specific sentences\",\"roi\":\"specific outcome\"}],\"roiSummary\":{\"leadsPerMonth\":\"e.g. 200-400\",\"hoursSaved\":\"10\",\"costSaved\":\"£2,000\"}} Services must be from: AI Ad Creation, Ad Management & Optimisation, Lead Generation, Cold Outreach Automation, Analytics & Reporting, PR & Podcast Outreach. Give 2-4 recommendations.",
+        system: "You are an AI business advisor for AIWorks, helping small businesses understand and adopt AI. Return ONLY valid JSON, no markdown, no backticks: {\"headline\":\"personalised headline\",\"overallScore\":7,\"diagnosis\":\"2-3 sentence summary of their AI readiness and biggest opportunity\",\"gaps\":[\"specific gap 1\"],\"recommendations\":[{\"service\":\"service or tool category\",\"priority\":\"High\",\"rationale\":\"2 specific sentences tailored to their pain areas and goal\",\"roi\":\"specific outcome e.g. 8 hours saved/week\",\"path\":\"done-for-you or self-serve\"}],\"roiSummary\":{\"timeSaved\":\"e.g. 10 hrs/week\",\"hoursSaved\":\"10\",\"costSaved\":\"£2,000\"}} Recommendations can be from either: DONE-FOR-YOU services (AI Ad Creation, Ad Management, Lead Generation, Cold Outreach Automation, Analytics & Reporting, PR & Podcast Outreach) or SELF-SERVE tool categories (AI Content & Copywriting Tools, AI Customer Service Chatbot, AI Sales & CRM Automation, AI Operations & Admin Tools, AI Analytics Tools, AI Email Marketing). Match path to their aiGoal — if goal is to understand AI or save time, favour self-serve; if goal is growth or full automation, favour done-for-you. Give 2-4 recommendations. Tailor everything to their specific industry, pain areas and AI familiarity level.",
         messages: [{role:"user",content:prompt}]
       })
     });
