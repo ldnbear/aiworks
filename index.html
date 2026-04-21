@@ -24,7 +24,48 @@
 html{font-size:16px;scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:'Geist',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
 
-/* BG */
+
+  /* ── Two paths section ── */
+  .two-paths{padding:5rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border);}
+  .paths-header{text-align:center;max-width:640px;margin:0 auto 3rem;}
+  .paths-title{font-family:'Instrument Serif',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--ink);margin:.5rem 0;}
+  .paths-sub{font-size:.95rem;color:var(--dim);margin-top:.75rem;}
+  .paths-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:860px;margin:0 auto;}
+  @media(max-width:640px){.paths-grid{grid-template-columns:1fr;}}
+  .path-card{background:#fff;border:1px solid var(--border2);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:.75rem;}
+  .path-done{border-top:3px solid var(--green);}
+  .path-diy{border-top:3px solid #6c63ff;}
+  .path-icon{font-size:2rem;}
+  .path-badge{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .6rem;border-radius:99px;background:var(--green-bg);color:var(--green);width:fit-content;}
+  .path-diy .path-badge{background:#f0eeff;color:#6c63ff;}
+  .path-title{font-family:'Instrument Serif',serif;font-size:1.4rem;color:var(--ink);margin:0;}
+  .path-desc{font-size:.88rem;color:var(--dim);line-height:1.6;}
+  .path-list{list-style:none;padding:0;margin:.5rem 0;display:flex;flex-direction:column;gap:.4rem;}
+  .path-list li{font-size:.85rem;color:var(--ink);padding-left:1.2rem;position:relative;}
+  .path-list li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700;}
+  .path-diy .path-list li::before{color:#6c63ff;}
+  .path-cta{display:inline-block;margin-top:auto;padding:.65rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:600;text-decoration:none;text-align:center;}
+  .path-cta-primary{background:var(--green);color:#fff;}
+  .path-cta-secondary{background:#6c63ff;color:#fff;}
+
+  /* ── AI Toolkit section ── */
+  .ai-toolkit{padding:5rem 1.5rem;background:var(--bg);}
+  .toolkit-header{text-align:center;max-width:640px;margin:0 auto 3rem;}
+  .toolkit-title{font-family:'Instrument Serif',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--ink);margin:.5rem 0;}
+  .toolkit-sub{font-size:.95rem;color:var(--dim);margin-top:.75rem;}
+  .toolkit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:960px;margin:0 auto 3rem;}
+  @media(max-width:768px){.toolkit-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:480px){.toolkit-grid{grid-template-columns:1fr;}}
+  .tool-card{background:#fff;border:1px solid var(--border2);border-radius:12px;padding:1.5rem;display:flex;flex-direction:column;gap:.5rem;transition:box-shadow .2s;}
+  .tool-card:hover{box-shadow:var(--shadow);}
+  .tool-icon{font-size:1.75rem;}
+  .tool-name{font-size:1rem;font-weight:600;color:var(--ink);margin:0;}
+  .tool-desc{font-size:.83rem;color:var(--dim);line-height:1.55;flex:1;}
+  .tool-tag{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--green);background:var(--green-bg);padding:.2rem .5rem;border-radius:4px;width:fit-content;}
+  .toolkit-cta{text-align:center;padding:2.5rem;background:linear-gradient(135deg,var(--hero-bg),#0d2b1a);border-radius:16px;max-width:960px;margin:0 auto;}
+  .toolkit-cta-text{font-size:1.05rem;color:rgba(255,255,255,.8);margin-bottom:1.25rem;}
+
+  /* BG */
 .dot-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle,#C5BDB0 1px,transparent 1px);background-size:30px 30px;opacity:.5;mask-image:radial-gradient(ellipse 100% 70% at 50% 0%,#000 20%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 100% 70% at 50% 0%,#000 20%,transparent 100%)}
 .orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(90px)}
 .orb1{width:600px;height:500px;background:radial-gradient(circle,rgba(31,102,68,.13) 0%,transparent 70%);top:-180px;left:-120px;animation:drift1 14s ease-in-out infinite}
@@ -526,9 +567,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   </div>
   <div class="wrap">
     <section class="hero">
-      <p class="hero-label">Full-service AI agency · SMEs</p>
+      <p class="hero-label">AI for small businesses · Done for you or DIY</p>
       <h1>Your business,<span class="line2"><em>growing</em> while</span><span class="line3">you sleep.</span></h1>
-      <p class="hero-sub">We build and operate AI-powered marketing, sales, and growth systems for small businesses — customers, leads, and revenue generated 24/7, automatically.</p>
+      <p class="hero-sub">We help small businesses grow with AI — whether we build and run everything for you, or guide you to the right tools to do it yourself.</p>
       
           <div style="display:flex;gap:1rem;margin-top:2rem;margin-bottom:2.5rem;justify-content:center;opacity:0;animation:fadeUp .7s .35s ease forwards">
             <a class="nav-login" href="#waitlist" onclick="event.preventDefault();document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})" style="font-family:'Geist',sans-serif;font-size:.88rem;font-weight:500;padding:.8rem 2rem;background:var(--green);color:#fff;border:none;border-radius:8px;text-decoration:none;transition:all .15s">Join the waitlist →</a>
@@ -588,7 +629,100 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 
   <!-- SERVICES BENTO GRID -->
   <div class="wrap">
-    <div class="section-label">What we build for you</div>
+    
+  <!-- Two ways to work with AIWorks -->
+  <section class="two-paths" id="how-we-help">
+    <div class="wrap">
+    <div class="paths-header">
+      <div class="section-label">Two ways we help</div>
+      <h2 class="paths-title">Not every business needs the same thing</h2>
+      <p class="paths-sub">Some want it all handled. Others want to learn and do it themselves. We support both.</p>
+    </div>
+    <div class="paths-grid">
+      <div class="path-card path-done">
+        <div class="path-icon">🤖</div>
+        <div class="path-badge">Full-service</div>
+        <h3 class="path-title">Done for you</h3>
+        <p class="path-desc">We build, configure and run AI agents across your marketing, sales and outreach. You focus on running the business — we handle the growth engine.</p>
+        <ul class="path-list">
+          <li>AI ad creation &amp; management</li>
+          <li>Automated outreach &amp; lead gen</li>
+          <li>Analytics &amp; reporting</li>
+          <li>PR &amp; podcast outreach</li>
+        </ul>
+        <a href="#waitlist" class="path-cta path-cta-primary">Join the waitlist →</a>
+      </div>
+      <div class="path-card path-diy">
+        <div class="path-icon">🛠️</div>
+        <div class="path-badge">Self-serve</div>
+        <h3 class="path-title">Tools &amp; guidance</h3>
+        <p class="path-desc">Not ready for full-service? We help you understand AI and point you to the right tools for your business — so you start seeing results immediately.</p>
+        <ul class="path-list">
+          <li>Free AI readiness audit</li>
+          <li>Curated tool recommendations</li>
+          <li>Setup guides for SMEs</li>
+          <li>No agency fees required</li>
+        </ul>
+        <a href="#ai-toolkit" class="path-cta path-cta-secondary">Explore AI tools →</a>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- AI Toolkit for SMEs -->
+  <section class="ai-toolkit" id="ai-toolkit">
+    <div class="wrap">
+    <div class="toolkit-header">
+      <div class="section-label">AI toolkit for SMEs</div>
+      <h2 class="toolkit-title">The right AI tools for your business</h2>
+      <p class="toolkit-sub">AI doesn't have to be complicated. Here are the categories that move the needle for small businesses — and what each one can do for you.</p>
+    </div>
+    <div class="toolkit-grid">
+      <div class="tool-card">
+        <div class="tool-icon">📝</div>
+        <h4 class="tool-name">Content &amp; copy</h4>
+        <p class="tool-desc">Generate blog posts, ad copy, emails and social content in minutes. Cut writing time by 80%.</p>
+        <span class="tool-tag">Great for: all SMEs</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📣</div>
+        <h4 class="tool-name">Paid advertising</h4>
+        <p class="tool-desc">AI tools that test creative variants automatically and optimise your ad spend around the clock.</p>
+        <span class="tool-tag">Great for: e-commerce, local</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📧</div>
+        <h4 class="tool-name">Sales &amp; outreach</h4>
+        <p class="tool-desc">Find prospects, write personalised emails and follow up automatically — without a sales team.</p>
+        <span class="tool-tag">Great for: B2B, services</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">💬</div>
+        <h4 class="tool-name">Customer service</h4>
+        <p class="tool-desc">AI chatbots that answer FAQs, qualify leads and book appointments 24/7 on your website.</p>
+        <span class="tool-tag">Great for: hospitality, retail</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📊</div>
+        <h4 class="tool-name">Analytics &amp; insights</h4>
+        <p class="tool-desc">Understand exactly what's working without drowning in spreadsheets. AI surfaces the signals.</p>
+        <span class="tool-tag">Great for: all SMEs</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">⚙️</div>
+        <h4 class="tool-name">Operations &amp; admin</h4>
+        <p class="tool-desc">Automate scheduling, reporting, follow-ups and internal workflows so you can focus on growth.</p>
+        <span class="tool-tag">Great for: professional services</span>
+      </div>
+    </div>
+    <div class="toolkit-cta">
+      <p class="toolkit-cta-text">Not sure which category matters most for your business?</p>
+      <button class="btn-primary" onclick="showAudit()">Get your free AI audit — find out in 2 mins →</button>
+    </div>
+    </div>
+  </section>
+
+  <div class="section-label">What we build for you</div>
     <div class="bento-grid">
       <div class="bento-item large">
         <div class="bento-tag">Most popular</div>
