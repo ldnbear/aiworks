@@ -1,8 +1,8 @@
 [build]
   functions = "netlify/functions"
 
-[functions."content-cron"]
-  schedule = "0 8 * * 1,4"
+[functions."content-loop"]
+  schedule = "0 * * * *"
 
 [[redirects]]
   from = "/api/claude"
