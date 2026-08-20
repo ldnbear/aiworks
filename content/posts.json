@@ -1,8 +1,26 @@
 [
-  {
-    "slug": "ai-tools-for-small-businesses",
-    "title": "AI Tools for Small Businesses UK: Where to Start in 2026",
-    "description": "The practical guide to AI tools for small businesses in the UK. No jargon, no hype — just the AI tools that actually save time and grow revenue for SMEs.",
-    "date": "2026-04-21"
-  }
+{
+"slug": "ai-for-hospitality-businesses",
+"title": "AI for Hospitality Businesses: A Practical Guide for UK Operators",
+"description": "How UK pubs, restaurants, cafés and hotels are using AI to answer enquiries, cut no-shows, handle reviews and save 10+ hours a week.",
+"date": "2026-08-19"
+},
+{
+"slug": "ai-for-trades-businesses",
+"title": "AI for Trades Businesses: A Practical Guide for UK Tradespeople",
+"description": "How UK plumbers, electricians, builders and heating engineers are using AI to answer every call, quote faster, invoice on time and win back their evenings.",
+"date": "2026-08-19"
+},
+{
+"slug": "ai-for-professional-services",
+"title": "AI for Professional Services Firms: A Practical UK Guide",
+"description": "How UK accountants, solicitors, consultants and advisers are using AI for drafting, meeting notes, document review and onboarding — without compromising confidentiality.",
+"date": "2026-08-19"
+},
+{
+"slug": "ai-tools-for-small-businesses",
+"title": "AI Tools for Small Businesses UK: Where to Start in 2026",
+"description": "The practical guide to AI tools for small businesses in the UK. No jargon, no hype — just the AI tools that actually save time and grow revenue for SMEs.",
+"date": "2026-04-21"
+}
 ]
