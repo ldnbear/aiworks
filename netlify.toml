@@ -1,6 +1,9 @@
 [build]
   functions = "netlify/functions"
 
+[functions."content-cron"]
+  schedule = "0 8 * * 1,4"
+
 [[redirects]]
   from = "/api/claude"
   to = "/.netlify/functions/claude-proxy"
