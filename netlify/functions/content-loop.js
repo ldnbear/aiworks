@@ -233,8 +233,9 @@ async function stepPublish(state) {
     await putFile('sitemap.xml', branch, sm.text.replace('</urlset>', entry), 'agent: sitemap', sm.sha);
   }
 
-  // PR = approval queue
-  await gh(`/repos/${REPO}/pulls`, {
+  // PR = approval queue. This step MUST succeed: if it does not, the draft sits on a
+  // branch with nobody notified. So we throw, leaving state at "publish" to retry next run.
+  const prRes = await gh(`/repos/${REPO}/pulls`, {
     method: 'POST',
     body: JSON.stringify({
       title: 'New post ready for review: ' + p.title,
@@ -244,7 +245,17 @@ async function stepPublish(state) {
     }),
   });
 
-  return { step: 'idle', lastCompleted: Date.now(), cycleCount: (state.cycleCount || 0) + 1 };
+  if (!prRes.ok) {
+    const detail = (await prRes.text()).slice(0, 300);
+    // 422 usually means a PR for this head already exists. Verify before giving up.
+    const owner = REPO.split('/')[0];
+    const openPrs = await (await gh(`/repos/${REPO}/pulls?state=open&head=${owner}:${branch}`)).json();
+    if (!Array.isArray(openPrs) || openPrs.length === 0) {
+      throw new Error('PR creation failed (' + prRes.status + '): ' + detail);
+    }
+  }
+
+  return { step: 'idle', lastCompleted: Date.now(), cycleCount: (state.cycleCount || 0) + 1, lastPublished: { slug: p.slug, title: p.title, date: p.date }, lastError: null };
 }
 
 // ---------- Handler ----------
@@ -265,6 +276,11 @@ exports.handler = async function () {
     await saveState(next, sha);
     return { statusCode: 200, body: 'advanced: ' + state.step + ' -> ' + next.step };
   } catch (err) {
+    // Record the failure in state.json so a stalled agent is visible without reading logs.
+    try {
+      const s = await loadState();
+      await saveState({ ...s.state, lastError: err.message, lastErrorAt: new Date().toISOString() }, s.sha);
+    } catch (e2) { /* state write also failed; nothing further we can do */ }
     return { statusCode: 500, body: 'agent error: ' + err.message };
   }
 };
