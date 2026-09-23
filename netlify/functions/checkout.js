@@ -1,4 +1,4 @@
-const { OFFERS, isEnabled } = require('./_offers');
+const { OFFERS, isEnabled, paypalUrl, checkoutProvider } = require('./_offers');
 
 const headers = { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' };
 const origin = 'https://agentsatwork.co';
@@ -9,8 +9,12 @@ exports.handler = async event => {
   if (requestOrigin && requestOrigin !== origin) return { statusCode: 403, headers, body: JSON.stringify({ error: 'Forbidden' }) };
   let id;
   try { id = JSON.parse(event.body || '{}').offer; } catch { return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid request' }) }; }
-  if (!OFFERS[id]) return { statusCode: 400, headers, body: JSON.stringify({ error: 'Unknown offer' }) };
+  if (typeof id !== 'string' || !Object.hasOwn(OFFERS, id)) return { statusCode: 400, headers, body: JSON.stringify({ error: 'Unknown offer' }) };
   if (!isEnabled(id)) return { statusCode: 503, headers, body: JSON.stringify({ error: 'This offer is not available for purchase yet.' }) };
+
+  if (checkoutProvider() === 'paypal') {
+    return { statusCode: 200, headers, body: JSON.stringify({ url: paypalUrl(id), provider: 'paypal' }) };
+  }
 
   const offer = OFFERS[id];
   const params = new URLSearchParams({

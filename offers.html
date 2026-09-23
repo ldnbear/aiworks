@@ -38,12 +38,15 @@
     const cards = [...document.querySelectorAll('[data-offer]')];
     fetch('/api/offers').then(r => r.ok ? r.json() : Promise.reject()).then(({offers}) => {
       cards.forEach(card => {
-        if (offers[card.dataset.offer]?.available) card.querySelector('button').textContent = 'Get started →';
+        if (offers[card.dataset.offer]?.available) {
+          card.dataset.available = 'true';
+          card.querySelector('button').textContent = offers[card.dataset.offer].provider === 'paypal' ? 'Continue to PayPal →' : 'Get started →';
+        }
       });
     }).catch(() => {});
     cards.forEach(card => card.querySelector('button').addEventListener('click', async event => {
       const button = event.currentTarget, status = card.querySelector('.status'), offer = card.dataset.offer;
-      if (button.textContent !== 'Get started →') {
+      if (card.dataset.available !== 'true') {
         const email = prompt('Work email for ' + card.querySelector('h2').textContent + ' early access:');
         if (!email) return;
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.textContent = 'Enter a valid email address.'; return; }

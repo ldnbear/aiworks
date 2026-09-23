@@ -1,8 +1,18 @@
 # Revenue launch checklist
 
-The product catalogue is safe to publish before payments are configured. Each offer defaults to an interest form. No checkout is shown unless all of its server-side settings are present.
+Each offer defaults to an interest form. Checkout requires an explicitly enabled and configured offer. PayPal hosted links are now the default; the Stripe integration remains optional.
 
-## Stripe
+## PayPal hosted checkout (default)
+
+Use the existing PayPal Business account. Copy the public one-off payment link or monthly subscription link into its matching entry in `paypal-links.json`. No PayPal password or secret API key belongs in this file. Before setting `enabled` to true, verify the merchant, GBP price and billing interval in PayPal's actual checkout and verify that the advertised service is operational. The server accepts only HTTPS links on `paypal.com` or `www.paypal.com`, with no URL credentials.
+
+The default PayPal route needs no Stripe configuration and no Netlify secret. Links remain empty and disabled until the actual merchant links are supplied. This route collects payments on PayPal; it does not automatically verify payments, grant access, save an onboarding brief, or deliver a service. The existing `/onboarding.html` endpoint is Stripe-specific and must not be used as proof of a PayPal payment. Automatic PayPal fulfillment requires a separate verified payment integration.
+
+Official setup instructions:
+- https://developer.paypal.com/payment-links-buttons/share-payment-link/
+- https://www.paypal.com/uk/cshelp/article/how-do-i-create-a-subscription-button-help269
+
+## Optional Stripe checkout
 
 The checkout function creates the prices from server-controlled values: `review` is a **one-time £29** purchase; `content`, `lead`, `reactivation` and `geo` are **monthly** recurring purchases for £49, £79, £99 and £39 respectively. It does not use a customer-supplied price.
 
@@ -10,6 +20,7 @@ Configure these **secret Netlify environment variables** for the production Func
 
 | Variable | Value |
 | --- | --- |
+| `CHECKOUT_PROVIDER` | `stripe` (omit for the default PayPal route) |
 | `STRIPE_SECRET_KEY` | Stripe secret key for the intended mode (test or live) |
 | `REVENUE_PRODUCTS_ENABLED` | Comma-separated IDs of **operationally deliverable** offers only |
 
