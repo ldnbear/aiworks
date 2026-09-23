@@ -150,7 +150,7 @@ footer p{font-size:.75rem;color:var(--dim)}
 .paywall-dismiss:hover{color:var(--mid)}
 .free-badge{display:inline-flex;align-items:center;gap:.4rem;font-family:'DM Mono',monospace;font-size:.68rem;color:var(--green);background:var(--green-bg);border:1px solid var(--green-line);padding:.25rem .7rem;border-radius:20px;margin-bottom:1rem}
 </style>
-</head>
+<link rel="stylesheet" href="/revenue.css"><style>button[disabled]{cursor:not-allowed!important;opacity:.7}</style></head>
 <body>
 <div class="dot-grid"></div>
 <div class="orb orb1"></div>
@@ -444,7 +444,6 @@ footer p{font-size:.75rem;color:var(--dim)}
 })();
 
   // Paywall logic
-  var STRIPE_URL = 'STRIPE_LINK_HERE';
   var FREE_USES = 1;
 
   // Check if coming from dashboard (bypass paywall)
@@ -499,7 +498,7 @@ footer p{font-size:.75rem;color:var(--dim)}
     <div class="paywall-top">
       <div class="paywall-icon">✦</div>
       <div class="paywall-title">You've used your <em>free sequence.</em></div>
-      <div class="paywall-sub">Unlock unlimited cold outreach sequences — plus all 6 AI marketing tools — with an Agents at Work subscription.</div>
+      <div class="paywall-sub">Paid access is preparing for launch. Explore the upcoming agent plans for scope and pricing.</div>
     </div>
     <div class="paywall-features">
       <div class="paywall-feature">Unlimited cold outreach sequences</div>
@@ -509,7 +508,7 @@ footer p{font-size:.75rem;color:var(--dim)}
       <div class="paywall-feature">PR & podcast outreach pitches</div>
     </div>
     <div class="paywall-actions">
-      <a class="btn-stripe" href="STRIPE_LINK_HERE" target="_blank">Unlock all tools →</a>
+      <button type="button" disabled aria-disabled="true" class="btn-stripe" style="width:100%;border:0;padding:13px 20px;border-radius:10px;background:#dfe6df;color:#435746;font:inherit;cursor:not-allowed">Payments coming soon</button><a href="/offers.html" class="revenue-link" style="display:block;margin:12px 0">Explore agent plans →</a>
       <button class="btn-dismiss" id="paywallDismiss">Maybe later</button>
     </div>
   </div>
@@ -522,7 +521,7 @@ footer p{font-size:.75rem;color:var(--dim)}
       <div class="paywall-icon">✦</div>
       <div class="free-badge">Free use complete</div>
       <div class="paywall-title">Want <em>unlimited</em> sequences?</div>
-      <p class="paywall-sub">You've used your free outreach sequence. Upgrade to get unlimited sequences, all 6 AI tools, and weekly prospect lists — managed for you.</p>
+      <p class="paywall-sub">You've used your free outreach sequence. Paid access is preparing for launch; you can explore the upcoming agent plans.</p>
     </div>
     <div class="paywall-features">
       <div class="paywall-feature">Unlimited cold outreach sequences</div>
@@ -533,7 +532,7 @@ footer p{font-size:.75rem;color:var(--dim)}
       <div class="paywall-feature">PR & Podcast Outreach pitches</div>
     </div>
     <div class="paywall-actions">
-      <a class="paywall-btn" href="https://buy.stripe.com/test_7sY6oJ4ZEcCK4KH1Nb8N200" target="_blank">Get full access — £297/month →</a>
+      <button type="button" disabled aria-disabled="true" class="paywall-btn" style="width:100%;border:0;padding:13px 20px;border-radius:10px;background:#dfe6df;color:#435746;font:inherit;cursor:not-allowed">Payments coming soon</button><a href="/offers.html" class="revenue-link" style="display:block;margin:12px 0">Explore agent plans →</a>
       <span class="paywall-dismiss" id="paywallDismiss">I'll stick with the free version for now</span>
     </div>
   </div>

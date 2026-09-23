@@ -1,7 +1,0 @@
-{
-  "review": { "url": "", "enabled": false },
-  "content": { "url": "", "enabled": false },
-  "lead": { "url": "", "enabled": false },
-  "reactivation": { "url": "", "enabled": false },
-  "geo": { "url": "", "enabled": false }
-}

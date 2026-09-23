@@ -616,6 +616,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 
 .loading-steps li{font-family:'Geist',sans-serif !important;font-size:.78rem !important}
 </style>
+<link rel="stylesheet" href="/revenue.css">
+<style>nav{gap:16px;flex-wrap:wrap}.nav-right{flex-wrap:wrap;gap:.65rem}.hero .nav-login[href="#agent-plans"]{color:#fff;border-color:rgba(255,255,255,.5)}.hero>div[style*="display:flex;gap:1rem"]{flex-wrap:wrap}.paths-grid{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:780px){.paths-grid{grid-template-columns:1fr}.nav-count,.live-badge{display:none}}.revenue-routes a{color:#1f6644}</style>
 </head>
 <body>
 
@@ -631,7 +633,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <a class="logo" onclick="showLanding()">ai<span>works</span></a>
       <div class="nav-right">
         <span class="nav-count">Free audit &middot; no email required</span>
-        <span class="live-badge"><span class="live-dot"></span>Accepting applications</span>
+        <a href="/offers.html" class="nav-login">Agent plans</a><a href="/tools.html" class="nav-login">DIY tools</a>
         <a href="/blog/" class="nav-login">Blog</a>
 <a href="/geo-scan.html" class="nav-login">Free GEO scan <span class="arr">&rarr;</span></a>
         <a href="login.html" class="nav-login">Client login <span class="arr">&rarr;</span></a>
@@ -645,12 +647,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   <div class="wrap">
     <section class="hero">
       <p class="hero-label">Free AI readiness audit &middot; 7 questions &middot; about 2 minutes</p>
-      <h1>Find the right AI<span class="line2"><em>starting point</em></span><span class="line3">for your business.</span></h1>
-      <p class="hero-sub">Get a practical, personalised roadmap first. Use it yourself, or talk to us about a managed build when you are ready to put the recommendations into practice.</p>
+      <h1>Hire your first<span class="line2"><em>AI employee.</em></span></h1>
+      <p class="hero-sub">Get a free audit to find your starting point, then explore an agent for leads, reviews, content or customer follow-ups. Agent plans from £29/month — payments coming soon.</p>
       
           <div style="display:flex;gap:1rem;margin-top:2rem;margin-bottom:2.5rem;justify-content:center;opacity:0;animation:fadeUp .7s .35s ease forwards">
             <a class="nav-login" href="#" onclick="event.preventDefault();showAudit()" style="font-family:'Geist',sans-serif;font-size:.88rem;font-weight:500;padding:.8rem 2rem;background:var(--green);color:#fff;border:none;border-radius:8px;text-decoration:none;transition:all .15s">Start my free audit →</a>
-            <a class="nav-login" href="#how-we-help" style="font-size:.88rem;padding:.8rem 2rem">See the managed build →</a>
+            <a class="nav-login" href="#agent-plans" style="font-size:.88rem;padding:.8rem 2rem">Explore agent plans →</a>
           </div>
 
           <div style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:2rem 2.5rem;box-shadow:0 4px 40px rgba(0,0,0,.3);backdrop-filter:blur(10px);opacity:0;animation:fadeUp .7s .4s ease forwards;margin:1.5rem auto 1rem">
@@ -694,6 +696,37 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     </div>
   </div>
 
+<div class="wrap"><section class="revenue-section" id="agent-plans"><p class="revenue-eyebrow">Choose your first agent</p><h2 class="revenue-title">Practical help for the jobs that pile up.</h2><p class="revenue-intro">Explore the planned services below. Payments are coming soon; subscribe buttons are inactive while we prepare for launch.</p><div class="revenue-grid"><article class="revenue-card" id="plan-lead" data-offer="lead">
+<span class="revenue-badge">Coming soon</span><h3>Lead Agent</h3><p>Find the right prospects.</p>
+<div class="revenue-price">£79<small> / month</small></div>
+<p>Prospect research and outreach shaped around your ideal customer.</p><ul><li>Target-customer brief</li><li>Prospect research and qualification</li><li>Personalised outreach drafts for approval</li></ul>
+<button type="button" class="payment-placeholder" disabled aria-describedby="plan-lead-note">Subscribe — £79/month</button>
+<p class="revenue-note" id="plan-lead-note">Payments coming soon.</p>
+<a class="revenue-link" href="/offers.html#lead">View plan details →</a></article><article class="revenue-card" id="plan-review" data-offer="review">
+<span class="revenue-badge">Coming soon</span><h3>Review Agent</h3><p>Build a habit of customer feedback.</p>
+<div class="revenue-price">£29<small> / month</small></div>
+<p>A planned workflow for review requests, follow-ups and customer feedback.</p><ul><li>Review requests after a customer visit</li><li>Follow-up reminders</li><li>Alerts for feedback that needs attention</li></ul>
+<button type="button" class="payment-placeholder" disabled aria-describedby="plan-review-note">Subscribe — £29/month</button>
+<p class="revenue-note" id="plan-review-note">Payments coming soon.</p>
+<a class="revenue-link" href="/offers.html#review">View plan details →</a></article><article class="revenue-card" id="plan-content" data-offer="content">
+<span class="revenue-badge">Coming soon</span><h3>Content Agent</h3><p>Keep your business visible.</p>
+<div class="revenue-price">£49<small> / month</small></div>
+<p>Content ideas and drafts shaped around your business and audience.</p><ul><li>Brand and audience brief</li><li>Social and email content drafts</li><li>Your approval before publishing</li></ul>
+<button type="button" class="payment-placeholder" disabled aria-describedby="plan-content-note">Subscribe — £49/month</button>
+<p class="revenue-note" id="plan-content-note">Payments coming soon.</p>
+<a class="revenue-link" href="/offers.html#content">View plan details →</a></article><article class="revenue-card" id="plan-reactivation" data-offer="reactivation">
+<span class="revenue-badge">Coming soon</span><h3>Reactivation Agent</h3><p>Reconnect with past customers.</p>
+<div class="revenue-price">£99<small> / month</small></div>
+<p>Plan relevant campaigns for customers who have already bought from you.</p><ul><li>Customer segments and campaign ideas</li><li>Email drafts and follow-up planning</li><li>Consent and approval before sending</li></ul>
+<button type="button" class="payment-placeholder" disabled aria-describedby="plan-reactivation-note">Subscribe — £99/month</button>
+<p class="revenue-note" id="plan-reactivation-note">Payments coming soon.</p>
+<a class="revenue-link" href="/offers.html#reactivation">View plan details →</a></article><article class="revenue-card" id="plan-geo" data-offer="geo">
+<span class="revenue-badge">Coming soon</span><h3>GEO Agent</h3><p>Track how your business is found.</p>
+<div class="revenue-price">£39<small> / month</small></div>
+<p>A planned monitoring service for your business’s visibility in AI-assisted search.</p><ul><li>Recurring web-search visibility checks</li><li>Changes and search evidence over time</li><li>Practical improvement recommendations</li></ul>
+<button type="button" class="payment-placeholder" disabled aria-describedby="plan-geo-note">Subscribe — £39/month</button>
+<p class="revenue-note" id="plan-geo-note">Payments coming soon.</p>
+<a class="revenue-link" href="/offers.html#geo">View plan details →</a></article></div><a class="revenue-link" href="/offers.html">Compare all plans and register interest →</a></section></div>
   <!-- SERVICES BENTO GRID -->
   <div class="wrap">
     
@@ -701,16 +734,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   <section class="two-paths" id="how-we-help">
     <div class="wrap">
     <div class="paths-header">
-      <div class="section-label">Two ways we help</div>
+      <div class="section-label">Three ways to get started</div>
       <h2 class="paths-title">Not every business needs the same thing</h2>
-      <p class="paths-sub">Some want it all handled. Others want to learn and do it themselves. We support both.</p>
+      <p class="paths-sub">Use your audit to choose a DIY tool, explore an agent plan, or discuss a custom build.</p>
     </div>
-    <div class="paths-grid">
+    <div class="paths-grid"><div class="path-card path-diy"><div class="path-icon">✦</div><div class="path-badge">From £29/month · Coming soon</div><h3 class="path-title">Choose an agent</h3><p class="path-desc">Start with one focused job: leads, customer reviews, content, reactivation or visibility.</p><ul class="path-list"><li>Clear monthly plan prices</li><li>Focused service descriptions</li><li>Register interest before launch</li></ul><a href="/offers.html" class="path-cta path-cta-secondary">Compare agent plans →</a></div>
       <div class="path-card path-done">
         <div class="path-icon">🤖</div>
         <div class="path-badge">Full-service</div>
         <h3 class="path-title">Done for you</h3>
-        <p class="path-desc">We build, configure and run AI agents across your marketing, sales and outreach. You focus on running the business — we handle the growth engine.</p>
+        <p class="path-desc">Discuss a custom workflow around your business and existing tools. Managed projects start from £1,500, with scope and price agreed before work starts.</p>
         <ul class="path-list">
           <li>AI ad creation &amp; management</li>
           <li>Automated outreach &amp; lead gen</li>
@@ -723,14 +756,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
         <div class="path-icon">🛠️</div>
         <div class="path-badge">Self-serve</div>
         <h3 class="path-title">Tools &amp; guidance</h3>
-        <p class="path-desc">Not ready for full-service? We help you understand AI and point you to the right tools for your business — so you start seeing results immediately.</p>
+        <p class="path-desc">Not ready for full-service? We help you understand AI and point you to the right tools for your business — so you can test an approach before committing.</p>
         <ul class="path-list">
           <li>Free AI readiness audit</li>
           <li>Curated tool recommendations</li>
           <li>Setup guides for SMEs</li>
           <li>No agency fees required</li>
         </ul>
-        <a href="#ai-toolkit" class="path-cta path-cta-secondary">Explore AI tools →</a>
+        <a href="/tools.html" class="path-cta path-cta-secondary">Explore AI tools →</a>
       </div>
     </div>
     </div>
@@ -742,7 +775,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     <div class="toolkit-header">
       <div class="section-label">AI toolkit for SMEs</div>
       <h2 class="toolkit-title">The right AI tools for your business</h2>
-      <p class="toolkit-sub">AI doesn't have to be complicated. Here are the categories that move the needle for small businesses — and what each one can do for you.</p>
+      <p class="toolkit-sub">AI doesn't have to be complicated. Explore practical categories, then browse our shortlist of tools for content, publishing, sales and operations.</p>
     </div>
     <div class="toolkit-grid">
       <div class="tool-card">
@@ -788,7 +821,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
         <span class="tool-tag">Free &middot; three checks &middot; results on screen &rarr;</span>
       </a>
     </div>
-    <div class="toolkit-cta">
+    <p style="text-align:center;margin-bottom:28px"><a class="revenue-link" href="/tools.html">Browse the DIY tool directory →</a></p><div class="toolkit-cta">
       <p class="toolkit-cta-text">Not sure which category matters most for your business?</p>
       <button class="btn-primary" onclick="showAudit()">Get your free AI audit — find out in 2 mins →</button>
     </div>
@@ -798,7 +831,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   <div class="section-label">What we build for you</div>
     <div class="bento-grid">
       <div class="bento-item large">
-        <div class="bento-tag">Most popular</div>
+        <div class="bento-tag">Creative workflow</div>
         <h3>Ad Creation</h3>
         <p>Draft ad creative across Meta, Google and TikTok, then review, test and iterate against your own baseline.</p>
         <div class="bento-mockup">
@@ -810,7 +843,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
         </div>
       </div>
       <div class="bento-item large">
-        <div class="bento-tag">High ROI</div>
+        <div class="bento-tag">Sales workflow</div>
         <h3>Cold Outreach</h3>
         <p>Build prospect lists and personalised email drafts, with approval and performance tracking kept in the workflow.</p>
         <div class="bento-mockup">
@@ -823,7 +856,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       </div>
       <div class="bento-item">
         <h3>🎯 Ad Management</h3>
-        <p>Budgets, bids, and targeting optimised around the clock by AI agents.</p>
+        <p>Plan budget, bid and targeting tests, then review changes against campaign results.</p>
       </div>
       <div class="bento-item">
         <h3>🔍 Lead Generation</h3>
@@ -835,7 +868,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       </div>
       <div class="bento-item">
         <h3>🎙️ PR & Podcast</h3>
-        <p>Get booked on relevant podcasts and secure press coverage automatically.</p>
+        <p>Research relevant podcasts and publications, then prepare pitches for review.</p>
       </div>
     </div>
   </div>
@@ -847,20 +880,20 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <div class="how-steps">
         <div class="how-step">
           <div class="how-step-num">1</div>
-          <h3>You apply</h3>
-          <p>Tell us about your business. We review every application to ensure we can deliver real results.</p>
+          <h3>Start with your free audit</h3>
+          <p>Answer seven questions and get practical recommendations based on your business.</p>
         </div>
         <div class="how-connector"></div>
         <div class="how-step">
           <div class="how-step-num">2</div>
-          <h3>We build your system</h3>
-          <p>Our team configures AI agents tailored to your market, audience, and goals — typically live within 5 days.</p>
+          <h3>Choose your next step</h3>
+          <p>Explore DIY tools, compare agent plans or discuss a managed build.</p>
         </div>
         <div class="how-connector"></div>
         <div class="how-step">
           <div class="how-step-num">3</div>
-          <h3>Agents run 24/7</h3>
-          <p>Your AI workforce generates leads, creates ads, and books meetings around the clock. You focus on closing.</p>
+          <h3>Put your plan into practice</h3>
+          <p>Use your audit today. Register interest in an agent while subscriptions prepare for launch.</p>
         </div>
       </div>
     </div>
@@ -869,10 +902,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   <!-- FOUNDING COHORT -->
   <div class="wrap">
     <div class="testimonials-section">
-      <div class="section-label" style="text-align:center">The founding cohort</div>
+      <div class="section-label" style="text-align:center">How we approach your project</div>
       <div class="testimonial-grid">
         <div class="testimonial-card">
-          <blockquote>We're onboarding a small founding cohort and building every agent playbook around their real numbers &mdash; not hypotheticals. Your business becomes the blueprint.</blockquote>
+          <blockquote>Every project starts with your business, the tools you already use, and the task you want to improve. We agree the scope with you before work starts.</blockquote>
           <div class="tc-author">
             <div class="tc-avatar">01</div>
             <div>
@@ -880,21 +913,21 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
               <div class="tc-co">Not off-the-shelf</div>
             </div>
           </div>
-          <div class="tc-stat">Limited founding spots</div>
+          <div class="tc-stat">Scope agreed together</div>
         </div>
         <div class="testimonial-card">
-          <blockquote>Every founding engagement becomes a named, verifiable case study &mdash; real pipeline, real revenue, published with the client's sign-off. No invented numbers, ever.</blockquote>
+          <blockquote>Choose a baseline before making changes, then compare results against it. Case studies are published only with the client’s permission.</blockquote>
           <div class="tc-author">
             <div class="tc-avatar">02</div>
             <div>
               <div class="tc-name">Proof, published</div>
-              <div class="tc-co">Case studies in progress</div>
+              <div class="tc-co">Measure against a baseline</div>
             </div>
           </div>
           <div class="tc-stat">Results you can check</div>
         </div>
         <div class="testimonial-card">
-          <blockquote>Agents draft, you approve. Every email, post and campaign passes through an approval queue you control from your phone &mdash; nothing goes out without your say-so.</blockquote>
+          <blockquote>Build review and approval into the workflow. Agree what needs your sign-off before any publishing or outreach is enabled.</blockquote>
           <div class="tc-author">
             <div class="tc-avatar">03</div>
             <div>
@@ -902,7 +935,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
               <div class="tc-co">Human-approved, AI-executed</div>
             </div>
           </div>
-          <div class="tc-stat">Approve from your phone</div>
+          <div class="tc-stat">Approval before action</div>
         </div>
       </div>
     </div>
@@ -926,7 +959,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   <footer style="padding:2rem 0;text-align:center;font-size:.8rem;color:var(--mid)">
     <div class="wrap" style="display:flex;justify-content:center;align-items:center;gap:1.5rem;flex-wrap:wrap">
       <span>© 2026 AIWorks. All rights reserved.</span>
-      <a href="/blog/" style="color:var(--mid);text-decoration:none">Blog</a>
+      <a href="/offers.html" style="color:var(--mid)">Agent plans</a><a href="/tools.html" style="color:var(--mid)">DIY tools</a><a href="/blog/" style="color:var(--mid);text-decoration:none">Blog</a>
 <a href="/privacy.html" style="color:var(--mid);text-decoration:none">Privacy</a>
       <a href="/contact.html" style="color:var(--mid);text-decoration:none">Contact</a>
     </div>
@@ -1001,7 +1034,7 @@ var answers = {};
 function escapeHtml(value) {
   var div = document.createElement("div");
   div.textContent = value == null ? "" : String(value);
-  return div.innerHTML;
+  return div.innerHTML.replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 }
 
 var QUESTIONS = [
@@ -1019,13 +1052,13 @@ function renderStep(idx) {
   currentStep = idx;
   var q = QUESTIONS[idx];
   var pct = Math.round((idx / QUESTIONS.length) * 100);
-  var pb = document.querySelector(".progress-bar");
+  var pb = document.getElementById("progressFill");
   if (pb) pb.style.width = pct + "%";
   var inputHtml = "";
   if (q.type === "text-pair") {
     inputHtml = "<div class=\"input-pair\">" + q.fields.map(function(f) {
       var lbl = f.key === "firstName" ? "First name" : "Business name";
-      return "<div class=\"input-wrap\"><span class=\"input-label\">" + lbl + "</span><input type=\"text\" class=\"audit-input\" id=\"field_" + f.key + "\" placeholder=\"" + f.placeholder + "\" value=\"" + (answers[f.key] || "") + "\" oninput=\"answers['"+f.key+"']=this.value;updateNextBtn()\"></div>";
+      return "<div class=\"input-wrap\"><span class=\"input-label\">" + lbl + "</span><input type=\"text\" class=\"audit-input\" id=\"field_" + f.key + "\" placeholder=\"" + f.placeholder + "\" value=\"" + escapeHtml(answers[f.key] || "") + "\" oninput=\"answers['"+f.key+"']=this.value;updateNextBtn()\"></div>";
     }).join("") + "</div>";
   } else if (q.type === "options") {
     var cols = q.cols || 2;
@@ -1137,7 +1170,7 @@ async function submitAudit() {
       method: "POST", headers: {"Content-Type":"application/json"},
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514", max_tokens: 1200,
-        system: "You are an AI business advisor for AIWorks, helping small businesses understand and adopt AI. Use only the seven audit answers supplied by the user. Do not invent ROI, lead volumes, hours saved, cost savings, revenue, or other projected results. Return ONLY valid JSON, no markdown, no backticks: {\"headline\":\"personalised headline\",\"overallScore\":7,\"diagnosis\":\"2-3 sentence summary grounded in the answers\",\"gaps\":[\"specific gap grounded in an answer\"],\"recommendations\":[{\"service\":\"service or tool category\",\"priority\":\"High or Medium\",\"rationale\":\"2 specific sentences tied to the supplied pain areas, tools, readiness and goal\",\"path\":\"done-for-you or self-serve\"}],\"nextSteps\":[{\"title\":\"short action\",\"detail\":\"one practical next step explicitly tied to one or more supplied answers\"}]} Recommendations can be from either: DONE-FOR-YOU services (AI Ad Creation, Ad Management, Lead Generation, Cold Outreach Automation, Analytics & Reporting, PR & Podcast Outreach) or SELF-SERVE tool categories (AI Content & Copywriting Tools, AI Customer Service Chatbot, AI Sales & CRM Automation, AI Operations & Admin Tools, AI Analytics Tools, AI Email Marketing). Match the path to the stated goal and familiarity. Give 2-4 recommendations and exactly 3 practical next steps.",
+        system: "You are an AI business advisor for AIWorks, helping small businesses understand and adopt AI. Use only the seven audit answers supplied by the user. Do not invent ROI, lead volumes, hours saved, cost savings, revenue, or other projected results. Return ONLY valid JSON, no markdown, no backticks: {\"headline\":\"personalised headline\",\"overallScore\":7,\"diagnosis\":\"2-3 sentence summary grounded in the answers\",\"gaps\":[\"specific gap grounded in an answer\"],\"recommendations\":[{\"service\":\"service or tool category\",\"priority\":\"High or Medium\",\"rationale\":\"2 specific sentences tied to the supplied pain areas, tools, readiness and goal\",\"path\":\"done-for-you or self-serve\",\"offer\":\"lead, review, content, reactivation, geo or none\"}],\"nextSteps\":[{\"title\":\"short action\",\"detail\":\"one practical next step explicitly tied to one or more supplied answers\"}]} Recommendations can be from either: PLANNED AGENT services (Lead Agent, Review Agent for customer review requests and feedback, Content Agent, Reactivation Agent, GEO Agent for web-search visibility monitoring) or SELF-SERVE tool categories (AI Content & Copywriting Tools, AI Customer Service Chatbot, AI Sales & CRM Automation, AI Operations & Admin Tools, AI Analytics Tools, AI Email Marketing). Agent plans are coming soon, not currently active subscriptions. Do not promise automatic delivery today. Match the path to the stated goal and familiarity, and set offer only when an agent is relevant. Give 2-4 recommendations and exactly 3 practical next steps.",
         messages: [{role:"user",content:prompt}]
       })
     });
@@ -1164,12 +1197,16 @@ function showProposal(data) {
   var firstName = answers.firstName || "there";
   var businessName = answers.businessName || "your business";
   var recos = (data.recommendations||[]).map(function(r) {
+    var ids = ['lead','review','content','reactivation','geo'];
+    var offer = ids.includes(r.offer) ? r.offer : null;
+    var link = r.path === 'self-serve' ? '/tools.html' : '/offers.html' + (offer ? '#'+offer : '');
+    var label = r.path === 'self-serve' ? 'Explore DIY tools →' : 'View the agent plan — coming soon →';
     return "<div class=\"reco-card\">" +
       "<div class=\"reco-card-header\">" +
       "<span class=\"reco-name\">" + escapeHtml(r.service) + "</span>" +
       "<span class=\"priority-badge priority-" + (r.priority==="High"?"high":"med") + "\">" + escapeHtml(r.priority) + " Priority</span>" +
       "</div><div class=\"reco-card-body\">" +
-      "<div class=\"reco-rationale\">" + escapeHtml(r.rationale) + "</div></div></div>";
+      "<div class=\"reco-rationale\">" + escapeHtml(r.rationale) + "</div><a class=\"revenue-link\" href=\"" + link + "\">" + label + "</a></div></div>";
   }).join("");
   var gaps = (data.gaps||[]).map(function(g) {
     return "<div class=\"gap-item\"><span class=\"gap-icon\">⚠</span><span>" + escapeHtml(g) + "</span></div>";
@@ -1193,6 +1230,7 @@ function showProposal(data) {
     "<div class=\"reco-list\">" + recos + "</div>" +
     "<div class=\"section-title\">Practical Next Steps</div>" +
     "<div class=\"reco-list\">" + nextSteps + "</div>" +
+    "<div class=\"section-title\">Choose how to put this into action</div><div class=\"revenue-routes\"><div class=\"revenue-route\"><h3>Do it yourself</h3><p>Explore tools you can try with your existing workflow.</p><a href=\"/tools.html\">Browse tools →</a></div><div class=\"revenue-route\"><h3>Choose an agent</h3><p>Plans from £29/month. Payments coming soon.</p><a href=\"/offers.html\">Compare plans →</a></div><div class=\"revenue-route\"><h3>Managed build</h3><p>Custom implementation from £1,500, with scope agreed first.</p><a href=\"/#waitlist\" onclick=\"showLanding()\">Discuss your project →</a></div></div>" +
     "<div class=\"proposal-cta\">" +
     "<div class=\"cta-title\">Want help putting the plan into practice?</div>" +
     "<div class=\"cta-sub\">Request a conversation about a managed build grounded in your audit.</div>" +
@@ -1205,6 +1243,8 @@ function showProposal(data) {
   document.getElementById("auditCard").scrollIntoView({behavior:"smooth"});
 }
 
+    if(location.hash === '#audit') showAudit();
+    window.addEventListener('hashchange', function(){if(location.hash === '#audit') showAudit();});
     function submitWaitlist(btn) {
       var form = btn.closest('form');
       var name = form.querySelector('input[type="text"]').value;
