@@ -4,21 +4,18 @@ The product catalogue is safe to publish before payments are configured. Each of
 
 ## Stripe
 
-Create five GBP prices in the business's Stripe account. `review` is a **one-time £29** price; `content`, `lead`, `reactivation` and `geo` are **monthly** recurring prices for £49, £79, £99 and £39 respectively. The checkout function verifies the price amount, currency and interval against these values before opening Stripe Checkout.
+The checkout function creates the prices from server-controlled values: `review` is a **one-time £29** purchase; `content`, `lead`, `reactivation` and `geo` are **monthly** recurring purchases for £49, £79, £99 and £39 respectively. It does not use a customer-supplied price.
 
 Configure these **secret Netlify environment variables** for the production Functions scope, never in Git or client-side HTML:
 
 | Variable | Value |
 | --- | --- |
 | `STRIPE_SECRET_KEY` | Stripe secret key for the intended mode (test or live) |
-| `STRIPE_PRICE_REVIEW` | £29 one-time Price ID |
-| `STRIPE_PRICE_CONTENT` | £49/month Price ID |
-| `STRIPE_PRICE_LEAD` | £79/month Price ID |
-| `STRIPE_PRICE_REACTIVATION` | £99/month Price ID |
-| `STRIPE_PRICE_GEO` | £39/month Price ID |
 | `REVENUE_PRODUCTS_ENABLED` | Comma-separated IDs of **operationally deliverable** offers only |
 
-The configured price alone never enables an offer. Add its ID to `REVENUE_PRODUCTS_ENABLED` only after the actual customer service, support and delivery have been verified. Redeploy after changing environment variables.
+The Stripe key alone never enables an offer. Add its ID to `REVENUE_PRODUCTS_ENABLED` only after the actual customer service, support and delivery have been verified. Redeploy after changing environment variables.
+
+The existing `buy.stripe.com/test_...` URL in several tool and login pages is a **Stripe test-mode payment link for £297/month**, not a live key or a payment integration for the five offers. The current `?payment=success` browser flag is not payment verification.
 
 Stripe Checkout returns to `/onboarding.html`, which checks the paid Checkout Session server-side and saves the customer's brief as session metadata in Stripe. This does **not** itself deliver a report, publish content, send outreach, or run monitoring. The customer-facing confirmation currently says that AIWorks will contact them. Do not enable any paid offer until its service delivery is implemented and tested.
 

@@ -13,25 +13,18 @@ exports.handler = async event => {
   if (!isEnabled(id)) return { statusCode: 503, headers, body: JSON.stringify({ error: 'This offer is not available for purchase yet.' }) };
 
   const offer = OFFERS[id];
-  const priceResponse = await fetch('https://api.stripe.com/v1/prices/' + encodeURIComponent(process.env[offer.priceEnv]), {
-    headers: { Authorization: 'Bearer ' + process.env.STRIPE_SECRET_KEY }
-  });
-  const price = await priceResponse.json();
-  if (!priceResponse.ok || !price.active || price.currency !== 'gbp' || price.unit_amount !== offer.amount ||
-    (offer.mode === 'subscription' && (price.type !== 'recurring' || price.recurring?.interval !== 'month')) ||
-    (offer.mode === 'payment' && price.type !== 'one_time')) {
-    console.error('Stripe price configuration mismatch', id);
-    return { statusCode: 503, headers, body: JSON.stringify({ error: 'This offer is temporarily unavailable.' }) };
-  }
   const params = new URLSearchParams({
     mode: offer.mode,
-    'line_items[0][price]': process.env[offer.priceEnv],
+    'line_items[0][price_data][currency]': 'gbp',
+    'line_items[0][price_data][unit_amount]': String(offer.amount),
+    'line_items[0][price_data][product_data][name]': offer.name,
     'line_items[0][quantity]': '1',
     'metadata[offer]': id,
     'success_url': origin + '/onboarding.html?session_id={CHECKOUT_SESSION_ID}',
     'cancel_url': origin + '/offers.html',
     'billing_address_collection': 'auto'
   });
+  if (offer.mode === 'subscription') params.set('line_items[0][price_data][recurring][interval]', 'month');
   const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + process.env.STRIPE_SECRET_KEY, 'Content-Type': 'application/x-www-form-urlencoded' },
