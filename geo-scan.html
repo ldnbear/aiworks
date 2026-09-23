@@ -166,7 +166,7 @@
     footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;font-size:.8rem;color:var(--dim)}
     footer a{color:var(--mid)}
   </style>
-<link rel="stylesheet" href="/revenue.css"></head>
+<link rel="stylesheet" href="/revenue.css"><style>.monitor-form button{white-space:normal}@media(max-width:600px){.monitor-form{flex-direction:column}.monitor-form input,.monitor-form button{width:100%;box-sizing:border-box}}</style></head>
 <body>
 
 <header class="hero">
@@ -224,13 +224,13 @@
 
   <div class="cta">
     <h2>Keep an eye on your visibility</h2>
-    <p><strong>GEO Agent — £39/month · Coming soon.</strong> A planned monitoring service for recurring visibility checks and practical recommendations.</p><button type="button" class="payment-placeholder" disabled aria-describedby="geoPaymentNote">Subscribe — £39/month</button><p id="geoPaymentNote">Payments coming soon. <a href="/offers.html#geo">View plan details →</a></p>
+    <p><strong>GEO Agent — £39/month · Coming soon.</strong> A planned monitoring service for recurring visibility checks and practical recommendations.</p><button type="button" class="payment-placeholder" disabled aria-describedby="geoPaymentNote">Coming soon</button><p id="geoPaymentNote">Sign up below to hear when it launches. <a href="/offers.html#geo">View plan details →</a></p>
     <form class="monitor-form" id="monitorForm" onsubmit="submitMonitoring(event)">
       <input type="email" id="monitorEmail" aria-label="Email address" placeholder="you@business.co.uk" autocomplete="email" required>
-      <button type="submit" id="monitorBtn">Register interest &rarr;</button>
+      <button type="submit" id="monitorBtn">Sign up for notifications &rarr;</button>
     </form>
     <p class="monitor-status" id="monitorStatus" role="status" aria-live="polite"></p>
-    <p class="early-access">Register interest to hear when monitoring launches. No payment or subscription is started.</p>
+    <p class="early-access">We’ll email you when GEO monitoring launches. Sign up to receive this notification; you can opt out by contacting us. No payment or commitment.</p>
   </div>
 </main>
 
@@ -269,15 +269,15 @@ async function submitMonitoring(event) {
     const response = await fetch('/api/waitlist', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({name:'Early access', email, tag:'GEO monitoring'})
+      body: JSON.stringify({name:'GEO launch notification', email, tag:'Launch notification: geo'})
     });
     const data = await response.json();
     if (!response.ok || !data.success) throw new Error('Signup was not confirmed');
     document.getElementById('monitorForm').reset();
-    status.textContent = 'Thanks — your GEO monitoring interest is registered.';
-    button.textContent = 'Registered ✓';
+    status.textContent = 'You’re on the list. We’ll email you when GEO monitoring launches.';
+    button.textContent = 'Signed up ✓';
   } catch (error) {
-    status.textContent = 'We could not register your interest. Please try again.';
+    status.textContent = 'We could not save your notification signup. Please try again.';
     button.disabled = false;
     button.textContent = 'Try again →';
   }
