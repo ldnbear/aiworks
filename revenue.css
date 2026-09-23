@@ -1,0 +1,18 @@
+
+/* Public service catalogue: checkout is deliberately inactive. */
+.revenue-section{padding:4rem 0}.revenue-eyebrow{font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;color:#1f6644;margin:0 0 12px}
+.revenue-title{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:400;line-height:1.12;color:#1a1814;margin:0 0 16px}
+.revenue-intro{max-width:680px;color:#655f54;line-height:1.7;margin:0 0 24px}
+.revenue-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:28px 0}
+.revenue-card{border:1px solid #ded8cc;border-radius:14px;background:#fff;padding:24px;display:flex;flex-direction:column;scroll-margin-top:28px}
+.revenue-card:target{outline:3px solid #1f6644;outline-offset:4px}.revenue-card h2,.revenue-card h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.65rem;color:#1a1814;margin:14px 0 8px}
+.revenue-card p{font-size:.87rem;line-height:1.6;color:#655f54;margin:0 0 16px}.revenue-card ul{padding-left:18px;line-height:1.7;color:#514b42;font-size:.84rem;flex:1;margin:0 0 24px}
+.revenue-price{font-family:'Instrument Serif',Georgia,serif;font-size:2.1rem;color:#1a1814;margin:8px 0 18px}.revenue-price small{font-family:inherit;font-size:1rem;color:#655f54}
+.revenue-badge{align-self:flex-start;font-size:.66rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:5px 9px;border-radius:20px;background:#eaf2ed;color:#1f6644}
+.payment-placeholder{display:block;width:100%;padding:13px 16px;border:1px solid #c6d0c7;border-radius:8px;background:#e2e8e2;color:#435746;font-family:inherit;font-size:.85rem;font-weight:600;cursor:not-allowed;opacity:1}
+.revenue-note{font-size:.78rem;line-height:1.6;color:#655f54;margin-top:12px}.revenue-link{display:inline-block;font-size:.84rem;color:#1f6644;font-weight:500;margin-top:14px;text-underline-offset:4px}
+.revenue-callout{background:#eaf2ed;border:1px solid #cbded1;border-radius:12px;padding:24px;margin:24px 0;color:#244d35;line-height:1.65}.revenue-callout p{margin:8px 0}
+.revenue-routes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:24px 0}.revenue-route{background:#f9f7f3;border:1px solid #ded8cc;border-radius:12px;padding:22px;line-height:1.6}.revenue-route h3{font-family:'Instrument Serif',Georgia,serif;font-size:1.4rem;margin:0 0 8px;font-weight:400}.revenue-route p{font-size:.86rem;color:#655f54;margin:0 0 12px}
+.revenue-interest{max-width:660px;margin:50px auto;padding:28px;background:#fff;border:1px solid #ded8cc;border-radius:14px}.revenue-interest h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.8rem;margin:0 0 12px}.revenue-interest label{display:block;font-size:.82rem;font-weight:500;margin:16px 0 6px}.revenue-interest input,.revenue-interest select{width:100%;padding:12px;border:1px solid #b9b4aa;border-radius:8px;background:#fff;font:inherit;color:#1a1814}.revenue-interest button{margin-top:18px;background:#1f6644;color:white;padding:13px 20px;border:0;border-radius:8px;font:inherit;cursor:pointer}.revenue-interest button:disabled{opacity:.6;cursor:wait}.revenue-interest p{line-height:1.6}
+@media(max-width:850px){.revenue-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.revenue-routes{grid-template-columns:1fr}}
+@media(max-width:560px){.revenue-grid{grid-template-columns:1fr}.revenue-section{padding:3rem 0}.revenue-card{padding:22px}}
