@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Getting started | AIWorks</title>
+<style>body{font-family:system-ui,sans-serif;background:#f7f8f4;color:#193326;margin:0}main{max-width:600px;margin:5vh auto;padding:28px;background:#fff;border-radius:16px}label{display:block;margin:18px 0 5px;font-weight:600}input,textarea{width:100%;box-sizing:border-box;padding:12px;border:1px solid #abbcb0;border-radius:7px;font:inherit}button{margin-top:22px;background:#1f6644;color:white;border:0;border-radius:7px;padding:12px 20px;font:inherit;cursor:pointer}p{line-height:1.5}</style></head>
+<body><main><a href="/">ai works</a><h1>Tell us about your business</h1><p id="status" role="status">Confirming your checkout…</p>
+<form id="form" hidden><label for="name">Your name</label><input id="name" required maxlength="450">
+<label for="business">Business name</label><input id="business" required maxlength="450">
+<label for="website">Website</label><input id="website" type="url" maxlength="450" placeholder="https://">
+<label for="goal">What would you most like to improve?</label><textarea id="goal" required maxlength="450" rows="3"></textarea>
+<label for="audience">Who are your customers?</label><textarea id="audience" maxlength="450" rows="2"></textarea>
+<label for="notes">Anything we should know before starting?</label><textarea id="notes" maxlength="450" rows="3"></textarea>
+<button>Submit brief →</button></form></main>
+<script>
+  const session_id = new URLSearchParams(location.search).get('session_id');
+  const status = document.getElementById('status'), form = document.getElementById('form');
+  if (!/^cs_(test_|live_)[A-Za-z0-9]+$/.test(session_id || '')) status.textContent = 'Open this page from your checkout confirmation.';
+  else fetch('/api/onboarding?session_id='+encodeURIComponent(session_id)).then(async r => {
+    const data = await r.json(); if (!r.ok) throw Error(data.error || 'Could not confirm checkout.');
+    if (data.submitted) status.textContent = 'Your brief has been received. We will contact you about the next step.';
+    else {status.textContent = 'Payment confirmed for '+data.offer+'. Complete your brief below.';form.hidden=false;}
+  }).catch(e => {status.textContent=e.message;});
+  form.addEventListener('submit', async e => {
+    e.preventDefault(); const button=form.querySelector('button'); button.disabled=true;
+    const fields=['name','business','website','goal','audience','notes'];
+    const details=Object.fromEntries(fields.map(key=>[key,document.getElementById(key).value.trim()]));
+    try {const r=await fetch('/api/onboarding',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id,...details})});
+      const data=await r.json();if(!r.ok)throw Error(data.error||'Could not save your brief.');
+      form.hidden=true;status.textContent='Your brief has been received. We will contact you about the next step.';
+      history.replaceState(null,'','/onboarding.html');
+    }catch(error){status.textContent=error.message;button.disabled=false;}
+  });
+</script></body></html>

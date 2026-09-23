@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI services for small businesses | AIWorks</title>
+  <meta name="description" content="Explore practical AI services for content, leads, customer reactivation and search visibility. See what each plan includes and register your interest.">
+  <link rel="canonical" href="https://agentsatwork.co/offers.html">
+  <style>
+    :root{color-scheme:light;font-family:system-ui,-apple-system,sans-serif;color:#193326;background:#f7f8f4}
+    *{box-sizing:border-box}body{margin:0}header,main,footer{max-width:1100px;margin:auto;padding:22px}a{color:#1b6644}
+    header{display:flex;justify-content:space-between;align-items:center}header a{font-weight:700;text-decoration:none}
+    h1{font-size:clamp(2rem,5vw,3.5rem);max-width:720px;line-height:1.1;margin:40px 0 16px}p{line-height:1.55}
+    .intro{max-width:690px;color:#53645a}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:42px 0}
+    article{background:white;border:1px solid #e0e8df;border-radius:16px;padding:26px;display:flex;flex-direction:column}
+    h2{margin:0 0 8px}.price{font-size:1.7rem;font-weight:750}.price small{font-size:.8rem;font-weight:400}
+    article p{color:#4a5a51}article ul{padding-left:20px;line-height:1.6;flex:1}
+    button{background:#1f6644;color:white;border:0;border-radius:8px;padding:12px 18px;cursor:pointer;font:inherit;font-weight:650}
+    button:disabled{opacity:.55;cursor:wait}.status{font-size:.85rem;color:#53645a;min-height:2.5em;margin:12px 0 0}
+    .small{font-size:.85rem;color:#617168}footer{border-top:1px solid #ddd}
+  </style>
+</head>
+<body>
+  <header><a href="/">ai works</a><a href="/geo-scan.html">Free GEO scan →</a></header>
+  <main>
+    <h1>Put a practical AI plan to work.</h1>
+    <p class="intro">Start with the free <a href="/">AI readiness audit</a>, then choose the support that fits. We only open checkout when a service can be delivered. Until then, register interest and we will contact you about availability.</p>
+    <div class="grid">
+      <article data-offer="review"><h2>AI Review</h2><div class="price">£29 <small>one-time</small></div><p>A focused review of where AI could help your business.</p><ul><li>Prioritised opportunities</li><li>Practical next steps</li><li>Recommendations for your approval</li></ul><button type="button">Register interest</button><p class="status" role="status"></p></article>
+      <article data-offer="content"><h2>Content Agent</h2><div class="price">£49 <small>/ month</small></div><p>Draft content for your team to review and publish.</p><ul><li>Content ideas and draft copy</li><li>Brand and audience brief</li><li>Human approval before publishing</li></ul><button type="button">Register interest</button><p class="status" role="status"></p></article>
+      <article data-offer="lead"><h2>Lead Agent</h2><div class="price">£79 <small>/ month</small></div><p>Prospect research and outreach drafts for review.</p><ul><li>Agreed target criteria</li><li>Prospect research and draft messages</li><li>No unsolicited sends without approval</li></ul><button type="button">Register interest</button><p class="status" role="status"></p></article>
+      <article data-offer="reactivation"><h2>Reactivation Agent</h2><div class="price">£99 <small>/ month</small></div><p>Campaign drafts for previous customers, subject to consent and review.</p><ul><li>Audience and offer planning</li><li>Reviewable email drafts</li><li>Approval before any campaign sends</li></ul><button type="button">Register interest</button><p class="status" role="status"></p></article>
+      <article data-offer="geo"><h2>GEO Monitoring</h2><div class="price">£39 <small>/ month</small></div><p>Proposed recurring visibility checks with practical recommendations.</p><ul><li>Search evidence over time</li><li>Clear inconclusive results</li><li>Suggested improvements</li></ul><button type="button">Register interest</button><p class="status" role="status"></p></article>
+    </div>
+    <p class="small">Subscription descriptions are proposed scopes. Pricing is indicative until checkout is enabled. No payment is taken when you register interest.</p>
+  </main>
+  <footer><a href="/privacy.html">Privacy</a> · <a href="/contact.html">Contact</a></footer>
+  <script>
+    const cards = [...document.querySelectorAll('[data-offer]')];
+    fetch('/api/offers').then(r => r.ok ? r.json() : Promise.reject()).then(({offers}) => {
+      cards.forEach(card => {
+        if (offers[card.dataset.offer]?.available) card.querySelector('button').textContent = 'Get started →';
+      });
+    }).catch(() => {});
+    cards.forEach(card => card.querySelector('button').addEventListener('click', async event => {
+      const button = event.currentTarget, status = card.querySelector('.status'), offer = card.dataset.offer;
+      if (button.textContent !== 'Get started →') {
+        const email = prompt('Work email for ' + card.querySelector('h2').textContent + ' early access:');
+        if (!email) return;
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.textContent = 'Enter a valid email address.'; return; }
+        button.disabled = true;
+        try {
+          const r = await fetch('/api/waitlist', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({name:'Offer interest',email,tag:'Offer: '+offer}) });
+          if (!r.ok) throw Error('Registration failed');
+          status.textContent = 'Thanks. Your interest is registered.';
+        } catch { status.textContent = 'Could not register. Please try again.'; }
+        finally { button.disabled = false; }
+        return;
+      }
+      button.disabled = true; status.textContent = 'Opening secure checkout…';
+      try {
+        const r = await fetch('/api/checkout', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({offer})});
+        const data = await r.json();
+        if (!r.ok || !data.url) throw Error(data.error || 'Checkout unavailable');
+        location.assign(data.url);
+      } catch (error) { status.textContent = error.message; button.disabled = false; }
+    }));
+  </script>
+</body>
+</html>
