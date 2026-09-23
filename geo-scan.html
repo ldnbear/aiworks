@@ -17,7 +17,7 @@
   <link rel="canonical" href="https://agentsatwork.co/geo-scan.html">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://agentsatwork.co/geo-scan.html">
-  <meta property="og:title" content="Can AI find your business? Free 60-second GEO scan">
+  <meta property="og:title" content="Can AI find your business? Free GEO scan">
   <meta property="og:description" content="Three AI-assisted web-search checks, an evidence-based visibility result, and practical recommendations.">
 
   <script type="application/ld+json">
@@ -146,6 +146,13 @@
     .cta h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:12px}
     .cta p{color:rgba(255,255,255,.7);max-width:480px;margin:0 auto 24px}
     .cta a{display:inline-block;background:#fff;color:var(--hero-bg);font-weight:500;padding:14px 28px;border-radius:999px}
+    .monitor-form{display:flex;gap:8px;max-width:480px;margin:0 auto}
+    .monitor-form input{flex:1;min-width:0;padding:13px 16px;border:1px solid rgba(255,255,255,.25);border-radius:999px;background:rgba(255,255,255,.08);color:#fff;font:inherit}
+    .monitor-form input::placeholder{color:rgba(255,255,255,.55)}
+    .monitor-form button{border:0;background:#fff;color:var(--hero-bg);font:inherit;font-weight:500;padding:13px 22px;border-radius:999px;cursor:pointer}
+    .monitor-form button:disabled{opacity:.65;cursor:wait}
+    .monitor-status{min-height:1.4em;margin:10px auto 0!important;font-size:.82rem!important}
+    @media(max-width:560px){.monitor-form{flex-direction:column}.monitor-form button{width:100%}}
     .early-access{margin-top:20px;font-size:.82rem!important;color:rgba(255,255,255,.58)!important}
 
     /* FAQ */
@@ -168,7 +175,7 @@
     <a href="login.html" class="nav-login">Client login &rarr;</a>
   </nav>
   <div class="hero-inner">
-    <p class="eyebrow">Free GEO scan · 60 seconds</p>
+    <p class="eyebrow">Free GEO scan &middot; three web-search checks</p>
     <h1>When customers ask AI,<br>does it <em>recommend you?</em></h1>
     <p class="hero-sub">We use an AI assistant to run three web searches: a branded check, a local category check and a buyer-intent check. We show what the search evidence supports &mdash; or say when a check is inconclusive. This is not a direct query of ChatGPT or Perplexity.</p>
 
@@ -218,7 +225,11 @@
   <div class="cta">
     <h2>Keep an eye on your visibility</h2>
     <p><strong>Early access: proposed £39/month monitoring plan.</strong> Register your interest in recurring visibility checks and practical change recommendations.</p>
-    <a href="/#waitlist">Register early-access interest &rarr;</a>
+    <form class="monitor-form" id="monitorForm" onsubmit="submitMonitoring(event)">
+      <input type="email" id="monitorEmail" aria-label="Email address" placeholder="you@business.co.uk" autocomplete="email" required>
+      <button type="submit" id="monitorBtn">Register interest &rarr;</button>
+    </form>
+    <p class="monitor-status" id="monitorStatus" role="status" aria-live="polite"></p>
     <p class="early-access">This is a proposal, not a purchasable subscription. Payments, recurring scans and emailed reports are not built yet.</p>
   </div>
 </main>
@@ -245,6 +256,32 @@
 
 <script>
 const API = '/api/geo-scan';
+
+async function submitMonitoring(event) {
+  event.preventDefault();
+  const email = document.getElementById('monitorEmail').value.trim();
+  const button = document.getElementById('monitorBtn');
+  const status = document.getElementById('monitorStatus');
+  button.disabled = true;
+  button.textContent = 'Registering…';
+  status.textContent = '';
+  try {
+    const response = await fetch('/api/waitlist', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({name:'Early access', email, tag:'GEO monitoring'})
+    });
+    const data = await response.json();
+    if (!response.ok || !data.success) throw new Error('Signup was not confirmed');
+    document.getElementById('monitorForm').reset();
+    status.textContent = 'Thanks — your GEO monitoring interest is registered.';
+    button.textContent = 'Registered ✓';
+  } catch (error) {
+    status.textContent = 'We could not register your interest. Please try again.';
+    button.disabled = false;
+    button.textContent = 'Try again →';
+  }
+}
 
 function ln(html, cls) {
   const led = document.getElementById('ledger');

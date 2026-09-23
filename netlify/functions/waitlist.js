@@ -6,7 +6,7 @@ exports.handler = async function(event) {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
   try {
-    const { name, email } = JSON.parse(event.body);
+    const { name, email, tag } = JSON.parse(event.body);
     if (!name || !email) {
       return { statusCode: 400, body: JSON.stringify({ error: 'Name and email required' }) };
     }
@@ -17,7 +17,7 @@ exports.handler = async function(event) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        records: [{ fields: { Name: name, Email: email } }]
+        records: [{ fields: { Name: tag ? `${name} — ${tag}` : name, Email: email } }]
       })
     });
     if (!resp.ok) {

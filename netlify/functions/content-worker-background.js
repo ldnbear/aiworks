@@ -182,7 +182,7 @@ ${HEAD_COMMON}
 ${p.body}
 <div class="cta">
   <h2>Is your business visible to AI?</h2>
-  <p>Your customers are asking ChatGPT and Perplexity for recommendations. Run our free 60-second scan and see whether the engines cite you &mdash; or your competitors.</p>
+  <p>Run three free AI-assisted web-search checks to see what the available search evidence says about your visibility.</p>
   <a href="/geo-scan.html">Run the free GEO scan &rarr;</a><a class="alt" href="/#waitlist">Join the waitlist</a>
 </div>
 </main>

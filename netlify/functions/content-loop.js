@@ -158,7 +158,7 @@ function postHTML(p) {
 </article>
 <div class="cta">
   <h3>Can AI find your business?</h3>
-  <p>When customers ask ChatGPT or Perplexity for recommendations, do you come up? Find out in 60 seconds &mdash; free.</p>
+  <p>Run three free AI-assisted web-search checks to see what the available search evidence says about your visibility.</p>
   <a href="/geo-scan.html">Run the free GEO scan &rarr;</a>
 </div>
 <footer>&copy; AIWorks &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/contact.html">Contact</a></footer>

@@ -369,11 +369,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .priority-med{background:rgba(200,135,58,.15);color:#c8873a}
 .reco-card-body{padding:.9rem 1.1rem}
 .reco-rationale{font-size:.85rem;color:var(--mid);line-height:1.6;margin-bottom:.7rem}
-.reco-roi{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--green);background:var(--green-bg);padding:.35rem .65rem;border-radius:2px;display:inline-block}
-.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-bottom:1.8rem}
-.roi-card{text-align:center;padding:1.1rem .7rem;border:1px solid var(--border);border-radius:2px;background:#fafaf8}
-.roi-num{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--green);margin-bottom:.25rem}
-.roi-label{font-size:.72rem;color:var(--dim);line-height:1.4}
 .proposal-cta{background:var(--ink);border-radius:2px;padding:1.8rem;text-align:center;margin-top:.5rem}
 .cta-title{font-family:'DM Serif Display',serif;font-size:1.25rem;color:#fff;margin-bottom:.5rem}
 .cta-sub{font-size:.84rem;color:rgba(255,255,255,.6);margin-bottom:1.3rem;line-height:1.5}
@@ -392,7 +387,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   .services-grid{grid-template-columns:1fr 1fr}
   .stats{gap:2rem}
   .audit-banner{flex-direction:column;align-items:flex-start}
-  .roi-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:520px){
   .waitlist-inner{grid-template-columns:1fr;gap:2rem}
@@ -598,12 +592,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .priority-med{background:#EAF2ED;color:#1F6644;border:1px solid rgba(31,102,68,.22)}
 .reco-card-body{padding:.9rem 1.1rem}
 .reco-rationale{font-size:.82rem;color:#7A7568;line-height:1.65;margin-bottom:.5rem}
-.reco-roi{font-size:.77rem;color:#1F6644;font-weight:500;background:#EAF2ED;padding:.35rem .7rem;border-radius:6px;display:inline-block}
 
-.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin-bottom:0}
-.roi-card{background:#F9F7F3;border:1px solid #E8E3DA;border-radius:12px;padding:1.1rem .9rem;text-align:center}
-.roi-num{font-family:'Instrument Serif',serif;font-size:1.55rem;font-weight:400;color:#1F6644;line-height:1;margin-bottom:.3rem}
-.roi-label{font-size:.68rem;color:#7A7568;line-height:1.3}
 
 .proposal-cta{background:#1A1814;border-radius:12px;padding:1.75rem;text-align:center;margin-top:1.75rem}
 .cta-title{font-family:'Instrument Serif',serif;font-size:1.35rem;font-weight:400;color:#fff;margin-bottom:.35rem}
@@ -620,13 +609,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   .step-nav{padding:1rem 1.25rem 1.25rem}
   .input-pair{grid-template-columns:1fr}
   .options-grid{grid-template-columns:1fr 1fr !important}
-  .roi-grid{grid-template-columns:1fr}
   .proposal-body{padding:1.25rem}
   .proposal-header{padding:1.5rem 1.25rem 1.25rem}
   .pdf-bar{flex-direction:column;gap:.6rem;text-align:center}
 }
 
-.reco-roi{font-family:'Geist',sans-serif !important;font-size:.78rem !important;border-radius:6px !important}
 .loading-steps li{font-family:'Geist',sans-serif !important;font-size:.78rem !important}
 </style>
 </head>
@@ -798,7 +785,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
         <div class="tool-icon">&#128269;</div>
         <h4 class="tool-name">New &mdash; Free GEO scan: can AI find your business?</h4>
         <p class="tool-desc">Run three AI-assisted web-search checks: one for your name and two for local buyer intent. See what the available search results support, including an inconclusive result when the evidence is not clear.</p>
-        <span class="tool-tag">Free &middot; 60 seconds &middot; instant results &rarr;</span>
+        <span class="tool-tag">Free &middot; three checks &middot; results on screen &rarr;</span>
       </a>
     </div>
     <div class="toolkit-cta">
@@ -971,7 +958,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
           <li>Mapping your current business setup</li>
           <li>Identifying your biggest AI opportunities</li>
           <li>Matching AI tools and services to your needs</li>
-          <li>Calculating your time and cost savings</li>
+          <li>Turning your answers into practical next steps</li>
           <li>Writing your personalised AI roadmap</li>
         </ul>
       </div>
@@ -993,24 +980,6 @@ for (let i = 0; i < 20; i++) {
   pc.appendChild(p);
 }
 
-// WAITLIST
-function handleWaitlist() {
-  const name = document.getElementById("wlName").value.trim();
-  const email = document.getElementById("wlEmail").value.trim();
-  const btn = document.getElementById("wlSubmitBtn");
-  if (!name) { flashInput(document.getElementById("wlName")); return; }
-  if (!email || !email.includes("@")) { flashInput(document.getElementById("wlEmail")); return; }
-  btn.classList.add("loading"); btn.disabled = true;
-  setTimeout(function() {
-    document.getElementById("wlFormOuter").style.display = "none";
-    document.getElementById("wlSuccess").classList.add("show");
-  }, 1500);
-}
-function flashInput(el) {
-  el.style.borderColor = "rgba(200,60,40,.45)";
-  setTimeout(function() { el.style.borderColor = ""; }, 1800);
-}
-
 // PAGE SWITCHING
 function showAudit() {
   document.getElementById("page-landing").style.display = "none";
@@ -1028,6 +997,12 @@ function showLanding() {
 var auditStarted = false;
 var currentStep = 0;
 var answers = {};
+
+function escapeHtml(value) {
+  var div = document.createElement("div");
+  div.textContent = value == null ? "" : String(value);
+  return div.innerHTML;
+}
 
 var QUESTIONS = [
     { id:"name", label:"Introduction", question:"What's your name and business?", hint:"So we can personalise your report.", type:"text-pair", fields:[{key:"firstName",placeholder:"Your first name"},{key:"businessName",placeholder:"Business or trading name"}] },
@@ -1162,7 +1137,7 @@ async function submitAudit() {
       method: "POST", headers: {"Content-Type":"application/json"},
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514", max_tokens: 1200,
-        system: "You are an AI business advisor for AIWorks, helping small businesses understand and adopt AI. Return ONLY valid JSON, no markdown, no backticks: {\"headline\":\"personalised headline\",\"overallScore\":7,\"diagnosis\":\"2-3 sentence summary of their AI readiness and biggest opportunity\",\"gaps\":[\"specific gap 1\"],\"recommendations\":[{\"service\":\"service or tool category\",\"priority\":\"High\",\"rationale\":\"2 specific sentences tailored to their pain areas and goal\",\"roi\":\"specific outcome e.g. 8 hours saved/week\",\"path\":\"done-for-you or self-serve\"}],\"roiSummary\":{\"timeSaved\":\"e.g. 10 hrs/week\",\"hoursSaved\":\"10\",\"costSaved\":\"£2,000\"}} Recommendations can be from either: DONE-FOR-YOU services (AI Ad Creation, Ad Management, Lead Generation, Cold Outreach Automation, Analytics & Reporting, PR & Podcast Outreach) or SELF-SERVE tool categories (AI Content & Copywriting Tools, AI Customer Service Chatbot, AI Sales & CRM Automation, AI Operations & Admin Tools, AI Analytics Tools, AI Email Marketing). Match path to their aiGoal — if goal is to understand AI or save time, favour self-serve; if goal is growth or full automation, favour done-for-you. Give 2-4 recommendations. Tailor everything to their specific industry, pain areas and AI familiarity level.",
+        system: "You are an AI business advisor for AIWorks, helping small businesses understand and adopt AI. Use only the seven audit answers supplied by the user. Do not invent ROI, lead volumes, hours saved, cost savings, revenue, or other projected results. Return ONLY valid JSON, no markdown, no backticks: {\"headline\":\"personalised headline\",\"overallScore\":7,\"diagnosis\":\"2-3 sentence summary grounded in the answers\",\"gaps\":[\"specific gap grounded in an answer\"],\"recommendations\":[{\"service\":\"service or tool category\",\"priority\":\"High or Medium\",\"rationale\":\"2 specific sentences tied to the supplied pain areas, tools, readiness and goal\",\"path\":\"done-for-you or self-serve\"}],\"nextSteps\":[{\"title\":\"short action\",\"detail\":\"one practical next step explicitly tied to one or more supplied answers\"}]} Recommendations can be from either: DONE-FOR-YOU services (AI Ad Creation, Ad Management, Lead Generation, Cold Outreach Automation, Analytics & Reporting, PR & Podcast Outreach) or SELF-SERVE tool categories (AI Content & Copywriting Tools, AI Customer Service Chatbot, AI Sales & CRM Automation, AI Operations & Admin Tools, AI Analytics Tools, AI Email Marketing). Match the path to the stated goal and familiarity. Give 2-4 recommendations and exactly 3 practical next steps.",
         messages: [{role:"user",content:prompt}]
       })
     });
@@ -1191,38 +1166,37 @@ function showProposal(data) {
   var recos = (data.recommendations||[]).map(function(r) {
     return "<div class=\"reco-card\">" +
       "<div class=\"reco-card-header\">" +
-      "<span class=\"reco-name\">" + r.service + "</span>" +
-      "<span class=\"priority-badge priority-" + (r.priority==="High"?"high":"med") + "\">" + r.priority + " Priority</span>" +
+      "<span class=\"reco-name\">" + escapeHtml(r.service) + "</span>" +
+      "<span class=\"priority-badge priority-" + (r.priority==="High"?"high":"med") + "\">" + escapeHtml(r.priority) + " Priority</span>" +
       "</div><div class=\"reco-card-body\">" +
-      "<div class=\"reco-rationale\">" + r.rationale + "</div>" +
-      "<div class=\"reco-roi\">📈 " + r.roi + "</div></div></div>";
+      "<div class=\"reco-rationale\">" + escapeHtml(r.rationale) + "</div></div></div>";
   }).join("");
   var gaps = (data.gaps||[]).map(function(g) {
-    return "<div class=\"gap-item\"><span class=\"gap-icon\">⚠</span><span>" + g + "</span></div>";
+    return "<div class=\"gap-item\"><span class=\"gap-icon\">⚠</span><span>" + escapeHtml(g) + "</span></div>";
   }).join("");
-  var rs = data.roiSummary || {};
+  var nextSteps = (data.nextSteps||[]).slice(0,3).map(function(step, index) {
+    return "<div class=\"reco-card\"><div class=\"reco-card-body\"><div class=\"reco-name\">" + (index + 1) + ". " + escapeHtml(step.title) + "</div><div class=\"reco-rationale\">" + escapeHtml(step.detail) + "</div></div></div>";
+  }).join("");
+  var safeScore = Math.max(0, Math.min(10, Number(data.overallScore) || 0));
   el.innerHTML =
     "<div class=\"proposal-header\">" +
-    "<div class=\"proposal-tag\">AIWorks - AI Marketing Audit</div>" +
-    "<div class=\"proposal-title\">" + (data.headline || businessName + " - Growth Audit") + "</div>" +
-    "<div class=\"proposal-subtitle\">Personalised analysis based on your answers - prepared by AI in seconds.</div>" +
-    "<div class=\"proposal-score\"><span>Marketing maturity score:</span><span class=\"score-num\">" + data.overallScore + "/10</span></div>" +
+    "<div class=\"proposal-tag\">AIWorks - AI Readiness Audit</div>" +
+    "<div class=\"proposal-title\">" + escapeHtml(data.headline || businessName + " - AI Audit") + "</div>" +
+    "<div class=\"proposal-subtitle\">Personalised analysis based on your seven answers.</div>" +
+    "<div class=\"proposal-score\"><span>AI readiness score:</span><span class=\"score-num\">" + safeScore + "/10</span></div>" +
     "</div><div class=\"proposal-body\">" +
     "<div class=\"section-title\">Your Situation</div>" +
-    "<div class=\"diagnosis-text\">" + data.diagnosis + "</div>" +
+    "<div class=\"diagnosis-text\">" + escapeHtml(data.diagnosis) + "</div>" +
     "<div class=\"section-title\">Key Gaps Identified</div>" +
     "<div class=\"gaps-list\">" + gaps + "</div>" +
-    "<div class=\"section-title\">Recommendations for " + firstName + "</div>" +
+    "<div class=\"section-title\">Recommendations for " + escapeHtml(firstName) + "</div>" +
     "<div class=\"reco-list\">" + recos + "</div>" +
-    "<div class=\"section-title\">Projected Impact</div>" +
-    "<div class=\"roi-grid\">" +
-    "<div class=\"roi-card\"><div class=\"roi-num\">" + (rs.leadsPerMonth||"--") + "</div><div class=\"roi-label\">New leads per month</div></div>" +
-    "<div class=\"roi-card\"><div class=\"roi-num\">" + (rs.hoursSaved||"--") + "hrs</div><div class=\"roi-label\">Saved per week</div></div>" +
-    "<div class=\"roi-card\"><div class=\"roi-num\">" + (rs.costSaved||"--") + "</div><div class=\"roi-label\">Saved monthly vs. hiring</div></div>" +
-    "</div><div class=\"proposal-cta\">" +
-    "<div class=\"cta-title\">Ready to plug these gaps?</div>" +
-    "<div class=\"cta-sub\">Join the AIWorks waitlist and we'll reach out to discuss your audit personally.</div>" +
-    "<button class=\"cta-btn\" onclick=\"showLanding();setTimeout(function(){document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})},100)\">Join the Waitlist \u2192</button>" +
+    "<div class=\"section-title\">Practical Next Steps</div>" +
+    "<div class=\"reco-list\">" + nextSteps + "</div>" +
+    "<div class=\"proposal-cta\">" +
+    "<div class=\"cta-title\">Want help putting the plan into practice?</div>" +
+    "<div class=\"cta-sub\">Request a conversation about a managed build grounded in your audit.</div>" +
+    "<button class=\"cta-btn\" onclick=\"showLanding();setTimeout(function(){document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})},100)\">Discuss a Managed Build \u2192</button>" +
     "</div></div>" +
     "<div class=\"pdf-bar\">" +
     "<span class=\"pdf-note\">AIWorks Audit - " + new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"}) + "</span>" +
@@ -1236,18 +1210,24 @@ function showProposal(data) {
       var name = form.querySelector('input[type="text"]').value;
       var email = form.querySelector('input[type="email"]').value;
       if (!name || !email) return;
+      var originalText = btn.textContent;
       btn.textContent = 'Submitting...';
       btn.disabled = true;
       fetch('/api/waitlist', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({name: name, email: email})
-  }).then(function() {
-    form.innerHTML = '<div style="text-align:center;padding:1rem 0"><div style="font-family:Instrument Serif,serif;font-size:1.4rem;color:#fff;margin-bottom:.4rem">Youre on the list! </div><div style="font-size:.85rem;color:rgba(255,255,255,.6)">Well reach out personally when a spot opens.</div></div>';
-  }).catch(function() {
-    btn.textContent = 'Join the waitlist �';
-    btn.disabled = false;
-  });
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name: name, email: email})
+      }).then(function(response) {
+        if (!response.ok) throw new Error('Signup request failed');
+        return response.json();
+      }).then(function(data) {
+        if (!data || data.success !== true) throw new Error('Signup was not confirmed');
+        form.innerHTML = '<div style="text-align:center;padding:1rem 0"><div style="font-family:Instrument Serif,serif;font-size:1.4rem;color:#fff;margin-bottom:.4rem">You’re on the list! ✓</div><div style="font-size:.85rem;color:rgba(255,255,255,.6)">We’ll reach out personally when a spot opens.</div></div>';
+      }).catch(function() {
+        btn.textContent = 'Try again →';
+        btn.disabled = false;
+        btn.setAttribute('aria-label', originalText + ' — previous request failed');
+      });
     }
   </script>
 </body>
