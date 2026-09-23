@@ -1,6 +1,6 @@
 // GEO Scan — "Can AI find your business?"
 // Three actions, each a fast single call so we stay inside Netlify's 10s window:
-//   probe  -> one web search, checks whether the business is cited for a buyer query
+//   probe  -> one AI-assisted web search, checks whether the available results mention the business
 //   report -> no tools, writes the narrative + fixes from probe results
 // Score is computed deterministically in JS (defensible, consistent), Claude writes the words.
 
@@ -53,10 +53,11 @@ async function probe(input) {
     model: 'claude-haiku-4-5-20251001',
     max_tokens: 600,
     system:
-      'You simulate an AI answer engine (like ChatGPT or Perplexity) responding to a local buyer query. ' +
+      'You assess business visibility using only the results of one web search. Do not claim to represent or query any other AI product. ' +
       'Run exactly one web search for the query, then respond ONLY with JSON, no markdown fences, no preamble: ' +
       '{"cited":["names of up to 5 businesses/sites your answer would recommend or cite"],' +
       '"target_found":boolean (true only if the target business itself would be recommended or cited),' +
+      '"conclusive":boolean (false when results are unavailable, ambiguous, or insufficient to assess the target),' +
       '"evidence":"one short sentence on what the results show about the target\'s visibility"}',
     messages: [
       {
@@ -75,6 +76,7 @@ async function probe(input) {
     query,
     cited: Array.isArray(parsed.cited) ? parsed.cited.slice(0, 5).map((c) => clip(c, 60)) : [],
     target_found: !!parsed.target_found,
+    conclusive: parsed.conclusive !== false,
     evidence: clip(parsed.evidence, 200),
   };
 }
@@ -82,15 +84,10 @@ async function probe(input) {
 // ---- action: report --------------------------------------------------------
 function computeScore(probes) {
   // branded query is always probe[0]; category queries follow
-  const weights = [35, 25, 25];
-  let score = 15; // baseline for existing (having a findable web presence at all is checked below)
-  let anyCitations = false;
-  probes.forEach((p, i) => {
-    if (p.target_found) score += weights[i] ?? 20;
-    if (p.cited && p.cited.length) anyCitations = true;
-  });
-  if (!anyCitations) score = Math.min(score, 20);
-  return Math.max(5, Math.min(100, score));
+  const conclusive = probes.filter((p) => p.conclusive !== false);
+  if (!conclusive.length) return null;
+  const hits = conclusive.filter((p) => p.target_found).length;
+  return Math.round((hits / conclusive.length) * 100);
 }
 
 async function report(input) {
@@ -101,6 +98,7 @@ async function report(input) {
     query: clip(p.query, 120),
     cited: (Array.isArray(p.cited) ? p.cited : []).slice(0, 5).map((c) => clip(c, 60)),
     target_found: !!p.target_found,
+    conclusive: p.conclusive !== false,
     evidence: clip(p.evidence, 200),
   }));
 
@@ -120,8 +118,8 @@ async function report(input) {
       {
         role: 'user',
         content:
-          `Business: ${business} — ${category} in ${location}. Visibility score: ${score}/100.\n` +
-          `Probe results (what AI answer engines cite for real buyer queries):\n` +
+          `Business: ${business} — ${category} in ${location}. Visibility score: ${score === null ? 'inconclusive' : score + '/100'} (based only on conclusive checks).\n` +
+          `Results from three AI-assisted web-search checks:\n` +
           JSON.stringify(probes, null, 2) +
           `\nWrite the headline, summary and exactly 3 fixes. Fixes should focus on: being citable by AI engines ` +
           `(structured data, consistent NAP, authoritative pages that answer buyer questions directly, reviews, ` +
