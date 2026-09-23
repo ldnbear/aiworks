@@ -9,10 +9,10 @@ Owner instruction (23 September 2026): publish the site updates with payment but
 - Review Agent means customer review requests, follow-ups and feedback alerts. It is not a one-time business audit.
 - Audit results link to relevant plans and the DIY directory, with a custom build route from £1,500.
 - GEO results link to the GEO Agent plan and retain the interest form.
-- Payment controls are native disabled buttons with a visible coming-soon note. No checkout links or checkout click handlers are active.
+- Payment controls are native disabled “Coming soon” buttons, paired with “Sign up for notifications” links. Links from individual plans preselect the matching plan; general links allow all agent launch updates. No checkout links or checkout click handlers are active.
 - `/api/offers` always returns all plans unavailable. `/api/checkout` and `/api/onboarding` always return 503, regardless of environment variables.
 - Old Stripe test links and the `?payment=success` access-grant path have been removed. The legacy login with publicly embedded passwords has been replaced by a coming-soon page; no password values are published in it.
-- Interest registration uses the existing Airtable-backed `/api/waitlist` and only reports success after confirmation.
+- Launch notification registration uses the existing Airtable-backed `/api/waitlist`, tags the selected plan as `Launch notification: <id>` and only reports success after confirmation. This stores the opted-in list; launch emails are not sent automatically by this change.
 - DIY directory uses direct vendor URLs, with no affiliate commission claimed.
 
 ## Deferred launch work
