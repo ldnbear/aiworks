@@ -13,12 +13,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free GEO Scan — Can AI Find Your Business? | AIWorks</title>
-  <meta name="description" content="When customers ask ChatGPT or Perplexity for recommendations, does your business come up? Run a free 60-second GEO scan and find out who AI engines recommend instead of you.">
+  <meta name="description" content="Run three free AI-assisted web-search checks to see what search evidence supports about your business's visibility and get practical recommendations.">
   <link rel="canonical" href="https://agentsatwork.co/geo-scan.html">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://agentsatwork.co/geo-scan.html">
-  <meta property="og:title" content="Can AI find your business? Free 60-second GEO scan">
-  <meta property="og:description" content="Customers now ask AI for recommendations instead of Googling. See whether the engines cite you — or your competitors.">
+  <meta property="og:title" content="Can AI find your business? Free GEO scan">
+  <meta property="og:description" content="Three AI-assisted web-search checks, an evidence-based visibility result, and practical recommendations.">
 
   <script type="application/ld+json">
   {
@@ -30,7 +30,7 @@
         "name": "What is GEO (Generative Engine Optimization)?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "GEO is the practice of making your business visible to AI answer engines such as ChatGPT, Perplexity and Gemini, so that when customers ask for recommendations, the AI cites your business as the answer. It is the successor to traditional SEO for the growing share of buyers who ask AI instead of searching Google."
+          "text": "GEO is the practice of making information about a business clear, consistent and easy for search and AI-assisted discovery systems to understand and cite."
         }
       },
       {
@@ -38,7 +38,7 @@
         "name": "How does the free GEO scan work?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The scan asks AI answer engines the same questions your customers ask — for example 'best boutique hotel in Salcombe' — and checks whether your business is cited in the answer. You get a visibility score out of 100, a list of who the engines recommend instead, and three specific fixes."
+          "text": "The scan uses an AI assistant to run three web searches: a branded check, a local category check and a buyer-intent check. It summarises the available search evidence, marks unclear checks inconclusive and suggests three practical next steps. It does not query ChatGPT or Perplexity directly."
         }
       },
       {
@@ -135,6 +135,7 @@
     .probe-verdict{font-size:.82rem;font-weight:500;display:inline-block;padding:3px 10px;border-radius:999px;margin-bottom:10px}
     .v-hit{background:var(--green-bg);color:var(--green)}
     .v-miss{background:#F6ECEA;color:var(--red)}
+    .v-inconclusive{background:#F5F0E7;color:var(--amber)}
     .probe-cited{font-size:.88rem;color:var(--mid)}
     .probe-cited strong{color:var(--ink);font-weight:500}
     .fixes{display:grid;gap:16px;margin-bottom:56px}
@@ -145,6 +146,14 @@
     .cta h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:12px}
     .cta p{color:rgba(255,255,255,.7);max-width:480px;margin:0 auto 24px}
     .cta a{display:inline-block;background:#fff;color:var(--hero-bg);font-weight:500;padding:14px 28px;border-radius:999px}
+    .monitor-form{display:flex;gap:8px;max-width:480px;margin:0 auto}
+    .monitor-form input{flex:1;min-width:0;padding:13px 16px;border:1px solid rgba(255,255,255,.25);border-radius:999px;background:rgba(255,255,255,.08);color:#fff;font:inherit}
+    .monitor-form input::placeholder{color:rgba(255,255,255,.55)}
+    .monitor-form button{border:0;background:#fff;color:var(--hero-bg);font:inherit;font-weight:500;padding:13px 22px;border-radius:999px;cursor:pointer}
+    .monitor-form button:disabled{opacity:.65;cursor:wait}
+    .monitor-status{min-height:1.4em;margin:10px auto 0!important;font-size:.82rem!important}
+    @media(max-width:560px){.monitor-form{flex-direction:column}.monitor-form button{width:100%}}
+    .early-access{margin-top:20px;font-size:.82rem!important;color:rgba(255,255,255,.58)!important}
 
     /* FAQ */
     .faq{padding:72px 0 96px}
@@ -166,13 +175,13 @@
     <a href="login.html" class="nav-login">Client login &rarr;</a>
   </nav>
   <div class="hero-inner">
-    <p class="eyebrow">Free GEO scan · 60 seconds</p>
+    <p class="eyebrow">Free GEO scan &middot; three web-search checks</p>
     <h1>When customers ask AI,<br>does it <em>recommend you?</em></h1>
-    <p class="hero-sub">Your next customer isn't Googling — they're asking ChatGPT and Perplexity who to use. This scan asks the same questions and shows you exactly who the engines cite. If it isn't you, you'll see who it is.</p>
+    <p class="hero-sub">We use an AI assistant to run three web searches: a branded check, a local category check and a buyer-intent check. We show what the search evidence supports &mdash; or say when a check is inconclusive. This is not a direct query of ChatGPT or Perplexity.</p>
 
     <div class="scan-card" id="scanCard">
       <h2>Run your scan</h2>
-      <p>We ask AI engines three real buyer questions about your business and score what comes back.</p>
+      <p>We run three AI-assisted web searches and assess the results available at scan time.</p>
       <div class="err" id="errBox"></div>
       <div class="two-col">
         <div class="field"><label for="fBiz">Business name</label><input id="fBiz" placeholder="e.g. The Anchor Boutique Hotel" maxlength="80" autocomplete="organization"></div>
@@ -182,12 +191,8 @@
         <div class="field"><label for="fLoc">Town / area</label><input id="fLoc" placeholder="e.g. Salcombe, Devon" maxlength="80"></div>
         <div class="field"><label for="fWeb">Website <span style="text-transform:none;color:var(--dim)">(optional)</span></label><input id="fWeb" placeholder="yourbusiness.co.uk" maxlength="100" autocomplete="url"></div>
       </div>
-      <div class="two-col">
-        <div class="field"><label for="fName">Your name</label><input id="fName" placeholder="First name" maxlength="60" autocomplete="given-name"></div>
-        <div class="field"><label for="fEmail">Email for your results</label><input id="fEmail" type="email" placeholder="you@business.co.uk" maxlength="120" autocomplete="email"></div>
-      </div>
       <button class="scan-btn" id="scanBtn" onclick="runScan()">Scan my visibility &rarr;</button>
-      <p class="fine">Free. No card. We'll email you the full report and occasional AI tips — unsubscribe anytime.</p>
+      <p class="fine">Free. No card. Results appear on this page; emailed reports are not currently available.</p>
     </div>
 
     <div class="ledger" id="ledger" aria-live="polite"></div>
@@ -211,16 +216,21 @@
     </div>
   </div>
 
-  <p class="sec-label">What the engines said</p>
+  <p class="sec-label">What the web-search checks found</p>
   <div class="probe-grid" id="rProbes"></div>
 
   <p class="sec-label">Your top three fixes</p>
   <div class="fixes" id="rFixes"></div>
 
   <div class="cta">
-    <h2>Want us to fix it for you?</h2>
-    <p>We build and run the AI systems that get SMEs cited by the engines — structured data, review flows, content the AI can actually parse. Done for you, approved by you.</p>
-    <a href="/#waitlist">Join the waitlist &rarr;</a>
+    <h2>Keep an eye on your visibility</h2>
+    <p><strong>Early access: proposed £39/month monitoring plan.</strong> Register your interest in recurring visibility checks and practical change recommendations.</p>
+    <form class="monitor-form" id="monitorForm" onsubmit="submitMonitoring(event)">
+      <input type="email" id="monitorEmail" aria-label="Email address" placeholder="you@business.co.uk" autocomplete="email" required>
+      <button type="submit" id="monitorBtn">Register interest &rarr;</button>
+    </form>
+    <p class="monitor-status" id="monitorStatus" role="status" aria-live="polite"></p>
+    <p class="early-access">This is a proposal, not a purchasable subscription. Payments, recurring scans and emailed reports are not built yet.</p>
   </div>
 </main>
 
@@ -228,11 +238,11 @@
   <h2>Questions</h2>
   <details>
     <summary>What is GEO?</summary>
-    <p>Generative Engine Optimization — making your business visible to AI answer engines like ChatGPT, Perplexity and Gemini, so when a customer asks "who's the best near me?", the answer is you. It's the successor to SEO for the growing share of buyers who ask AI instead of searching.</p>
+    <p>Generative Engine Optimisation means making information about your business clear, consistent and easy for search and AI-assisted discovery systems to understand and cite.</p>
   </details>
   <details>
     <summary>How does the scan work?</summary>
-    <p>We put three real buyer questions to AI engines — one branded ("your business, reviews") and two category questions ("best [what you do] in [your area]") — then check whether you're cited, who is, and score it out of 100.</p>
+    <p>An AI assistant runs three web searches: one branded query ("your business, reviews"), one local category query ("best [what you do] in [your area]") and one buyer-intent query ("[what you do] near [area] recommendations"). It reviews those search results; it does not query ChatGPT, Perplexity or their recommendation indexes. A timeout or unclear evidence is shown as inconclusive rather than a failure.</p>
   </details>
   <details>
     <summary>Why don't I show up?</summary>
@@ -246,6 +256,32 @@
 
 <script>
 const API = '/api/geo-scan';
+
+async function submitMonitoring(event) {
+  event.preventDefault();
+  const email = document.getElementById('monitorEmail').value.trim();
+  const button = document.getElementById('monitorBtn');
+  const status = document.getElementById('monitorStatus');
+  button.disabled = true;
+  button.textContent = 'Registering…';
+  status.textContent = '';
+  try {
+    const response = await fetch('/api/waitlist', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({name:'Early access', email, tag:'GEO monitoring'})
+    });
+    const data = await response.json();
+    if (!response.ok || !data.success) throw new Error('Signup was not confirmed');
+    document.getElementById('monitorForm').reset();
+    status.textContent = 'Thanks — your GEO monitoring interest is registered.';
+    button.textContent = 'Registered ✓';
+  } catch (error) {
+    status.textContent = 'We could not register your interest. Please try again.';
+    button.disabled = false;
+    button.textContent = 'Try again →';
+  }
+}
 
 function ln(html, cls) {
   const led = document.getElementById('ledger');
@@ -271,12 +307,12 @@ async function probeWithRetry(body) {
 async function runScan() {
   const v = id => document.getElementById(id).value.trim();
   const business = v('fBiz'), category = v('fCat'), location = v('fLoc'),
-        website = v('fWeb'), name = v('fName'), email = v('fEmail');
+        website = v('fWeb');
   const errBox = document.getElementById('errBox');
   errBox.style.display = 'none';
 
-  if (!business || !category || !location || !name || !email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-    errBox.textContent = 'Fill in your business name, what you do, your area, your name and a valid email — then hit scan.';
+  if (!business || !category || !location) {
+    errBox.textContent = 'Fill in your business name, what you do and your area — then hit scan.';
     errBox.style.display = 'block';
     return;
   }
@@ -284,10 +320,6 @@ async function runScan() {
   const btn = document.getElementById('scanBtn');
   btn.disabled = true; btn.textContent = 'Scanning…';
   gtag('event', 'geo_scan_start');
-
-  // Lead capture — reuses the existing waitlist function; non-blocking
-  fetch('/api/waitlist', { method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ name: name + ' — GEO scan: ' + business, email }) }).catch(()=>{});
 
   const led = document.getElementById('ledger');
   led.style.display = 'block';
@@ -307,14 +339,16 @@ async function runScan() {
     try {
       const p = await probeWithRetry({ action:'probe', query: queries[i], business, website });
       probes.push(p);
-      if (p.target_found) {
-        ln('<span class="hit">✓ You were cited.</span> <span class="dim">' + esc(p.evidence) + '</span>');
+      if (p.conclusive === false) {
+        ln('<span class="dim">… check inconclusive. ' + esc(p.evidence) + '</span>');
+      } else if (p.target_found) {
+        ln('<span class="hit">✓ Your business appeared in the search evidence.</span> <span class="dim">' + esc(p.evidence) + '</span>');
       } else {
-        const who = p.cited.length ? 'Cited instead: ' + esc(p.cited.join(', ')) : 'No clear local recommendations returned.';
-        ln('<span class="miss">✗ You were not cited.</span> <span class="dim">' + who + '</span>');
+        const who = p.cited.length ? 'Other results mentioned: ' + esc(p.cited.join(', ')) : 'No clear local recommendations returned.';
+        ln('<span class="miss">✗ Your business was not found in this check.</span> <span class="dim">' + who + '</span>');
       }
     } catch (e) {
-      probes.push({ query: queries[i], cited: [], target_found: false, evidence: 'Probe inconclusive (engine timeout).' });
+      probes.push({ query: queries[i], cited: [], target_found: false, conclusive: false, evidence: 'Check inconclusive (search request timed out).' });
       ln('<span class="dim">… probe timed out, marked inconclusive. Continuing.</span>');
     }
   }
@@ -338,22 +372,27 @@ function render(rep) {
 
   const arc = document.getElementById('dialArc');
   const circ = 326.7;
-  arc.style.strokeDashoffset = circ - (circ * rep.score / 100);
-  if (rep.score < 40) arc.style.stroke = 'var(--red)';
-  else if (rep.score < 70) arc.style.stroke = 'var(--amber)';
+  const score = Number.isFinite(rep.score) ? rep.score : null;
+  arc.style.strokeDashoffset = score === null ? circ : circ - (circ * score / 100);
+  if (score !== null && score < 40) arc.style.stroke = 'var(--red)';
+  else if (score !== null && score < 70) arc.style.stroke = 'var(--amber)';
 
   // count-up
   const numEl = document.getElementById('dialNum');
-  let n = 0; const step = Math.max(1, Math.round(rep.score / 40));
-  const t = setInterval(() => { n = Math.min(rep.score, n + step); numEl.textContent = n; if (n >= rep.score) clearInterval(t); }, 30);
+  if (score === null) {
+    numEl.textContent = '—';
+  } else {
+    let n = 0; const step = Math.max(1, Math.round(score / 40));
+    const t = setInterval(() => { n = Math.min(score, n + step); numEl.textContent = n; if (n >= score) clearInterval(t); }, 30);
+  }
 
   document.getElementById('rHeadline').textContent = rep.headline;
   document.getElementById('rSummary').textContent = rep.summary;
 
   document.getElementById('rProbes').innerHTML = rep.probes.map(p =>
     '<div class="probe"><div class="probe-q">' + esc(p.query) + '</div>' +
-    '<span class="probe-verdict ' + (p.target_found ? 'v-hit">Cited' : 'v-miss">Not cited') + '</span>' +
-    '<p class="probe-cited">' + (p.cited.length ? '<strong>Engines cited:</strong> ' + esc(p.cited.join(', ')) + '. ' : '') + esc(p.evidence) + '</p></div>'
+    '<span class="probe-verdict ' + (p.conclusive === false ? 'v-inconclusive">Inconclusive' : p.target_found ? 'v-hit">Found' : 'v-miss">Not found') + '</span>' +
+    '<p class="probe-cited">' + (p.cited.length ? '<strong>Search results mentioned:</strong> ' + esc(p.cited.join(', ')) + '. ' : '') + esc(p.evidence) + '</p></div>'
   ).join('');
 
   document.getElementById('rFixes').innerHTML = rep.fixes.map(f =>

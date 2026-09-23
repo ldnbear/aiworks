@@ -369,11 +369,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .priority-med{background:rgba(200,135,58,.15);color:#c8873a}
 .reco-card-body{padding:.9rem 1.1rem}
 .reco-rationale{font-size:.85rem;color:var(--mid);line-height:1.6;margin-bottom:.7rem}
-.reco-roi{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--green);background:var(--green-bg);padding:.35rem .65rem;border-radius:2px;display:inline-block}
-.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-bottom:1.8rem}
-.roi-card{text-align:center;padding:1.1rem .7rem;border:1px solid var(--border);border-radius:2px;background:#fafaf8}
-.roi-num{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--green);margin-bottom:.25rem}
-.roi-label{font-size:.72rem;color:var(--dim);line-height:1.4}
 .proposal-cta{background:var(--ink);border-radius:2px;padding:1.8rem;text-align:center;margin-top:.5rem}
 .cta-title{font-family:'DM Serif Display',serif;font-size:1.25rem;color:#fff;margin-bottom:.5rem}
 .cta-sub{font-size:.84rem;color:rgba(255,255,255,.6);margin-bottom:1.3rem;line-height:1.5}
@@ -392,7 +387,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   .services-grid{grid-template-columns:1fr 1fr}
   .stats{gap:2rem}
   .audit-banner{flex-direction:column;align-items:flex-start}
-  .roi-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:520px){
   .waitlist-inner{grid-template-columns:1fr;gap:2rem}
@@ -598,12 +592,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .priority-med{background:#EAF2ED;color:#1F6644;border:1px solid rgba(31,102,68,.22)}
 .reco-card-body{padding:.9rem 1.1rem}
 .reco-rationale{font-size:.82rem;color:#7A7568;line-height:1.65;margin-bottom:.5rem}
-.reco-roi{font-size:.77rem;color:#1F6644;font-weight:500;background:#EAF2ED;padding:.35rem .7rem;border-radius:6px;display:inline-block}
 
-.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin-bottom:0}
-.roi-card{background:#F9F7F3;border:1px solid #E8E3DA;border-radius:12px;padding:1.1rem .9rem;text-align:center}
-.roi-num{font-family:'Instrument Serif',serif;font-size:1.55rem;font-weight:400;color:#1F6644;line-height:1;margin-bottom:.3rem}
-.roi-label{font-size:.68rem;color:#7A7568;line-height:1.3}
 
 .proposal-cta{background:#1A1814;border-radius:12px;padding:1.75rem;text-align:center;margin-top:1.75rem}
 .cta-title{font-family:'Instrument Serif',serif;font-size:1.35rem;font-weight:400;color:#fff;margin-bottom:.35rem}
@@ -620,13 +609,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   .step-nav{padding:1rem 1.25rem 1.25rem}
   .input-pair{grid-template-columns:1fr}
   .options-grid{grid-template-columns:1fr 1fr !important}
-  .roi-grid{grid-template-columns:1fr}
   .proposal-body{padding:1.25rem}
   .proposal-header{padding:1.5rem 1.25rem 1.25rem}
   .pdf-bar{flex-direction:column;gap:.6rem;text-align:center}
 }
 
-.reco-roi{font-family:'Geist',sans-serif !important;font-size:.78rem !important;border-radius:6px !important}
 .loading-steps li{font-family:'Geist',sans-serif !important;font-size:.78rem !important}
 </style>
 </head>
@@ -643,7 +630,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     <nav>
       <a class="logo" onclick="showLanding()">ai<span>works</span></a>
       <div class="nav-right">
-        <span class="nav-count"><strong id="navCount">143</strong> on waitlist</span>
+        <span class="nav-count">Free audit &middot; no email required</span>
         <span class="live-badge"><span class="live-dot"></span>Accepting applications</span>
         <a href="/blog/" class="nav-login">Blog</a>
 <a href="/geo-scan.html" class="nav-login">Free GEO scan <span class="arr">&rarr;</span></a>
@@ -651,19 +638,19 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       </div>
     </nav>
       <div class="announce-bar">
-        <span>⚡ Limited spots — Now accepting founding clients.</span>
-        <a href="#waitlist" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Apply now →</a>
+        <span>Start free. If you want help implementing the plan, we can build it with you.</span>
+        <a href="#" onclick="event.preventDefault();showAudit()">Take the free audit →</a>
       </div>
   </div>
   <div class="wrap">
     <section class="hero">
-      <p class="hero-label">AI for small businesses · Start here</p>
-      <h1>AI is changing<span class="line2"><em>everything.</em></span><span class="line3">We'll help you use it.</span></h1>
-      <p class="hero-sub">Not sure where to start with AI? We help small businesses discover the right tools, understand what's possible, and put AI to work — hands-on guidance or fully done for you.</p>
+      <p class="hero-label">Free AI readiness audit &middot; 7 questions &middot; about 2 minutes</p>
+      <h1>Find the right AI<span class="line2"><em>starting point</em></span><span class="line3">for your business.</span></h1>
+      <p class="hero-sub">Get a practical, personalised roadmap first. Use it yourself, or talk to us about a managed build when you are ready to put the recommendations into practice.</p>
       
           <div style="display:flex;gap:1rem;margin-top:2rem;margin-bottom:2.5rem;justify-content:center;opacity:0;animation:fadeUp .7s .35s ease forwards">
-            <a class="nav-login" href="#waitlist" onclick="event.preventDefault();document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})" style="font-family:'Geist',sans-serif;font-size:.88rem;font-weight:500;padding:.8rem 2rem;background:var(--green);color:#fff;border:none;border-radius:8px;text-decoration:none;transition:all .15s">Find your AI starting point →</a>
-            <a class="nav-login" href="#" onclick="event.preventDefault();showAudit()" style="font-size:.88rem;padding:.8rem 2rem">Get free audit →</a>
+            <a class="nav-login" href="#" onclick="event.preventDefault();showAudit()" style="font-family:'Geist',sans-serif;font-size:.88rem;font-weight:500;padding:.8rem 2rem;background:var(--green);color:#fff;border:none;border-radius:8px;text-decoration:none;transition:all .15s">Start my free audit →</a>
+            <a class="nav-login" href="#how-we-help" style="font-size:.88rem;padding:.8rem 2rem">See the managed build →</a>
           </div>
 
           <div style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:2rem 2.5rem;box-shadow:0 4px 40px rgba(0,0,0,.3);backdrop-filter:blur(10px);opacity:0;animation:fadeUp .7s .4s ease forwards;margin:1.5rem auto 1rem">
@@ -674,7 +661,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 <span class="term-indent">→ <strong>Content:</strong> Generate weekly social posts in seconds</span>
 <span class="term-indent">→ <strong>Customer service:</strong> AI chatbot for orders &amp; FAQs</span>
 <span class="term-indent">→ <strong>Email:</strong> Automated follow-ups for repeat customers</span>
-<span class="term-dim">⚡ Takes 30 mins to set up · Costs under £50/mo</span></span>
+<span class="term-dim">Review the recommendations, then choose what to implement</span></span>
             </div>
           </div>
 
@@ -689,23 +676,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
         <button class="audit-btn" onclick="showAudit()">Get My Free Audit <span class="arr">→</span></button>
       </div>
       <div class="stats-new">
-            <div class="stat-card">
-              <div class="sc-num">143<em>+</em></div>
-              <div class="sc-label">Businesses on waitlist</div>
-            </div>
-            <div class="stat-card">
-              <div class="sc-num">24<em>/7</em></div>
-              <div class="sc-label">Agents running for clients</div>
-            </div>
-            <div class="stat-card">
-              <div class="sc-num">6<em>×</em></div>
-              <div class="sc-label">Avg. pipeline increase</div>
-            </div>
-            <div class="stat-card">
-              <div class="sc-num">£40<em>k</em></div>
-              <div class="sc-label">Avg. revenue added/yr</div>
-            </div>
-          </div>
+        <div class="stat-card"><div class="sc-num">7</div><div class="sc-label">Focused questions</div></div>
+        <div class="stat-card"><div class="sc-num">~2<em>min</em></div><div class="sc-label">To complete</div></div>
+        <div class="stat-card"><div class="sc-num">3</div><div class="sc-label">Prioritised next steps</div></div>
+        <div class="stat-card"><div class="sc-num">£0</div><div class="sc-label">No email required</div></div>
+      </div>
     </section>
   </div>
 
@@ -742,7 +717,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
           <li>Analytics &amp; reporting</li>
           <li>PR &amp; podcast outreach</li>
         </ul>
-        <a href="#waitlist" class="path-cta path-cta-primary">Join the waitlist →</a>
+        <a href="#waitlist" class="path-cta path-cta-primary">Discuss a managed build →</a>
       </div>
       <div class="path-card path-diy">
         <div class="path-icon">🛠️</div>
@@ -773,7 +748,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <div class="tool-card">
         <div class="tool-icon">📝</div>
         <h4 class="tool-name">Content &amp; copy</h4>
-        <p class="tool-desc">Generate blog posts, ad copy, emails and social content in minutes. Cut writing time by 80%.</p>
+        <p class="tool-desc">Draft blog posts, ad copy, emails and social content, with a person reviewing every output before it is used.</p>
         <span class="tool-tag">Great for: all SMEs</span>
       </div>
       <div class="tool-card">
@@ -809,8 +784,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <a href="/geo-scan.html" class="tool-card" style="display:block;grid-column:1/-1;text-decoration:none;background:var(--green-bg);border-color:var(--green-line)">
         <div class="tool-icon">&#128269;</div>
         <h4 class="tool-name">New &mdash; Free GEO scan: can AI find your business?</h4>
-        <p class="tool-desc">When customers ask ChatGPT or Perplexity for recommendations, do you come up? Run a free 60-second scan and see exactly who the engines cite &mdash; and who they cite instead of you.</p>
-        <span class="tool-tag">Free &middot; 60 seconds &middot; instant results &rarr;</span>
+        <p class="tool-desc">Run three AI-assisted web-search checks: one for your name and two for local buyer intent. See what the available search results support, including an inconclusive result when the evidence is not clear.</p>
+        <span class="tool-tag">Free &middot; three checks &middot; results on screen &rarr;</span>
       </a>
     </div>
     <div class="toolkit-cta">
@@ -825,25 +800,25 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <div class="bento-item large">
         <div class="bento-tag">Most popular</div>
         <h3>Ad Creation</h3>
-        <p>AI agents generate scroll-stopping ad creative across Meta, Google, and TikTok — tested and iterated automatically.</p>
+        <p>Draft ad creative across Meta, Google and TikTok, then review, test and iterate against your own baseline.</p>
         <div class="bento-mockup">
           <div class="bento-mockup-bar">● ● ●</div>
           <div class="bento-mockup-line"><span style="color:#2ECC71">● Agent: Ad Creator</span></div>
-          <div class="bento-mockup-line">> Generated 48 variants for "Demo Client"</div>
-          <div class="bento-mockup-line">> Top performer: 4.2% CTR (+180% vs baseline)</div>
-          <div class="bento-mockup-line" style="color:var(--dim)">● Completed in 12 min</div>
+          <div class="bento-mockup-line">> Draft variants ready for review</div>
+          <div class="bento-mockup-line">> Compare approved variants against your baseline</div>
+          <div class="bento-mockup-line" style="color:var(--dim)">● Example workflow &mdash; results vary</div>
         </div>
       </div>
       <div class="bento-item large">
         <div class="bento-tag">High ROI</div>
         <h3>Cold Outreach</h3>
-        <p>Personalised email sequences at scale — your AI finds prospects, writes messages, and books meetings while you sleep.</p>
+        <p>Build prospect lists and personalised email drafts, with approval and performance tracking kept in the workflow.</p>
         <div class="bento-mockup">
           <div class="bento-mockup-bar">● ● ●</div>
           <div class="bento-mockup-line"><span style="color:#2ECC71">● Agent: Outreach</span></div>
-          <div class="bento-mockup-line">> Sent 84 personalised emails</div>
-          <div class="bento-mockup-line">> 12 replies, 3 meetings booked</div>
-          <div class="bento-mockup-line" style="color:var(--dim)">● Next run in 6h 42m</div>
+          <div class="bento-mockup-line">> Personalised drafts ready for approval</div>
+          <div class="bento-mockup-line">> Track replies and meetings in one place</div>
+          <div class="bento-mockup-line" style="color:var(--dim)">● Example workflow &mdash; results vary</div>
         </div>
       </div>
       <div class="bento-item">
@@ -936,16 +911,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   <!-- DARK CTA / WAITLIST -->
   <div class="dark-cta" id="waitlist">
     <div class="wrap">
-      <div class="dc-headline">Join the businesses growing on autopilot</div>
-      <div class="dc-sub">Limited spots — we only take on clients we know we can help.</div>
+      <div class="dc-headline">Want us to build your roadmap?</div>
+      <div class="dc-sub">Share your details and we will contact you to discuss a managed build for your business.</div>
       <form class="dc-form" onsubmit="event.preventDefault();submitWaitlist(this.querySelector('.dc-btn'))">
         <input type="text" name="name" placeholder="Your name" required>
         <input type="email" name="email" placeholder="Work email" required>
-        <button type="submit" class="dc-btn">Join the waitlist →</button>
+        <button type="submit" class="dc-btn">Request a managed-build call →</button>
       </form>
-      <div class="dc-note">
-        <span>143+ businesses already on the waitlist</span>
-      </div>
+      <div class="dc-note"><span>No obligation. We will use your details only to respond to your enquiry.</span></div>
     </div>
   </div>
 
@@ -985,7 +958,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
           <li>Mapping your current business setup</li>
           <li>Identifying your biggest AI opportunities</li>
           <li>Matching AI tools and services to your needs</li>
-          <li>Calculating your time and cost savings</li>
+          <li>Turning your answers into practical next steps</li>
           <li>Writing your personalised AI roadmap</li>
         </ul>
       </div>
@@ -995,20 +968,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 </div>
 
 <script>
-// LIVE WAITLIST COUNT
-  (function() {
-    fetch('/api/waitlist-count')
-      .then(function(r){return r.json();})
-      .then(function(d){
-        if(d.count===undefined) return;
-        var n = d.count;
-        var navEl=document.getElementById('navCount');
-        var spEl=document.getElementById('spCount');
-        if(navEl) navEl.textContent=n;
-        if(spEl) spEl.textContent=n+'+';
-      }).catch(function(){});
-  })();
-
   // PARTICLES
 const pc = document.getElementById("particles");
 for (let i = 0; i < 20; i++) {
@@ -1019,27 +978,6 @@ for (let i = 0; i < 20; i++) {
   p.style.animationDuration = (7 + Math.random() * 10) + "s";
   p.style.animationDelay = (Math.random() * 12) + "s";
   pc.appendChild(p);
-}
-
-// WAITLIST
-function handleWaitlist() {
-  const name = document.getElementById("wlName").value.trim();
-  const email = document.getElementById("wlEmail").value.trim();
-  const btn = document.getElementById("wlSubmitBtn");
-  if (!name) { flashInput(document.getElementById("wlName")); return; }
-  if (!email || !email.includes("@")) { flashInput(document.getElementById("wlEmail")); return; }
-  btn.classList.add("loading"); btn.disabled = true;
-  setTimeout(function() {
-    document.getElementById("wlFormOuter").style.display = "none";
-    document.getElementById("wlSuccess").classList.add("show");
-    const n = parseInt(document.getElementById("navCount").textContent) + 1;
-    document.getElementById("navCount").textContent = n;
-    document.getElementById("spCount").textContent = n;
-  }, 1500);
-}
-function flashInput(el) {
-  el.style.borderColor = "rgba(200,60,40,.45)";
-  setTimeout(function() { el.style.borderColor = ""; }, 1800);
 }
 
 // PAGE SWITCHING
@@ -1059,6 +997,12 @@ function showLanding() {
 var auditStarted = false;
 var currentStep = 0;
 var answers = {};
+
+function escapeHtml(value) {
+  var div = document.createElement("div");
+  div.textContent = value == null ? "" : String(value);
+  return div.innerHTML;
+}
 
 var QUESTIONS = [
     { id:"name", label:"Introduction", question:"What's your name and business?", hint:"So we can personalise your report.", type:"text-pair", fields:[{key:"firstName",placeholder:"Your first name"},{key:"businessName",placeholder:"Business or trading name"}] },
@@ -1193,7 +1137,7 @@ async function submitAudit() {
       method: "POST", headers: {"Content-Type":"application/json"},
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514", max_tokens: 1200,
-        system: "You are an AI business advisor for AIWorks, helping small businesses understand and adopt AI. Return ONLY valid JSON, no markdown, no backticks: {\"headline\":\"personalised headline\",\"overallScore\":7,\"diagnosis\":\"2-3 sentence summary of their AI readiness and biggest opportunity\",\"gaps\":[\"specific gap 1\"],\"recommendations\":[{\"service\":\"service or tool category\",\"priority\":\"High\",\"rationale\":\"2 specific sentences tailored to their pain areas and goal\",\"roi\":\"specific outcome e.g. 8 hours saved/week\",\"path\":\"done-for-you or self-serve\"}],\"roiSummary\":{\"timeSaved\":\"e.g. 10 hrs/week\",\"hoursSaved\":\"10\",\"costSaved\":\"£2,000\"}} Recommendations can be from either: DONE-FOR-YOU services (AI Ad Creation, Ad Management, Lead Generation, Cold Outreach Automation, Analytics & Reporting, PR & Podcast Outreach) or SELF-SERVE tool categories (AI Content & Copywriting Tools, AI Customer Service Chatbot, AI Sales & CRM Automation, AI Operations & Admin Tools, AI Analytics Tools, AI Email Marketing). Match path to their aiGoal — if goal is to understand AI or save time, favour self-serve; if goal is growth or full automation, favour done-for-you. Give 2-4 recommendations. Tailor everything to their specific industry, pain areas and AI familiarity level.",
+        system: "You are an AI business advisor for AIWorks, helping small businesses understand and adopt AI. Use only the seven audit answers supplied by the user. Do not invent ROI, lead volumes, hours saved, cost savings, revenue, or other projected results. Return ONLY valid JSON, no markdown, no backticks: {\"headline\":\"personalised headline\",\"overallScore\":7,\"diagnosis\":\"2-3 sentence summary grounded in the answers\",\"gaps\":[\"specific gap grounded in an answer\"],\"recommendations\":[{\"service\":\"service or tool category\",\"priority\":\"High or Medium\",\"rationale\":\"2 specific sentences tied to the supplied pain areas, tools, readiness and goal\",\"path\":\"done-for-you or self-serve\"}],\"nextSteps\":[{\"title\":\"short action\",\"detail\":\"one practical next step explicitly tied to one or more supplied answers\"}]} Recommendations can be from either: DONE-FOR-YOU services (AI Ad Creation, Ad Management, Lead Generation, Cold Outreach Automation, Analytics & Reporting, PR & Podcast Outreach) or SELF-SERVE tool categories (AI Content & Copywriting Tools, AI Customer Service Chatbot, AI Sales & CRM Automation, AI Operations & Admin Tools, AI Analytics Tools, AI Email Marketing). Match the path to the stated goal and familiarity. Give 2-4 recommendations and exactly 3 practical next steps.",
         messages: [{role:"user",content:prompt}]
       })
     });
@@ -1222,38 +1166,37 @@ function showProposal(data) {
   var recos = (data.recommendations||[]).map(function(r) {
     return "<div class=\"reco-card\">" +
       "<div class=\"reco-card-header\">" +
-      "<span class=\"reco-name\">" + r.service + "</span>" +
-      "<span class=\"priority-badge priority-" + (r.priority==="High"?"high":"med") + "\">" + r.priority + " Priority</span>" +
+      "<span class=\"reco-name\">" + escapeHtml(r.service) + "</span>" +
+      "<span class=\"priority-badge priority-" + (r.priority==="High"?"high":"med") + "\">" + escapeHtml(r.priority) + " Priority</span>" +
       "</div><div class=\"reco-card-body\">" +
-      "<div class=\"reco-rationale\">" + r.rationale + "</div>" +
-      "<div class=\"reco-roi\">📈 " + r.roi + "</div></div></div>";
+      "<div class=\"reco-rationale\">" + escapeHtml(r.rationale) + "</div></div></div>";
   }).join("");
   var gaps = (data.gaps||[]).map(function(g) {
-    return "<div class=\"gap-item\"><span class=\"gap-icon\">⚠</span><span>" + g + "</span></div>";
+    return "<div class=\"gap-item\"><span class=\"gap-icon\">⚠</span><span>" + escapeHtml(g) + "</span></div>";
   }).join("");
-  var rs = data.roiSummary || {};
+  var nextSteps = (data.nextSteps||[]).slice(0,3).map(function(step, index) {
+    return "<div class=\"reco-card\"><div class=\"reco-card-body\"><div class=\"reco-name\">" + (index + 1) + ". " + escapeHtml(step.title) + "</div><div class=\"reco-rationale\">" + escapeHtml(step.detail) + "</div></div></div>";
+  }).join("");
+  var safeScore = Math.max(0, Math.min(10, Number(data.overallScore) || 0));
   el.innerHTML =
     "<div class=\"proposal-header\">" +
-    "<div class=\"proposal-tag\">AIWorks - AI Marketing Audit</div>" +
-    "<div class=\"proposal-title\">" + (data.headline || businessName + " - Growth Audit") + "</div>" +
-    "<div class=\"proposal-subtitle\">Personalised analysis based on your answers - prepared by AI in seconds.</div>" +
-    "<div class=\"proposal-score\"><span>Marketing maturity score:</span><span class=\"score-num\">" + data.overallScore + "/10</span></div>" +
+    "<div class=\"proposal-tag\">AIWorks - AI Readiness Audit</div>" +
+    "<div class=\"proposal-title\">" + escapeHtml(data.headline || businessName + " - AI Audit") + "</div>" +
+    "<div class=\"proposal-subtitle\">Personalised analysis based on your seven answers.</div>" +
+    "<div class=\"proposal-score\"><span>AI readiness score:</span><span class=\"score-num\">" + safeScore + "/10</span></div>" +
     "</div><div class=\"proposal-body\">" +
     "<div class=\"section-title\">Your Situation</div>" +
-    "<div class=\"diagnosis-text\">" + data.diagnosis + "</div>" +
+    "<div class=\"diagnosis-text\">" + escapeHtml(data.diagnosis) + "</div>" +
     "<div class=\"section-title\">Key Gaps Identified</div>" +
     "<div class=\"gaps-list\">" + gaps + "</div>" +
-    "<div class=\"section-title\">Recommendations for " + firstName + "</div>" +
+    "<div class=\"section-title\">Recommendations for " + escapeHtml(firstName) + "</div>" +
     "<div class=\"reco-list\">" + recos + "</div>" +
-    "<div class=\"section-title\">Projected Impact</div>" +
-    "<div class=\"roi-grid\">" +
-    "<div class=\"roi-card\"><div class=\"roi-num\">" + (rs.leadsPerMonth||"--") + "</div><div class=\"roi-label\">New leads per month</div></div>" +
-    "<div class=\"roi-card\"><div class=\"roi-num\">" + (rs.hoursSaved||"--") + "hrs</div><div class=\"roi-label\">Saved per week</div></div>" +
-    "<div class=\"roi-card\"><div class=\"roi-num\">" + (rs.costSaved||"--") + "</div><div class=\"roi-label\">Saved monthly vs. hiring</div></div>" +
-    "</div><div class=\"proposal-cta\">" +
-    "<div class=\"cta-title\">Ready to plug these gaps?</div>" +
-    "<div class=\"cta-sub\">Join the AIWorks waitlist and we'll reach out to discuss your audit personally.</div>" +
-    "<button class=\"cta-btn\" onclick=\"showLanding();setTimeout(function(){document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})},100)\">Join the Waitlist \u2192</button>" +
+    "<div class=\"section-title\">Practical Next Steps</div>" +
+    "<div class=\"reco-list\">" + nextSteps + "</div>" +
+    "<div class=\"proposal-cta\">" +
+    "<div class=\"cta-title\">Want help putting the plan into practice?</div>" +
+    "<div class=\"cta-sub\">Request a conversation about a managed build grounded in your audit.</div>" +
+    "<button class=\"cta-btn\" onclick=\"showLanding();setTimeout(function(){document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})},100)\">Discuss a Managed Build \u2192</button>" +
     "</div></div>" +
     "<div class=\"pdf-bar\">" +
     "<span class=\"pdf-note\">AIWorks Audit - " + new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"}) + "</span>" +
@@ -1267,18 +1210,24 @@ function showProposal(data) {
       var name = form.querySelector('input[type="text"]').value;
       var email = form.querySelector('input[type="email"]').value;
       if (!name || !email) return;
+      var originalText = btn.textContent;
       btn.textContent = 'Submitting...';
       btn.disabled = true;
       fetch('/api/waitlist', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({name: name, email: email})
-  }).then(function() {
-    form.innerHTML = '<div style="text-align:center;padding:1rem 0"><div style="font-family:Instrument Serif,serif;font-size:1.4rem;color:#fff;margin-bottom:.4rem">Youre on the list! </div><div style="font-size:.85rem;color:rgba(255,255,255,.6)">Well reach out personally when a spot opens.</div></div>';
-  }).catch(function() {
-    btn.textContent = 'Join the waitlist �';
-    btn.disabled = false;
-  });
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name: name, email: email})
+      }).then(function(response) {
+        if (!response.ok) throw new Error('Signup request failed');
+        return response.json();
+      }).then(function(data) {
+        if (!data || data.success !== true) throw new Error('Signup was not confirmed');
+        form.innerHTML = '<div style="text-align:center;padding:1rem 0"><div style="font-family:Instrument Serif,serif;font-size:1.4rem;color:#fff;margin-bottom:.4rem">You’re on the list! ✓</div><div style="font-size:.85rem;color:rgba(255,255,255,.6)">We’ll reach out personally when a spot opens.</div></div>';
+      }).catch(function() {
+        btn.textContent = 'Try again →';
+        btn.disabled = false;
+        btn.setAttribute('aria-label', originalText + ' — previous request failed');
+      });
     }
   </script>
 </body>
