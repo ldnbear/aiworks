@@ -63,10 +63,10 @@ For every article: one distinct question, an accurate headline, real author or i
 
 ### Before assessing search performance
 
-1. Verify a Google Search Console URL-prefix property for https://agentsatwork.co/geddon/ (or use an existing verified domain property). Verification requires the owner’s Search Console access; no verification token or property was available to this implementation.
+1. Verify a Google Search Console URL-prefix property for https://agentsatwork.co/geddon/ (or use an existing verified domain property). The existing https://agentsatwork.co/ property was confirmed as verified-owner access on 30 October 2026 and covers GEDDON; no new verification file or DNS change was needed.
 2. Submit https://agentsatwork.co/geddon/sitemap.xml and inspect the five canonical pages. A successful deployment or sitemap request is not proof of Google indexing.
 3. Check Page indexing, Google-selected canonicals and live URL inspection. Repair exclusions or crawl problems before adding more content.
-4. Capture a PageSpeed Insights baseline and, when traffic is sufficient, assess real-user LCP, INP and CLS. No Lighthouse, PSI or field-performance score is claimed here.
+4. Capture a PageSpeed Insights baseline and, when traffic is sufficient, assess real-user LCP, INP and CLS. The measured Lighthouse/PageSpeed baseline is recorded below; there is still no field-performance dataset.
 
 ### Weekly for the first 90 days
 
@@ -109,4 +109,20 @@ Report: https://pagespeed.web.dev/analysis/https-agentsatwork-co-geddon/smish9c0
 
 These are one-run Lighthouse 13.6.0 lab results, not a Google ranking score or field Core Web Vitals assessment. PageSpeed reports no real-user data. The mobile run used an emulated Moto G Power with slow 4G throttling. After this baseline, the highlighted fine-print contrast and inconsistent accessible names on waitlist links were corrected; no new accessibility score is claimed without a fresh run.
 
-Search Console property verification, sitemap submission and URL inspection remain pending owner authentication. No confirmed indexing or organic traffic baseline is claimed. The public PageSpeed API returned a shared quota error; the baseline above was obtained from the functioning PageSpeed Insights website.
+Search Console access and sitemap/indexing submissions were subsequently completed on 30 October 2026; see the completion record below. Accepted requests are not confirmation of indexing. The public PageSpeed API returned a shared quota error; the baseline above was obtained from the functioning PageSpeed Insights website.
+
+## Search Console completion record — 30 October 2026
+
+- Confirmed verified-owner status on the existing https://agentsatwork.co/ property. This property covers all GEDDON URLs; no duplicate property, additional owner, DNS record or verification token was created.
+- Submitted https://agentsatwork.co/geddon/sitemap.xml. Google reports **Sitemap processed successfully**, last read 30/10/2026, **5 discovered pages**. An initial temporary fetch status resolved to successful processing without a site change.
+- Inspected each of the five canonical pages and submitted one indexing request per URL. Each request returned **Indexing requested** and confirmed addition to a priority crawl queue:
+  1. https://agentsatwork.co/geddon/
+  2. https://agentsatwork.co/geddon/journal/
+  3. https://agentsatwork.co/geddon/guides/open-cell-wetsuits/
+  4. https://agentsatwork.co/geddon/guides/5-5mm-vs-7-5mm-wetsuits/
+  5. https://agentsatwork.co/geddon/guides/womens-freediving-wetsuits/
+- The inspected pages were not yet indexed at the time of submission. Google controls crawl timing and inclusion. Do not interpret a successful indexing request, a discovered sitemap URL or a Lighthouse SEO score as proof of indexing or ranking.
+- Configured a GEDDON-only performance view using a Page filter containing https://agentsatwork.co/geddon/ and a 28-day reporting window. The available data covered **1–28 October 2026**, before GEDDON launched, with **0 clicks, 0 impressions and no query data**. This is a pre-launch baseline, not evidence that post-launch SEO succeeded or failed. There is no meaningful average ranking position to report yet.
+- GEDDON-only report: https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fagentsatwork.co%2F&page=*https%3A%2F%2Fagentsatwork.co%2Fgeddon%2F&num_of_days=28
+
+All owner-side setup and submissions requested in this task are complete. Confirmed indexing and real-user performance data remain outcomes to check as Google processes the pages and traffic arrives. No recurring monitoring automation has been created.
