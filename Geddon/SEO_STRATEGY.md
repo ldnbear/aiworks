@@ -126,3 +126,14 @@ Search Console access and sitemap/indexing submissions were subsequently complet
 - GEDDON-only report: https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fagentsatwork.co%2F&page=*https%3A%2F%2Fagentsatwork.co%2Fgeddon%2F&num_of_days=28
 
 All owner-side setup and submissions requested in this task are complete. Confirmed indexing and real-user performance data remain outcomes to check as Google processes the pages and traffic arrives. No recurring monitoring automation has been created.
+
+## International cold-water and comparison expansion — 30 October 2026
+
+The user confirmed Norway and Alaska as intended markets. The homepage now explicitly describes cold-water spearfishing and freediving wetsuits. Added two linked editorial pages, bringing the canonical GEDDON sitemap to seven pages:
+
+- /geddon/guides/cold-water-wetsuits-norway-alaska/: cold-water spearfishing wetsuits, wetsuits for Norway/Alaska, 7mm and 7.5mm buying considerations. Uses primary local operator equipment lists, without universal temperature or destination suitability claims.
+- /geddon/guides/scorpena-spearpro-geddon-wetsuits/: Scorpena/SpearPro model research and alternative/comparison intent. Compares EcoLine 7mm, Deep Passion Plus Grey 7mm and Cabrilla Women’s 7mm with the proposed GEDDON Start 7.5mm. Published specifications are sourced, no performance winners are invented, and GEDDON’s prelaunch status is explicit.
+
+Only Scorpena and SpearPro logos were confidently legible in the reference photo. The article does not claim to identify the pictured models, imply affiliation, reuse the Instagram photo, invent a hands-on test or portray prototype suitability as proven. The homepage, journal, thickness guide and sitemaps link to the new material. No keyword volumes or ranking outcomes are claimed.
+
+Primary references: https://www.scorpena.com/wetsuit-scorpena-ecoline-7mm.html ; https://www.spearpro.com/products/spearpro-wetsuit-deep-passion-plus-grey-7mm ; https://www.spearpro.com/products/spearpro-cabrilla-wetsuit-7mm-women ; https://www.arcticspearfishing.com/rentals ; https://www.alaskafreediver.com/uploads/b/e61084a0-df34-11ed-96d5-8b4eb9dc2469/25%20Rental%20Rates.pdf ; https://dan.org/alert-diver/article/wetsuits/
