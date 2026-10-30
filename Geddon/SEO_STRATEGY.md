@@ -92,3 +92,21 @@ When deposits open, create substantive individual product pages with final price
 - https://waihana.com/collections/womens-wetsuits
 
 No search-volume subscription, Search Console verification, indexing request, external outreach, backlinks or traffic outcome is implied by these implementation notes.
+
+## Measured PageSpeed baseline — 30 October 2026
+
+Report: https://pagespeed.web.dev/analysis/https-agentsatwork-co-geddon/smish9c03t?form_factor=desktop
+
+| Lab metric | Mobile | Desktop |
+| --- | --- | --- |
+| Performance | 99/100 | 100/100 |
+| Accessibility | 96/100 | 96/100 |
+| Best Practices | 100/100 | 100/100 |
+| SEO checks | 100/100 | 100/100 |
+| Largest Contentful Paint | 2.1 s | 0.3 s |
+| Total Blocking Time | 0 ms | 0 ms |
+| Cumulative Layout Shift | 0.001 | 0.001 |
+
+These are one-run Lighthouse 13.6.0 lab results, not a Google ranking score or field Core Web Vitals assessment. PageSpeed reports no real-user data. The mobile run used an emulated Moto G Power with slow 4G throttling. After this baseline, the highlighted fine-print contrast and inconsistent accessible names on waitlist links were corrected; no new accessibility score is claimed without a fresh run.
+
+Search Console property verification, sitemap submission and URL inspection remain pending owner authentication. No confirmed indexing or organic traffic baseline is claimed. The public PageSpeed API returned a shared quota error; the baseline above was obtained from the functioning PageSpeed Insights website.
