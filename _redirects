@@ -102,10 +102,6 @@ https://geddonsupply.com/Geddon/underwater.svg  /Geddon/underwater.svg  200!
 https://geddonsupply.com/Geddon/women.svg  /Geddon/women.svg  200!
 https://geddonsupply.com/Geddon/share-image.jpg  /.netlify/functions/geddon-social-image  200!
 https://geddonsupply.com/robots.txt  /_geddon-staging/robots.txt  200!
-https://geddonsupply.com/.netlify/functions/geddon-contact  /.netlify/functions/geddon-contact  200!
-https://geddonsupply.com/.netlify/functions/geddon-waitlist  /.netlify/functions/geddon-waitlist  200!
-https://geddonsupply.com/.netlify/functions/geddon-social-image  /.netlify/functions/geddon-social-image  200!
-https://geddonsupply.com/*  /_geddon-staging/404.html  404!
 https://www.geddonsupply.com/contact  /_geddon-staging/contact/index.html  200!
 https://www.geddonsupply.com/contact/  /_geddon-staging/contact/index.html  200!
 https://www.geddonsupply.com/contact/index.html  /_geddon-staging/contact/index.html  200!
@@ -208,10 +204,6 @@ https://www.geddonsupply.com/Geddon/underwater.svg  /Geddon/underwater.svg  200!
 https://www.geddonsupply.com/Geddon/women.svg  /Geddon/women.svg  200!
 https://www.geddonsupply.com/Geddon/share-image.jpg  /.netlify/functions/geddon-social-image  200!
 https://www.geddonsupply.com/robots.txt  /_geddon-staging/robots.txt  200!
-https://www.geddonsupply.com/.netlify/functions/geddon-contact  /.netlify/functions/geddon-contact  200!
-https://www.geddonsupply.com/.netlify/functions/geddon-waitlist  /.netlify/functions/geddon-waitlist  200!
-https://www.geddonsupply.com/.netlify/functions/geddon-social-image  /.netlify/functions/geddon-social-image  200!
-https://www.geddonsupply.com/*  /_geddon-staging/404.html  404!
 https://geddonsupplies.com/contact  /_geddon-staging/contact/index.html  200!
 https://geddonsupplies.com/contact/  /_geddon-staging/contact/index.html  200!
 https://geddonsupplies.com/contact/index.html  /_geddon-staging/contact/index.html  200!
@@ -314,10 +306,6 @@ https://geddonsupplies.com/Geddon/underwater.svg  /Geddon/underwater.svg  200!
 https://geddonsupplies.com/Geddon/women.svg  /Geddon/women.svg  200!
 https://geddonsupplies.com/Geddon/share-image.jpg  /.netlify/functions/geddon-social-image  200!
 https://geddonsupplies.com/robots.txt  /_geddon-staging/robots.txt  200!
-https://geddonsupplies.com/.netlify/functions/geddon-contact  /.netlify/functions/geddon-contact  200!
-https://geddonsupplies.com/.netlify/functions/geddon-waitlist  /.netlify/functions/geddon-waitlist  200!
-https://geddonsupplies.com/.netlify/functions/geddon-social-image  /.netlify/functions/geddon-social-image  200!
-https://geddonsupplies.com/*  /_geddon-staging/404.html  404!
 https://www.geddonsupplies.com/contact  /_geddon-staging/contact/index.html  200!
 https://www.geddonsupplies.com/contact/  /_geddon-staging/contact/index.html  200!
 https://www.geddonsupplies.com/contact/index.html  /_geddon-staging/contact/index.html  200!
@@ -420,10 +408,6 @@ https://www.geddonsupplies.com/Geddon/underwater.svg  /Geddon/underwater.svg  20
 https://www.geddonsupplies.com/Geddon/women.svg  /Geddon/women.svg  200!
 https://www.geddonsupplies.com/Geddon/share-image.jpg  /.netlify/functions/geddon-social-image  200!
 https://www.geddonsupplies.com/robots.txt  /_geddon-staging/robots.txt  200!
-https://www.geddonsupplies.com/.netlify/functions/geddon-contact  /.netlify/functions/geddon-contact  200!
-https://www.geddonsupplies.com/.netlify/functions/geddon-waitlist  /.netlify/functions/geddon-waitlist  200!
-https://www.geddonsupplies.com/.netlify/functions/geddon-social-image  /.netlify/functions/geddon-social-image  200!
-https://www.geddonsupplies.com/*  /_geddon-staging/404.html  404!
 http://geddonsupply.com/contact  /_geddon-staging/contact/index.html  200!
 http://geddonsupply.com/contact/  /_geddon-staging/contact/index.html  200!
 http://geddonsupply.com/contact/index.html  /_geddon-staging/contact/index.html  200!
@@ -526,10 +510,6 @@ http://geddonsupply.com/Geddon/underwater.svg  /Geddon/underwater.svg  200!
 http://geddonsupply.com/Geddon/women.svg  /Geddon/women.svg  200!
 http://geddonsupply.com/Geddon/share-image.jpg  /.netlify/functions/geddon-social-image  200!
 http://geddonsupply.com/robots.txt  /_geddon-staging/robots.txt  200!
-http://geddonsupply.com/.netlify/functions/geddon-contact  /.netlify/functions/geddon-contact  200!
-http://geddonsupply.com/.netlify/functions/geddon-waitlist  /.netlify/functions/geddon-waitlist  200!
-http://geddonsupply.com/.netlify/functions/geddon-social-image  /.netlify/functions/geddon-social-image  200!
-http://geddonsupply.com/*  /_geddon-staging/404.html  404!
 http://www.geddonsupply.com/contact  /_geddon-staging/contact/index.html  200!
 http://www.geddonsupply.com/contact/  /_geddon-staging/contact/index.html  200!
 http://www.geddonsupply.com/contact/index.html  /_geddon-staging/contact/index.html  200!
@@ -632,10 +612,6 @@ http://www.geddonsupply.com/Geddon/underwater.svg  /Geddon/underwater.svg  200!
 http://www.geddonsupply.com/Geddon/women.svg  /Geddon/women.svg  200!
 http://www.geddonsupply.com/Geddon/share-image.jpg  /.netlify/functions/geddon-social-image  200!
 http://www.geddonsupply.com/robots.txt  /_geddon-staging/robots.txt  200!
-http://www.geddonsupply.com/.netlify/functions/geddon-contact  /.netlify/functions/geddon-contact  200!
-http://www.geddonsupply.com/.netlify/functions/geddon-waitlist  /.netlify/functions/geddon-waitlist  200!
-http://www.geddonsupply.com/.netlify/functions/geddon-social-image  /.netlify/functions/geddon-social-image  200!
-http://www.geddonsupply.com/*  /_geddon-staging/404.html  404!
 http://geddonsupplies.com/contact  /_geddon-staging/contact/index.html  200!
 http://geddonsupplies.com/contact/  /_geddon-staging/contact/index.html  200!
 http://geddonsupplies.com/contact/index.html  /_geddon-staging/contact/index.html  200!
@@ -738,10 +714,6 @@ http://geddonsupplies.com/Geddon/underwater.svg  /Geddon/underwater.svg  200!
 http://geddonsupplies.com/Geddon/women.svg  /Geddon/women.svg  200!
 http://geddonsupplies.com/Geddon/share-image.jpg  /.netlify/functions/geddon-social-image  200!
 http://geddonsupplies.com/robots.txt  /_geddon-staging/robots.txt  200!
-http://geddonsupplies.com/.netlify/functions/geddon-contact  /.netlify/functions/geddon-contact  200!
-http://geddonsupplies.com/.netlify/functions/geddon-waitlist  /.netlify/functions/geddon-waitlist  200!
-http://geddonsupplies.com/.netlify/functions/geddon-social-image  /.netlify/functions/geddon-social-image  200!
-http://geddonsupplies.com/*  /_geddon-staging/404.html  404!
 http://www.geddonsupplies.com/contact  /_geddon-staging/contact/index.html  200!
 http://www.geddonsupplies.com/contact/  /_geddon-staging/contact/index.html  200!
 http://www.geddonsupplies.com/contact/index.html  /_geddon-staging/contact/index.html  200!
@@ -844,10 +816,6 @@ http://www.geddonsupplies.com/Geddon/underwater.svg  /Geddon/underwater.svg  200
 http://www.geddonsupplies.com/Geddon/women.svg  /Geddon/women.svg  200!
 http://www.geddonsupplies.com/Geddon/share-image.jpg  /.netlify/functions/geddon-social-image  200!
 http://www.geddonsupplies.com/robots.txt  /_geddon-staging/robots.txt  200!
-http://www.geddonsupplies.com/.netlify/functions/geddon-contact  /.netlify/functions/geddon-contact  200!
-http://www.geddonsupplies.com/.netlify/functions/geddon-waitlist  /.netlify/functions/geddon-waitlist  200!
-http://www.geddonsupplies.com/.netlify/functions/geddon-social-image  /.netlify/functions/geddon-social-image  200!
-http://www.geddonsupplies.com/*  /_geddon-staging/404.html  404!
 
 # Existing site behavior unchanged.
 /  /index.html  200
