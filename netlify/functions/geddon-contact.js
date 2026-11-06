@@ -5,7 +5,7 @@ function response(statusCode,body){return {statusCode,headers:{'Content-Type':'a
 exports.handler = async event => {
  if(event.httpMethod!=='POST')return response(405,{error:'Use POST.'});
  const origin=event.headers?.origin;
- const allowed=new Set(['https://agentsatwork.co','https://www.agentsatwork.co']);
+ const allowed=new Set(['https://agentsatwork.co','https://www.agentsatwork.co','https://geddonsupply.com','https://www.geddonsupply.com','https://geddonsupplies.com','https://www.geddonsupplies.com']);
  for(const key of ['URL','DEPLOY_PRIME_URL']){try{if(process.env[key])allowed.add(new URL(process.env[key]).origin);}catch{}}
  if(origin&&!allowed.has(origin))return response(403,{error:'This form must be submitted from GEDDON.'});
  if(!event.headers?.['content-type']?.toLowerCase().startsWith('application/json'))return response(415,{error:'Use JSON.'});
@@ -31,3 +31,4 @@ exports.handler = async event => {
   return response(200,{success:true});
  }catch{return response(502,{error:'We could not confirm your message. Please use the Google Forms contact link.'});}
 };
+
