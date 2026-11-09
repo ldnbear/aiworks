@@ -4,6 +4,8 @@ const CONSENT = 'I agree to receive GEDDON launch emails. I can unsubscribe at a
 const choices = {fit:["Men's","Women's","Not sure"],size:['XS','S','M','L','XL','XXL','Not sure'],thickness:['5.5 mm — Prawle','7.5 mm — Start','Not sure'],colourway:['Moor','Kelp','Night','Not sure']};
 const completed = new Map();
 function response(statusCode,body){return {statusCode,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'},body:JSON.stringify(body)};}
+// Operational telemetry only: never log names, emails, form answers or consent values.
+function audit(outcome,statusCode,requestId){console.info(JSON.stringify({event:'geddon_waitlist_submission',outcome,statusCode,requestId:requestId||null,time:new Date().toISOString()}));}
 exports.handler = async event => {
  if(event.httpMethod!=='POST')return response(405,{error:'Use POST.'});
  const origin=event.headers?.origin;
@@ -21,15 +23,16 @@ exports.handler = async event => {
  for(const [key,values]of Object.entries(choices))if(!values.includes(data[key]))return response(400,{error:'Please choose your fit, size, thickness and colourway.'});
  const requestId=typeof data.requestId==='string'&&/^[a-f0-9-]{36}$/i.test(data.requestId)?data.requestId:null;
  const now=Date.now();for(const[k,v]of completed)if(now-v>600000)completed.delete(k);
- if(requestId&&completed.has(requestId))return response(200,{success:true});
+ if(requestId&&completed.has(requestId)){audit('duplicate_request',200,requestId);return response(200,{success:true});}
  const safe=value=>/^[=+@\-]/.test(value)?"'"+value:value;
  const fields=new URLSearchParams({'entry.430789589':safe(name),'entry.1400563767':safe(email),'entry.1848638400':data.fit,'entry.119536413':data.size,'entry.2017302128':data.thickness,'entry.1825243199':data.colourway,'entry.929905603':CONSENT,'fvv':'1','pageHistory':'0'});
  try{
   const result=await fetch(FORM_ACTION,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:fields.toString(),signal:AbortSignal.timeout(18000)});
   const page=await result.text();
-  if(!result.ok||!/Your response has been recorded\./i.test(page))return response(502,{error:'Google did not confirm your sign-up. Please use the Google form below.'});
+  if(!result.ok||!/Your response has been recorded\./i.test(page)){audit('google_unconfirmed',502,requestId);return response(502,{error:'Google did not confirm your sign-up. Please use the Google form below.'});}
   if(requestId){if(completed.size>1000)completed.delete(completed.keys().next().value);completed.set(requestId,now);}
+  audit('confirmed',200,requestId);
   return response(200,{success:true});
- }catch{return response(502,{error:'We could not confirm your sign-up. Please use the Google form below.'});}
+ }catch{audit('upstream_error',502,requestId);return response(502,{error:'We could not confirm your sign-up. Please use the Google form below.'});}
 };
 
