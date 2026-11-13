@@ -949,7 +949,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <form class="dc-form" onsubmit="event.preventDefault();submitWaitlist(this.querySelector('.dc-btn'))">
         <input type="text" name="name" placeholder="Your name" required>
         <input type="email" name="email" placeholder="Work email" required>
-        <button type="submit" class="dc-btn">Join the voice AI waitlist →</button>
+        <button type="submit" class="dc-btn">Join waitlist →</button>
       </form>
       <div class="dc-note"><span>No payment required. By joining, you agree to receive launch and pilot updates. You can opt out by replying to any update. See our privacy policy below.</span></div>
     </div>
@@ -1404,7 +1404,6 @@ function showProposal(data) {
     "<div class=\"proposal-tag\">AIWorks - Voice AI Opportunity Audit</div>" +
     "<div class=\"proposal-title\">" + escapeHtml(data.headline || businessName + " - AI Audit") + "</div>" +
     "<div class=\"proposal-subtitle\">A starting-point assessment from your seven answers, not a performance forecast.</div>" +
-    "<div class=\"proposal-score\"><span>Indicative workflow readiness:</span><span class=\"score-num\">" + safeScore + "/10</span></div>" +
     "</div><div class=\"proposal-body\">" +
     "<div class=\"section-title\">Your Situation</div>" +
     "<div class=\"diagnosis-text\">" + escapeHtml(data.diagnosis) + "</div>" +
@@ -1414,7 +1413,7 @@ function showProposal(data) {
     "<div class=\"reco-list\">" + recos + "</div>" +
     "<div class=\"section-title\">Practical Next Steps</div>" +
     "<div class=\"reco-list\">" + nextSteps + "</div>" +
-    "<div class=\"section-title\">Choose how to put this into action</div><div class=\"revenue-routes\"><div class=\"revenue-route\"><h3>Do it yourself</h3><p>Explore tools you can try with your existing workflow.</p><a href=\"/tools.html\">Browse tools →</a></div><div class=\"revenue-route\"><h3>Choose an agent</h3><p>Plans from £29/month. Be first to hear when it launches.</p><a href=\"/offers.html\">Compare plans →</a></div><div class=\"revenue-route\"><h3>Managed build</h3><p>Custom implementation from £1,500, with scope agreed first.</p><a href=\"/#waitlist\" onclick=\"showLanding()\">Discuss your project →</a></div></div>" +
+
     "<div class=\"proposal-cta\">" +
     "<div class=\"cta-title\">Want help putting the plan into practice?</div>" +
     "<div class=\"cta-sub\">Join the voice AI management waitlist to hear about launch and pilot opportunities relevant to your business.</div>" +
