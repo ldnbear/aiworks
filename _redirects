@@ -1,17 +1,3 @@
-# User-requested Agents at Work homepage redirect; unrelated paths stay live.
-http://agentsatwork.co/  https://geddonsupply.com/  301!
-http://agentsatwork.co/index.html  https://geddonsupply.com/  301!
-http://agentsatwork.co/index  https://geddonsupply.com/  301!
-http://www.agentsatwork.co/  https://geddonsupply.com/  301!
-http://www.agentsatwork.co/index.html  https://geddonsupply.com/  301!
-http://www.agentsatwork.co/index  https://geddonsupply.com/  301!
-https://agentsatwork.co/  https://geddonsupply.com/  301!
-https://agentsatwork.co/index.html  https://geddonsupply.com/  301!
-https://agentsatwork.co/index  https://geddonsupply.com/  301!
-https://www.agentsatwork.co/  https://geddonsupply.com/  301!
-https://www.agentsatwork.co/index.html  https://geddonsupply.com/  301!
-https://www.agentsatwork.co/index  https://geddonsupply.com/  301!
-
 # GEDDON domain migration. Enable only after DNS and TLS are ready.
 # Keep host-scoped rules above the existing generic root rewrite.
 https://agentsatwork.co/geddon  https://geddonsupply.com/  301!
