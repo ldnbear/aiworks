@@ -249,7 +249,7 @@ footer p{font-size:.75rem;color:var(--dim)}
     var system='You are a senior marketing analyst. Analyse the provided marketing metrics and generate a comprehensive performance report. Calculate derived metrics (CTR, CPA, ROAS, CVR etc). You MUST respond with ONLY valid JSON, no markdown, no backticks. Structure: {"kpis":[{"label":"ROAS","value":"3.8x","delta":"+0.4x","trend":"up"},{"label":"CTR","value":"1.78%","delta":"-0.2%","trend":"down"},{"label":"CPA","value":"£52","delta":"-£8","trend":"up"},{"label":"Conv. Rate","value":"1.5%","delta":"","trend":"flat"}],"executiveSummary":"2-3 sentence plain English summary of overall performance","insights":[{"type":"positive","icon":"✅","text":"<strong>ROAS of 3.8x</strong> is above the 3x benchmark for this sector, driven by strong ad creative performance."},{"type":"warning","icon":"⚠️","text":"..."},{"type":"negative","icon":"🔴","text":"..."}],"actions":[{"title":"Action title","description":"What to do and why","impact":"Estimated impact e.g. +15% CTR"}]}. Include 4 KPIs, 1 exec summary, 4-6 insights (mix of positive/warning/negative), 3-5 prioritised actions. Be specific with numbers.';
 
     fetch('/api/claude',{ method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:4000,system:system,messages:[{role:'user',content:prompt}]})
+      body:JSON.stringify({model:'claude-sonnet-5-5',thinking:{type:'between_tools'},output_config:{effort:'low'},max_tokens:4000,system:system,messages:[{role:'user',content:prompt}]})
     })
     .then(function(r){return r.json();})
     .then(function(data){

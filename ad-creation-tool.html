@@ -261,7 +261,7 @@ footer p{font-size:.75rem;color:var(--dim)}
     var system = 'You are an expert performance marketer and ad copywriter. Generate ad variations for the specified platforms. For each platform write 3 variations. Each variation must be platform-appropriate in length and style. You MUST respond with ONLY valid JSON, no markdown, no backticks. Structure: {"totalAds":9,"platforms":[{"platform":"Meta (Facebook & Instagram)","ads":[{"variant":1,"angle":"Pain point","headline":"headline here","primaryText":"ad body copy here","cta":"Book a free audit","charCount":120},{"variant":2,...},{"variant":3,...}]}]} For Google Search ads use: headline1, headline2, description fields instead. For TikTok use: hook (first 3 seconds script), body, cta. For LinkedIn use: headline, introText, cta. Make ads punchy, specific, and scroll-stopping. No generic copy.';
 
     fetch('/api/claude',{ method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:4000,system:system,messages:[{role:'user',content:prompt}]})
+      body:JSON.stringify({model:'claude-sonnet-5-5',thinking:{type:'between_tools'},output_config:{effort:'low'},max_tokens:4000,system:system,messages:[{role:'user',content:prompt}]})
     })
     .then(function(r){return r.json();})
     .then(function(data){

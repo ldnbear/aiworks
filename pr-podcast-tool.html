@@ -242,7 +242,7 @@ footer p{font-size:.75rem;color:var(--dim)}
     fetch('/api/claude',{
       method:'POST',
       headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01',},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:5000,system:system,messages:[{role:'user',content:prompt}]})
+      body:JSON.stringify({model:'claude-sonnet-5-5',thinking:{type:'between_tools'},output_config:{effort:'low'},max_tokens:5000,system:system,messages:[{role:'user',content:prompt}]})
     })
     .then(function(r){return r.json();})
     .then(function(data){

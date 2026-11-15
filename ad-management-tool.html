@@ -255,7 +255,7 @@ footer p{font-size:.75rem;color:var(--dim)}
     var system='You are a senior paid media strategist with deep expertise in Meta, Google, LinkedIn and TikTok ads. Audit the campaign and produce a prioritised optimisation plan. You MUST respond with ONLY valid JSON, no markdown, no backticks. Structure: {"healthScores":[{"label":"CTR Health","score":"1.3%","status":"ok","note":"Below 2% benchmark"},{"label":"CPA vs Target","score":"£37","status":"bad","note":"51% above target"},{"label":"Creative Fatigue","score":"Medium","status":"ok","note":"4-6 creatives is healthy"},{"label":"Audience Fit","score":"Good","status":"good","note":"Narrow audiences convert better for this objective"}],"optimisations":[{"priority":"urgent","title":"Optimisation title","description":"What to do and exactly how","impact":"Estimated impact","action":"Do this now"},{"priority":"medium",...},{"priority":"low",...}],"budgetRecommendation":{"title":"Budget recommendation title","description":"Specific budget advice with numbers"}}. Status options: good, ok, bad. Include 4 health scores, 4-6 optimisations (mix of urgent/medium/low), 1 budget recommendation. Be very specific and actionable.';
 
     fetch('/api/claude',{ method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2500,system:system,messages:[{role:'user',content:prompt}]})
+      body:JSON.stringify({model:'claude-sonnet-5-5',thinking:{type:'between_tools'},output_config:{effort:'low'},max_tokens:2500,system:system,messages:[{role:'user',content:prompt}]})
     })
     .then(function(r){return r.json();})
     .then(function(data){
