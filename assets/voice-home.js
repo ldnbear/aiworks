@@ -138,3 +138,112 @@ signupForm.addEventListener('submit', async event => {
 });
 signupForm.elements.name.addEventListener('input', () => signupForm.elements.name.setCustomValidity(''));
 syncPage();
+
+const industryExamples = [
+  {
+    image: 'voice-workshop-call.webp',
+    alt: 'A home services business owner taking a call at her workshop desk',
+    name: 'Trades & home services',
+    task: 'Capture the details of a new quote request.'
+  },
+  {
+    image: 'voice-auto-repair.webp',
+    alt: 'A garage owner taking a call at the service desk',
+    name: 'Auto repair',
+    task: 'Take a service booking while the team is on the workshop floor.'
+  },
+  {
+    image: 'voice-hotel-reception.webp',
+    alt: 'A hotel manager reviewing a reservation during a phone call',
+    name: 'Independent hotels',
+    task: 'Handle a room enquiry while reception helps guests.'
+  },
+  {
+    image: 'voice-dental-reception.webp',
+    alt: 'A dental receptionist answering the phone beside a booking computer',
+    name: 'Dental practices',
+    task: 'Route appointment requests to the booking team.'
+  },
+  {
+    image: 'voice-physio-practice.webp',
+    alt: 'A physiotherapy practice owner reviewing an appointment follow-up',
+    name: 'Physiotherapy practices',
+    task: 'Follow up on an appointment request.'
+  }
+];
+
+function startIndustryRotation(figure) {
+  const photo = figure.querySelector('.hero-photo');
+  const name = figure.querySelector('.industry-name');
+  const task = figure.querySelector('.industry-task');
+  const controls = figure.querySelector('.industry-controls');
+  const toggle = figure.querySelector('[data-industry-toggle]');
+  const announcement = figure.querySelector('.industry-announcement');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let playing = !reducedMotion.matches;
+  let current = 0;
+  let timer;
+  let pending;
+  const loaded = new Map();
+
+  function updatePlayback(nextPlaying) {
+    playing = nextPlaying;
+    clearTimeout(timer);
+    toggle.textContent = playing ? 'Pause' : 'Play';
+    toggle.setAttribute('aria-label', playing ? 'Pause rotation' : 'Play rotation');
+    if (playing && !document.hidden) timer = setTimeout(() => move(1, false), 6500);
+  }
+
+  function preload(index) {
+    if (!loaded.has(index)) {
+      const image = new Image();
+      image.src = '/assets/' + industryExamples[index].image;
+      loaded.set(index, image);
+    }
+    return loaded.get(index);
+  }
+
+  async function move(direction, manual) {
+    if (pending && !manual) return;
+    const index = (current + direction + industryExamples.length) % industryExamples.length;
+    const request = {};
+    pending = request;
+    if (manual) updatePlayback(false);
+    const image = preload(index);
+    try {
+      await image.decode();
+      if (pending !== request) return;
+      if (!manual && !playing) return;
+      const example = industryExamples[index];
+      photo.src = image.src;
+      photo.alt = example.alt;
+      name.textContent = example.name;
+      task.textContent = example.task;
+      if (manual) announcement.textContent = example.name + '. ' + example.task;
+      current = index;
+      preload((current + 1) % industryExamples.length);
+    } catch {
+      loaded.delete(index);
+      if (manual && pending === request) announcement.textContent = 'That example could not load. Please try again.';
+    } finally {
+      if (pending === request) {
+        pending = undefined;
+        updatePlayback(playing);
+      }
+    }
+  }
+
+  figure.querySelector('[data-industry-prev]').addEventListener('click', () => move(-1, true));
+  figure.querySelector('[data-industry-next]').addEventListener('click', () => move(1, true));
+  toggle.addEventListener('click', () => updatePlayback(!playing));
+  reducedMotion.addEventListener('change', event => {
+    if (event.matches) updatePlayback(false);
+  });
+  document.addEventListener('visibilitychange', () => updatePlayback(playing));
+  controls.hidden = false;
+  preload(1);
+  updatePlayback(playing);
+}
+
+const industryRotation = document.querySelector('.industry-rotation');
+if (industryRotation) startIndustryRotation(industryRotation);
