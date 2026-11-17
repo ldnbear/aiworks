@@ -41,20 +41,25 @@
   <h1>Practical AI for small businesses</h1>
   <p class="sub">Guides on AI tools, visibility in AI answers, and automation that actually pays for itself. Written for UK SME owners, not engineers.</p>
 </header>
-<main id="posts"><p style="color:var(--dim)">Loading articles&hellip;</p></main>
+<main id="posts">
+  <a class="card" href="/blog/ai-for-hospitality-businesses"><span class="date">19 August 2026</span><h2>AI for Hospitality Businesses: A Practical Guide for UK Operators</h2><p>How UK pubs, restaurants, cafés and hotels are using AI to answer enquiries, cut no-shows, handle reviews and save 10+ hours a week.</p><span class="more">Read article &rarr;</span></a>
+  <a class="card" href="/blog/ai-for-trades-businesses"><span class="date">19 August 2026</span><h2>AI for Trades Businesses: A Practical Guide for UK Tradespeople</h2><p>How UK plumbers, electricians, builders and heating engineers are using AI to answer every call, quote faster, invoice on time and win back their evenings.</p><span class="more">Read article &rarr;</span></a>
+  <a class="card" href="/blog/ai-for-professional-services"><span class="date">19 August 2026</span><h2>AI for Professional Services Firms: A Practical UK Guide</h2><p>How UK accountants, solicitors, consultants and advisers are using AI for drafting, meeting notes, document review and onboarding — without compromising confidentiality.</p><span class="more">Read article &rarr;</span></a>
+  <a class="card" href="/blog/ai-tools-for-small-businesses"><span class="date">21 April 2026</span><h2>AI Tools for Small Businesses UK: Where to Start in 2026</h2><p>The practical guide to AI tools for small businesses in the UK. No jargon, no hype — just the AI tools that actually save time and grow revenue for SMEs.</p><span class="more">Read article &rarr;</span></a>
+</main>
 <footer>&copy; AIWorks &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/contact.html">Contact</a></footer>
 <script>
 fetch('/content/posts.json').then(r => r.json()).then(posts => {
   const fmt = d => new Date(d + 'T00:00:00').toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
   const esc = s => { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; };
   document.getElementById('posts').innerHTML = posts.map(p =>
-    '<a class="card" href="/blog/' + encodeURIComponent(p.slug) + '.html">' +
+    '<a class="card" href="/blog/' + encodeURIComponent(p.slug) + '">' +
     '<span class="date">' + fmt(p.date) + '</span>' +
     '<h2>' + esc(p.title) + '</h2>' +
     '<p>' + esc(p.description) + '</p>' +
     '<span class="more">Read article &rarr;</span></a>'
   ).join('');
-}).catch(() => { document.getElementById('posts').innerHTML = '<p style="color:var(--dim)">Could not load articles. <a href="/blog/ai-tools-for-small-businesses.html">Read our latest guide instead &rarr;</a></p>'; });
+}).catch(() => {});
 </script>
 </body>
 </html>
