@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shop Wetsuits &amp; Surf Earplugs | GEDDON Supply</title>
+  <meta name="description" content="Browse the GEDDON collection: Moor, Kelp and Night cold-water wetsuits and GEDDON surf earplugs. See current availability.">
+  <link rel="canonical" href="https://geddonsupply.com/shop/">
+  <link rel="icon" href="../icon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#252e2b">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Shop the collection | GEDDON Supply">
+  <meta property="og:description" content="Cold-water wetsuits and surf earplugs from South Devon.">
+  <meta property="og:url" content="https://geddonsupply.com/shop/">
+  <meta property="og:image" content="https://geddonsupply.com/share-image.jpg">
+  <link rel="stylesheet" href="../fonts.css">
+  <style>
+    :root { --paper:#f6f4ee; --ink:#28312d; --quiet:#54605a; --rule:#c9cec2; --green:#1f7047; --display:GEDDONDisplay,'Arial Narrow',sans-serif; --body:GEDDONBody,Arial,sans-serif; --mono:GEDDONMono,monospace; --voice:GEDDONVoice,Georgia,serif; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.5 var(--body); -webkit-font-smoothing:antialiased; }
+    a { color:inherit; text-decoration:none; }
+    a:focus-visible, summary:focus-visible { outline:3px solid #409660; outline-offset:4px; }
+    .skip { position:absolute; left:1rem; top:-6rem; z-index:2; background:white; color:var(--ink); padding:.75rem; }
+    .skip:focus { top:1rem; }
+    .frame { width:min(100% - clamp(36px,8vw,144px),1536px); margin-inline:auto; }
+    header, footer { background:#28312e; color:#f3f1e8; }
+    .mast { min-height:80px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .logo { display:inline-flex; align-items:center; white-space:nowrap; font:800 36px/.9 var(--display); font-stretch:75%; letter-spacing:-.045em; }
+    .logo i { display:inline-block; width:.5em; height:.105em; background:#50b580; margin:0 .08em; }
+    nav { display:flex; align-items:center; gap:clamp(16px,2.3vw,35px); }
+    nav a { display:inline-flex; align-items:center; min-height:44px; font:11px var(--mono); white-space:nowrap; }
+    nav a[aria-current] { text-decoration:underline; text-underline-offset:6px; text-decoration-color:#80bb94; }
+    .nav-cta { min-height:43px; padding:0 18px; background:#eeeee4; color:var(--ink); }
+    .intro { display:flex; align-items:flex-end; justify-content:space-between; gap:30px; padding:clamp(38px,5.6vw,85px) 0 clamp(25px,3vw,42px); border-bottom:1px solid var(--rule); }
+    h1,h2,p { margin:0; }
+    h1 { font:800 clamp(75px,9.2vw,150px)/.82 var(--display); font-stretch:75%; letter-spacing:-.045em; text-transform:uppercase; }
+    .intro p { max-width:19em; font:clamp(19px,2.1vw,31px)/1.13 var(--voice); padding-bottom:.04em; }
+    .products { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(12px,1.65vw,28px); margin:clamp(22px,2.7vw,42px) 0 clamp(45px,6vw,90px); }
+    article { min-width:0; }
+    .plate { position:relative; isolation:isolate; display:grid; place-items:center; overflow:hidden; aspect-ratio:4/5; background:#e9e4d9; }
+    .plate img { display:block; width:100%; height:100%; object-fit:cover; }
+    .stock { position:absolute; z-index:1; left:clamp(9px,1vw,16px); top:clamp(9px,1vw,16px); padding:5px 8px 4px; font:600 10px/1.2 var(--mono); letter-spacing:.055em; background:#28312e; color:white; }
+    .caption { display:flex; justify-content:space-between; align-items:center; gap:8px; margin:17px 0 7px; }
+    h2 { font:800 clamp(29px,3vw,48px)/1 var(--display); font-stretch:75%; letter-spacing:-.025em; }
+    .swatches { display:flex; align-items:center; gap:3px; flex-shrink:0; }
+    .swatches i { display:block; width:10px; height:10px; border-radius:50%; border:1px solid #0002; }
+    .kind { color:var(--quiet); font:10px/1.5 var(--mono); letter-spacing:.045em; text-transform:uppercase; }
+    details { margin-top:15px; border-top:1px solid var(--rule); }
+    summary { display:flex; justify-content:space-between; align-items:center; min-height:44px; cursor:pointer; font:12px var(--body); }
+    summary::-webkit-details-marker { display:none; }
+    summary::after { content:'+'; font:18px var(--mono); color:var(--quiet); }
+    details[open] summary::after { content:'−'; }
+    details p { padding-bottom:10px; font-size:14px; color:var(--quiet); }
+    .foot { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; padding-block:32px; }
+    .foot p { font:clamp(23px,2.4vw,36px)/1.2 var(--voice); }
+    .foot a { text-decoration:underline; text-underline-offset:4px; font:11px var(--mono); }
+    @media (max-width:960px) {
+      .optional { display:none; } .products { grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:27px; }
+    }
+    @media (max-width:580px) {
+      .mast { min-height:65px; gap:10px; } .logo { font-size:28px; }
+      nav { gap:12px; } nav a { font-size:10px; } nav .secondary { display:none; } .nav-cta { min-height:38px; padding:0 10px; }
+      .intro { display:block; padding:36px 0 22px; } .intro p { margin-top:14px; max-width:20em; }
+      .products { column-gap:12px; } .caption { margin-top:12px; } .swatches { display:none; }
+      h2 { font-size:clamp(24px,6.1vw,35px); } .kind { font-size:9px; }
+      .stock { font-size:9px; padding:4px 6px; } details { margin-top:10px; } .foot { align-items:flex-start; flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to products</a>
+  <header>
+    <div class="frame mast">
+      <a class="logo" href="/" aria-label="GEDDON home">GEDD<i aria-hidden="true"></i>ON</a>
+      <nav aria-label="Main navigation">
+        <a href="/shop/" aria-current="page">Shop</a>
+        <a class="optional" href="/#collection">The suits</a>
+        <a class="optional" href="/#features">The details</a>
+        <a class="secondary" href="/journal/">Journal</a>
+        <a class="secondary" href="/contact/">Contact</a>
+        <a class="nav-cta" href="/#waitlist">Join the waitlist</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="frame">
+    <div class="intro">
+      <h1>Shop</h1>
+      <p>Cold-water wetsuits and surf earplugs from South Devon.</p>
+    </div>
+    <div class="products">
+      <article aria-labelledby="moor-name">
+        <div class="plate"><img src="moor.webp" width="640" height="800" alt="Hooded Moor wetsuit in olive and granite camouflage"><span class="stock">SOLD OUT</span></div>
+        <div class="caption"><h2 id="moor-name">Moor</h2><span class="swatches" aria-hidden="true"><i style="background:#576046"></i><i style="background:#6d6b50"></i><i style="background:#393e38"></i></span></div>
+        <p class="kind">Cold-water wetsuit</p>
+        <details><summary>Product details</summary><p>Olive, kelp and granite camouflage with lime-wash stitching. Hooded two-piece suit in Prawle 5.5&nbsp;mm and Start 7.5&nbsp;mm.</p></details>
+      </article>
+      <article aria-labelledby="kelp-name">
+        <div class="plate"><img src="kelp.webp" width="640" height="800" alt="Hooded Kelp wetsuit in warm brown and olive camouflage"><span class="stock">SOLD OUT</span></div>
+        <div class="caption"><h2 id="kelp-name">Kelp</h2><span class="swatches" aria-hidden="true"><i style="background:#665036"></i><i style="background:#82734d"></i><i style="background:#50513b"></i></span></div>
+        <p class="kind">Cold-water wetsuit</p>
+        <details><summary>Product details</summary><p>Warm brown and olive camouflage with gold stitching. Hooded two-piece suit in Prawle 5.5&nbsp;mm and Start 7.5&nbsp;mm.</p></details>
+      </article>
+      <article aria-labelledby="night-name">
+        <div class="plate"><img src="night.webp" width="640" height="800" alt="Hooded Night wetsuit in charcoal camouflage with muted rings"><span class="stock">SOLD OUT</span></div>
+        <div class="caption"><h2 id="night-name">Night</h2><span class="swatches" aria-hidden="true"><i style="background:#242923"></i><i style="background:#373e37"></i><i style="background:#4e544a"></i></span></div>
+        <p class="kind">Cold-water wetsuit</p>
+        <details><summary>Product details</summary><p>Near-black camouflage with muted rings and Devon-green stitching. Hooded two-piece suit in Prawle 5.5&nbsp;mm and Start 7.5&nbsp;mm.</p></details>
+      </article>
+      <article aria-labelledby="earplug-name">
+        <div class="plate"><img src="earplugs.webp" width="640" height="800" alt="Front and rear views of the GEDDON earplug with its curved wing and outward-facing G"><span class="stock">SOLD OUT</span></div>
+        <div class="caption"><h2 id="earplug-name">Surf Earplugs</h2><span class="swatches" aria-hidden="true"><i style="background:#454b4b"></i><i style="background:#58614d"></i><i style="background:#919884"></i></span></div>
+        <p class="kind">Surf accessory</p>
+        <details><summary>Product details</summary><p>A tapered granite face with the GEDDON G beside the grille, a curved silicone wing and interchangeable sage tips. Shown in Moor and Granite.</p></details>
+      </article>
+    </div>
+  </main>
+  <footer><div class="foot frame"><p>One more drop.</p><a href="/#waitlist">Join the wetsuit waitlist ↗</a></div></footer>
+</body>
+</html>
